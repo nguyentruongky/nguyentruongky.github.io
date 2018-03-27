@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Activate code view - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="Purpose">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2016/05/25/code-view.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/img/posts/otp.png')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Activate code view</h1>
+          
+          <h2 class="subheading">Create a code input view to validate when forgot password or activate registration.</h2>
+          
+          <span class="meta">Posted by
+            <a href="#">Ky Nguyen</a>
+            on May 25, 2016</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <h4 id="purpose">Purpose</h4>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fcode_view.gif?alt=media&amp;token=994d2ae9-1c38-456b-ad68-7f711805548e" alt="" /></p>
+
+<h4 id="requirement">Requirement</h4>
+
+<ul>
+  <li>Dynamic number of character, maybe 6 or 8, maximum is 12.</li>
+  <li>Active the current character underline.</li>
+  <li>Auto active/validate when enter enough character.</li>
+</ul>
+
+<h4 id="idea">Idea</h4>
+<ul>
+  <li>Create a custom view named <code class="highlighter-rouge">CharacterView</code> to display a code character with underline.</li>
+  <li>Create an array of <code class="highlighter-rouge">CharacterView</code> with the number of character base on demand.</li>
+  <li>Calculate and decrease the font size, the distance between 2 views to make sure all characters will be displayed at the center of the screen.</li>
+</ul>
+
+<p>Let’s do it.</p>
+
+<h4 id="character-view">Character View</h4>
+
+<p>The character view includes 2 elements: 1 label for code and 1 view for underline.
+Setup the code label and underline view</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupCode() {
+    codeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+    codeLabel.font = UIFont.systemFontOfSize(defaultFontSize)
+    codeLabel.textAlignment = NSTextAlignment.Center
+    self.addSubview(codeLabel)
+}
+
+private func setupUnderline() {
+    underlineView = UIView(frame: CGRect(
+        x: codeLabel.frame.origin.x,
+        y: codeLabel.frame.origin.y + codeLabel.frame.height + 4,
+        width: codeLabel.frame.width,
+        height: codeLabel.frame.width / 10))
+    underlineView.backgroundColor = Color.inactiveColor
+    self.addSubview(underlineView)
+}
+</code></pre></div></div>
+
+<p>There are some errors here.</p>
+<ul>
+  <li>The <code class="highlighter-rouge">defaultFontSize</code> is a global variable, it’ll be changed base on the number of characters.</li>
+  <li>The <code class="highlighter-rouge">Color.inactiveColor</code> is a static variable, you can change any color you want.</li>
+</ul>
+
+<p>The character view has active, inactive states. These methods to do that.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func activate() { 
+    changeStateWithColor(Color.activeColor) 
+}
+func deactivate() { 
+    changeStateWithColor(Color.inactiveColor) 
+}
+private func changeStateWithColor(color: UIColor) { 
+    codeLabel.textColor = color; - 
+    underlineView.backgroundColor = color; 
+}
+</code></pre></div></div>
+<p>And another method to change to string in code label.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func changeCodeWithString(string: String) { 
+    codeLabel.text = string 
+}
+</code></pre></div></div>
+
+<h4 id="code-view">Code View</h4>
+
+<p>The code view will have some variables:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">characterViews : [CharacterView]</code>: An array of character views.</li>
+  <li><code class="highlighter-rouge">horizontalSpacing: CGFloat</code>: the spacing between 2 characters.</li>
+  <li><code class="highlighter-rouge">codeField : UITextField</code>: A hidden textfield, the code will be enter directly here and parse to character view.</li>
+  <li><code class="highlighter-rouge">validateCode: ((String) -&gt; ())?</code>: a method will be executed when the code enter completely.</li>
+</ul>
+
+<p>Initialize the view</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
+
+override init(frame: CGRect) { super.init(frame: frame) }
+
+convenience init(frame: CGRect, numberOfCharacter: Int) {
+    self.init(frame: frame)
+    setupCodeField()
+    let value = calculateSizeForScreenBaseOnWidth(frame.width, numberOfCharacter: numberOfCharacter)
+    let horizontalSpacing: CGFloat = value.spacing
+    let baseSize = value.baseSize
+    var labelX = calculateFirstLabelXBaseOnLabelWidth(baseSize.width,
+                                                      viewWidth: frame.width,
+                                                      numberOfCharacter: numberOfCharacter,
+                                                      horizontalSpacing: horizontalSpacing)
+
+    for _ in 0 ..&lt; numberOfCharacter {
+        self.addSubview(createCharacterViewWithSize(baseSize, atX: labelX))
+        labelX += horizontalSpacing + baseSize.width
+    }
+
+    activeCodeAtIndex(0)
+}
+</code></pre></div></div>
+
+<p>We have to setup the hidden textfield. Don’t forget conform UITextFieldDelegate</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupCodeField() {
+    codeField.delegate = self
+    self.addSubview(codeField)
+    codeField.becomeFirstResponder()
+    codeField.autocorrectionType = UITextAutocorrectionType.No
+    codeField.autocapitalizationType = UITextAutocapitalizationType.None
+}
+</code></pre></div></div>
+
+<p>We have to calculate the character size and font size base on the code view and number of character. For example: with 6-character-code, the font size can be 40+pt and the horizontal spacing is 16. But with 12-character-code, we can’t do that. The font size has to be decreased. This is a recursion method to find the suitable size.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func calculateSizeForScreenBaseOnWidth(viewWidth: CGFloat, numberOfCharacter: Int) -&gt; (chracterSize: CGSize, spacing: CGFloat) {
+    let baseSize = calculateSizeBaseOnFontSize(defaultFontSize)
+    if viewWidth / CGFloat(numberOfCharacter) &gt; baseSize.width + horizontalSpacing { return (baseSize, horizontalSpacing) }
+
+    horizontalSpacing -=  horizontalSpacing &gt; 8 ? 2 : 0
+    defaultFontSize -= 4
+    return calculateSizeForScreenBaseOnWidth(viewWidth, numberOfCharacter: numberOfCharacter)
+}
+</code></pre></div></div>
+
+<p>This method returns a tuple with the character view size and the horizontal spacing between 2 character views.
+Next, we have to calculate the x coordinate for the first character view.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func calculateFirstLabelXBaseOnLabelWidth(width: CGFloat,
+                                          viewWidth: CGFloat,
+                                          numberOfCharacter: Int,
+                                          horizontalSpacing spacing: CGFloat) -&gt; CGFloat {
+    var labelX: CGFloat = width * CGFloat(numberOfCharacter)
+    labelX += spacing * CGFloat(numberOfCharacter - 1)
+    labelX = (viewWidth - labelX) / 2
+    return labelX
+}
+</code></pre></div></div>
+
+<p>And the most important method is the textfield delegate.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -&gt; Bool {
+    let codeLength = textField.text!.characters.count
+    // delete character
+    guard string.isEmpty == false &amp;&amp; range.length != 1 else {
+        characterViews[codeLength - 1].changeCodeWithString(string)
+        activeCodeAtIndex(codeLength - 1)
+        deactivateCodeAtIndex(codeLength)
+        return true
+    }
+
+    // enter new character
+    guard codeLength &lt; characterViews.count else { return false }
+    enterCodeAtIndex(codeLength, withString: string)
+
+    // validate code
+    if codeLength + 1 == characterViews.count {
+        let code = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        print("validate code \(code)")
+        if let validateCode = validateCode {
+            validateCode(code)
+        }
+    }
+    return true
+}
+
+</code></pre></div></div>
+
+<p>We have to handle the delete key, when input new character, when fill all characters and execute <code class="highlighter-rouge">validateCode</code> method.</p>
+
+<ul>
+  <li>Delete key: clear text, activate the current character and deactivate the previous character view. Make sure your character index will not out of index. View detail in the sample project.</li>
+  <li>Add new character: add text to current character, active next character.</li>
+  <li>Auto execute the method: check the count of character, use <code class="highlighter-rouge">stringByReplacingCharactersInRange</code> to create new text and execute the method.</li>
+</ul>
+
+<h4 id="improvement">Improvement</h4>
+
+<ul>
+  <li>The code doesn’t work good on iPhone 6+, the font size is a little small.</li>
+  <li>The recursion code makes the performance down a lot.</li>
+</ul>
+
+<p>Some detail can’t be written here, please see more at my github: <a href="https://github.com/nguyentruongky/ActiveCode">https://github.com/nguyentruongky/ActiveCode</a></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2016/01/29/embed-controller.html" data-toggle="tooltip" data-placement="top" title="Dynamically load view controller into another">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

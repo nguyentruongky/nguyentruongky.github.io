@@ -1,4 +1,276 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-27T17:40:50+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Airbnb Home screen sample</title><link href="http://localhost:4000/2016/01/27/Airbnb-home.html" rel="alternate" type="text/html" title="Airbnb Home screen sample" /><published>2016-01-27T00:00:00+07:00</published><updated>2016-01-27T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/27/Airbnb-home</id><content type="html" xml:base="http://localhost:4000/2016/01/27/Airbnb-home.html">&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fdemo.gif?alt=media&amp;amp;token=cad709ea-eb96-498c-8e0d-5af864263ef5&quot; alt=&quot;demo.gif&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-27T20:18:44+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Activate code view</title><link href="http://localhost:4000/2016/05/25/code-view.html" rel="alternate" type="text/html" title="Activate code view" /><published>2016-05-25T00:00:00+07:00</published><updated>2016-05-25T00:00:00+07:00</updated><id>http://localhost:4000/2016/05/25/code-view</id><content type="html" xml:base="http://localhost:4000/2016/05/25/code-view.html">&lt;h4 id=&quot;purpose&quot;&gt;Purpose&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fcode_view.gif?alt=media&amp;amp;token=994d2ae9-1c38-456b-ad68-7f711805548e&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;requirement&quot;&gt;Requirement&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Dynamic number of character, maybe 6 or 8, maximum is 12.&lt;/li&gt;
+  &lt;li&gt;Active the current character underline.&lt;/li&gt;
+  &lt;li&gt;Auto active/validate when enter enough character.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;idea&quot;&gt;Idea&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create a custom view named &lt;code class=&quot;highlighter-rouge&quot;&gt;CharacterView&lt;/code&gt; to display a code character with underline.&lt;/li&gt;
+  &lt;li&gt;Create an array of &lt;code class=&quot;highlighter-rouge&quot;&gt;CharacterView&lt;/code&gt; with the number of character base on demand.&lt;/li&gt;
+  &lt;li&gt;Calculate and decrease the font size, the distance between 2 views to make sure all characters will be displayed at the center of the screen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s do it.&lt;/p&gt;
+
+&lt;h4 id=&quot;character-view&quot;&gt;Character View&lt;/h4&gt;
+
+&lt;p&gt;The character view includes 2 elements: 1 label for code and 1 view for underline.
+Setup the code label and underline view&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func setupCode() {
+    codeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+    codeLabel.font = UIFont.systemFontOfSize(defaultFontSize)
+    codeLabel.textAlignment = NSTextAlignment.Center
+    self.addSubview(codeLabel)
+}
+
+private func setupUnderline() {
+    underlineView = UIView(frame: CGRect(
+        x: codeLabel.frame.origin.x,
+        y: codeLabel.frame.origin.y + codeLabel.frame.height + 4,
+        width: codeLabel.frame.width,
+        height: codeLabel.frame.width / 10))
+    underlineView.backgroundColor = Color.inactiveColor
+    self.addSubview(underlineView)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There are some errors here.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;defaultFontSize&lt;/code&gt; is a global variable, it’ll be changed base on the number of characters.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;Color.inactiveColor&lt;/code&gt; is a static variable, you can change any color you want.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The character view has active, inactive states. These methods to do that.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func activate() { 
+    changeStateWithColor(Color.activeColor) 
+}
+func deactivate() { 
+    changeStateWithColor(Color.inactiveColor) 
+}
+private func changeStateWithColor(color: UIColor) { 
+    codeLabel.textColor = color; - 
+    underlineView.backgroundColor = color; 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And another method to change to string in code label.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func changeCodeWithString(string: String) { 
+    codeLabel.text = string 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;code-view&quot;&gt;Code View&lt;/h4&gt;
+
+&lt;p&gt;The code view will have some variables:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;characterViews : [CharacterView]&lt;/code&gt;: An array of character views.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;horizontalSpacing: CGFloat&lt;/code&gt;: the spacing between 2 characters.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;codeField : UITextField&lt;/code&gt;: A hidden textfield, the code will be enter directly here and parse to character view.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;validateCode: ((String) -&amp;gt; ())?&lt;/code&gt;: a method will be executed when the code enter completely.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Initialize the view&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
+
+override init(frame: CGRect) { super.init(frame: frame) }
+
+convenience init(frame: CGRect, numberOfCharacter: Int) {
+    self.init(frame: frame)
+    setupCodeField()
+    let value = calculateSizeForScreenBaseOnWidth(frame.width, numberOfCharacter: numberOfCharacter)
+    let horizontalSpacing: CGFloat = value.spacing
+    let baseSize = value.baseSize
+    var labelX = calculateFirstLabelXBaseOnLabelWidth(baseSize.width,
+                                                      viewWidth: frame.width,
+                                                      numberOfCharacter: numberOfCharacter,
+                                                      horizontalSpacing: horizontalSpacing)
+
+    for _ in 0 ..&amp;lt; numberOfCharacter {
+        self.addSubview(createCharacterViewWithSize(baseSize, atX: labelX))
+        labelX += horizontalSpacing + baseSize.width
+    }
+
+    activeCodeAtIndex(0)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have to setup the hidden textfield. Don’t forget conform UITextFieldDelegate&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func setupCodeField() {
+    codeField.delegate = self
+    self.addSubview(codeField)
+    codeField.becomeFirstResponder()
+    codeField.autocorrectionType = UITextAutocorrectionType.No
+    codeField.autocapitalizationType = UITextAutocapitalizationType.None
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have to calculate the character size and font size base on the code view and number of character. For example: with 6-character-code, the font size can be 40+pt and the horizontal spacing is 16. But with 12-character-code, we can’t do that. The font size has to be decreased. This is a recursion method to find the suitable size.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func calculateSizeForScreenBaseOnWidth(viewWidth: CGFloat, numberOfCharacter: Int) -&amp;gt; (chracterSize: CGSize, spacing: CGFloat) {
+    let baseSize = calculateSizeBaseOnFontSize(defaultFontSize)
+    if viewWidth / CGFloat(numberOfCharacter) &amp;gt; baseSize.width + horizontalSpacing { return (baseSize, horizontalSpacing) }
+
+    horizontalSpacing -=  horizontalSpacing &amp;gt; 8 ? 2 : 0
+    defaultFontSize -= 4
+    return calculateSizeForScreenBaseOnWidth(viewWidth, numberOfCharacter: numberOfCharacter)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This method returns a tuple with the character view size and the horizontal spacing between 2 character views.
+Next, we have to calculate the x coordinate for the first character view.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func calculateFirstLabelXBaseOnLabelWidth(width: CGFloat,
+                                          viewWidth: CGFloat,
+                                          numberOfCharacter: Int,
+                                          horizontalSpacing spacing: CGFloat) -&amp;gt; CGFloat {
+    var labelX: CGFloat = width * CGFloat(numberOfCharacter)
+    labelX += spacing * CGFloat(numberOfCharacter - 1)
+    labelX = (viewWidth - labelX) / 2
+    return labelX
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And the most important method is the textfield delegate.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -&amp;gt; Bool {
+    let codeLength = textField.text!.characters.count
+    // delete character
+    guard string.isEmpty == false &amp;amp;&amp;amp; range.length != 1 else {
+        characterViews[codeLength - 1].changeCodeWithString(string)
+        activeCodeAtIndex(codeLength - 1)
+        deactivateCodeAtIndex(codeLength)
+        return true
+    }
+
+    // enter new character
+    guard codeLength &amp;lt; characterViews.count else { return false }
+    enterCodeAtIndex(codeLength, withString: string)
+
+    // validate code
+    if codeLength + 1 == characterViews.count {
+        let code = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+        print(&quot;validate code \(code)&quot;)
+        if let validateCode = validateCode {
+            validateCode(code)
+        }
+    }
+    return true
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have to handle the delete key, when input new character, when fill all characters and execute &lt;code class=&quot;highlighter-rouge&quot;&gt;validateCode&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Delete key: clear text, activate the current character and deactivate the previous character view. Make sure your character index will not out of index. View detail in the sample project.&lt;/li&gt;
+  &lt;li&gt;Add new character: add text to current character, active next character.&lt;/li&gt;
+  &lt;li&gt;Auto execute the method: check the count of character, use &lt;code class=&quot;highlighter-rouge&quot;&gt;stringByReplacingCharactersInRange&lt;/code&gt; to create new text and execute the method.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;improvement&quot;&gt;Improvement&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The code doesn’t work good on iPhone 6+, the font size is a little small.&lt;/li&gt;
+  &lt;li&gt;The recursion code makes the performance down a lot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some detail can’t be written here, please see more at my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Purpose</summary></entry><entry><title type="html">Dynamically load view controller into another</title><link href="http://localhost:4000/2016/01/29/embed-controller.html" rel="alternate" type="text/html" title="Dynamically load view controller into another" /><published>2016-01-29T00:00:00+07:00</published><updated>2016-01-29T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/29/embed-controller</id><content type="html" xml:base="http://localhost:4000/2016/01/29/embed-controller.html">&lt;p&gt;I saw a question on &lt;a href=&quot;http://stackoverflow.com/questions/35011539/how-to-make-view-scroll-like-instagrams-profile-vc-with-segmentedcontroller/35079835#35079835&quot;&gt;stackoverflow&lt;/a&gt;. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create new project.&lt;/li&gt;
+  &lt;li&gt;Design what you want. I add a label, a segmented control and a container view to embed child controller.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fcontainer_view.png?alt=media&amp;amp;token=1a69995c-9f5f-4226-a67c-b7bbd3bbce83&quot; alt=&quot;design&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Select all controls and choose menu Editor\Embed In\View. Name it: Content View.&lt;/li&gt;
+  &lt;li&gt;Select Content View and embed into ScrollView.&lt;/li&gt;
+  &lt;li&gt;Set constraint for ScrollView: leading, trailing, top, bottom to super view equal 0.&lt;/li&gt;
+  &lt;li&gt;Set constraint for Content View: leading, trailing, top, bottom to ScrollView equal to 0, vertical and horizontal alignment.&lt;/li&gt;
+  &lt;li&gt;Connect outlets and action to your controller.&lt;/li&gt;
+  &lt;li&gt;Add your new controllers. In my demo, I added 2 TableViewController, 1 for displaying images (ImageController), 1 for loading text (TextController).&lt;/li&gt;
+  &lt;li&gt;Back to your main view controller, add some code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var dynamicHeight: CGFloat = 0    
+@IBOutlet weak var scrollView: UIScrollView!  
+@IBOutlet weak var pageContainer: UIView!
+@IBAction func selectPage(sender: AnyObject) {
+	// remove child controllers before add others
+	for controller in childViewControllers {  
+		controller.removeFromParentViewController()
+	}  
+	for view in pageContainer.subviews {  
+		view.removeFromSuperview()
+	}
+	let segment = sender as! UISegmentedControl
+	if segment.selectedSegmentIndex == 0 {  
+		createImageController()
+	} else { 
+		createTextController()
+	}  
+	updateScrollContentSize()
+}
+    
+func updateScrollContentSize() {
+	// 150 is your other view height. 
+	scrollView.contentSize = CGSize(width: view.frame.size.width, height: dynamicHeight + 150)
+}
+    
+func createTextController() {    
+	let textController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;TextController&quot;) as! TextController
+	dynamicHeight = textController.getTableContentHeight()
+	textController.tableView.scrollEnabled = false  
+	self.addChildViewController(textController)
+	pageContainer.addSubview(textController.view)
+	textController.view.frame = CGRectMake(0, 0, pageContainer.frame.size.width, dynamicHeight)
+}
+
+func createImageController() {    
+	let imageController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;ImageShowController&quot;) as! ImageShowController
+	dynamicHeight = imageController.getTableContentHeight()
+	imageController.tableView.scrollEnabled = false  
+	self.addChildViewController(imageController)
+	pageContainer.addSubview(imageController.view)
+	imageController.view.frame = CGRectMake(0, 0, pageContainer.frame.size.width, dynamicHeight * 2)
+}
+    
+override func viewDidAppear(animated: Bool) {    
+	super.viewDidAppear(true)
+	createImageController()
+	updateScrollContentSize()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode tells you about the error. Fix it now. Open your controller you want to embed and add some code.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func getTableContentHeight() -&amp;gt; CGFloat {    
+	// calculate the total height of your controller. 
+	return CGFloat(vietnamTravelLocations.count) * 44
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s done, run your project and see the result.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Container view is very convenient, But don’t exploit it, especially when your embed controller change the height many times. Your app will be lag, unstable and bring a bad experience to your user.&lt;/p&gt;
+
+&lt;p&gt;You can download my demo at &lt;a href=&quot;https://github.com/nguyentruongky/DemoContainerViewDynamicLoading&quot;&gt;my github&lt;/a&gt;. Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I saw a question on stackoverflow. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.</summary></entry><entry><title type="html">Airbnb Home screen sample</title><link href="http://localhost:4000/2016/01/27/Airbnb-home.html" rel="alternate" type="text/html" title="Airbnb Home screen sample" /><published>2016-01-27T00:00:00+07:00</published><updated>2016-01-27T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/27/Airbnb-home</id><content type="html" xml:base="http://localhost:4000/2016/01/27/Airbnb-home.html">&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fdemo.gif?alt=media&amp;amp;token=cad709ea-eb96-498c-8e0d-5af864263ef5&quot; alt=&quot;demo.gif&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You can see it anywhere. It’s very popular in home screen, gallery screen. See how to do that.&lt;/p&gt;
 &lt;ul&gt;
