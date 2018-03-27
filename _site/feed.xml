@@ -1,187 +1,781 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-27T10:45:27+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Man must explore, and this is exploration at its greatest</title><link href="http://localhost:4000/2017/10/31/man-must-explore.html" rel="alternate" type="text/html" title="Man must explore, and this is exploration at its greatest" /><published>2017-10-31T21:45:13+07:00</published><updated>2017-10-31T21:45:13+07:00</updated><id>http://localhost:4000/2017/10/31/man-must-explore</id><content type="html" xml:base="http://localhost:4000/2017/10/31/man-must-explore.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry><entry><title type="html">I believe every human has a finite number of heartbeats. I don’t intend to waste any of mine.</title><link href="http://localhost:4000/2017/10/30/heartbeats.html" rel="alternate" type="text/html" title="I believe every human has a finite number of heartbeats. I don't intend to waste any of mine." /><published>2017-10-31T10:45:13+07:00</published><updated>2017-10-31T10:45:13+07:00</updated><id>http://localhost:4000/2017/10/30/heartbeats</id><content type="html" xml:base="http://localhost:4000/2017/10/30/heartbeats.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry><entry><title type="html">Science has not yet mastered prophecy</title><link href="http://localhost:4000/2017/10/29/prophecy.html" rel="alternate" type="text/html" title="Science has not yet mastered prophecy" /><published>2017-10-30T10:45:13+07:00</published><updated>2017-10-30T10:45:13+07:00</updated><id>http://localhost:4000/2017/10/29/prophecy</id><content type="html" xml:base="http://localhost:4000/2017/10/29/prophecy.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry><entry><title type="html">Failure is not an option</title><link href="http://localhost:4000/2017/10/28/exploration.html" rel="alternate" type="text/html" title="Failure is not an option" /><published>2017-10-29T10:45:13+07:00</published><updated>2017-10-29T10:45:13+07:00</updated><id>http://localhost:4000/2017/10/28/exploration</id><content type="html" xml:base="http://localhost:4000/2017/10/28/exploration.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry><entry><title type="html">The dreams of yesterday are the hopes of today and the reality of tomorrow.</title><link href="http://localhost:4000/2017/10/27/dreams.html" rel="alternate" type="text/html" title="The dreams of yesterday are the hopes of today and the reality of tomorrow." /><published>2017-10-28T10:45:13+07:00</published><updated>2017-10-28T10:45:13+07:00</updated><id>http://localhost:4000/2017/10/27/dreams</id><content type="html" xml:base="http://localhost:4000/2017/10/27/dreams.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry><entry><title type="html">Dinosaurs are extinct today</title><link href="http://localhost:4000/2017/10/26/dinosaurs.html" rel="alternate" type="text/html" title="Dinosaurs are extinct today" /><published>2017-10-27T10:45:13+07:00</published><updated>2017-10-27T10:45:13+07:00</updated><id>http://localhost:4000/2017/10/26/dinosaurs</id><content type="html" xml:base="http://localhost:4000/2017/10/26/dinosaurs.html">&lt;p&gt;Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.&lt;/p&gt;
-
-&lt;p&gt;Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.&lt;/p&gt;
-
-&lt;p&gt;What was most significant about the lunar voyage was not that man set foot on the Moon but that they set eye on the earth.&lt;/p&gt;
-
-&lt;p&gt;A Chinese tale tells of some men sent to harm a young girl who, upon seeing her beauty, become her protectors rather than her violators. That's how I felt seeing the Earth for the first time. I could not help but love and cherish her.&lt;/p&gt;
-
-&lt;p&gt;For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;The Final Frontier&lt;/h2&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;p&gt;There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.&lt;/p&gt;
-
-&lt;blockquote class=&quot;blockquote&quot;&gt;The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.&lt;/blockquote&gt;
-
-&lt;p&gt;Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.&lt;/p&gt;
-
-&lt;h2 class=&quot;section-heading&quot;&gt;Reaching for the Stars&lt;/h2&gt;
-
-&lt;p&gt;As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.&lt;/p&gt;
-
-&lt;img class=&quot;img-fluid&quot; src=&quot;https://source.unsplash.com/Mn9Fa_wQH-M/800x450&quot; alt=&quot;Demo Image&quot;&gt;
-&lt;span class=&quot;caption text-muted&quot;&gt;To go places and do things that have never been done before – that’s what living is all about.&lt;/span&gt;
-
-&lt;p&gt;Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.&lt;/p&gt;
-
-&lt;p&gt;As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.&lt;/p&gt;
-
-&lt;p&gt;Placeholder text by &lt;a href=&quot;http://spaceipsum.com/&quot;&gt;Space Ipsum&lt;/a&gt;. Photographs by &lt;a href=&quot;https://unsplash.com/&quot;&gt;Unsplash&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-27T17:40:50+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Airbnb Home screen sample</title><link href="http://localhost:4000/2016/01/27/Airbnb-home.html" rel="alternate" type="text/html" title="Airbnb Home screen sample" /><published>2016-01-27T00:00:00+07:00</published><updated>2016-01-27T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/27/Airbnb-home</id><content type="html" xml:base="http://localhost:4000/2016/01/27/Airbnb-home.html">&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fdemo.gif?alt=media&amp;amp;token=cad709ea-eb96-498c-8e0d-5af864263ef5&quot; alt=&quot;demo.gif&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can see it anywhere. It’s very popular in home screen, gallery screen. See how to do that.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create new project.&lt;/li&gt;
+  &lt;li&gt;Remove ViewController.swift and the view controller in Main storyboard.&lt;/li&gt;
+  &lt;li&gt;Add TableViewController to storyboard. Don’t forget check &lt;code class=&quot;highlighter-rouge&quot;&gt;Is Initial View Controller&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Name the Table View Cell and Identifier &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Set HeaderCell height to 400&lt;/li&gt;
+  &lt;li&gt;Design your cell look like this&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fheadercelldesign.png?alt=media&amp;amp;token=a2de60ef-625a-4864-bb73-d25f86d7ef54&quot; alt=&quot;headerCellDesign.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell.swift&lt;/code&gt; and connect with our HeaderCell. Remember, &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell.swift&lt;/code&gt; is subclass of UITableViewCell&lt;/li&gt;
+  &lt;li&gt;Clear all codes in file and connect outlets.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fconnectoutletheadercell.png?alt=media&amp;amp;token=ccc8ff44-0995-4699-a395-06d0af605458&quot; alt=&quot;connectOutletHeaderCell.png&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write a method to make the search button as a circle. Create a new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;UIExtension.swift&lt;/code&gt;. You see how it’s useful later.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UIView {    
+func createBorder(color: UIColor = .white, width: CGFloat = 2) {
+    self.layer.borderColor = color.CGColor
+    self.layer.borderWidth = width
+}
+    
+func createRoundCorner(radius: CGFloat = 4) {
+    self.layer.cornerRadius = radius
+    self.clipsToBounds = true
+}
+    
+func createRoundCorner() {
+    createRoundCorner(4)
+}
+    
+func createBorderCorner() {
+    createBorder()
+    createRoundCorner()
+}
+    
+func createCircleShape() {
+    createRoundCorner(self.frame.size.width / 2)
+}
+}    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;If you don’t know about Extension yet, read more &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html&quot;&gt;here&lt;/a&gt;. It’s awesome.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Back to HeaderCell, add &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; method.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {
+searchButton.createCircleShape()
+}    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add a subclass of UITableViewController file name &lt;code class=&quot;highlighter-rouge&quot;&gt;HomescreenViewController.swift&lt;/code&gt;, connect it to your Table View Controller in IB and clear all codes in files.&lt;/li&gt;
+  &lt;li&gt;Add some code
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class HomescreenTableViewController: UITableViewController {    
+// It's the header of the sections. The first empty section header is use for header.
+let sections = [&quot;&quot;, &quot;Recently View&quot;, &quot;Favourite&quot;, &quot;Suggestion&quot;]  
+
+override func numberOfSectionsInTableView(tableView: UITableView) -&amp;gt; Int { return 1 }
+    
+override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
+    return sections.count }
+	
+override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&amp;gt; UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier(&quot;HeaderCell&quot;, forIndexPath: indexPath) as! HeaderCell
+    cell.setupView()
+    return cell
+}
+    
+override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -&amp;gt; CGFloat { return 400 }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run app and you see header cell.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhomescreenheadercomplete.png?alt=media&amp;amp;token=fcc1ec80-71cf-4224-982c-9cef26b3f5f0&quot; alt=&quot;homescreenHeaderComplete&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Now is the main design of the screen. Add new Table View Cell, name and Reuse identifier is &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategory&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Change cell height to 400.&lt;/li&gt;
+  &lt;li&gt;Add a Collection View to your cell, set delegate and datasource to your &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategory&lt;/code&gt; cell.&lt;/li&gt;
+  &lt;li&gt;Select the Collection View and set cell size to width: 300, height: 350. Set scroll direction to Horizontal.&lt;/li&gt;
+  &lt;li&gt;Select the Collection View Cell and set reuse identifier is &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCell&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Design the PlaceCell like the UI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://truongky.files.wordpress.com/2016/01/placecategory.png&quot; alt=&quot;placeCategory&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file (subclass of UITableViewCell), name &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategoryCell.swift&lt;/code&gt;. Connect it to your PlaceCategoryCell and connect outlets to your file.&lt;/li&gt;
+  &lt;li&gt;Add new file (subclass of UICollectionViewCell), name &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCollectionViewCell&lt;/code&gt;. Connect it to your PlaceCell. Connect outlets to your file.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fplacecollectionviewcell_connectoutlet.png?alt=media&amp;amp;token=244b013a-577a-4439-9474-2d49fd256aee&quot; alt=&quot;placeCollectionViewCell_connectOutlet&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; method to your code
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {  
+avatarImageView.createCircleShape()
+}    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategoryCell.swift&lt;/code&gt; and add some codes.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Model
+class PlaceModel : NSObject {    
+	var placeName = &quot;&quot;
+	var shortDescription = &quot;&quot;
+	var price: Int64 = 0
+	var currency = &quot;&quot;
+	var unit = &quot;&quot;
+	var thumbnailImage: UIImage?
+	var avatarImage: UIImage?
+	var didWish = false
+}
+    
+class PlaceCategoryTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+	@IBOutlet weak var sectionLabel: UILabel!
+	var placeList = [PlaceModel]()
+	
+	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -&amp;gt; Int { return placeList.count }
+
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&amp;gt; UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(&quot;PlaceCell&quot;, forIndexPath: indexPath) as! PlaceCollectionViewCell
+		cell.setupView()
+		let place = placeList[indexPath.row]
+		cell.thumbnailImageView.image = place.thumbnailImage
+		cell.avatarImageView.image = place.avatarImage
+		cell.priceLabel.text = String(place.price)
+		cell.currencyLabel.text = place.currency
+		cell.unitLabel.text = place.unit
+		cell.placeNameLabel.text = place.placeName
+		cell.placeDescriptionLabel.text = place.shortDescription
+		return cell
+	}
+    
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&amp;gt; CGSize {
+		return CGSize(width: 300, height: 350) }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s almost done. Your UI setup is ready to display data. We create some sample data to show now.&lt;/li&gt;
+  &lt;li&gt;Create new file &lt;code class=&quot;highlighter-rouge&quot;&gt;SampleData.swift&lt;/code&gt; and add some codes
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class SampleData {
+static let places = [&quot;Ha Noi&quot;, &quot;Hai Phong&quot;, &quot;Trang An&quot;, &quot;Hoi An&quot;, &quot;Ho Chi Minh&quot;, &quot;Bien Hoa&quot;, &quot;My Tho&quot;, &quot;Can Tho&quot;, &quot;Tay Ninh&quot;, &quot;Con Dao&quot;]
+static let avatars = [&quot;Avatar1&quot;, &quot;Avatar2&quot;, &quot;Avatar3&quot;, &quot;Avatar4&quot;, &quot;Avatar5&quot;, &quot;Avatar6&quot;, &quot;Avatar7&quot;, &quot;Avatar8&quot;, &quot;Avatar9&quot;, &quot;Avatar10&quot;]
+static let thumbnails = [&quot;Place1&quot;, &quot;Place2&quot;,  &quot;Place3&quot;,  &quot;Place4&quot;,  &quot;Place5&quot;,  &quot;Place6&quot;,  &quot;Place7&quot;,  &quot;Place8&quot;,  &quot;Place9&quot;,  &quot;Place10&quot;]
+static let prices: [Int64] = [5000000, 15000000, 18000000,  2000000, 25000000, 15000000, 9000000, 1000000, 12000000, 6000000]  
+static let shortDescriptions = [&quot;New BedRm by C.Park&quot;,
+        &quot;Cozy &amp;amp; Private Floor of Brownstone&quot;,
+        &quot;AMAZING MANHATTAN SKYLIN&quot;,
+        &quot;Studio Apartment with King Bed&quot;,
+        &quot;Beautiful Midtown East&quot;,
+        &quot;Brooklyn Style - With a Balcony!!!&quot;,
+        &quot;Cozy Bedroom in Apartment&quot;,
+        &quot;Loft with Manhattan skyline view!&quot;,
+        &quot;Hell's Kitchen 1-Bdr. Apt. Share&quot;,
+        &quot;Green Room&quot;]
+    
+static func generateFavouriteList() -&amp;gt; [PlaceModel] {
+    var favouriteList = [PlaceModel]()
+    for _ in 0..&amp;lt;10 {
+        let randomIndex = randomInt(10)
+        let place = PlaceModel()
+        place.placeName = places[randomIndex]
+        place.avatarImage = UIImage(named: avatars[randomIndex])
+        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
+        place.unit = &quot;PER NIGHT&quot;
+        place.currency = &quot;VND&quot;
+        place.price = prices[randomIndex]
+        place.shortDescription = shortDescriptions[randomIndex]
+        favouriteList.append(place)
+    }
+    return favouriteList
+}
+    
+static func generateRecentlyList() -&amp;gt; [PlaceModel] {
+    var recentlyList = [PlaceModel]()    
+    for _ in 0..&amp;lt;10 {
+        let randomIndex = randomInt(10)
+        let place = PlaceModel()
+        place.placeName = places[randomIndex]
+        place.avatarImage = UIImage(named: avatars[randomIndex])
+        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
+        place.unit = &quot;PER NIGHT&quot;
+        place.currency = &quot;VND&quot;
+        place.price = prices[randomIndex]
+        place.shortDescription = shortDescriptions[randomIndex]
+        recentlyList.append(place)
+    }
+    return recentlyList;
+}
+    
+static func generateSuggestionList() -&amp;gt; [PlaceModel] {    
+    var suggestionList = [PlaceModel]()
+    for _ in 0..&amp;lt;10 {
+        let randomIndex = randomInt(10)
+        let place = PlaceModel()
+        place.placeName = places[randomIndex]
+        place.avatarImage = UIImage(named: avatars[randomIndex])
+        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
+        place.unit = &quot;PER NIGHT&quot;
+        place.currency = &quot;VND&quot;
+        place.price = prices[randomIndex]
+        place.shortDescription = shortDescriptions[randomIndex]
+        suggestionList.append(place)
+    }
+    return suggestionList
+}
+    
+static func randomInt(max: UInt32) -&amp;gt; Int { return Int(arc4random_uniform(max)) }
+}    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Please make sure you add 10 avatar images (Avatar1.png, Avatar2.png…, Avatar10.png) and 10 place images (Place1.png, Place2.png…, Place10.png)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Run and enjoy.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;The main purpose is to show how nest a Collection View in a Table View. The Airbnb home has many things to do. 
+You can download my project &lt;a href=&quot;https://github.com/nguyentruongky/AirbnbHomescreenSample&quot;&gt;at my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry><entry><title type="html">Contact Picker</title><link href="http://localhost:4000/2016/01/19/Contact-picker.html" rel="alternate" type="text/html" title="Contact Picker" /><published>2016-01-19T00:00:00+07:00</published><updated>2016-01-19T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/19/Contact%20picker</id><content type="html" xml:base="http://localhost:4000/2016/01/19/Contact-picker.html">&lt;p&gt;I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone numbers from all contacts, search contacts, contacts are grouped into first character of the name. Here what I did&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffullcontact.png?alt=media&amp;amp;token=0225e273-c25a-46f1-a053-2a29ce26aed2&quot; alt=&quot;&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fsearch_contact.png?alt=media&amp;amp;token=63aa4ae0-4149-4ecf-a649-059940d17210&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use intention in this function so that this picker can be use anywhere easily. Read more about intention at my posts: &lt;a href=&quot;https://truongky.wordpress.com/2016/01/19/1000-lines-of-code-good-work-cont/&quot;&gt;1000+ lines of code, good work?“ (Cont)&lt;/a&gt; and &lt;a href=&quot;https://truongky.wordpress.com/2016/01/12/pageviewcontroller-how-can-i-reuse-it/&quot;&gt;PageViewController: How can I reuse it?&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s begin.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create new project.&lt;/li&gt;
+  &lt;li&gt;Design what you want. Two controls must have: a UITableView and a UISearchBar.&lt;/li&gt;
+  &lt;li&gt;Add a UITableViewCell and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;contactCell&lt;/code&gt; with style is &lt;code class=&quot;highlighter-rouge&quot;&gt;Subtitle&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Add a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;ContactPickerIntention.swift&lt;/code&gt; and implement NSObject class. It’s our intention.&lt;/li&gt;
+  &lt;li&gt;Add a NSObject in IB and change its subclass is &lt;code class=&quot;highlighter-rouge&quot;&gt;ContactPickerIntention.swift&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Connect controls to the intention. I named them &lt;code class=&quot;highlighter-rouge&quot;&gt;searchBar&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Connect the intention to ViewController.&lt;/li&gt;
+  &lt;li&gt;The intention has to conform some delegate and datasource.
+    &lt;ul&gt;
+      &lt;li&gt;UISearchBarDelegate&lt;/li&gt;
+      &lt;li&gt;UITableViewDelegate&lt;/li&gt;
+      &lt;li&gt;UITableViewDataSource&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You have to ask permission to access to contact.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
+	// warn the user that because they just denied permission, this functionality won't work
+	// also let them know that they have to fix this in settings
+	if granted == false { return }
+	// load contact 
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Load all contacts&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;All contacts are here. Run a loop and load every contact, find the phone number and consider this contact with every number is a contact item.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func getNameFromContact(currentContact: ABRecordRef) -&amp;gt; String {
+	let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
+	let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
+	var currentName = &quot;&quot;
+	if firstName == nil &amp;amp;&amp;amp; lastName == nil { // prevent anonymous contact
+            currentName = &quot;&quot;
+	} else {
+		currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
+	}
+	return currentName
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ABRecordCopyCompositeName&lt;/code&gt; function can get the contact’s full name for you, but if there is a contact without first name or last name, your app crashes. Take care some anonymous friends with this func.&lt;/p&gt;
+
+&lt;p&gt;Get the phone numbers.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -&amp;gt; [String]? {
+    var phoneNumberList = [String]()
+    let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
+    for var j: CFIndex = 0; j &amp;lt; ABMultiValueGetCount(phones); j++ {
+        let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
+        if mobileLabel == kABPersonPhoneMobileLabel ||
+            mobileLabel == kABHomeLabel ||
+            mobileLabel == kABPersonPhoneMainLabel ||
+            mobileLabel == kABPersonPhoneIPhoneLabel ||
+            mobileLabel == kABOtherLabel ||
+            mobileLabel == kABWorkLabel {
+                let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
+                phoneNumberList.append(phone)
+        }
+    }
+    return phoneNumberList
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There are a few phone number types such as Mobile, Home, Work. And those types are marked with the Label. We have to get the phones multi value and find the phone number conform to the labels.&lt;/p&gt;
+
+&lt;p&gt;I created struct &lt;code class=&quot;highlighter-rouge&quot;&gt;Contact&lt;/code&gt; to keep the name and the phone number. And a dictionary with key is the first character of the name and the value is an array of Contact to store all contacts.&lt;/p&gt;
+
+&lt;p&gt;If you want to get email, try this func&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func getEmail(currentContact: ABRecordRef) -&amp;gt; String {
+    let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
+    var emailString = &quot;&quot;
+    if ABMultiValueGetCount(email) &amp;gt; 0 {
+        emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+    }
+    return emailString
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can download my complete project at &lt;a href=&quot;https://github.com/nguyentruongky/ContactPicker&quot;&gt;my github&lt;/a&gt;
+You can use this intention anywhere you want with simple actions, copy the file and use it in ViewController.
+ViewController&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;contactPickerIntention.getAllContacts()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;This project just demonstrate how I did my feature. And you can do a lot with this, add delegate to pass data from picker to ViewController, show alert and open setting when access denied and user want to accept it.
+Intention is extremely easy and powerful. Understand it clearly, your code grows to a higher level.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone numbers from all contacts, search contacts, contacts are grouped into first character of the name. Here what I did</summary></entry><entry><title type="html">1000+ lines of code, good work? (Cont)</title><link href="http://localhost:4000/2016/01/19/1000_lines_of_code_2.html" rel="alternate" type="text/html" title="1000+ lines of code, good work? (Cont)" /><published>2016-01-19T00:00:00+07:00</published><updated>2016-01-19T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/19/1000_lines_of_code_2</id><content type="html" xml:base="http://localhost:4000/2016/01/19/1000_lines_of_code_2.html">&lt;p&gt;Continue the 1000-line-of-code nightmare (my previous note &lt;a href=&quot;https://truongky.wordpress.com/2016/01/14/1000-lines-of-code-good-work/&quot;&gt;here&lt;/a&gt;). dDue to the post at &lt;a href=&quot;http://bendyworks.com/single-responsibility-principle-ios/&quot;&gt;bendyworks.com&lt;/a&gt;, I found another solution for this problem. INTENTION. What is intention? For me, intention is something does only one thing. In an aspect, intention is similar with extension, but it’s better for reusing. You can think it’s a component.&lt;/p&gt;
+
+&lt;p&gt;I’ll show you how to use intention to create an image slideshow with UIScrollView.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create new project&lt;/li&gt;
+  &lt;li&gt;Add a UIScrollView and a UIPageControl.&lt;/li&gt;
+  &lt;li&gt;Add new file, name &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;, implement NSObject&lt;/li&gt;
+  &lt;li&gt;Add a NSObject into IB and its subclass is &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Connect UIScrollView and UIPageControl to object &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Set UIScrollView delegate is our intention&lt;/li&gt;
+  &lt;li&gt;Connect intention to the main ViewController.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fconnect_object.png?alt=media&amp;amp;token=49facbec-76c2-49ea-91dd-c32ac10f3bf0&quot; alt=&quot;connect_object&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add some code to our intention&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func loadImagesToSlideShow(images:[String]) {
+	for var i = 0; i &amp;lt; images.count; i++ {
+            let imageSlide = formatSlide(images[i], slideIndex: i)
+            scrollView.addSubview(imageSlide)
+	}
+	formatPageControl(images.count)
+	formatScrollView(images.count)
+}
+
+private func formatSlide(imagesName: String, slideIndex: Int) -&amp;gt; UIImageView {
+	let imageSource = UIImage(named: imagesName)
+	let imageView = UIImageView(image: imageSource)
+	imageView.contentMode = .ScaleAspectFit
+	imageView.clipsToBounds = true    
+	var frame = scrollView.frame
+	frame.origin.x = CGFloat(slideIndex) * scrollView.frame.width
+	imageView.frame = frame
+	return imageView
+}
+
+private func formatPageControl(pageCount: Int) {
+	indicatorPageControl.backgroundColor = UIColor.blackColor()
+	indicatorPageControl.numberOfPages = pageCount
+}
+
+private func formatScrollView(pageCount: Int) {
+	scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageCount), scrollView.frame.height)
+}
+
+func scrollViewDidScroll(scrollView: UIScrollView) {
+	let pageWidth = scrollView.frame.size.width
+	let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
+	indicatorPageControl.currentPage = page
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add some code to ViewController. Your ViewController looks like this:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@IBOutlet var slideShowIntention: ImageSlideShowIntention!
+override func viewDidLoad() {
+super.viewDidLoad()
+let imageNames = [&quot;son_doong_1&quot;, &quot;son_doong_2&quot;]
+slideShowIntention.loadImagesToSlideShow(imageNames)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Anywhere you want to use an images slide show like this, copy the intention file, connect to your ViewController, pass an images name array and let it go.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This article used to demonstrate what is intention. This solution can be used with the small image source. With a large image source, I suggest you take a look at my previous post at &lt;a href=&quot;https://truongky.wordpress.com/2016/01/12/pageviewcontroller-how-can-i-reuse-it/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can download my complete project at &lt;a href=&quot;https://github.com/nguyentruongky/ImageSlideShow_IntentionDemo&quot;&gt;my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Continue the 1000-line-of-code nightmare (my previous note here). dDue to the post at bendyworks.com, I found another solution for this problem. INTENTION. What is intention? For me, intention is something does only one thing. In an aspect, intention is similar with extension, but it’s better for reusing. You can think it’s a component.</summary></entry><entry><title type="html">1000+ lines of code, good work?</title><link href="http://localhost:4000/2016/01/14/1000_lines_of_code_1.html" rel="alternate" type="text/html" title="1000+ lines of code, good work?" /><published>2016-01-14T00:00:00+07:00</published><updated>2016-01-14T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/14/1000_lines_of_code_1</id><content type="html" xml:base="http://localhost:4000/2016/01/14/1000_lines_of_code_1.html">&lt;p&gt;Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do you think when fix a bug, add a function with a 1000-line-of-code file?&lt;br /&gt;
+I’m sure your feeling same to mine. It’s horrible to find something there.&lt;/p&gt;
+
+&lt;p&gt;Take a look at this photo and list what we have to do.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Flogin_screen.png?alt=media&amp;amp;token=0c019309-0523-43ec-9f90-f0fe75d16606&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Design a view contain email and password TextField with a round corner.&lt;/li&gt;
+  &lt;li&gt;Design button &lt;code class=&quot;highlighter-rouge&quot;&gt;Sign In&lt;/code&gt; with a round corner.&lt;/li&gt;
+  &lt;li&gt;Add logo&lt;/li&gt;
+  &lt;li&gt;Add 2 buttons below.&lt;/li&gt;
+  &lt;li&gt;Toggle enabled button &lt;code class=&quot;highlighter-rouge&quot;&gt;Sign In&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Validate email and password.&lt;/li&gt;
+  &lt;li&gt;Connect to service to login.&lt;/li&gt;
+  &lt;li&gt;Handle error from service.&lt;/li&gt;
+  &lt;li&gt;Handle error with not available internet.&lt;/li&gt;
+  &lt;li&gt;Save log in result into local.&lt;/li&gt;
+  &lt;li&gt;Show forgot password screen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With a simple log in screen, there are 10+ small tasks to do. I don’t want to mention to log in and sign up in the same screen. And the view controller will contain a lot of codes. It’s horrible.&lt;/p&gt;
+
+&lt;p&gt;Thank God, Extension is here. Extension in Swift is awesome. If you don’t know about Extension, read more &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html&quot;&gt;here&lt;/a&gt;.
+I split up to 3 extension files:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;FormattingUIExtension: contain with UI code, animation, effect. I call &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad()&lt;/code&gt; to format the UI. I usually do that: set title, run animation, set text color, background, implement delegate in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;DataValidationExtension: validate email, password, enabled or disabled button, keyboard when input data changed.&lt;/li&gt;
+  &lt;li&gt;ServiceCommunicationExtension:
+    &lt;ul&gt;
+      &lt;li&gt;Connect to service to login.&lt;/li&gt;
+      &lt;li&gt;Handle error from service.&lt;/li&gt;
+      &lt;li&gt;Handle error with not available internet.&lt;/li&gt;
+      &lt;li&gt;Save log in result into local.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And this is my ViewController.swift.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://truongky.files.wordpress.com/2016/01/viewcontroller.png&quot; alt=&quot;viewController&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now I want to add animation, find &lt;code class=&quot;highlighter-rouge&quot;&gt;FormattingUIExtension.swift&lt;/code&gt; and code, service changes, do it in &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceCommunicationExtension.swift&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;You can download my complete project &lt;a href=&quot;https://github.com/nguyentruongky/LogInExtensionSample_Start&quot;&gt;here&lt;/a&gt;.
+Don’t add everything in view controller, split it up, manage it easily and forgot the 1000-line-of-code nightmare.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This article is not a tutorial, it’s only a note for friends and myself.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do you think when fix a bug, add a function with a 1000-line-of-code file? I’m sure your feeling same to mine. It’s horrible to find something there.</summary></entry><entry><title type="html">PageViewController</title><link href="http://localhost:4000/2016/01/12/PageViewController.html" rel="alternate" type="text/html" title="PageViewController" /><published>2016-01-12T00:00:00+07:00</published><updated>2016-01-12T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/12/PageViewController</id><content type="html" xml:base="http://localhost:4000/2016/01/12/PageViewController.html">&lt;p&gt;I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it anywhere by copying a file then write some small codes.&lt;br /&gt;
+Try it now.&lt;br /&gt;
+Follow &lt;a href=&quot;http://swiftiostutorials.com/ios-tutorial-using-uipageviewcontroller-create-content-slider-objective-cswift/&quot;&gt;this article&lt;/a&gt; to understand UIPageViewController.&lt;/p&gt;
+
+&lt;p&gt;OK, let’s do some smart thing. Use your current project.&lt;/p&gt;
+
+&lt;p&gt;Create new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController.swift&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController&lt;/code&gt; will conform to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIPageViewControllerDataSource&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Create an integer variable name &lt;code class=&quot;highlighter-rouge&quot;&gt;contentCount&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var contentCount = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Write a function to setup this controller&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupController(numberOfContent: Int) {
+    contentCount = numberOfContent
+
+    // 1
+    let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+    pageController.dataSource = self
+    
+    // 2
+    if contentCount &amp;gt; 0 {
+        let firstController = getItemController(0)!
+        let startingViewControllers: NSArray = [firstController]
+        pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+    }
+
+    // 3
+    addChildViewController(pageController)
+    self.view.addSubview(pageController.view)
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): initialize a UIPageViewController. This is what show your content.&lt;/p&gt;
+
+&lt;p&gt;(2): setup the first page for controller&lt;/p&gt;
+
+&lt;p&gt;(3): add UIPageController to &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController&lt;/code&gt; subview.&lt;/p&gt;
+
+&lt;p&gt;Go ahead, implement &lt;code class=&quot;highlighter-rouge&quot;&gt;UIPageViewControllerDataSource&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -&amp;gt; UIViewController? {
+    let itemController = viewController as! PageItemController
+    if itemController.itemIndex &amp;gt; 0 {
+        return getItemController(itemController.itemIndex - 1)
+    }
+    return nil
+}
+
+func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -&amp;gt; UIViewController? {
+    let itemController = viewController as! PageItemController
+    if itemController.itemIndex + 1 &amp;lt; contentCount {
+        return getItemController(itemController.itemIndex+1)
+    }
+    return nil
+}
+
+private func getItemController(itemIndex: Int) -&amp;gt; PageItemController? {
+    if itemIndex &amp;lt; contentCount {
+        return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+    }
+    return nil
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;These method are defined in UIPageViewControllerDataSource and you have to implement it. You understand them after the tutorial on swiftiostutorials.com&lt;/p&gt;
+
+&lt;p&gt;You can see &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt;. This is your Page Item Controller. If you don’t want to change the base class, you can name your page item controller &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt;. If not, you have to change &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt; to another name.&lt;/p&gt;
+
+&lt;p&gt;XCode will ask you “What the hell is delegate?”. So, what the hell is delegate?&lt;/p&gt;
+
+&lt;p&gt;Find out what it is &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaEncyclopedia/DelegatesandDataSources/DelegatesandDataSources.html&quot;&gt;here&lt;/a&gt;. Now imagine that you are a shopkeeper but you can not ship products to your customer. Delivery man will help you. Delegate is a virtual delivery man. Delegate is a virtual delivery man. In your current controller (MyPageViewController), you can’t do &lt;code class=&quot;highlighter-rouge&quot;&gt;getPageItemAtIndex&lt;/code&gt;, so you tell the delegate do that for you.&lt;/p&gt;
+
+&lt;p&gt;Define delegate now.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;protocol PageViewDelegate {
+    func getPageItemAtIndex(index: Int) -&amp;gt; UIViewController
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Write this code out of the class scope. I usually write it under import functions.&lt;/p&gt;
+
+&lt;p&gt;And use delegate in MyPageViewController&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var delegate: PageViewDelegate?
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s almost done here. You have to implement PageViewDelegate in your main controller. However, I want to show you the complete code for this base class. Go ahead.&lt;/p&gt;
+
+&lt;p&gt;Add new variable to determine should we show indicator dots.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var didShowPageControl = false
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add these code at the end of &lt;code class=&quot;highlighter-rouge&quot;&gt;setupController&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if didShowPageControl == true {
+    setupPageControl()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add new methods&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func setupPageControl() {
+    let appearance = UIPageControl.appearance()
+    appearance.pageIndicatorTintColor = UIColor.grayColor()
+    appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
+    appearance.backgroundColor = UIColor.darkGrayColor()
+}
+
+func presentationCountForPageViewController(pageViewController: UIPageViewController) -&amp;gt; Int {
+    if didShowPageControl == false { return 0 }
+    return contentCount
+}
+
+func presentationIndexForPageViewController(pageViewController: UIPageViewController) -&amp;gt; Int {
+    return 0 }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ve done. You can copy it to anywhere you want and use it easily.&lt;/p&gt;
+
+&lt;p&gt;Design your beautiful page item to show on UIPageViewController. Here we will use the PageItemController you created in the swiftiostutorials’s tutorial.&lt;/p&gt;
+
+&lt;p&gt;And in your main view controller, remove all codes in class ViewController then write some new codes. Your class looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class ViewController: UIViewController, PageViewDelegate {
+    // Initialize it right away here
+    private let contentImages = [&quot;nature_pic_1.png&quot;,
+                                 &quot;nature_pic_2.png&quot;,
+                                 &quot;nature_pic_3.png&quot;,
+                                 &quot;nature_pic_4.png&quot;];
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let pageController = MyPageViewController()
+        pageController.delegate = self
+        pageController.setupController(contentImages.count)
+
+        addChildViewController(pageController)
+        self.view.addSubview(pageController.view)
+    }
+
+    func getPageItemAtIndex(index: Int) -&amp;gt; UIViewController {
+        let pageItemController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;ItemController&quot;) as! PageItemController
+        pageItemController.itemIndex = index
+        pageItemController.imageName = contentImages[index]
+        return pageItemController
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can see your &lt;code class=&quot;highlighter-rouge&quot;&gt;PageViewDelegate&lt;/code&gt; you defined here.&lt;/p&gt;
+
+&lt;p&gt;What you have to do is, define an array of images, initilize a MyPageController instance and implement delegate.&lt;/p&gt;
+
+&lt;p&gt;Take a look at &lt;code class=&quot;highlighter-rouge&quot;&gt;getPageItemAtIndex&lt;/code&gt;. What you want to show in PageItemController, you will code here. For example: you can add new label to show the item’s description, define it and pass data here.&lt;/p&gt;
+
+&lt;p&gt;Run app and enjoy your code.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;Now we don’t have to write the repeat code anymore. Copy this file and use it anywhere.&lt;/p&gt;
+
+&lt;p&gt;You can download the complete project &lt;a href=&quot;https://github.com/nguyentruongky/KPageViewController&quot;&gt;at my github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it anywhere by copying a file then write some small codes. Try it now. Follow this article to understand UIPageViewController.</summary></entry><entry><title type="html">How concurrency help in iOS</title><link href="http://localhost:4000/2016/01/11/how_concurrency_help_ios.html" rel="alternate" type="text/html" title="How concurrency help in iOS" /><published>2016-01-11T00:00:00+07:00</published><updated>2016-01-11T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/11/how_concurrency_help_ios</id><content type="html" xml:base="http://localhost:4000/2016/01/11/how_concurrency_help_ios.html">&lt;p&gt;Without concurrency, all tasks run in the main thread, and the app will be freeze when a heavy task is (eg: downloading, uploading, image processing…) running. Concurrency can give the users a better experience. The heavy tasks are running in background and they can do anything they want on the UI as usual.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This is not a tutorial, it’s only a note. What do I have to remember and understand about concurrency programming. The demo project can be found &lt;a href=&quot;https://github.com/nguyentruongky/ConcurrentProgrammingDemo&quot;&gt;here&lt;/a&gt;.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are 2 concurrency concepts: dispatch queues and NSOperationQueues&lt;/p&gt;
+
+&lt;h2 id=&quot;gcd---grand-central-dispatch&quot;&gt;GCD - Grand Central Dispatch&lt;/h2&gt;
+
+&lt;p&gt;GCD conform with the FIFO order. GCD will run tasks in separate queues, not the main queue so that your app won’t be freezed. There are 2 dispatch queues: serial queues and concurrency queues.&lt;/p&gt;
+
+&lt;h4 id=&quot;serial-queues&quot;&gt;Serial Queues&lt;/h4&gt;
+
+&lt;p&gt;The serial queue can only run a task at a time. The second task will run right after the first task has been done. Fortunately, we can create many serial queues and run them concurrently.&lt;/p&gt;
+
+&lt;p&gt;Serial queues are useful for managing shared resources and avoiding race condition. In addition, the advantage of serial queues I like the most is tasks are executed in a predictable order. They executed in the same order as they are inserted.&lt;/p&gt;
+
+&lt;p&gt;In below demo, I downloaded 4 images by using serial queue.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func runSerialQueue() {
+    let serialQueue = dispatch_queue_create(&quot;imagesQueue&quot;, DISPATCH_QUEUE_SERIAL)
+    dispatch_async(serialQueue) { () -&amp;gt; Void in
+        self.runDownloadTask(0)
+    }
+    dispatch_async(serialQueue) { () -&amp;gt; Void in
+        self.runDownloadTask(1)
+    }
+    dispatch_async(serialQueue) { () -&amp;gt; Void in
+        self.runDownloadTask(2)
+    }
+    dispatch_async(serialQueue) { () -&amp;gt; Void in
+        self.runDownloadTask(3)
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can create more queues and add task to new queues. Those queues will run concurrently with &lt;code class=&quot;highlighter-rouge&quot;&gt;imagesQueue&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;And here is download function:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func runDownloadTask(index: Int) {
+    let img = self.downloadImage(self.imageUrl[index])
+    dispatch_async(dispatch_get_main_queue(), {
+        self.images[index].image = img
+        self.downloadCompleted()
+    })
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Take a look at this cheat sheet. It can help you remember about GCD.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fgcd%2Fgcd-cheatsheet.png?alt=media&amp;amp;token=01784ece-24b1-48b7-be8a-073a3c0116bf&quot; alt=&quot;gcd-cheatsheet&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;concurrent-queues&quot;&gt;Concurrent Queues&lt;/h4&gt;
+
+&lt;p&gt;Concurrent queues execute multiple tasks at a time. You will not know the order of execution, execution time.&lt;/p&gt;
+
+&lt;p&gt;Besides the main queue, the system provides four concurrent queues. We call them Global Dispatch queues.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DISPATCH_QUEUE_PRIORITY_HIGH&lt;/li&gt;
+  &lt;li&gt;DISPATCH_QUEUE_PRIORITY_DEFAULT&lt;/li&gt;
+  &lt;li&gt;DISPATCH_QUEUE_PRIORITY_LOW&lt;/li&gt;
+  &lt;li&gt;DISPATCH_QUEUE_PRIORITY_BACKGROUND&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here is how to download images with concurrent queues&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func runConcurrentQueue() {
+    let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+    dispatch_async(queue) { () -&amp;gt; Void in
+        self.runDownloadTask(0)
+    }
+    dispatch_async(queue) { () -&amp;gt; Void in
+       self.runDownloadTask(1)
+    }
+    dispatch_async(queue) { () -&amp;gt; Void in
+        self.runDownloadTask(2)
+    }
+    dispatch_async(queue) { () -&amp;gt; Void in
+        self.runDownloadTask(3)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;operation-queue&quot;&gt;Operation Queue&lt;/h2&gt;
+
+&lt;p&gt;Here are how operation queues are different from dispatch queues:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Don’t follow FIFO: in operation queues, you can set an execution priority for operations and you can add dependencies between operations which means you can define that some operations will only be executed after the completion of other operations.&lt;/li&gt;
+  &lt;li&gt;By default, they operate concurrently: while you can’t change its type to serial queues, there is still a workaround to execute tasks in operation queues in sequence by using dependencies between operations.&lt;/li&gt;
+  &lt;li&gt;Operation queues are instances of class NSOperationQueue and its tasks are encapsulated in instances of NSOperation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The advantages of NSOperation&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First, they support dependencies through the method addDependency(op: NSOperation) in the NSOperation class. When you need to start an operation that depends on the execution of the other, you will want to use NSOperation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fgcd%2Fnsoperation-fig2.png?alt=media&amp;amp;token=102f9633-4ad6-454a-ae30-00fdcda667a3&quot; alt=&quot;NSOperation-Fig2&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can decide the operation priority which higher priority will be executed first.&lt;/li&gt;
+  &lt;li&gt;You can cancel an operation after it’s added to the queue.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s see how it works.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; func runNSOperationQueue() {
+
+    queue = NSOperationQueue();
+
+    func createOperation(index: Int) -&amp;gt; NSBlockOperation {
+
+        let operation = NSBlockOperation(block: {
+
+            self.runDownloadTask(index)
+        })
+
+        operation.completionBlock = {
+            print(&quot;Operation \(index + 1) completed, cancelled:\(operation.cancelled)&quot;)
+        }
+
+        return operation
+    }
+
+    let operation1 = createOperation(0)
+    queue.addOperation(operation1)
+
+    let operation2 = createOperation(1)
+    operation2.addDependency(operation1)
+    queue.addOperation(operation2)
+
+    let operation3 = createOperation(2)
+    operation3.addDependency(operation2)
+    queue.addOperation(operation3)
+
+    let operation4 = createOperation(3)
+    queue.addOperation(operation4)
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We can see operation 2 (op2) depends on op1 and op3 depends on op2. It means, op1 and op4 run at a time and op1 completed, op2 runs and same to op3.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Concurrency is extremely strong in building app contacted with server, downloading or processing heavy tasks. It helps our apps run incredible smoothly.&lt;/p&gt;
+
+&lt;p&gt;This note is based on &lt;a href=&quot;http://www.appcoda.com/ios-concurrency/&quot;&gt;http://www.appcoda.com/ios-concurrency/&lt;/a&gt;. 
+You can download the complete project &lt;a href=&quot;https://github.com/nguyentruongky/ConcurrentProgrammingDemo&quot;&gt;at my github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Without concurrency, all tasks run in the main thread, and the app will be freeze when a heavy task is (eg: downloading, uploading, image processing…) running. Concurrency can give the users a better experience. The heavy tasks are running in background and they can do anything they want on the UI as usual.</summary></entry></feed>

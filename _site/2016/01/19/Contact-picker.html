@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Contact Picker - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone ...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2016/01/19/Contact-picker.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/img/posts/contact_list.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Contact Picker</h1>
+          
+          <h2 class="subheading">Pick phone number from ABAddressBook</h2>
+          
+          <span class="meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on January 19, 2016</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone numbers from all contacts, search contacts, contacts are grouped into first character of the name. Here what I did</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffullcontact.png?alt=media&amp;token=0225e273-c25a-46f1-a053-2a29ce26aed2" alt="" /> <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fsearch_contact.png?alt=media&amp;token=63aa4ae0-4149-4ecf-a649-059940d17210" alt="" /></p>
+
+<p>I use intention in this function so that this picker can be use anywhere easily. Read more about intention at my posts: <a href="https://truongky.wordpress.com/2016/01/19/1000-lines-of-code-good-work-cont/">1000+ lines of code, good work?“ (Cont)</a> and <a href="https://truongky.wordpress.com/2016/01/12/pageviewcontroller-how-can-i-reuse-it/">PageViewController: How can I reuse it?</a></p>
+
+<p>Let’s begin.</p>
+
+<ul>
+  <li>Create new project.</li>
+  <li>Design what you want. Two controls must have: a UITableView and a UISearchBar.</li>
+  <li>Add a UITableViewCell and name it <code class="highlighter-rouge">contactCell</code> with style is <code class="highlighter-rouge">Subtitle</code>.</li>
+  <li>Add a new file <code class="highlighter-rouge">ContactPickerIntention.swift</code> and implement NSObject class. It’s our intention.</li>
+  <li>Add a NSObject in IB and change its subclass is <code class="highlighter-rouge">ContactPickerIntention.swift</code>.</li>
+  <li>Connect controls to the intention. I named them <code class="highlighter-rouge">searchBar</code> and <code class="highlighter-rouge">tableView</code>.</li>
+  <li>Connect the intention to ViewController.</li>
+  <li>The intention has to conform some delegate and datasource.
+    <ul>
+      <li>UISearchBarDelegate</li>
+      <li>UITableViewDelegate</li>
+      <li>UITableViewDataSource</li>
+    </ul>
+  </li>
+</ul>
+
+<p>You have to ask permission to access to contact.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
+	// warn the user that because they just denied permission, this functionality won't work
+	// also let them know that they have to fix this in settings
+	if granted == false { return }
+	// load contact 
+}
+</code></pre></div></div>
+
+<p>Load all contacts</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+</code></pre></div></div>
+
+<p>All contacts are here. Run a loop and load every contact, find the phone number and consider this contact with every number is a contact item.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func getNameFromContact(currentContact: ABRecordRef) -&gt; String {
+	let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
+	let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
+	var currentName = ""
+	if firstName == nil &amp;&amp; lastName == nil { // prevent anonymous contact
+            currentName = ""
+	} else {
+		currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
+	}
+	return currentName
+}
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">ABRecordCopyCompositeName</code> function can get the contact’s full name for you, but if there is a contact without first name or last name, your app crashes. Take care some anonymous friends with this func.</p>
+
+<p>Get the phone numbers.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -&gt; [String]? {
+    var phoneNumberList = [String]()
+    let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
+    for var j: CFIndex = 0; j &lt; ABMultiValueGetCount(phones); j++ {
+        let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
+        if mobileLabel == kABPersonPhoneMobileLabel ||
+            mobileLabel == kABHomeLabel ||
+            mobileLabel == kABPersonPhoneMainLabel ||
+            mobileLabel == kABPersonPhoneIPhoneLabel ||
+            mobileLabel == kABOtherLabel ||
+            mobileLabel == kABWorkLabel {
+                let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
+                phoneNumberList.append(phone)
+        }
+    }
+    return phoneNumberList
+}
+</code></pre></div></div>
+
+<p>There are a few phone number types such as Mobile, Home, Work. And those types are marked with the Label. We have to get the phones multi value and find the phone number conform to the labels.</p>
+
+<p>I created struct <code class="highlighter-rouge">Contact</code> to keep the name and the phone number. And a dictionary with key is the first character of the name and the value is an array of Contact to store all contacts.</p>
+
+<p>If you want to get email, try this func</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func getEmail(currentContact: ABRecordRef) -&gt; String {
+    let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
+    var emailString = ""
+    if ABMultiValueGetCount(email) &gt; 0 {
+        emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+    }
+    return emailString
+}
+</code></pre></div></div>
+
+<p>You can download my complete project at <a href="https://github.com/nguyentruongky/ContactPicker">my github</a>
+You can use this intention anywhere you want with simple actions, copy the file and use it in ViewController.
+ViewController</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contactPickerIntention.getAllContacts()
+</code></pre></div></div>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>This project just demonstrate how I did my feature. And you can do a lot with this, add delegate to pass data from picker to ViewController, show alert and open setting when access denied and user want to accept it.
+Intention is extremely easy and powerful. Understand it clearly, your code grows to a higher level.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2016/01/19/1000_lines_of_code_2.html" data-toggle="tooltip" data-placement="top" title="1000+ lines of code, good work? (Cont)">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2016/01/27/Airbnb-home.html" data-toggle="tooltip" data-placement="top" title="Airbnb Home screen sample">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

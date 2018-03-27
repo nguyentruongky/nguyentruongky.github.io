@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    PageViewController - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it ...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2016/01/12/PageViewController.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/img/posts/page_view_controller.png')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>PageViewController</h1>
+          
+          <h2 class="subheading">How to easily reuse UIPageViewController?</h2>
+          
+          <span class="meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on January 12, 2016</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it anywhere by copying a file then write some small codes.<br />
+Try it now.<br />
+Follow <a href="http://swiftiostutorials.com/ios-tutorial-using-uipageviewcontroller-create-content-slider-objective-cswift/">this article</a> to understand UIPageViewController.</p>
+
+<p>OK, let’s do some smart thing. Use your current project.</p>
+
+<p>Create new file name <code class="highlighter-rouge">MyPageViewController.swift</code>. <code class="highlighter-rouge">MyPageViewController</code> will conform to <code class="highlighter-rouge">UIPageViewControllerDataSource</code></p>
+
+<p>Create an integer variable name <code class="highlighter-rouge">contentCount</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var contentCount = 0
+</code></pre></div></div>
+
+<p>Write a function to setup this controller</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func setupController(numberOfContent: Int) {
+    contentCount = numberOfContent
+
+    // 1
+    let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+    pageController.dataSource = self
+    
+    // 2
+    if contentCount &gt; 0 {
+        let firstController = getItemController(0)!
+        let startingViewControllers: NSArray = [firstController]
+        pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+    }
+
+    // 3
+    addChildViewController(pageController)
+    self.view.addSubview(pageController.view)
+}
+
+</code></pre></div></div>
+
+<p>(1): initialize a UIPageViewController. This is what show your content.</p>
+
+<p>(2): setup the first page for controller</p>
+
+<p>(3): add UIPageController to <code class="highlighter-rouge">MyPageViewController</code> subview.</p>
+
+<p>Go ahead, implement <code class="highlighter-rouge">UIPageViewControllerDataSource</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -&gt; UIViewController? {
+    let itemController = viewController as! PageItemController
+    if itemController.itemIndex &gt; 0 {
+        return getItemController(itemController.itemIndex - 1)
+    }
+    return nil
+}
+
+func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -&gt; UIViewController? {
+    let itemController = viewController as! PageItemController
+    if itemController.itemIndex + 1 &lt; contentCount {
+        return getItemController(itemController.itemIndex+1)
+    }
+    return nil
+}
+
+private func getItemController(itemIndex: Int) -&gt; PageItemController? {
+    if itemIndex &lt; contentCount {
+        return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+    }
+    return nil
+}
+
+</code></pre></div></div>
+
+<p>These method are defined in UIPageViewControllerDataSource and you have to implement it. You understand them after the tutorial on swiftiostutorials.com</p>
+
+<p>You can see <code class="highlighter-rouge">PageItemController</code>. This is your Page Item Controller. If you don’t want to change the base class, you can name your page item controller <code class="highlighter-rouge">PageItemController</code>. If not, you have to change <code class="highlighter-rouge">PageItemController</code> to another name.</p>
+
+<p>XCode will ask you “What the hell is delegate?”. So, what the hell is delegate?</p>
+
+<p>Find out what it is <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaEncyclopedia/DelegatesandDataSources/DelegatesandDataSources.html">here</a>. Now imagine that you are a shopkeeper but you can not ship products to your customer. Delivery man will help you. Delegate is a virtual delivery man. Delegate is a virtual delivery man. In your current controller (MyPageViewController), you can’t do <code class="highlighter-rouge">getPageItemAtIndex</code>, so you tell the delegate do that for you.</p>
+
+<p>Define delegate now.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>protocol PageViewDelegate {
+    func getPageItemAtIndex(index: Int) -&gt; UIViewController
+}
+</code></pre></div></div>
+
+<p>Write this code out of the class scope. I usually write it under import functions.</p>
+
+<p>And use delegate in MyPageViewController</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var delegate: PageViewDelegate?
+</code></pre></div></div>
+
+<p>It’s almost done here. You have to implement PageViewDelegate in your main controller. However, I want to show you the complete code for this base class. Go ahead.</p>
+
+<p>Add new variable to determine should we show indicator dots.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var didShowPageControl = false
+</code></pre></div></div>
+
+<p>Add these code at the end of <code class="highlighter-rouge">setupController</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if didShowPageControl == true {
+    setupPageControl()
+}
+</code></pre></div></div>
+
+<p>Add new methods</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupPageControl() {
+    let appearance = UIPageControl.appearance()
+    appearance.pageIndicatorTintColor = UIColor.grayColor()
+    appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
+    appearance.backgroundColor = UIColor.darkGrayColor()
+}
+
+func presentationCountForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
+    if didShowPageControl == false { return 0 }
+    return contentCount
+}
+
+func presentationIndexForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
+    return 0 }
+
+</code></pre></div></div>
+
+<p>We’ve done. You can copy it to anywhere you want and use it easily.</p>
+
+<p>Design your beautiful page item to show on UIPageViewController. Here we will use the PageItemController you created in the swiftiostutorials’s tutorial.</p>
+
+<p>And in your main view controller, remove all codes in class ViewController then write some new codes. Your class looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ViewController: UIViewController, PageViewDelegate {
+    // Initialize it right away here
+    private let contentImages = ["nature_pic_1.png",
+                                 "nature_pic_2.png",
+                                 "nature_pic_3.png",
+                                 "nature_pic_4.png"];
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let pageController = MyPageViewController()
+        pageController.delegate = self
+        pageController.setupController(contentImages.count)
+
+        addChildViewController(pageController)
+        self.view.addSubview(pageController.view)
+    }
+
+    func getPageItemAtIndex(index: Int) -&gt; UIViewController {
+        let pageItemController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
+        pageItemController.itemIndex = index
+        pageItemController.imageName = contentImages[index]
+        return pageItemController
+    }
+}
+</code></pre></div></div>
+
+<p>You can see your <code class="highlighter-rouge">PageViewDelegate</code> you defined here.</p>
+
+<p>What you have to do is, define an array of images, initilize a MyPageController instance and implement delegate.</p>
+
+<p>Take a look at <code class="highlighter-rouge">getPageItemAtIndex</code>. What you want to show in PageItemController, you will code here. For example: you can add new label to show the item’s description, define it and pass data here.</p>
+
+<p>Run app and enjoy your code.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Now we don’t have to write the repeat code anymore. Copy this file and use it anywhere.</p>
+
+<p>You can download the complete project <a href="https://github.com/nguyentruongky/KPageViewController">at my github</a>.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2016/01/11/how_concurrency_help_ios.html" data-toggle="tooltip" data-placement="top" title="How concurrency help in iOS">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2016/01/14/1000_lines_of_code_1.html" data-toggle="tooltip" data-placement="top" title="1000+ lines of code, good work?">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

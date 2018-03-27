@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    1000+ lines of code, good work? - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do ...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2016/01/14/1000_lines_of_code_1.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/img/posts/code_1.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>1000+ lines of code, good work?</h1>
+          
+          <h2 class="subheading">Simple ways to end the nightmare</h2>
+          
+          <span class="meta">Posted by
+            <a href="#">Start Bootstrap</a>
+            on January 14, 2016</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do you think when fix a bug, add a function with a 1000-line-of-code file?<br />
+I’m sure your feeling same to mine. It’s horrible to find something there.</p>
+
+<p>Take a look at this photo and list what we have to do.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Flogin_screen.png?alt=media&amp;token=0c019309-0523-43ec-9f90-f0fe75d16606" alt="" /></p>
+<ul>
+  <li>Design a view contain email and password TextField with a round corner.</li>
+  <li>Design button <code class="highlighter-rouge">Sign In</code> with a round corner.</li>
+  <li>Add logo</li>
+  <li>Add 2 buttons below.</li>
+  <li>Toggle enabled button <code class="highlighter-rouge">Sign In</code>.</li>
+  <li>Validate email and password.</li>
+  <li>Connect to service to login.</li>
+  <li>Handle error from service.</li>
+  <li>Handle error with not available internet.</li>
+  <li>Save log in result into local.</li>
+  <li>Show forgot password screen.</li>
+</ul>
+
+<p>With a simple log in screen, there are 10+ small tasks to do. I don’t want to mention to log in and sign up in the same screen. And the view controller will contain a lot of codes. It’s horrible.</p>
+
+<p>Thank God, Extension is here. Extension in Swift is awesome. If you don’t know about Extension, read more <a href="https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html">here</a>.
+I split up to 3 extension files:</p>
+<ul>
+  <li>FormattingUIExtension: contain with UI code, animation, effect. I call <code class="highlighter-rouge">setupView()</code> in <code class="highlighter-rouge">viewDidLoad()</code> to format the UI. I usually do that: set title, run animation, set text color, background, implement delegate in <code class="highlighter-rouge">setupView</code>.</li>
+  <li>DataValidationExtension: validate email, password, enabled or disabled button, keyboard when input data changed.</li>
+  <li>ServiceCommunicationExtension:
+    <ul>
+      <li>Connect to service to login.</li>
+      <li>Handle error from service.</li>
+      <li>Handle error with not available internet.</li>
+      <li>Save log in result into local.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>And this is my ViewController.swift.</p>
+
+<p><img src="https://truongky.files.wordpress.com/2016/01/viewcontroller.png" alt="viewController" /></p>
+
+<p>Now I want to add animation, find <code class="highlighter-rouge">FormattingUIExtension.swift</code> and code, service changes, do it in <code class="highlighter-rouge">ServiceCommunicationExtension.swift</code></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>You can download my complete project <a href="https://github.com/nguyentruongky/LogInExtensionSample_Start">here</a>.
+Don’t add everything in view controller, split it up, manage it easily and forgot the 1000-line-of-code nightmare.</p>
+
+<p><strong>This article is not a tutorial, it’s only a note for friends and myself.</strong></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2016/01/12/PageViewController.html" data-toggle="tooltip" data-placement="top" title="PageViewController">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2016/01/19/1000_lines_of_code_2.html" data-toggle="tooltip" data-placement="top" title="1000+ lines of code, good work? (Cont)">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
