@@ -1,15 +1,15 @@
 title:             Clean Blog
 email:             nguyentruongky33@gmail.com
-description:       A Blog Theme by Start Bootstrap
-author:            Start Bootstrap
+description:       My personal notes, codes, reviews, ideas
+author:            Ky Nguyen
 baseurl:           "/"
 url:               "http://nguyentruongky.github.io"
 
 
 # Social Profiles
-twitter_username:  SBootstrap
-github_username:   BlackrockDigital
-facebook_username: StartBootstrap
+# twitter_username:  SBootstrap
+github_username:   nguyentruongky
+# facebook_username: StartBootstrap
 
 # Build settings
 markdown:          kramdown
