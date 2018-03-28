@@ -1,4 +1,613 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-28T11:57:50+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Top Skills iOS Developers Need Today</title><link href="http://localhost:4000/2017/03/08/top-skills-ios.html" rel="alternate" type="text/html" title="Top Skills iOS Developers Need Today" /><published>2017-03-08T00:00:00+07:00</published><updated>2017-03-08T00:00:00+07:00</updated><id>http://localhost:4000/2017/03/08/top-skills-ios</id><content type="html" xml:base="http://localhost:4000/2017/03/08/top-skills-ios.html">&lt;p&gt;We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-28T15:53:40+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Make the Most of Your 24 Hours</title><link href="http://localhost:4000/2017/04/28/most-of-24-hours.html" rel="alternate" type="text/html" title="Make the Most of Your 24 Hours" /><published>2017-04-28T00:00:00+07:00</published><updated>2017-04-28T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/28/most-of-24-hours</id><content type="html" xml:base="http://localhost:4000/2017/04/28/most-of-24-hours.html">&lt;h2 id=&quot;bitter-experience&quot;&gt;Bitter Experience&lt;/h2&gt;
+&lt;p&gt;I started iOS as a 2-year-experience .NET developer. The salary range for a junior iOS dev is a little bit lower than the amount for a 2-year-experience develop get. I wanted to make myself stronger, earn more experience. I had a misconception of working and learning. I thought, freelance projects will help me strengthen my knowledge and experience. So I tried to get as more as possible freelance projects. And my nightmare started from here.&lt;/p&gt;
+
+&lt;p&gt;I had no time to spend with my family, no time to work on personal improvement, no time to go out with friends, no time at all. All of my time was used up on my freelance work from coding new features, fixing bugs and much more. I was killing myself working odd hours and missing out on quality time with my family and friends.&lt;/p&gt;
+
+&lt;p&gt;I made a mess, uncountable technical debts, bugs, with the project. I was angry with everyone and myself. And the company project was affected. I brought more bugs there, dozens of stupid bugs, critical bugs.&lt;/p&gt;
+
+&lt;p&gt;Finally, after lots of stress situations, I found a way to get myself out of these nightmares.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-necessary-for-you&quot;&gt;Why necessary for you?&lt;/h2&gt;
+&lt;p&gt;You’re developer, and you understand clearly about the pressure in development. I’m sure you want to get some freelance projects to earn more money. So, you should try my solution to manage your time effectively.&lt;/p&gt;
+
+&lt;p&gt;You’re developer, and you have to work OT. Too many tasks you have and you have no enough time for work. No time for family, no time for your life, no time at all. My solution can help you get out of your situation.&lt;/p&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+&lt;p&gt;This solution is about how to change the way I work, how to manage time effectively. It’s absolutely right for me, and helps me out of the shit situations, boost my career, make my life better. Is it good to try yourself?&lt;/p&gt;
+
+&lt;p&gt;This solution has 2 parts:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Life skills: something you need to change in your life, how you work, how you enjoy your life…&lt;/li&gt;
+  &lt;li&gt;Tech skills: 4 tips for iOS developers to work faster, better, and save time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;life-skills---switch-up-working-hours&quot;&gt;Life Skills - Switch Up Working Hours&lt;/h3&gt;
+
+&lt;p&gt;You have to spend at least 8 hours a day for working at your office. The manager says, “We have no time, we have to work OT”. Yes, it’s a extremely bad solution. Your brain, your body is drained. And now, you force it work more hard. Do you really think you can work effectively after 8 hours working? No, you don’t. You know, your colleagues know, but the manager doesn’t know.&lt;/p&gt;
+
+&lt;p&gt;It’s too hard to decline working OT, but you should do. You have to do unless you make more bugs and everything is worse.&lt;/p&gt;
+
+&lt;p&gt;One time, I had to work until 8.30 pm, without dinner, just some instance noodle. Went home, went to bed and 11.30pm, got a call.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“What the hell are you doing? Something is wrong with the promotion”.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;OK, turned my Macbook on and worked like a dead guy.&lt;/p&gt;
+
+&lt;p&gt;Many times like that, and the project had shit quality. I can’t believe I can do but, but I did, no choice.&lt;/p&gt;
+
+&lt;h4 id=&quot;what-is-the-better-solution&quot;&gt;What is the better solution?&lt;/h4&gt;
+
+&lt;p&gt;The firs thing in my solution, is to switch up working hours. I decline all OT and try to work better, work more in my ideal time to finish more tasks or fix more bugs.&lt;/p&gt;
+
+&lt;p&gt;The ideal time for working, for me, is 2am after 3 to 4 hours of sleeping, maybe different from you. This time is ideal because everything is quiet and there are absolutely no distractions. No phone calls, no email, no one bothers you. For me, this is the best time to get my creative juices flowing.&lt;/p&gt;
+
+&lt;p&gt;It’s exactly same to freelance projects. You can achieve better results than work after office time.&lt;/p&gt;
+
+&lt;p&gt;It’s hard to start at all, but try it yourself and experience amazing results.&lt;/p&gt;
+
+&lt;h3 id=&quot;life-skills---keep-up-health&quot;&gt;Life Skills - Keep Up Health&lt;/h3&gt;
+
+&lt;p&gt;Most importantly, a healthy body is the key to reach success. I have to work 8 hours everyday in an office and an additional 4-6 hours on freelance projects. If you do the math, my body has to work 1.5 times more than usual. Crazy, right? For most people, their body and mind will become exhausted very quickly with a schedule like this. In order for me to prevent myself from becoming ill, I make a conscious effort to include additional nutrition in my meals with more fruits, protein, etc.&lt;/p&gt;
+
+&lt;p&gt;In additional to a healthy diet, it’s important to stay active.I try to incorporate a little bit of exercise into my daily activities. For example, I use the stairs instead of the elevator, I try to walk faster, clean the floor manually, and more. Now, I know these types of activities won’t help me become an athlete, but every little bit helps to keep my health up.&lt;/p&gt;
+
+&lt;p&gt;You can make more evil bugs when you’re not healthy. And you waste double time to fix what you did when you’re not healthy. So, keep up your health and make good things for your code.&lt;/p&gt;
+
+&lt;h3 id=&quot;life-skills---change-your-mindset&quot;&gt;Life Skills - Change Your Mindset&lt;/h3&gt;
+
+&lt;p&gt;Freelance projects are very good for expanding your experience. You have many projects to fill into your CV. You can earn more money. It’s great. But they’re not good to your knowledge. Freelance projects are useful when you have strong experience and want to strengthen them. But it’s a bad choice for learning because of pressure.&lt;/p&gt;
+
+&lt;p&gt;When you’re in a freelance projects, you have many pressure about time limit, money, client attitude… And you just want to make it done, not want to understand how it work and how to make it better. It’s harmful for you. You think you have experience with it, CoreData for instance, and you apply for new projects with CoreData require. You run into a big bugs and take lots of time to understand to fix that.&lt;/p&gt;
+
+&lt;p&gt;Side projects are better choice. You can research new technologies, try new hot things in new iOS, SiriKit, HealthKit for instance. Don’t forget to publish some side projects. They can help you to show off for your clients or your interviewer.&lt;/p&gt;
+
+&lt;p&gt;You also practice or strengthen your weakness in iOS with side projects. With these projects, you learn a lot and be confident to apply new projects.&lt;/p&gt;
+
+&lt;p&gt;Don’t think about money first, think about yourself, Make yourself better and money comes.&lt;/p&gt;
+
+&lt;h3 id=&quot;tech-skills---code-snippets&quot;&gt;Tech skills - Code Snippets&lt;/h3&gt;
+
+&lt;p&gt;Code Snippets is your template codes. You don’t want to type all the code or copy it from somewhere. Just type some first characters and select it from suggestion list. For instance, I usually type “button”, and XCode will give me this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/save_coding_time_ios/Button_Snippet.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Easy, right? You don’t want to type boring code anymore.&lt;/p&gt;
+
+&lt;p&gt;Don’t forget use &amp;lt;# and #&amp;gt; with the placeholder text in the middle. Go ahead—try typing that into Xcode, and watch as the text between the octothorp tags magically transforms right in front of your eyes.&lt;/p&gt;
+
+&lt;p&gt;You can try my snippets at &lt;a href=&quot;https://github.com/nguyentruongky/iOS_snippets&quot;&gt;&lt;/a&gt; by copy and paste to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Library/Developer/Xcode/UserData/CodeSnippets/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Small things but very useful.&lt;/p&gt;
+
+&lt;h3 id=&quot;tech-skills---knowledge-base&quot;&gt;Tech skills - Knowledge base&lt;/h3&gt;
+
+&lt;p&gt;It works like an external library, nearly same to Pods but in free way.&lt;/p&gt;
+
+&lt;p&gt;Situation like this. You finished a cool animation in company project. It’s really cool and you want to use it in your current freelance project. You copy this code to the freelance project, change something and let it work like a charm. But, you find something can be better in this code. You make changes, and want this change be applied in the company project. You copy this code again. Imagine you have more 2 projects, use this animation. It’s a nightmare.&lt;/p&gt;
+
+&lt;p&gt;Knowledge base is good choice for you. Create your own knowledge base in Github, clone to your projects. Add new features, change some if needed. Push to Github and pull it from other projects. All your projects can get the latest update easily. Cool, right?&lt;/p&gt;
+
+&lt;h4 id=&quot;some-notices-you-should-know&quot;&gt;Some notices you should know&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Clone your knowledge base to every project to avoid some unpredictable situations. Some changes in this project can make consequence to others projects, and it takes you lots of time to find out the cause.&lt;/li&gt;
+  &lt;li&gt;Add your knowledge base to .gitignore. Without this step, you will commit your changes into Github with an unrelated commit message. Or you can make some unexpected commit and your knowledge base become a mess.&lt;/li&gt;
+  &lt;li&gt;Run test for your code and make sure it works good before commit.&lt;/li&gt;
+  &lt;li&gt;Should use &lt;code class=&quot;highlighter-rouge&quot;&gt;branch&lt;/code&gt;to manage your base.
+    &lt;h4 id=&quot;why-dont-i-create-a-pods&quot;&gt;Why don’t I create a Pods?&lt;/h4&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because CocoaPods need to release on Github. But these pieces of code change continuously, new code, new update, remove redundant code.&lt;/p&gt;
+
+&lt;h3 id=&quot;tech-skills---auto-layout-programmatically&quot;&gt;Tech skills - Auto Layout programmatically&lt;/h3&gt;
+&lt;p&gt;This is a popular war for many iOS developers. Storyboard fans think this is stupid thing. Programmatically guys fight for their belief.&lt;/p&gt;
+
+&lt;p&gt;This is opinion from a developer can’t live without Storyboard, and now he abandons it. It’s me :)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Auto Layout programmatically saves your time and your life.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;how-can-it-help-to-save-time&quot;&gt;How can it help to save time?&lt;/h4&gt;
+
+&lt;p&gt;My situation is a good example. I designed a very good UI, and connected outlet, started logic coding, finished that feature. One day, I had to refactor code and found some improvement. Some &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; had gestures, should be changed to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;. No problem, made changes. What did I do?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
+  &lt;li&gt;Delete one by one.&lt;/li&gt;
+  &lt;li&gt;Add new &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Connect new outlets&lt;/li&gt;
+  &lt;li&gt;Setup Auto Layout constraints. (This is most painful step, dozens of constraints need setup)&lt;/li&gt;
+  &lt;li&gt;Find and change many things in code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And when I changed to Auto Layout programmatically:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
+  &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Find and change many things in code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Easier a lot, right? Especially, no change in setting up constraints.&lt;/p&gt;
+
+&lt;p&gt;Another advantage is to customize controls with Auto Layout programmatically. You can make any custom controls with programmatically, but you can’t do that with Storyboard.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Custom_Control.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you use Storyboard (I mean Xib file), you can make a view, and copy 2 files, &lt;code class=&quot;highlighter-rouge&quot;&gt;NewTextField.xib&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;NewTextField.swift&lt;/code&gt;to your knowledge base. And you want to change it name to &lt;code class=&quot;highlighter-rouge&quot;&gt;MyAwesomeTextField&lt;/code&gt;, you have to change 4 times, the 2 files’ name, class’ name, and the subclass’ name in xib. Never happen in Programmatically.&lt;/p&gt;
+
+&lt;h4 id=&quot;some-libraries-you-can-try&quot;&gt;Some libraries you can try&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/SnapKit/SnapKit&quot;&gt;SnapKit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/freshOS/Stevia&quot;&gt;Stevia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/roberthein/TinyConstraints&quot;&gt;TinyConstraints&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And my favorite library is &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;knConstraints&lt;/a&gt;, a project learned style from TinyConstraints, developed with a new syntax and more advantages.&lt;/p&gt;
+
+&lt;h3 id=&quot;tech-skills---vip-architecture&quot;&gt;Tech skills - VIP architecture&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fclean_swift.png?alt=media&amp;amp;token=ba4d79bc-9ea2-49f7-af54-c8def001c631&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;VIP Architecture is a complex topic. You should view the talk about it at https://github.com/swift-vietnam/iOS-Awesome-Starter-Kit&lt;/p&gt;
+
+&lt;p&gt;In my post, I only talk about how to use it quickly.&lt;/p&gt;
+
+&lt;p&gt;My example code shows you how to select a photo for profile image. You can do it easily in another way. But in this way, you can easier manage your code and reuse it anywhere.&lt;/p&gt;
+
+&lt;p&gt;Move on step by step&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;In your controller, define new variable &lt;code class=&quot;highlighter-rouge&quot;&gt;var output : SampleControllerOutput?&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;New file and add below code:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// (1) - Define actions controller needs in protocol SampleControllerOutput
+
+protocol SampleControllerOutput: class {
+    /* action from controller */
+    func getProfile()
+}
+
+// (2) - Define actions to respond to result in protocol 'SampleInteractorOutput'. For instance: requestSuccess, updateView...
+
+protocol SampleInteractorOutput: class {
+    func getProfileSuccess(profile: UserProfile)        
+    func getProfileFail(err: Error)
+}
+
+// (3) - Conform actions from 'SampleControllerOutput' in 'extension SampleInteractor'
+
+extension SampleInteractor: SampleControllerOutput {
+    func getProfile() {
+        GGetProfileWorker(id: id,
+                         successResponse: output?.fetchProfileSuccess,
+                         failResponse: output?.fetchProfileFail)
+            .execute()
+    }
+}
+
+// (4) - Conform actions from 'SampleInteractorOutput'
+
+extension SamplePresenter: SampleInteractorOutput {
+    func getProfileFail(err: Error) {
+        output?.showGetProfileFailError(err: err)
+    }
+    func getProfileSuccess(profile: UserProfile) {
+        output?.showUserProfile(profile: profile)
+    }
+}
+
+// (5) - Define actions to update directly to UI to 'SamplePresenterOutput'
+
+protocol SamplePresenterOutput: class {
+    func showUserProfile(profile: UserProfile)
+    func showGetProfileFailError(err: Error)
+}
+
+// (6) - Update UI
+
+extension SampleController: SamplePresenterOutput {
+    func showGetProfileFailError(err: Error) { }
+    
+    func showUserProfile(profile: UserProfile) {
+        // update view
+    }
+}
+
+/* (7) - It's set up. Don't need to care about it. */
+
+class SampleInteractor {
+    var output: SampleInteractorOutput?
+}
+
+class SamplePresenter {
+    weak var output: SamplePresenterOutput?
+}
+
+//MARK: Configuration
+class SampleConfiguration /* called in viewDidLoad */ {
+    static let shared = SampleConfiguration()
+    func configure(viewController: SampleController) {
+        
+        // Presenter
+        let presenter = SamplePresenter()
+        presenter.output = viewController
+        
+        // Interactor
+        let interactor = SampleInteractor()
+        interactor.output = presenter
+        
+        // View controller
+        viewController.output = interactor
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(1) - You define actions your controller need to do. For example: getProfile, updateProfile, viewDetail…&lt;/p&gt;
+
+&lt;p&gt;(2) - Define what happen when the actions from controller finish. For example: getProfileSuccess, getProfileFail…&lt;/p&gt;
+
+&lt;p&gt;(3) - This is the execute space. Conform the actions you defined for controller before, and let worker execute the action.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How does the worker look like?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;struct GetUserProfile {
+    private let api = &quot;/workshops/&quot;
+    var id: Int
+    var successResponse: ((_ something: UserProfile) -&amp;gt; Void)? = nil
+    var failResponse: ((_ error: Error) -&amp;gt; Void)? = nil
+    func execute() {
+        // connect to server
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(4) - Response to result will be here. You should change the model data to new data, which can easily set to your view. For example, change Date to String, so that you just set to your view, no need to convert Date to String in your controller.&lt;/p&gt;
+
+&lt;p&gt;(5), (6) - Actions to update to controller.&lt;/p&gt;
+
+&lt;p&gt;(7) - These code is ready to use. It’s always same for other controllers. You just need to change the prefix name, &lt;code class=&quot;highlighter-rouge&quot;&gt;Sample&lt;/code&gt; to your feature name.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How to use?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In your controller, &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;, call &lt;code class=&quot;highlighter-rouge&quot;&gt;SampleConfiguration.shared.config&lt;/code&gt;. And call &lt;code class=&quot;highlighter-rouge&quot;&gt;output&lt;/code&gt; to do your actions.&lt;/p&gt;
+
+&lt;p&gt;This solution saves much time for me. I hope it can help you. Save time, work better and enjoy your life.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Bitter Experience I started iOS as a 2-year-experience .NET developer. The salary range for a junior iOS dev is a little bit lower than the amount for a 2-year-experience develop get. I wanted to make myself stronger, earn more experience. I had a misconception of working and learning. I thought, freelance projects will help me strengthen my knowledge and experience. So I tried to get as more as possible freelance projects. And my nightmare started from here.</summary></entry><entry><title type="html">Auto Layout with Storyboard and Programmatically</title><link href="http://localhost:4000/2017/04/25/auto-layout.html" rel="alternate" type="text/html" title="Auto Layout with Storyboard and Programmatically" /><published>2017-04-25T00:00:00+07:00</published><updated>2017-04-25T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/25/auto-layout</id><content type="html" xml:base="http://localhost:4000/2017/04/25/auto-layout.html">&lt;p&gt;I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.&lt;/p&gt;
+
+&lt;p&gt;There are many discussions about Auto Layout with Storyboard or Programmatically is better. But no one wins. Everyone has own reason and belief.&lt;/p&gt;
+
+&lt;p&gt;This post is my personal opinion. It’s written by a developer can’t live without Storyboard, and now he abandons it.&lt;/p&gt;
+
+&lt;p&gt;3 reasons why he changed to Auto Layout by programmatically.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-do-i-abandon-storyboard&quot;&gt;Why do I abandon Storyboard?&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-too-many-steps-to-changes&quot;&gt;1. Too many steps to changes&lt;/h3&gt;
+&lt;p&gt;I designed a very good UI, and connected outlet, started logic coding, finished that feature. One day, I had to refactor code and found some improvement. Some &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; had gestures, should be changed to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;. No problem, made changes. What did I do?&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Found the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
+    &lt;li&gt;Delete one by one.&lt;/li&gt;
+    &lt;li&gt;Add new &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;Connect new outlets&lt;/li&gt;
+    &lt;li&gt;Setup Auto Layout constraints. (This is most painful step, dozens of constraints need setup)&lt;/li&gt;
+    &lt;li&gt;Find and change many things in code&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And when I changed to Auto Layout programmatically:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Found the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
+    &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;Find and change many things in code&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Easier a lot, right? Especially, no change in setting up constraints.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-open-storyboard-is-a-pain-in-the-ass&quot;&gt;2. Open Storyboard is a pain in the ass&lt;/h3&gt;
+&lt;p&gt;My first project had a huge Storyboard, all-in-one. More than &lt;strong&gt;30 Controllers&lt;/strong&gt; were in &lt;strong&gt;1 Storyboard file&lt;/strong&gt;. It’s a nightmare. Anytime I opened it, change the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt;’s textColor, and committed. 99% had conflicts. Fix conflicts in XML is another nightmare.&lt;/p&gt;
+
+&lt;p&gt;Thanks God, some experienced developers tell about split it up. A Storyboard should contain 3 to 5 Controllers, not more. It should be splitted up as features, for instance, &lt;code class=&quot;highlighter-rouge&quot;&gt;Membership&lt;/code&gt; Storyboard contains &lt;code class=&quot;highlighter-rouge&quot;&gt;Landing&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Register&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Login&lt;/code&gt; Controllers, or &lt;code class=&quot;highlighter-rouge&quot;&gt;Password&lt;/code&gt; Controller contains &lt;code class=&quot;highlighter-rouge&quot;&gt;ForgotPassword&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Confirmation&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NewPassword&lt;/code&gt; Controllers. It’s a big improvement and save a lot of iOS developer’s lives.&lt;/p&gt;
+
+&lt;p&gt;It’s better but not the best choice. Conflicts usually occur with Storyboard, and can’t avoid. 
+Besides that, constraints list is a mess, really mess and easy to make you mad.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Constraint_list.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can debate about select a control, and select the constraint you want instead of find in the list. Believe me, many times you can’t do that, and we soon get mad with it.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-dynamically-customize-control-with-auto-layout-programmatically&quot;&gt;3. Dynamically customize control with Auto Layout programmatically&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Custom_Control.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What would you do with this control in Storyboard? You can make a custom view with 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; for title, 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; for text input, and 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; for underline, 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; for right button.&lt;/p&gt;
+
+&lt;p&gt;How to use it? Drag a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; to Storyboard, choose subclass. Remember, it’s a UIView. You have to access to the view instance, textField and change the properties.&lt;/p&gt;
+
+&lt;p&gt;But with Auto Layout programmatically, it’s a  &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt;. You can change textColor,  font,  backgroundColor easily. Again, It’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can see how I implement this custom &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; at &lt;a href=&quot;https://github.com/nguyentruongky/knCollection/blob/develop/knCollection/Control/knGistTextField.swift&quot;&gt;knGistTextField&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reasons-prevent-you-from-using-auto-layout-programmatically&quot;&gt;Reasons prevent you from using Auto Layout programmatically&lt;/h2&gt;
+
+&lt;h3 id=&quot;too-many-code-in-a-file&quot;&gt;Too many code in a file&lt;/h3&gt;
+
+&lt;p&gt;Yes, I have to admit that. There are 600 - 700 lines of code in my file. But it’s easy to solve this problem with &lt;strong&gt;Extension&lt;/strong&gt;. 
+Why don’t we define and setup constraints in the main file, (&lt;code class=&quot;highlighter-rouge&quot;&gt;LoginController.swift&lt;/code&gt;, for instance), and move all handler, logic into new file, &lt;code class=&quot;highlighter-rouge&quot;&gt;LoginControllerHandler.swift&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;write-the-same-codes-many-times&quot;&gt;Write the same codes many times&lt;/h3&gt;
+
+&lt;p&gt;Define a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; with Auto Layout programmatically&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let button: UIButton = {
+    let title = &quot;Sample&quot;
+    let image = &quot;Sample&quot;
+    let color = UIColor.black
+    
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(color, for: .normal)
+    button.setImage(UIImage(named: image), for: .normal)
+    return button
+}()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Every time I need a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;, do I have to find and copy this code? No, code snippet can help you.&lt;/p&gt;
+
+&lt;p&gt;Find out how it helps &lt;a href=&quot;http://nshipster.com/xcode-snippets/&quot;&gt;here&lt;/a&gt;.
+I define above button with &lt;code class=&quot;highlighter-rouge&quot;&gt;knButton&lt;/code&gt; key in my XCode. It’s easier that find and drag a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; and then format it in Storyboard, right?&lt;/p&gt;
+
+&lt;h3 id=&quot;code-is-too-long-and-unreadable&quot;&gt;Code is too long and unreadable&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// (1): can't change anything 
+let underline = UIView()
+underline.translatesAutoresizingMaskIntoConstraints = false
+addSubview(underline)
+
+// (2): Constraints setup
+underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+// Format control
+underline.backgroundColor = UIColor.lightGray
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The (1) is same to all controls in Auto Layout programmatically, you have to keep this format for all controls. You can make it better with this code (if you want)&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UIView {
+    func addToView(view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1) can be changed to&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let underline = UIView()
+underline.addToView(view)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The (2), they’re default code from Apple, why don’t we make it more readable and beautiful?&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;underline.bottom(toView: view, space: -8)
+underline.horizontal(toView: view)
+underline.height(1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Is it beautiful enough? It comes from my own Auto Layout library. You can find it at &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-can-i-do-with-auto-layout-programmatically&quot;&gt;What can I do with Auto Layout programmatically?&lt;/h2&gt;
+
+&lt;p&gt;If you wan to try a life without Storyboard, why don’t you try these following instructions?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Setup your own code snippets&lt;/li&gt;
+  &lt;li&gt;Try my Auto Layout library &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;&lt;strong&gt;knConstraints&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Develop some simple custom views, with Auto Layout programmatically.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-can-i-help&quot;&gt;How can I help?&lt;/h2&gt;
+
+&lt;p&gt;Please feel free to touch to me by leaving comments below or Skype: nguyentruongky3390.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.</summary></entry><entry><title type="html">Use UITableViewController to solve very long screen</title><link href="http://localhost:4000/2017/04/18/long-screen.html" rel="alternate" type="text/html" title="Use UITableViewController to solve very long screen" /><published>2017-04-18T00:00:00+07:00</published><updated>2017-04-18T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/18/long-screen</id><content type="html" xml:base="http://localhost:4000/2017/04/18/long-screen.html">&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/UITableViewController_static/Long_screen.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Do you have any solutions for long long screen like this? I’m sure have. This kind of screen is very popular in item detail (e-commercial app), room view (booking app)… I have to implement this screen in my class detail from an education app. This is how I did that.&lt;/p&gt;
+
+&lt;h2 id=&quot;my-problem&quot;&gt;My problem&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The screen is too long, and too many controls are in every section.&lt;/li&gt;
+  &lt;li&gt;Some sections can be missing, for instance, promotion code section is only available for specially class.&lt;/li&gt;
+  &lt;li&gt;Some sections contain very complex controls, for instance, UICollectionView the editor’s picks in the above photo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;First I thought about the UIStackView. It can hide or show view easily. But hard to control the section’s size and have to manage scrolling.&lt;/p&gt;
+
+&lt;p&gt;I find my best solution, UITableViewController, static UITableView.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-idea&quot;&gt;The idea&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;A section is a cell in the TableView.&lt;/li&gt;
+  &lt;li&gt;I make some custom views for complex section, like an embedded UICollectionView.&lt;/li&gt;
+  &lt;li&gt;Other simple sections, like Summary, Promotion, Shipping can be define controls inside the controller.&lt;/li&gt;
+  &lt;li&gt;Develop some functions to dynamically generate cells. Don’t define variables for cells.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sample-code&quot;&gt;Sample code&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func makeAvailibilityCell() -&amp;gt; knTableCell {
+    let cell = knTableCell()
+
+    let containerView = UIView()
+    containerView.translatesAutoresizingMaskIntoConstraints = false
+    cell.addSubview(containerView)
+    containerView.fill(toView: cell)
+    
+    let titleLabel = makeHeaderLabel(text: &quot;availability&quot;.classLocalized) // (1)
+    
+    let seeButton = ogeSupporter.createGradientBorderButton() // (2)
+    seeButton.setTitle(&quot;seeAvailability&quot;.classLocalized, for: .normal)
+    
+    containerView.addSubview(titleLabel)
+    containerView.addSubview(availabilityLabel) // (3)
+    containerView.addSubview(seeButton)
+    
+    // (4)
+    seeButton.width(160)
+    seeButton.right(toView: containerView, space: -30)
+    seeButton.centerY(toView: titleLabel)
+    
+    titleLabel.left(toView: containerView, space: 30)
+    titleLabel.width(screenWidth - 60)
+    
+    availabilityLabel.horizontal(toView: titleLabel)
+    
+    containerView.addConstraints(withFormat: &quot;V:|-15-[v0]-10-[v1]|&quot;,
+                                 views: titleLabel, availabilityLabel)
+    
+    return cell
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1) (2) - Just define a label/button. Nothing is important here. These controls are not changed text/UI, should be defined inside the functions to reduce the number of reference controls in the controllers&lt;/p&gt;
+
+&lt;p&gt;(3) - This is the content of this section. Data changes up to different items. I need to keep this reference to update data when request completed.&lt;/p&gt;
+
+&lt;p&gt;(4) - Set up the UI with auto layout.&lt;/p&gt;
+
+&lt;p&gt;**Important: ** The space between 2 sections should be define on 1 cell. Look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;Promotion code&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift?&lt;/code&gt; in the photo. The padding between them should belong to &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift?&lt;/code&gt; cell.&lt;/p&gt;
+
+&lt;p&gt;It means, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bottomAnchor&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;Apply button&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;Promotion code&lt;/code&gt; to the cell is 0. And the &lt;code class=&quot;highlighter-rouge&quot;&gt;topAnchor&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift? label&lt;/code&gt; is about 54. It’s very useful in missing section. The space among sections still are good enough.&lt;/p&gt;
+
+&lt;h4 id=&quot;how-to-use&quot;&gt;How to use&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cells.append(makeAboutSellerCell()) 
+cells.append(makeAddressCell())
+         
+if promotion.isAvailable == true {
+     cells.append(makePromotionCell())
+}
+tableView.reloadTable()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;It’s easy, right? It saves much time for me. If designer wants to change anything, go to exactly make cell function, change the UI.&lt;/p&gt;
+
+&lt;p&gt;Enjoy coding.&lt;/p&gt;
+
+&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry><entry><title type="html">How to draw a gradient border button?</title><link href="http://localhost:4000/2017/04/13/gradient-border-button.html" rel="alternate" type="text/html" title="How to draw a gradient border button?" /><published>2017-04-13T00:00:00+07:00</published><updated>2017-04-13T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/13/gradient-border-button</id><content type="html" xml:base="http://localhost:4000/2017/04/13/gradient-border-button.html">&lt;h2 id=&quot;my-problem&quot;&gt;My Problem&lt;/h2&gt;
+
+&lt;p&gt;Last week, my partner showed me his design for our application. Everything is great, easily implemented with some custom controls. But wait, something is not in my knowledge.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Gradient_border_button.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A button with gradient border. Never try it before. Up to now, I just created gradient background views 2 times in previous projects. Googled and found some good results.&lt;/p&gt;
+
+&lt;h2 id=&quot;other-solutions&quot;&gt;Other solutions&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
+let gradient = CAGradientLayer()
+gradient.frame =  CGRect(origin: .zero, size: button.frame.size)
+gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
+let shape = CAShapeLayer()
+shape.lineWidth = 2
+shape.path = UIBezierPath(rect: button.bounds).cgPath
+shape.strokeColor = UIColor.black.cgColor
+shape.fillColor = UIColor.clear.cgColor
+gradient.mask = shape
+button.layer.addSublayer(gradient)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Awesome, it’s perfect.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Gradient_border_rectangle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Rectangles with rounded corners are everywhere! (Steve Jobs)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tried to make my button rounded corner. And…&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Wrong_round_corner_gradient_rectangle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Oops. It didn’t work as what I need. Did some more search and found another great one from Ian Hirschfeld here &lt;a href=&quot;https://medium.com/swift-programming/how-to-create-an-angle-gradient-border-in-swift-f4856dde4c90&quot;&gt;https://medium.com/swift-programming/how-to-create-an-angle-gradient-border-in-swift-f4856dde4c90&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;my-solution&quot;&gt;My solution&lt;/h2&gt;
+
+&lt;p&gt;It works like a charm, but it’s not my favorite solution. I need a Swifty project, not a combination with Objective-C. So don’t I try to make something simpler and easier for me and others. Finally, I did it.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-idea&quot;&gt;The idea&lt;/h3&gt;
+
+&lt;p&gt;Simple idea, create a button with gradient background, fill it with a solid color view, and the padding to the button bounds is the border width.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Talk is cheap. Show me the code. (Linus Torvalds)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {    
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.frame = bounds
+    gradientLayer.colors = colors.map({ return $0.cgColor })
+    gradientLayer.startPoint = startPoint
+    gradientLayer.endPoint = endPoint
+    layer.insertSublayer(gradientLayer, at: 0) // * important
+    
+    let backgroundView = UIView()
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    insertSubview(backgroundView, at: 1) // * (1)
+    backgroundView.backgroundColor = backgroundColor // (2)
+    backgroundView.fill(toView: self, space: UIEdgeInsets(space: borderWidth)) // (3)
+    createRoundCorner(cornerRadius)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1) - The most important thing here is the order of the gradient layer and background view. The title label will be overlapped and when we use &lt;code class=&quot;highlighter-rouge&quot;&gt;addSublayer&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubview&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;(2) - backgroundColor: the view property from UIKit.&lt;/p&gt;
+
+&lt;p&gt;(3) - borderWidth is new property, we will use it every time re-setupView.&lt;/p&gt;
+
+&lt;p&gt;Now is time to create the rounded corner.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func createRoundCorner(_ radius: CGFloat) {
+    cornerRadius = radius
+    super.createRoundCorner(radius)
+    backgroundView.createRoundCorner(radius - borderWidth)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Every time we set the radius or backgroundColor, &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; called. So that, the &lt;code class=&quot;highlighter-rouge&quot;&gt;gradientLayer&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;backgroundView&lt;/code&gt; are added many times. Keep an instance and remove it every time view setup.&lt;/p&gt;
+
+&lt;p&gt;But, no gradient border appears. The border width still zero. We need to give a non-zero value to &lt;code class=&quot;highlighter-rouge&quot;&gt;borderWidth&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; again.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func createBorder(_ width: CGFloat) {
+    borderWidth = width
+    setupView()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;See the result&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Final_button.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;completed-code&quot;&gt;Completed code&lt;/h3&gt;
+
+&lt;p&gt;Have a look at my completed code for this library at &lt;a href=&quot;https://github.com/nguyentruongky/knGradientBorderButton&quot;&gt;https://github.com/nguyentruongky/knGradientBorderButton&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;suggestions-or-feedback&quot;&gt;Suggestions or feedback?&lt;/h2&gt;
+
+&lt;p&gt;Feel free to comment, suggest, create pull request or open issue.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My Problem</summary></entry><entry><title type="html">Top Skills iOS Developers Need Today</title><link href="http://localhost:4000/2017/03/08/top-skills-ios.html" rel="alternate" type="text/html" title="Top Skills iOS Developers Need Today" /><published>2017-03-08T00:00:00+07:00</published><updated>2017-03-08T00:00:00+07:00</updated><id>http://localhost:4000/2017/03/08/top-skills-ios</id><content type="html" xml:base="http://localhost:4000/2017/03/08/top-skills-ios.html">&lt;p&gt;We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-swift&quot;&gt;1. Swift&lt;/h2&gt;
 
@@ -627,394 +1236,4 @@ static func randomInt(max: UInt32) -&amp;gt; Int { return Int(arc4random_uniform
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
 &lt;p&gt;The main purpose is to show how nest a Collection View in a Table View. The Airbnb home has many things to do. 
-You can download my project &lt;a href=&quot;https://github.com/nguyentruongky/AirbnbHomescreenSample&quot;&gt;at my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry><entry><title type="html">Contact Picker</title><link href="http://localhost:4000/2016/01/19/Contact-picker.html" rel="alternate" type="text/html" title="Contact Picker" /><published>2016-01-19T00:00:00+07:00</published><updated>2016-01-19T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/19/Contact%20picker</id><content type="html" xml:base="http://localhost:4000/2016/01/19/Contact-picker.html">&lt;p&gt;I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone numbers from all contacts, search contacts, contacts are grouped into first character of the name. Here what I did&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffullcontact.png?alt=media&amp;amp;token=0225e273-c25a-46f1-a053-2a29ce26aed2&quot; alt=&quot;&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fsearch_contact.png?alt=media&amp;amp;token=63aa4ae0-4149-4ecf-a649-059940d17210&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I use intention in this function so that this picker can be use anywhere easily. Read more about intention at my posts: &lt;a href=&quot;https://truongky.wordpress.com/2016/01/19/1000-lines-of-code-good-work-cont/&quot;&gt;1000+ lines of code, good work?“ (Cont)&lt;/a&gt; and &lt;a href=&quot;https://truongky.wordpress.com/2016/01/12/pageviewcontroller-how-can-i-reuse-it/&quot;&gt;PageViewController: How can I reuse it?&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s begin.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Create new project.&lt;/li&gt;
-  &lt;li&gt;Design what you want. Two controls must have: a UITableView and a UISearchBar.&lt;/li&gt;
-  &lt;li&gt;Add a UITableViewCell and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;contactCell&lt;/code&gt; with style is &lt;code class=&quot;highlighter-rouge&quot;&gt;Subtitle&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Add a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;ContactPickerIntention.swift&lt;/code&gt; and implement NSObject class. It’s our intention.&lt;/li&gt;
-  &lt;li&gt;Add a NSObject in IB and change its subclass is &lt;code class=&quot;highlighter-rouge&quot;&gt;ContactPickerIntention.swift&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Connect controls to the intention. I named them &lt;code class=&quot;highlighter-rouge&quot;&gt;searchBar&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Connect the intention to ViewController.&lt;/li&gt;
-  &lt;li&gt;The intention has to conform some delegate and datasource.
-    &lt;ul&gt;
-      &lt;li&gt;UISearchBarDelegate&lt;/li&gt;
-      &lt;li&gt;UITableViewDelegate&lt;/li&gt;
-      &lt;li&gt;UITableViewDataSource&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You have to ask permission to access to contact.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
-	// warn the user that because they just denied permission, this functionality won't work
-	// also let them know that they have to fix this in settings
-	if granted == false { return }
-	// load contact 
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Load all contacts&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;All contacts are here. Run a loop and load every contact, find the phone number and consider this contact with every number is a contact item.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func getNameFromContact(currentContact: ABRecordRef) -&amp;gt; String {
-	let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
-	let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
-	var currentName = &quot;&quot;
-	if firstName == nil &amp;amp;&amp;amp; lastName == nil { // prevent anonymous contact
-            currentName = &quot;&quot;
-	} else {
-		currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
-	}
-	return currentName
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ABRecordCopyCompositeName&lt;/code&gt; function can get the contact’s full name for you, but if there is a contact without first name or last name, your app crashes. Take care some anonymous friends with this func.&lt;/p&gt;
-
-&lt;p&gt;Get the phone numbers.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -&amp;gt; [String]? {
-    var phoneNumberList = [String]()
-    let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
-    for var j: CFIndex = 0; j &amp;lt; ABMultiValueGetCount(phones); j++ {
-        let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
-        if mobileLabel == kABPersonPhoneMobileLabel ||
-            mobileLabel == kABHomeLabel ||
-            mobileLabel == kABPersonPhoneMainLabel ||
-            mobileLabel == kABPersonPhoneIPhoneLabel ||
-            mobileLabel == kABOtherLabel ||
-            mobileLabel == kABWorkLabel {
-                let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
-                phoneNumberList.append(phone)
-        }
-    }
-    return phoneNumberList
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;There are a few phone number types such as Mobile, Home, Work. And those types are marked with the Label. We have to get the phones multi value and find the phone number conform to the labels.&lt;/p&gt;
-
-&lt;p&gt;I created struct &lt;code class=&quot;highlighter-rouge&quot;&gt;Contact&lt;/code&gt; to keep the name and the phone number. And a dictionary with key is the first character of the name and the value is an array of Contact to store all contacts.&lt;/p&gt;
-
-&lt;p&gt;If you want to get email, try this func&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func getEmail(currentContact: ABRecordRef) -&amp;gt; String {
-    let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
-    var emailString = &quot;&quot;
-    if ABMultiValueGetCount(email) &amp;gt; 0 {
-        emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
-    }
-    return emailString
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You can download my complete project at &lt;a href=&quot;https://github.com/nguyentruongky/ContactPicker&quot;&gt;my github&lt;/a&gt;
-You can use this intention anywhere you want with simple actions, copy the file and use it in ViewController.
-ViewController&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;contactPickerIntention.getAllContacts()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;This project just demonstrate how I did my feature. And you can do a lot with this, add delegate to pass data from picker to ViewController, show alert and open setting when access denied and user want to accept it.
-Intention is extremely easy and powerful. Understand it clearly, your code grows to a higher level.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I have a feature in my app: pick a phone number. I code this feature in Objective C and now I want to parse to Swift. The feature requires to load all phone numbers from all contacts, search contacts, contacts are grouped into first character of the name. Here what I did</summary></entry><entry><title type="html">1000+ lines of code, good work? (Cont)</title><link href="http://localhost:4000/2016/01/19/1000_lines_of_code_2.html" rel="alternate" type="text/html" title="1000+ lines of code, good work? (Cont)" /><published>2016-01-19T00:00:00+07:00</published><updated>2016-01-19T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/19/1000_lines_of_code_2</id><content type="html" xml:base="http://localhost:4000/2016/01/19/1000_lines_of_code_2.html">&lt;p&gt;Continue the 1000-line-of-code nightmare (my previous note &lt;a href=&quot;https://truongky.wordpress.com/2016/01/14/1000-lines-of-code-good-work/&quot;&gt;here&lt;/a&gt;). dDue to the post at &lt;a href=&quot;http://bendyworks.com/single-responsibility-principle-ios/&quot;&gt;bendyworks.com&lt;/a&gt;, I found another solution for this problem. INTENTION. What is intention? For me, intention is something does only one thing. In an aspect, intention is similar with extension, but it’s better for reusing. You can think it’s a component.&lt;/p&gt;
-
-&lt;p&gt;I’ll show you how to use intention to create an image slideshow with UIScrollView.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Create new project&lt;/li&gt;
-  &lt;li&gt;Add a UIScrollView and a UIPageControl.&lt;/li&gt;
-  &lt;li&gt;Add new file, name &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;, implement NSObject&lt;/li&gt;
-  &lt;li&gt;Add a NSObject into IB and its subclass is &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Connect UIScrollView and UIPageControl to object &lt;code class=&quot;highlighter-rouge&quot;&gt;ImageSlideShowIntention.swift&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Set UIScrollView delegate is our intention&lt;/li&gt;
-  &lt;li&gt;Connect intention to the main ViewController.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fconnect_object.png?alt=media&amp;amp;token=49facbec-76c2-49ea-91dd-c32ac10f3bf0&quot; alt=&quot;connect_object&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add some code to our intention&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func loadImagesToSlideShow(images:[String]) {
-	for var i = 0; i &amp;lt; images.count; i++ {
-            let imageSlide = formatSlide(images[i], slideIndex: i)
-            scrollView.addSubview(imageSlide)
-	}
-	formatPageControl(images.count)
-	formatScrollView(images.count)
-}
-
-private func formatSlide(imagesName: String, slideIndex: Int) -&amp;gt; UIImageView {
-	let imageSource = UIImage(named: imagesName)
-	let imageView = UIImageView(image: imageSource)
-	imageView.contentMode = .ScaleAspectFit
-	imageView.clipsToBounds = true    
-	var frame = scrollView.frame
-	frame.origin.x = CGFloat(slideIndex) * scrollView.frame.width
-	imageView.frame = frame
-	return imageView
-}
-
-private func formatPageControl(pageCount: Int) {
-	indicatorPageControl.backgroundColor = UIColor.blackColor()
-	indicatorPageControl.numberOfPages = pageCount
-}
-
-private func formatScrollView(pageCount: Int) {
-	scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageCount), scrollView.frame.height)
-}
-
-func scrollViewDidScroll(scrollView: UIScrollView) {
-	let pageWidth = scrollView.frame.size.width
-	let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
-	indicatorPageControl.currentPage = page
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add some code to ViewController. Your ViewController looks like this:
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@IBOutlet var slideShowIntention: ImageSlideShowIntention!
-override func viewDidLoad() {
-super.viewDidLoad()
-let imageNames = [&quot;son_doong_1&quot;, &quot;son_doong_2&quot;]
-slideShowIntention.loadImagesToSlideShow(imageNames)
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Anywhere you want to use an images slide show like this, copy the intention file, connect to your ViewController, pass an images name array and let it go.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;This article used to demonstrate what is intention. This solution can be used with the small image source. With a large image source, I suggest you take a look at my previous post at &lt;a href=&quot;https://truongky.wordpress.com/2016/01/12/pageviewcontroller-how-can-i-reuse-it/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can download my complete project at &lt;a href=&quot;https://github.com/nguyentruongky/ImageSlideShow_IntentionDemo&quot;&gt;my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Continue the 1000-line-of-code nightmare (my previous note here). dDue to the post at bendyworks.com, I found another solution for this problem. INTENTION. What is intention? For me, intention is something does only one thing. In an aspect, intention is similar with extension, but it’s better for reusing. You can think it’s a component.</summary></entry><entry><title type="html">1000+ lines of code, good work?</title><link href="http://localhost:4000/2016/01/14/1000_lines_of_code_1.html" rel="alternate" type="text/html" title="1000+ lines of code, good work?" /><published>2016-01-14T00:00:00+07:00</published><updated>2016-01-14T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/14/1000_lines_of_code_1</id><content type="html" xml:base="http://localhost:4000/2016/01/14/1000_lines_of_code_1.html">&lt;p&gt;Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do you think when fix a bug, add a function with a 1000-line-of-code file?&lt;br /&gt;
-I’m sure your feeling same to mine. It’s horrible to find something there.&lt;/p&gt;
-
-&lt;p&gt;Take a look at this photo and list what we have to do.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Flogin_screen.png?alt=media&amp;amp;token=0c019309-0523-43ec-9f90-f0fe75d16606&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Design a view contain email and password TextField with a round corner.&lt;/li&gt;
-  &lt;li&gt;Design button &lt;code class=&quot;highlighter-rouge&quot;&gt;Sign In&lt;/code&gt; with a round corner.&lt;/li&gt;
-  &lt;li&gt;Add logo&lt;/li&gt;
-  &lt;li&gt;Add 2 buttons below.&lt;/li&gt;
-  &lt;li&gt;Toggle enabled button &lt;code class=&quot;highlighter-rouge&quot;&gt;Sign In&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Validate email and password.&lt;/li&gt;
-  &lt;li&gt;Connect to service to login.&lt;/li&gt;
-  &lt;li&gt;Handle error from service.&lt;/li&gt;
-  &lt;li&gt;Handle error with not available internet.&lt;/li&gt;
-  &lt;li&gt;Save log in result into local.&lt;/li&gt;
-  &lt;li&gt;Show forgot password screen.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;With a simple log in screen, there are 10+ small tasks to do. I don’t want to mention to log in and sign up in the same screen. And the view controller will contain a lot of codes. It’s horrible.&lt;/p&gt;
-
-&lt;p&gt;Thank God, Extension is here. Extension in Swift is awesome. If you don’t know about Extension, read more &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html&quot;&gt;here&lt;/a&gt;.
-I split up to 3 extension files:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;FormattingUIExtension: contain with UI code, animation, effect. I call &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad()&lt;/code&gt; to format the UI. I usually do that: set title, run animation, set text color, background, implement delegate in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;DataValidationExtension: validate email, password, enabled or disabled button, keyboard when input data changed.&lt;/li&gt;
-  &lt;li&gt;ServiceCommunicationExtension:
-    &lt;ul&gt;
-      &lt;li&gt;Connect to service to login.&lt;/li&gt;
-      &lt;li&gt;Handle error from service.&lt;/li&gt;
-      &lt;li&gt;Handle error with not available internet.&lt;/li&gt;
-      &lt;li&gt;Save log in result into local.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And this is my ViewController.swift.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://truongky.files.wordpress.com/2016/01/viewcontroller.png&quot; alt=&quot;viewController&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now I want to add animation, find &lt;code class=&quot;highlighter-rouge&quot;&gt;FormattingUIExtension.swift&lt;/code&gt; and code, service changes, do it in &lt;code class=&quot;highlighter-rouge&quot;&gt;ServiceCommunicationExtension.swift&lt;/code&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;You can download my complete project &lt;a href=&quot;https://github.com/nguyentruongky/LogInExtensionSample_Start&quot;&gt;here&lt;/a&gt;.
-Don’t add everything in view controller, split it up, manage it easily and forgot the 1000-line-of-code nightmare.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;This article is not a tutorial, it’s only a note for friends and myself.&lt;/strong&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have you ever write a file with more 500 lines of code? I think the answer is YES. Me too, even more 1000 lines. How can you maintain your code? And what do you think when fix a bug, add a function with a 1000-line-of-code file? I’m sure your feeling same to mine. It’s horrible to find something there.</summary></entry><entry><title type="html">PageViewController</title><link href="http://localhost:4000/2016/01/12/PageViewController.html" rel="alternate" type="text/html" title="PageViewController" /><published>2016-01-12T00:00:00+07:00</published><updated>2016-01-12T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/12/PageViewController</id><content type="html" xml:base="http://localhost:4000/2016/01/12/PageViewController.html">&lt;p&gt;I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it anywhere by copying a file then write some small codes.&lt;br /&gt;
-Try it now.&lt;br /&gt;
-Follow &lt;a href=&quot;http://swiftiostutorials.com/ios-tutorial-using-uipageviewcontroller-create-content-slider-objective-cswift/&quot;&gt;this article&lt;/a&gt; to understand UIPageViewController.&lt;/p&gt;
-
-&lt;p&gt;OK, let’s do some smart thing. Use your current project.&lt;/p&gt;
-
-&lt;p&gt;Create new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController.swift&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController&lt;/code&gt; will conform to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIPageViewControllerDataSource&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Create an integer variable name &lt;code class=&quot;highlighter-rouge&quot;&gt;contentCount&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var contentCount = 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Write a function to setup this controller&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupController(numberOfContent: Int) {
-    contentCount = numberOfContent
-
-    // 1
-    let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
-    pageController.dataSource = self
-    
-    // 2
-    if contentCount &amp;gt; 0 {
-        let firstController = getItemController(0)!
-        let startingViewControllers: NSArray = [firstController]
-        pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
-    }
-
-    // 3
-    addChildViewController(pageController)
-    self.view.addSubview(pageController.view)
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): initialize a UIPageViewController. This is what show your content.&lt;/p&gt;
-
-&lt;p&gt;(2): setup the first page for controller&lt;/p&gt;
-
-&lt;p&gt;(3): add UIPageController to &lt;code class=&quot;highlighter-rouge&quot;&gt;MyPageViewController&lt;/code&gt; subview.&lt;/p&gt;
-
-&lt;p&gt;Go ahead, implement &lt;code class=&quot;highlighter-rouge&quot;&gt;UIPageViewControllerDataSource&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -&amp;gt; UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex &amp;gt; 0 {
-        return getItemController(itemController.itemIndex - 1)
-    }
-    return nil
-}
-
-func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -&amp;gt; UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex + 1 &amp;lt; contentCount {
-        return getItemController(itemController.itemIndex+1)
-    }
-    return nil
-}
-
-private func getItemController(itemIndex: Int) -&amp;gt; PageItemController? {
-    if itemIndex &amp;lt; contentCount {
-        return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
-    }
-    return nil
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;These method are defined in UIPageViewControllerDataSource and you have to implement it. You understand them after the tutorial on swiftiostutorials.com&lt;/p&gt;
-
-&lt;p&gt;You can see &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt;. This is your Page Item Controller. If you don’t want to change the base class, you can name your page item controller &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt;. If not, you have to change &lt;code class=&quot;highlighter-rouge&quot;&gt;PageItemController&lt;/code&gt; to another name.&lt;/p&gt;
-
-&lt;p&gt;XCode will ask you “What the hell is delegate?”. So, what the hell is delegate?&lt;/p&gt;
-
-&lt;p&gt;Find out what it is &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaEncyclopedia/DelegatesandDataSources/DelegatesandDataSources.html&quot;&gt;here&lt;/a&gt;. Now imagine that you are a shopkeeper but you can not ship products to your customer. Delivery man will help you. Delegate is a virtual delivery man. Delegate is a virtual delivery man. In your current controller (MyPageViewController), you can’t do &lt;code class=&quot;highlighter-rouge&quot;&gt;getPageItemAtIndex&lt;/code&gt;, so you tell the delegate do that for you.&lt;/p&gt;
-
-&lt;p&gt;Define delegate now.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;protocol PageViewDelegate {
-    func getPageItemAtIndex(index: Int) -&amp;gt; UIViewController
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Write this code out of the class scope. I usually write it under import functions.&lt;/p&gt;
-
-&lt;p&gt;And use delegate in MyPageViewController&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var delegate: PageViewDelegate?
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It’s almost done here. You have to implement PageViewDelegate in your main controller. However, I want to show you the complete code for this base class. Go ahead.&lt;/p&gt;
-
-&lt;p&gt;Add new variable to determine should we show indicator dots.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var didShowPageControl = false
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Add these code at the end of &lt;code class=&quot;highlighter-rouge&quot;&gt;setupController&lt;/code&gt; method.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if didShowPageControl == true {
-    setupPageControl()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Add new methods&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func setupPageControl() {
-    let appearance = UIPageControl.appearance()
-    appearance.pageIndicatorTintColor = UIColor.grayColor()
-    appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-    appearance.backgroundColor = UIColor.darkGrayColor()
-}
-
-func presentationCountForPageViewController(pageViewController: UIPageViewController) -&amp;gt; Int {
-    if didShowPageControl == false { return 0 }
-    return contentCount
-}
-
-func presentationIndexForPageViewController(pageViewController: UIPageViewController) -&amp;gt; Int {
-    return 0 }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We’ve done. You can copy it to anywhere you want and use it easily.&lt;/p&gt;
-
-&lt;p&gt;Design your beautiful page item to show on UIPageViewController. Here we will use the PageItemController you created in the swiftiostutorials’s tutorial.&lt;/p&gt;
-
-&lt;p&gt;And in your main view controller, remove all codes in class ViewController then write some new codes. Your class looks like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class ViewController: UIViewController, PageViewDelegate {
-    // Initialize it right away here
-    private let contentImages = [&quot;nature_pic_1.png&quot;,
-                                 &quot;nature_pic_2.png&quot;,
-                                 &quot;nature_pic_3.png&quot;,
-                                 &quot;nature_pic_4.png&quot;];
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let pageController = MyPageViewController()
-        pageController.delegate = self
-        pageController.setupController(contentImages.count)
-
-        addChildViewController(pageController)
-        self.view.addSubview(pageController.view)
-    }
-
-    func getPageItemAtIndex(index: Int) -&amp;gt; UIViewController {
-        let pageItemController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;ItemController&quot;) as! PageItemController
-        pageItemController.itemIndex = index
-        pageItemController.imageName = contentImages[index]
-        return pageItemController
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You can see your &lt;code class=&quot;highlighter-rouge&quot;&gt;PageViewDelegate&lt;/code&gt; you defined here.&lt;/p&gt;
-
-&lt;p&gt;What you have to do is, define an array of images, initilize a MyPageController instance and implement delegate.&lt;/p&gt;
-
-&lt;p&gt;Take a look at &lt;code class=&quot;highlighter-rouge&quot;&gt;getPageItemAtIndex&lt;/code&gt;. What you want to show in PageItemController, you will code here. For example: you can add new label to show the item’s description, define it and pass data here.&lt;/p&gt;
-
-&lt;p&gt;Run app and enjoy your code.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;Now we don’t have to write the repeat code anymore. Copy this file and use it anywhere.&lt;/p&gt;
-
-&lt;p&gt;You can download the complete project &lt;a href=&quot;https://github.com/nguyentruongky/KPageViewController&quot;&gt;at my github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I always get tired of rewriting (or copying) code from my previous projects every single time I use UIPageViewController. Finally, I found a way to reuse it anywhere by copying a file then write some small codes. Try it now. Follow this article to understand UIPageViewController.</summary></entry></feed>
+You can download my project &lt;a href=&quot;https://github.com/nguyentruongky/AirbnbHomescreenSample&quot;&gt;at my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry></feed>

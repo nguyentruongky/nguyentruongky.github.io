@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Auto Layout with Storyboard and Programmatically - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2017/04/25/auto-layout.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/img/posts/storyboard-vs-programtically.jpg')"> -->
+<header class="masthead" style="background-image: url('/img/posts/storyboard-vs-programtically.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Auto Layout with Storyboard and Programmatically</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">My conclusion for argument about Auto Layout with Storyboard and Programmatically</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 25, 2017</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-10 mx-auto">
+
+      <p>I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.</p>
+
+<p>There are many discussions about Auto Layout with Storyboard or Programmatically is better. But no one wins. Everyone has own reason and belief.</p>
+
+<p>This post is my personal opinion. It’s written by a developer can’t live without Storyboard, and now he abandons it.</p>
+
+<p>3 reasons why he changed to Auto Layout by programmatically.</p>
+
+<h2 id="why-do-i-abandon-storyboard">Why do I abandon Storyboard?</h2>
+
+<h3 id="1-too-many-steps-to-changes">1. Too many steps to changes</h3>
+<p>I designed a very good UI, and connected outlet, started logic coding, finished that feature. One day, I had to refactor code and found some improvement. Some <code class="highlighter-rouge">UILabel</code> had gestures, should be changed to <code class="highlighter-rouge">UIButton</code>. No problem, made changes. What did I do?</p>
+
+<blockquote>
+  <ul>
+    <li>Found the <code class="highlighter-rouge">UILabel</code> need change</li>
+    <li>Delete one by one.</li>
+    <li>Add new <code class="highlighter-rouge">UIButton</code></li>
+    <li>Connect new outlets</li>
+    <li>Setup Auto Layout constraints. (This is most painful step, dozens of constraints need setup)</li>
+    <li>Find and change many things in code</li>
+  </ul>
+</blockquote>
+
+<p>And when I changed to Auto Layout programmatically:</p>
+
+<blockquote>
+  <ul>
+    <li>Found the <code class="highlighter-rouge">UILabel</code> need change</li>
+    <li>Change <code class="highlighter-rouge">UILabel</code> to <code class="highlighter-rouge">UIButton</code></li>
+    <li>Find and change many things in code</li>
+  </ul>
+</blockquote>
+
+<p>Easier a lot, right? Especially, no change in setting up constraints.</p>
+
+<h3 id="2-open-storyboard-is-a-pain-in-the-ass">2. Open Storyboard is a pain in the ass</h3>
+<p>My first project had a huge Storyboard, all-in-one. More than <strong>30 Controllers</strong> were in <strong>1 Storyboard file</strong>. It’s a nightmare. Anytime I opened it, change the <code class="highlighter-rouge">UILabel</code>’s textColor, and committed. 99% had conflicts. Fix conflicts in XML is another nightmare.</p>
+
+<p>Thanks God, some experienced developers tell about split it up. A Storyboard should contain 3 to 5 Controllers, not more. It should be splitted up as features, for instance, <code class="highlighter-rouge">Membership</code> Storyboard contains <code class="highlighter-rouge">Landing</code>, <code class="highlighter-rouge">Register</code>, <code class="highlighter-rouge">Login</code> Controllers, or <code class="highlighter-rouge">Password</code> Controller contains <code class="highlighter-rouge">ForgotPassword</code>, <code class="highlighter-rouge">Confirmation</code>, <code class="highlighter-rouge">NewPassword</code> Controllers. It’s a big improvement and save a lot of iOS developer’s lives.</p>
+
+<p>It’s better but not the best choice. Conflicts usually occur with Storyboard, and can’t avoid. 
+Besides that, constraints list is a mess, really mess and easy to make you mad.</p>
+
+<p><img src="https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Constraint_list.png" alt="" /></p>
+
+<p>You can debate about select a control, and select the constraint you want instead of find in the list. Believe me, many times you can’t do that, and we soon get mad with it.</p>
+
+<h3 id="3-dynamically-customize-control-with-auto-layout-programmatically">3. Dynamically customize control with Auto Layout programmatically</h3>
+
+<p><img src="https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Custom_Control.png" width="500" /></p>
+
+<p>What would you do with this control in Storyboard? You can make a custom view with 1 <code class="highlighter-rouge">UILabel</code> for title, 1 <code class="highlighter-rouge">UITextField</code> for text input, and 1 <code class="highlighter-rouge">UIView</code> for underline, 1 <code class="highlighter-rouge">UIButton</code> for right button.</p>
+
+<p>How to use it? Drag a <code class="highlighter-rouge">UIView</code> to Storyboard, choose subclass. Remember, it’s a UIView. You have to access to the view instance, textField and change the properties.</p>
+
+<p>But with Auto Layout programmatically, it’s a  <code class="highlighter-rouge">UITextField</code>. You can change textColor,  font,  backgroundColor easily. Again, It’s a <code class="highlighter-rouge">UITextField</code>.</p>
+
+<p>You can see how I implement this custom <code class="highlighter-rouge">UITextField</code> at <a href="https://github.com/nguyentruongky/knCollection/blob/develop/knCollection/Control/knGistTextField.swift">knGistTextField</a></p>
+
+<h2 id="reasons-prevent-you-from-using-auto-layout-programmatically">Reasons prevent you from using Auto Layout programmatically</h2>
+
+<h3 id="too-many-code-in-a-file">Too many code in a file</h3>
+
+<p>Yes, I have to admit that. There are 600 - 700 lines of code in my file. But it’s easy to solve this problem with <strong>Extension</strong>. 
+Why don’t we define and setup constraints in the main file, (<code class="highlighter-rouge">LoginController.swift</code>, for instance), and move all handler, logic into new file, <code class="highlighter-rouge">LoginControllerHandler.swift</code>.</p>
+
+<h3 id="write-the-same-codes-many-times">Write the same codes many times</h3>
+
+<p>Define a <code class="highlighter-rouge">UIButton</code> with Auto Layout programmatically</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let button: UIButton = {
+    let title = "Sample"
+    let image = "Sample"
+    let color = UIColor.black
+    
+    let button = UIButton()
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setTitle(title, for: .normal)
+    button.setTitleColor(color, for: .normal)
+    button.setImage(UIImage(named: image), for: .normal)
+    return button
+}()
+</code></pre></div></div>
+
+<p>Every time I need a <code class="highlighter-rouge">UIButton</code>, do I have to find and copy this code? No, code snippet can help you.</p>
+
+<p>Find out how it helps <a href="http://nshipster.com/xcode-snippets/">here</a>.
+I define above button with <code class="highlighter-rouge">knButton</code> key in my XCode. It’s easier that find and drag a <code class="highlighter-rouge">UIButton</code> and then format it in Storyboard, right?</p>
+
+<h3 id="code-is-too-long-and-unreadable">Code is too long and unreadable</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// (1): can't change anything 
+let underline = UIView()
+underline.translatesAutoresizingMaskIntoConstraints = false
+addSubview(underline)
+
+// (2): Constraints setup
+underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+// Format control
+underline.backgroundColor = UIColor.lightGray
+</code></pre></div></div>
+
+<p>The (1) is same to all controls in Auto Layout programmatically, you have to keep this format for all controls. You can make it better with this code (if you want)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extension UIView {
+    func addToView(view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self)
+    }
+}
+</code></pre></div></div>
+
+<p>(1) can be changed to</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let underline = UIView()
+underline.addToView(view)
+</code></pre></div></div>
+<p>The (2), they’re default code from Apple, why don’t we make it more readable and beautiful?</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>underline.bottom(toView: view, space: -8)
+underline.horizontal(toView: view)
+underline.height(1)
+</code></pre></div></div>
+
+<p>Is it beautiful enough? It comes from my own Auto Layout library. You can find it at <a href="https://github.com/nguyentruongky/knConstraints">https://github.com/nguyentruongky/knConstraints</a></p>
+
+<h2 id="what-can-i-do-with-auto-layout-programmatically">What can I do with Auto Layout programmatically?</h2>
+
+<p>If you wan to try a life without Storyboard, why don’t you try these following instructions?</p>
+
+<ul>
+  <li>Setup your own code snippets</li>
+  <li>Try my Auto Layout library <a href="https://github.com/nguyentruongky/knConstraints"><strong>knConstraints</strong></a></li>
+  <li>Develop some simple custom views, with Auto Layout programmatically.</li>
+</ul>
+
+<h2 id="how-can-i-help">How can I help?</h2>
+
+<p>Please feel free to touch to me by leaving comments below or Skype: nguyentruongky3390.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2017/04/18/long-screen.html" data-toggle="tooltip" data-placement="top" title="Use UITableViewController to solve very long screen">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2017/04/28/most-of-24-hours.html" data-toggle="tooltip" data-placement="top" title="Make the Most of Your 24 Hours">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
