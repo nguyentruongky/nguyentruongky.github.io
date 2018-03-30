@@ -80,6 +80,8 @@ func refreshUI() {
 
 - Run the app, and try. 
 
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffinish_demo_i18n.gif?alt=media&token=cfc52b0b-7b74-4195-b9b9-f8b4e6c76461" width="320px"/>
+
 ### What is the advantages in this way? 
 
 First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication. 
