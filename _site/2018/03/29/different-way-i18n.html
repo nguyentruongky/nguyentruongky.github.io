@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Different way to do multi languages in iOS - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use strin...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2018/03/29/different-way-i18n.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_lang.jpg?alt=media&token=25c8f158-be13-4b93-b913-57d4097ae69e')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_lang.jpg?alt=media&token=25c8f158-be13-4b93-b913-57d4097ae69e')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Different way to do multi languages in iOS</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Save your time and effort to do multi languages in iOS</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on March 29, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-10 mx-auto">
+
+      <p>Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.</p>
+
+<p>This note I want to take note about another way I found in my recent projects. I use plist files to save languages. Do it now.</p>
+
+<h3 id="steps">Steps</h3>
+<ul>
+  <li>New project. Design UI like this, connect outlets</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n_demo.png?alt=media&amp;token=f1ee2869-5c17-4401-ab2a-124be93b4d7f" width="350px" /></p>
+<ul>
+  <li>Add 2 plist files, named Lang_en.plist, Lang_vi.plist</li>
+  <li>Add some codes for localization.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class knI18n {
+    static let shared = knI18n()
+    
+    private let knCurrentLanguageKey = "knCurrentLanguageKey"
+    private let fileNameBase = "Lang_"
+    lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
+    func getLanguageFile() -&gt; NSDictionary {
+        let language = currentLanguage ?? "en"
+        if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: "plist") {
+            return NSDictionary(contentsOfFile: path)!
+        }
+        fatalError("Localizable file NOT found")
+    }
+    
+    func localize(string: String) -&gt; String {
+        guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
+        return localizedString
+    }
+    
+    func setLanguage(_ language: String) {
+        currentLanguage = language
+        localizableDictionary = getLanguageFile()
+    }
+    
+    private var currentLanguage: String? {
+        get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
+        set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
+    }
+}
+
+extension String {
+    var i18n: String {
+        return knI18n.shared.localize(string: self)
+    }
+}
+</code></pre></div></div>
+
+<p>Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language.</p>
+
+<ul>
+  <li>Add some code into controller</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@objc func handleChangeToEn() {
+    knI18n.shared.setLanguage("en")
+    refreshUI()
+}
+
+@objc func handleChangeToVi() {
+    knI18n.shared.setLanguage("vi")
+    refreshUI()
+}
+
+func refreshUI() {
+    languageLabel.text = "lang".i18n
+    helloLabel.text = "hello".i18n
+    vietnameseButton.setTitle("change_vi".i18n, for: .normal)
+    englishButton.setTitle("change_en".i18n, for: .normal)
+}
+</code></pre></div></div>
+
+<ul>
+  <li>Run the app, and try.</li>
+</ul>
+
+<h3 id="what-is-the-advantages-in-this-way">What is the advantages in this way?</h3>
+
+<p>First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fkey_exist.png?alt=media&amp;token=937931c6-4480-4891-8f57-8fdb98d0db45" width="350" /></p>
+
+<p>Second, no need to worry about <code class="highlighter-rouge">;</code> and the end of text. Once, I missed a <code class="highlighter-rouge">;</code> and faced to error, took me much time to fix. XCode was not kind enough to tell me this problem 2 years ago.</p>
+
+<p>Third, very easy to add new languages, just new plist files with name start with <code class="highlighter-rouge">Lang_</code>.</p>
+
+<p>Minor note: XCode can be very slow anytime, so, I like to shorten the name to <code class="highlighter-rouge">i18n</code> and <code class="highlighter-rouge">knI18n</code> to easier to type without suggestion.</p>
+
+<h3 id="but-still-have-disadvantages-in-this-way">But still have disadvantages in this way</h3>
+
+<p>I can’t send these plist files to translator, difficult for them to open and do their work. These attached files can help.</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">GenerateText</code> is used to export text from language file to text, then I can easily send to translators.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">GeneratePlist</code> is used to convert translated text file to plist. And can import directly to project.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>How to use?</p>
+</blockquote>
+
+<p>Put <code class="highlighter-rouge">GenerateText</code> app in the same place with plist file, run Terminal at that folder, type <code class="highlighter-rouge">./GenerateText</code>. New file text is generated and ready to send to translators.</p>
+
+<p>Put translated file in the same folder with <code class="highlighter-rouge">GeneratePlist</code> app, type <code class="highlighter-rouge">./GeneratePlist</code> in Terminal to generate new plist file.</p>
+
+<p>My app can backup your plist file before generate new one. But should backup manual will be more secure.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Hope this solution can help iOS developer work with i18n easier. Download project at <a href="https://github.com/nguyentruongky/i18n_Demo">https://github.com/nguyentruongky/i18n_Demo</a></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2017/04/28/most-of-24-hours.html" data-toggle="tooltip" data-placement="top" title="Make the Most of Your 24 Hours">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

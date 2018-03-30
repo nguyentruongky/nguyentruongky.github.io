@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Make the Most of Your 24 Hours
-subtitle: Tips to save your time and make your code quality become better. This talk is presented in Swift Battle. 
+subtitle: Tips to save your time and make your code quality become better. This talk was presented in Swift Battle. 
 date:   2017-4-28
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fsave_time.jpg?alt=media&token=c9e1939e-bcea-4005-bcd8-ae327ccbd5e7
 '

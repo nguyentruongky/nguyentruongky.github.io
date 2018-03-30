@@ -1,4 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-28T15:53:40+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Make the Most of Your 24 Hours</title><link href="http://localhost:4000/2017/04/28/most-of-24-hours.html" rel="alternate" type="text/html" title="Make the Most of Your 24 Hours" /><published>2017-04-28T00:00:00+07:00</published><updated>2017-04-28T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/28/most-of-24-hours</id><content type="html" xml:base="http://localhost:4000/2017/04/28/most-of-24-hours.html">&lt;h2 id=&quot;bitter-experience&quot;&gt;Bitter Experience&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-30T10:19:02+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Different way to do multi languages in iOS</title><link href="http://localhost:4000/2018/03/29/different-way-i18n.html" rel="alternate" type="text/html" title="Different way to do multi languages in iOS" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4000/2018/03/29/different-way-i18n</id><content type="html" xml:base="http://localhost:4000/2018/03/29/different-way-i18n.html">&lt;p&gt;Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.&lt;/p&gt;
+
+&lt;p&gt;This note I want to take note about another way I found in my recent projects. I use plist files to save languages. Do it now.&lt;/p&gt;
+
+&lt;h3 id=&quot;steps&quot;&gt;Steps&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;New project. Design UI like this, connect outlets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n_demo.png?alt=media&amp;amp;token=f1ee2869-5c17-4401-ab2a-124be93b4d7f&quot; width=&quot;350px&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add 2 plist files, named Lang_en.plist, Lang_vi.plist&lt;/li&gt;
+  &lt;li&gt;Add some codes for localization.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knI18n {
+    static let shared = knI18n()
+    
+    private let knCurrentLanguageKey = &quot;knCurrentLanguageKey&quot;
+    private let fileNameBase = &quot;Lang_&quot;
+    lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
+    func getLanguageFile() -&amp;gt; NSDictionary {
+        let language = currentLanguage ?? &quot;en&quot;
+        if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: &quot;plist&quot;) {
+            return NSDictionary(contentsOfFile: path)!
+        }
+        fatalError(&quot;Localizable file NOT found&quot;)
+    }
+    
+    func localize(string: String) -&amp;gt; String {
+        guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
+        return localizedString
+    }
+    
+    func setLanguage(_ language: String) {
+        currentLanguage = language
+        localizableDictionary = getLanguageFile()
+    }
+    
+    private var currentLanguage: String? {
+        get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
+        set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
+    }
+}
+
+extension String {
+    var i18n: String {
+        return knI18n.shared.localize(string: self)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add some code into controller&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc func handleChangeToEn() {
+    knI18n.shared.setLanguage(&quot;en&quot;)
+    refreshUI()
+}
+
+@objc func handleChangeToVi() {
+    knI18n.shared.setLanguage(&quot;vi&quot;)
+    refreshUI()
+}
+
+func refreshUI() {
+    languageLabel.text = &quot;lang&quot;.i18n
+    helloLabel.text = &quot;hello&quot;.i18n
+    vietnameseButton.setTitle(&quot;change_vi&quot;.i18n, for: .normal)
+    englishButton.setTitle(&quot;change_en&quot;.i18n, for: .normal)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run the app, and try.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-is-the-advantages-in-this-way&quot;&gt;What is the advantages in this way?&lt;/h3&gt;
+
+&lt;p&gt;First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fkey_exist.png?alt=media&amp;amp;token=937931c6-4480-4891-8f57-8fdb98d0db45&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Second, no need to worry about &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and the end of text. Once, I missed a &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and faced to error, took me much time to fix. XCode was not kind enough to tell me this problem 2 years ago.&lt;/p&gt;
+
+&lt;p&gt;Third, very easy to add new languages, just new plist files with name start with &lt;code class=&quot;highlighter-rouge&quot;&gt;Lang_&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Minor note: XCode can be very slow anytime, so, I like to shorten the name to &lt;code class=&quot;highlighter-rouge&quot;&gt;i18n&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;knI18n&lt;/code&gt; to easier to type without suggestion.&lt;/p&gt;
+
+&lt;h3 id=&quot;but-still-have-disadvantages-in-this-way&quot;&gt;But still have disadvantages in this way&lt;/h3&gt;
+
+&lt;p&gt;I can’t send these plist files to translator, difficult for them to open and do their work. These attached files can help.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GenerateText&lt;/code&gt; is used to export text from language file to text, then I can easily send to translators.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GeneratePlist&lt;/code&gt; is used to convert translated text file to plist. And can import directly to project.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How to use?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Put &lt;code class=&quot;highlighter-rouge&quot;&gt;GenerateText&lt;/code&gt; app in the same place with plist file, run Terminal at that folder, type &lt;code class=&quot;highlighter-rouge&quot;&gt;./GenerateText&lt;/code&gt;. New file text is generated and ready to send to translators.&lt;/p&gt;
+
+&lt;p&gt;Put translated file in the same folder with &lt;code class=&quot;highlighter-rouge&quot;&gt;GeneratePlist&lt;/code&gt; app, type &lt;code class=&quot;highlighter-rouge&quot;&gt;./GeneratePlist&lt;/code&gt; in Terminal to generate new plist file.&lt;/p&gt;
+
+&lt;p&gt;My app can backup your plist file before generate new one. But should backup manual will be more secure.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Hope this solution can help iOS developer work with i18n easier. Download project at &lt;a href=&quot;https://github.com/nguyentruongky/i18n_Demo&quot;&gt;https://github.com/nguyentruongky/i18n_Demo&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.</summary></entry><entry><title type="html">Make the Most of Your 24 Hours</title><link href="http://localhost:4000/2017/04/28/most-of-24-hours.html" rel="alternate" type="text/html" title="Make the Most of Your 24 Hours" /><published>2017-04-28T00:00:00+07:00</published><updated>2017-04-28T00:00:00+07:00</updated><id>http://localhost:4000/2017/04/28/most-of-24-hours</id><content type="html" xml:base="http://localhost:4000/2017/04/28/most-of-24-hours.html">&lt;h2 id=&quot;bitter-experience&quot;&gt;Bitter Experience&lt;/h2&gt;
 &lt;p&gt;I started iOS as a 2-year-experience .NET developer. The salary range for a junior iOS dev is a little bit lower than the amount for a 2-year-experience develop get. I wanted to make myself stronger, earn more experience. I had a misconception of working and learning. I thought, freelance projects will help me strengthen my knowledge and experience. So I tried to get as more as possible freelance projects. And my nightmare started from here.&lt;/p&gt;
 
 &lt;p&gt;I had no time to spend with my family, no time to work on personal improvement, no time to go out with friends, no time at all. All of my time was used up on my freelance work from coding new features, fixing bugs and much more. I was killing myself working odd hours and missing out on quality time with my family and friends.&lt;/p&gt;
@@ -1007,233 +1124,4 @@ override func viewDidAppear(animated: Bool) {
 
 &lt;p&gt;Container view is very convenient, But don’t exploit it, especially when your embed controller change the height many times. Your app will be lag, unstable and bring a bad experience to your user.&lt;/p&gt;
 
-&lt;p&gt;You can download my demo at &lt;a href=&quot;https://github.com/nguyentruongky/DemoContainerViewDynamicLoading&quot;&gt;my github&lt;/a&gt;. Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I saw a question on stackoverflow. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.</summary></entry><entry><title type="html">Airbnb Home screen sample</title><link href="http://localhost:4000/2016/01/27/Airbnb-home.html" rel="alternate" type="text/html" title="Airbnb Home screen sample" /><published>2016-01-27T00:00:00+07:00</published><updated>2016-01-27T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/27/Airbnb-home</id><content type="html" xml:base="http://localhost:4000/2016/01/27/Airbnb-home.html">&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fdemo.gif?alt=media&amp;amp;token=cad709ea-eb96-498c-8e0d-5af864263ef5&quot; alt=&quot;demo.gif&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can see it anywhere. It’s very popular in home screen, gallery screen. See how to do that.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Create new project.&lt;/li&gt;
-  &lt;li&gt;Remove ViewController.swift and the view controller in Main storyboard.&lt;/li&gt;
-  &lt;li&gt;Add TableViewController to storyboard. Don’t forget check &lt;code class=&quot;highlighter-rouge&quot;&gt;Is Initial View Controller&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Name the Table View Cell and Identifier &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Set HeaderCell height to 400&lt;/li&gt;
-  &lt;li&gt;Design your cell look like this&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fheadercelldesign.png?alt=media&amp;amp;token=a2de60ef-625a-4864-bb73-d25f86d7ef54&quot; alt=&quot;headerCellDesign.png&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell.swift&lt;/code&gt; and connect with our HeaderCell. Remember, &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderCell.swift&lt;/code&gt; is subclass of UITableViewCell&lt;/li&gt;
-  &lt;li&gt;Clear all codes in file and connect outlets.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fconnectoutletheadercell.png?alt=media&amp;amp;token=ccc8ff44-0995-4699-a395-06d0af605458&quot; alt=&quot;connectOutletHeaderCell.png&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Write a method to make the search button as a circle. Create a new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;UIExtension.swift&lt;/code&gt;. You see how it’s useful later.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UIView {    
-func createBorder(color: UIColor = .white, width: CGFloat = 2) {
-    self.layer.borderColor = color.CGColor
-    self.layer.borderWidth = width
-}
-    
-func createRoundCorner(radius: CGFloat = 4) {
-    self.layer.cornerRadius = radius
-    self.clipsToBounds = true
-}
-    
-func createRoundCorner() {
-    createRoundCorner(4)
-}
-    
-func createBorderCorner() {
-    createBorder()
-    createRoundCorner()
-}
-    
-func createCircleShape() {
-    createRoundCorner(self.frame.size.width / 2)
-}
-}    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;If you don’t know about Extension yet, read more &lt;a href=&quot;https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Extensions.html&quot;&gt;here&lt;/a&gt;. It’s awesome.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Back to HeaderCell, add &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; method.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {
-searchButton.createCircleShape()
-}    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Add a subclass of UITableViewController file name &lt;code class=&quot;highlighter-rouge&quot;&gt;HomescreenViewController.swift&lt;/code&gt;, connect it to your Table View Controller in IB and clear all codes in files.&lt;/li&gt;
-  &lt;li&gt;Add some code
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class HomescreenTableViewController: UITableViewController {    
-// It's the header of the sections. The first empty section header is use for header.
-let sections = [&quot;&quot;, &quot;Recently View&quot;, &quot;Favourite&quot;, &quot;Suggestion&quot;]  
-
-override func numberOfSectionsInTableView(tableView: UITableView) -&amp;gt; Int { return 1 }
-    
-override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
-    return sections.count }
-	
-override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&amp;gt; UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(&quot;HeaderCell&quot;, forIndexPath: indexPath) as! HeaderCell
-    cell.setupView()
-    return cell
-}
-    
-override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -&amp;gt; CGFloat { return 400 }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Run app and you see header cell.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhomescreenheadercomplete.png?alt=media&amp;amp;token=fcc1ec80-71cf-4224-982c-9cef26b3f5f0&quot; alt=&quot;homescreenHeaderComplete&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Now is the main design of the screen. Add new Table View Cell, name and Reuse identifier is &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategory&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Change cell height to 400.&lt;/li&gt;
-  &lt;li&gt;Add a Collection View to your cell, set delegate and datasource to your &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategory&lt;/code&gt; cell.&lt;/li&gt;
-  &lt;li&gt;Select the Collection View and set cell size to width: 300, height: 350. Set scroll direction to Horizontal.&lt;/li&gt;
-  &lt;li&gt;Select the Collection View Cell and set reuse identifier is &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCell&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Design the PlaceCell like the UI.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://truongky.files.wordpress.com/2016/01/placecategory.png&quot; alt=&quot;placeCategory&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add new file (subclass of UITableViewCell), name &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategoryCell.swift&lt;/code&gt;. Connect it to your PlaceCategoryCell and connect outlets to your file.&lt;/li&gt;
-  &lt;li&gt;Add new file (subclass of UICollectionViewCell), name &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCollectionViewCell&lt;/code&gt;. Connect it to your PlaceCell. Connect outlets to your file.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fplacecollectionviewcell_connectoutlet.png?alt=media&amp;amp;token=244b013a-577a-4439-9474-2d49fd256aee&quot; alt=&quot;placeCollectionViewCell_connectOutlet&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt; method to your code
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {  
-avatarImageView.createCircleShape()
-}    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;PlaceCategoryCell.swift&lt;/code&gt; and add some codes.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Model
-class PlaceModel : NSObject {    
-	var placeName = &quot;&quot;
-	var shortDescription = &quot;&quot;
-	var price: Int64 = 0
-	var currency = &quot;&quot;
-	var unit = &quot;&quot;
-	var thumbnailImage: UIImage?
-	var avatarImage: UIImage?
-	var didWish = false
-}
-    
-class PlaceCategoryTableViewCell: UITableViewCell, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-	@IBOutlet weak var sectionLabel: UILabel!
-	var placeList = [PlaceModel]()
-	
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -&amp;gt; Int { return placeList.count }
-
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&amp;gt; UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(&quot;PlaceCell&quot;, forIndexPath: indexPath) as! PlaceCollectionViewCell
-		cell.setupView()
-		let place = placeList[indexPath.row]
-		cell.thumbnailImageView.image = place.thumbnailImage
-		cell.avatarImageView.image = place.avatarImage
-		cell.priceLabel.text = String(place.price)
-		cell.currencyLabel.text = place.currency
-		cell.unitLabel.text = place.unit
-		cell.placeNameLabel.text = place.placeName
-		cell.placeDescriptionLabel.text = place.shortDescription
-		return cell
-	}
-    
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -&amp;gt; CGSize {
-		return CGSize(width: 300, height: 350) }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It’s almost done. Your UI setup is ready to display data. We create some sample data to show now.&lt;/li&gt;
-  &lt;li&gt;Create new file &lt;code class=&quot;highlighter-rouge&quot;&gt;SampleData.swift&lt;/code&gt; and add some codes
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class SampleData {
-static let places = [&quot;Ha Noi&quot;, &quot;Hai Phong&quot;, &quot;Trang An&quot;, &quot;Hoi An&quot;, &quot;Ho Chi Minh&quot;, &quot;Bien Hoa&quot;, &quot;My Tho&quot;, &quot;Can Tho&quot;, &quot;Tay Ninh&quot;, &quot;Con Dao&quot;]
-static let avatars = [&quot;Avatar1&quot;, &quot;Avatar2&quot;, &quot;Avatar3&quot;, &quot;Avatar4&quot;, &quot;Avatar5&quot;, &quot;Avatar6&quot;, &quot;Avatar7&quot;, &quot;Avatar8&quot;, &quot;Avatar9&quot;, &quot;Avatar10&quot;]
-static let thumbnails = [&quot;Place1&quot;, &quot;Place2&quot;,  &quot;Place3&quot;,  &quot;Place4&quot;,  &quot;Place5&quot;,  &quot;Place6&quot;,  &quot;Place7&quot;,  &quot;Place8&quot;,  &quot;Place9&quot;,  &quot;Place10&quot;]
-static let prices: [Int64] = [5000000, 15000000, 18000000,  2000000, 25000000, 15000000, 9000000, 1000000, 12000000, 6000000]  
-static let shortDescriptions = [&quot;New BedRm by C.Park&quot;,
-        &quot;Cozy &amp;amp; Private Floor of Brownstone&quot;,
-        &quot;AMAZING MANHATTAN SKYLIN&quot;,
-        &quot;Studio Apartment with King Bed&quot;,
-        &quot;Beautiful Midtown East&quot;,
-        &quot;Brooklyn Style - With a Balcony!!!&quot;,
-        &quot;Cozy Bedroom in Apartment&quot;,
-        &quot;Loft with Manhattan skyline view!&quot;,
-        &quot;Hell's Kitchen 1-Bdr. Apt. Share&quot;,
-        &quot;Green Room&quot;]
-    
-static func generateFavouriteList() -&amp;gt; [PlaceModel] {
-    var favouriteList = [PlaceModel]()
-    for _ in 0..&amp;lt;10 {
-        let randomIndex = randomInt(10)
-        let place = PlaceModel()
-        place.placeName = places[randomIndex]
-        place.avatarImage = UIImage(named: avatars[randomIndex])
-        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
-        place.unit = &quot;PER NIGHT&quot;
-        place.currency = &quot;VND&quot;
-        place.price = prices[randomIndex]
-        place.shortDescription = shortDescriptions[randomIndex]
-        favouriteList.append(place)
-    }
-    return favouriteList
-}
-    
-static func generateRecentlyList() -&amp;gt; [PlaceModel] {
-    var recentlyList = [PlaceModel]()    
-    for _ in 0..&amp;lt;10 {
-        let randomIndex = randomInt(10)
-        let place = PlaceModel()
-        place.placeName = places[randomIndex]
-        place.avatarImage = UIImage(named: avatars[randomIndex])
-        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
-        place.unit = &quot;PER NIGHT&quot;
-        place.currency = &quot;VND&quot;
-        place.price = prices[randomIndex]
-        place.shortDescription = shortDescriptions[randomIndex]
-        recentlyList.append(place)
-    }
-    return recentlyList;
-}
-    
-static func generateSuggestionList() -&amp;gt; [PlaceModel] {    
-    var suggestionList = [PlaceModel]()
-    for _ in 0..&amp;lt;10 {
-        let randomIndex = randomInt(10)
-        let place = PlaceModel()
-        place.placeName = places[randomIndex]
-        place.avatarImage = UIImage(named: avatars[randomIndex])
-        place.thumbnailImage = UIImage(named: thumbnails[randomIndex])
-        place.unit = &quot;PER NIGHT&quot;
-        place.currency = &quot;VND&quot;
-        place.price = prices[randomIndex]
-        place.shortDescription = shortDescriptions[randomIndex]
-        suggestionList.append(place)
-    }
-    return suggestionList
-}
-    
-static func randomInt(max: UInt32) -&amp;gt; Int { return Int(arc4random_uniform(max)) }
-}    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Please make sure you add 10 avatar images (Avatar1.png, Avatar2.png…, Avatar10.png) and 10 place images (Place1.png, Place2.png…, Place10.png)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Run and enjoy.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;The main purpose is to show how nest a Collection View in a Table View. The Airbnb home has many things to do. 
-You can download my project &lt;a href=&quot;https://github.com/nguyentruongky/AirbnbHomescreenSample&quot;&gt;at my github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry></feed>
+&lt;p&gt;You can download my demo at &lt;a href=&quot;https://github.com/nguyentruongky/DemoContainerViewDynamicLoading&quot;&gt;my github&lt;/a&gt;. Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I saw a question on stackoverflow. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.</summary></entry></feed>
