@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Thinking about Coinhako history screen - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/2018/03/29/coinhako-history-demo.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/www.coinhako.com/assets/friendliest_wallet-13ccee4871179541b33bd8f1f974a484870de1daf3e210711b8d6ecca83a2c16.svg')"> -->
+<header class="masthead" style="background-image: url('https://www.coinhako.com/assets/friendliest_wallet-13ccee4871179541b33bd8f1f974a484870de1daf3e210711b8d6ecca83a2c16.svg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Thinking about Coinhako history screen</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">A small note about how Coinhako make their history screen with status and filter in the same screen.</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on March 29, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-10 mx-auto">
+
+      <p>Have just joined cryptocurrencies market and select <a href="https://www.coinhako.com">Coinhako</a> as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app <a href="https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8">here</a>.</p>
+
+<p>This is my thinking about how Coinhako’s developers make the app, and try with a simple demo.</p>
+
+<p>Screenshots from Coinhako app</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_1.PNG?alt=media&amp;token=76851c42-e60f-4ea4-999b-4831747b19f6" width="320px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_2.PNG?alt=media&amp;token=8b86f562-bb3f-4fc8-b724-b497c2ac131f" width="320px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_3.PNG?alt=media&amp;token=ef118078-1859-4624-a982-81456e43d934" width="320px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_4.PNG?alt=media&amp;token=ba3a9c48-90f9-42ca-9576-48c837fc784a" width="320px" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_5.PNG?alt=media&amp;token=9e853be9-be5b-42ba-8c02-5538c95cf724" width="320px" /></p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<ul>
+  <li>Display 2 lists of status: Pending transactions and Completed transactions. This can be done with a UITableView in a UIViewController.</li>
+  <li>There is filter, and filter result is a list of transaction, no matter what status. It looks like displayed in the same screen with 2 status lists before.</li>
+  <li>Every list has empty state.</li>
+  <li>Every list can load more if available.</li>
+  <li>Every list can reload when displayed.</li>
+</ul>
+
+<h2 id="my-thinking">My thinking</h2>
+<p>First thinking is a UITableView in a UIViewController. There are 4 datasources, <code class="highlighter-rouge">pendingDatasource</code>, <code class="highlighter-rouge">completedDatasource</code>, <code class="highlighter-rouge">filterDatasource</code> and <code class="highlighter-rouge">mainDatasource</code>. When user selects pending segment or completed segment or filter, app will update the correct datasource and <code class="highlighter-rouge">mainDatasource</code> then reload UITableView. Empty state will be dislay if the selected datasource is empty. This can be the good solution. But I am concern about load more and reload. Very difficult to handle all of them to reload and load more.</p>
+
+<p>New thinking, make a custom view contain UITableView to display list, handle load data, reload, load more event, empty state inside the view. When user does any actions, add the view to UIViewController and remove the previous one. I will do this solution in my demo.</p>
+
+<h2 id="demo">Demo</h2>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_demo.gif?alt=media&amp;token=5e529cff-97f5-4380-95fc-32619ad32727" width="320px" /></p>
+
+<h3 id="create-project">Create project</h3>
+<p>I am a big fan of Auto Layout Programatically, so that no Storyboard in my project. I added some libs for Auto Layout and some codebase.</p>
+
+<p>The demo has HistoryController and FilterController.</p>
+
+<p>HistoryController contains a UISegmentControl for status and a bar button to show filter. 
+FilterController contains only UIButton to turn filter on/off.</p>
+
+<p>UI for controller is in <code class="highlighter-rouge">setupView()</code>.</p>
+
+<h3 id="add-listview">Add ListView</h3>
+
+<p>ListView is a base view for PendingView, CompletedView, FilterView. ListView contains a UITableView and conform UITableViewDelegate, UITableViewDataSource. ListView also handles load data or load more, status (empty, error, loading).</p>
+
+<p>This is just a simple demo, so I make a Datasource (fake data). In my regular projects, I will load data/load more by workers to handle request result and separate code for the View.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ListView: knView {
+    let maxItemCount = 20
+    
+    let fakeData = Datasource()
+    var currentPage = 0
+    var canLoadMore = true 
+    var datasource = [String]() { didSet { tableView.reloadData() }}
+    
+    lazy var tableView: UITableView = { [weak self] in
+        let tb = UITableView()
+        tb.translatesAutoresizingMaskIntoConstraints = false
+        tb.separatorStyle = .none
+        tb.showsVerticalScrollIndicator = false
+        tb.dataSource = self
+        tb.delegate = self
+        tb.register(knTableCell.self, forCellReuseIdentifier: "knTableCell")
+        return tb
+        }()
+    
+    override func setupView() {
+        translatesAutoresizingMaskIntoConstraints = false
+        addSubviews(views: tableView)
+        tableView.fill(toView: self)
+        backgroundColor = .white
+    }
+    
+    func fetchMore() { }
+    func fetchData() { }
+
+    func checkLoadMoreAvailable(currentCount: Int) {
+        canLoadMore = currentCount == maxItemCount
+        currentPage += currentCount == maxItemCount ? 1 : 0
+    }
+}
+
+
+extension ListView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+        return datasource.count }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == datasource.count - 1 {
+            fetchMore()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "knTableCell", for: indexPath) as! knTableCell
+        cell.textLabel?.text = datasource[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&gt; CGFloat { return 66 }
+}
+</code></pre></div></div>
+
+<h3 id="add-pendingview-completedview-filterview">Add PendingView, CompletedView, FilterView</h3>
+<p>Add more 3 views and override <code class="highlighter-rouge">fetchData()</code>, <code class="highlighter-rouge">fetchMore()</code>. Example for PendingView</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class PendingView: ListView {
+    override func fetchData() {
+        let newData = fakeData.getPendingList(page: 0)
+        checkLoadMoreAvailable(currentCount: newData.count)
+        datasource = newData
+    }
+    
+    override func fetchMore() {
+        guard canLoadMore else { return }
+        let newData = fakeData.getPendingList(page: currentPage)
+        checkLoadMoreAvailable(currentCount: newData.count)
+        datasource += newData
+    }
+}
+</code></pre></div></div>
+
+<h3 id="handle-logic">Handle logic</h3>
+<p>In HistoryController, handle the add view and remove previous one by setting ListType.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func showList(_ listType: ListType) {
+    switch listType {
+        case .pending:
+            if pendingView.datasource.count == 0 {
+                pendingView.fetchData()
+            }
+            statusSegment.selectedSegmentIndex = 0
+            view.addSubview(pendingView)
+            pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = pendingView
+            
+        case .completed:
+            if completedView.datasource.count == 0 {
+                completedView.fetchData()
+            }
+            statusSegment.selectedSegmentIndex = 1
+            view.addSubview(completedView)
+            completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = completedView
+            
+        case .filter:
+            view.addSubview(filterView)
+            filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = filterView
+        }
+    }
+</code></pre></div></div>
+
+<p>This is the most complicated portion in this demo. Other minor codes you can see in the sample on <a href="https://github.com/nguyentruongky/MultiScreensInOneDemo">Github</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is my thinking about how Coinhako’s iOS app handle history screen. Not sure it is right or not. But this solution can be useful in screens like this.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/03/29/different-way-i18n.html" data-toggle="tooltip" data-placement="top" title="Different way to do multi languages in iOS">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

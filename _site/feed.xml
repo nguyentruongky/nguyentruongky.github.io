@@ -1,4 +1,162 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-30T11:17:33+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Different way to do multi languages in iOS</title><link href="http://localhost:4000/2018/03/29/different-way-i18n.html" rel="alternate" type="text/html" title="Different way to do multi languages in iOS" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4000/2018/03/29/different-way-i18n</id><content type="html" xml:base="http://localhost:4000/2018/03/29/different-way-i18n.html">&lt;p&gt;Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-30T17:28:43+07:00</updated><id>http://localhost:4000/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4000/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4000/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4000/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is my thinking about how Coinhako’s developers make the app, and try with a simple demo.&lt;/p&gt;
+
+&lt;p&gt;Screenshots from Coinhako app&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_1.PNG?alt=media&amp;amp;token=76851c42-e60f-4ea4-999b-4831747b19f6&quot; width=&quot;320px&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_2.PNG?alt=media&amp;amp;token=8b86f562-bb3f-4fc8-b724-b497c2ac131f&quot; width=&quot;320px&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_3.PNG?alt=media&amp;amp;token=ef118078-1859-4624-a982-81456e43d934&quot; width=&quot;320px&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_4.PNG?alt=media&amp;amp;token=ba3a9c48-90f9-42ca-9576-48c837fc784a&quot; width=&quot;320px&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_5.PNG?alt=media&amp;amp;token=9e853be9-be5b-42ba-8c02-5538c95cf724&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Display 2 lists of status: Pending transactions and Completed transactions. This can be done with a UITableView in a UIViewController.&lt;/li&gt;
+  &lt;li&gt;There is filter, and filter result is a list of transaction, no matter what status. It looks like displayed in the same screen with 2 status lists before.&lt;/li&gt;
+  &lt;li&gt;Every list has empty state.&lt;/li&gt;
+  &lt;li&gt;Every list can load more if available.&lt;/li&gt;
+  &lt;li&gt;Every list can reload when displayed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;my-thinking&quot;&gt;My thinking&lt;/h2&gt;
+&lt;p&gt;First thinking is a UITableView in a UIViewController. There are 4 datasources, &lt;code class=&quot;highlighter-rouge&quot;&gt;pendingDatasource&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;completedDatasource&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;filterDatasource&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;mainDatasource&lt;/code&gt;. When user selects pending segment or completed segment or filter, app will update the correct datasource and &lt;code class=&quot;highlighter-rouge&quot;&gt;mainDatasource&lt;/code&gt; then reload UITableView. Empty state will be dislay if the selected datasource is empty. This can be the good solution. But I am concern about load more and reload. Very difficult to handle all of them to reload and load more.&lt;/p&gt;
+
+&lt;p&gt;New thinking, make a custom view contain UITableView to display list, handle load data, reload, load more event, empty state inside the view. When user does any actions, add the view to UIViewController and remove the previous one. I will do this solution in my demo.&lt;/p&gt;
+
+&lt;h2 id=&quot;demo&quot;&gt;Demo&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_demo.gif?alt=media&amp;amp;token=5e529cff-97f5-4380-95fc-32619ad32727&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;create-project&quot;&gt;Create project&lt;/h3&gt;
+&lt;p&gt;I am a big fan of Auto Layout Programatically, so that no Storyboard in my project. I added some libs for Auto Layout and some codebase.&lt;/p&gt;
+
+&lt;p&gt;The demo has HistoryController and FilterController.&lt;/p&gt;
+
+&lt;p&gt;HistoryController contains a UISegmentControl for status and a bar button to show filter. 
+FilterController contains only UIButton to turn filter on/off.&lt;/p&gt;
+
+&lt;p&gt;UI for controller is in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-listview&quot;&gt;Add ListView&lt;/h3&gt;
+
+&lt;p&gt;ListView is a base view for PendingView, CompletedView, FilterView. ListView contains a UITableView and conform UITableViewDelegate, UITableViewDataSource. ListView also handles load data or load more, status (empty, error, loading).&lt;/p&gt;
+
+&lt;p&gt;This is just a simple demo, so I make a Datasource (fake data). In my regular projects, I will load data/load more by workers to handle request result and separate code for the View.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class ListView: knView {
+    let maxItemCount = 20
+    
+    let fakeData = Datasource()
+    var currentPage = 0
+    var canLoadMore = true 
+    var datasource = [String]() { didSet { tableView.reloadData() }}
+    
+    lazy var tableView: UITableView = { [weak self] in
+        let tb = UITableView()
+        tb.translatesAutoresizingMaskIntoConstraints = false
+        tb.separatorStyle = .none
+        tb.showsVerticalScrollIndicator = false
+        tb.dataSource = self
+        tb.delegate = self
+        tb.register(knTableCell.self, forCellReuseIdentifier: &quot;knTableCell&quot;)
+        return tb
+        }()
+    
+    override func setupView() {
+        translatesAutoresizingMaskIntoConstraints = false
+        addSubviews(views: tableView)
+        tableView.fill(toView: self)
+        backgroundColor = .white
+    }
+    
+    func fetchMore() { }
+    func fetchData() { }
+
+    func checkLoadMoreAvailable(currentCount: Int) {
+        canLoadMore = currentCount == maxItemCount
+        currentPage += currentCount == maxItemCount ? 1 : 0
+    }
+}
+
+
+extension ListView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
+        return datasource.count }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == datasource.count - 1 {
+            fetchMore()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;knTableCell&quot;, for: indexPath) as! knTableCell
+        cell.textLabel?.text = datasource[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { return 66 }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-pendingview-completedview-filterview&quot;&gt;Add PendingView, CompletedView, FilterView&lt;/h3&gt;
+&lt;p&gt;Add more 3 views and override &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchMore()&lt;/code&gt;. Example for PendingView&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class PendingView: ListView {
+    override func fetchData() {
+        let newData = fakeData.getPendingList(page: 0)
+        checkLoadMoreAvailable(currentCount: newData.count)
+        datasource = newData
+    }
+    
+    override func fetchMore() {
+        guard canLoadMore else { return }
+        let newData = fakeData.getPendingList(page: currentPage)
+        checkLoadMoreAvailable(currentCount: newData.count)
+        datasource += newData
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;handle-logic&quot;&gt;Handle logic&lt;/h3&gt;
+&lt;p&gt;In HistoryController, handle the add view and remove previous one by setting ListType.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func showList(_ listType: ListType) {
+    switch listType {
+        case .pending:
+            if pendingView.datasource.count == 0 {
+                pendingView.fetchData()
+            }
+            statusSegment.selectedSegmentIndex = 0
+            view.addSubview(pendingView)
+            pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = pendingView
+            
+        case .completed:
+            if completedView.datasource.count == 0 {
+                completedView.fetchData()
+            }
+            statusSegment.selectedSegmentIndex = 1
+            view.addSubview(completedView)
+            completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = completedView
+            
+        case .filter:
+            view.addSubview(filterView)
+            filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
+            currentList?.removeFromParentView()
+            currentList = filterView
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the most complicated portion in this demo. Other minor codes you can see in the sample on &lt;a href=&quot;https://github.com/nguyentruongky/MultiScreensInOneDemo&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This is my thinking about how Coinhako’s iOS app handle history screen. Not sure it is right or not. But this solution can be useful in screens like this.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app here.</summary></entry><entry><title type="html">Different way to do multi languages in iOS</title><link href="http://localhost:4000/2018/03/29/different-way-i18n.html" rel="alternate" type="text/html" title="Different way to do multi languages in iOS" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4000/2018/03/29/different-way-i18n</id><content type="html" xml:base="http://localhost:4000/2018/03/29/different-way-i18n.html">&lt;p&gt;Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.&lt;/p&gt;
 
 &lt;p&gt;This note I want to take note about another way I found in my recent projects. I use plist files to save languages. Do it now.&lt;/p&gt;
 
@@ -1041,89 +1199,4 @@ Next, we have to calculate the x coordinate for the first character view.&lt;/p&
   &lt;li&gt;The recursion code makes the performance down a lot.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Some detail can’t be written here, please see more at my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Purpose</summary></entry><entry><title type="html">Dynamically load view controller into another</title><link href="http://localhost:4000/2016/01/29/embed-controller.html" rel="alternate" type="text/html" title="Dynamically load view controller into another" /><published>2016-01-29T00:00:00+07:00</published><updated>2016-01-29T00:00:00+07:00</updated><id>http://localhost:4000/2016/01/29/embed-controller</id><content type="html" xml:base="http://localhost:4000/2016/01/29/embed-controller.html">&lt;p&gt;I saw a question on &lt;a href=&quot;http://stackoverflow.com/questions/35011539/how-to-make-view-scroll-like-instagrams-profile-vc-with-segmentedcontroller/35079835#35079835&quot;&gt;stackoverflow&lt;/a&gt;. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Create new project.&lt;/li&gt;
-  &lt;li&gt;Design what you want. I add a label, a segmented control and a container view to embed child controller.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fcontainer_view.png?alt=media&amp;amp;token=1a69995c-9f5f-4226-a67c-b7bbd3bbce83&quot; alt=&quot;design&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Select all controls and choose menu Editor\Embed In\View. Name it: Content View.&lt;/li&gt;
-  &lt;li&gt;Select Content View and embed into ScrollView.&lt;/li&gt;
-  &lt;li&gt;Set constraint for ScrollView: leading, trailing, top, bottom to super view equal 0.&lt;/li&gt;
-  &lt;li&gt;Set constraint for Content View: leading, trailing, top, bottom to ScrollView equal to 0, vertical and horizontal alignment.&lt;/li&gt;
-  &lt;li&gt;Connect outlets and action to your controller.&lt;/li&gt;
-  &lt;li&gt;Add your new controllers. In my demo, I added 2 TableViewController, 1 for displaying images (ImageController), 1 for loading text (TextController).&lt;/li&gt;
-  &lt;li&gt;Back to your main view controller, add some code.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var dynamicHeight: CGFloat = 0    
-@IBOutlet weak var scrollView: UIScrollView!  
-@IBOutlet weak var pageContainer: UIView!
-@IBAction func selectPage(sender: AnyObject) {
-	// remove child controllers before add others
-	for controller in childViewControllers {  
-		controller.removeFromParentViewController()
-	}  
-	for view in pageContainer.subviews {  
-		view.removeFromSuperview()
-	}
-	let segment = sender as! UISegmentedControl
-	if segment.selectedSegmentIndex == 0 {  
-		createImageController()
-	} else { 
-		createTextController()
-	}  
-	updateScrollContentSize()
-}
-    
-func updateScrollContentSize() {
-	// 150 is your other view height. 
-	scrollView.contentSize = CGSize(width: view.frame.size.width, height: dynamicHeight + 150)
-}
-    
-func createTextController() {    
-	let textController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;TextController&quot;) as! TextController
-	dynamicHeight = textController.getTableContentHeight()
-	textController.tableView.scrollEnabled = false  
-	self.addChildViewController(textController)
-	pageContainer.addSubview(textController.view)
-	textController.view.frame = CGRectMake(0, 0, pageContainer.frame.size.width, dynamicHeight)
-}
-
-func createImageController() {    
-	let imageController = UIStoryboard(name: &quot;Main&quot;, bundle: nil).instantiateViewControllerWithIdentifier(&quot;ImageShowController&quot;) as! ImageShowController
-	dynamicHeight = imageController.getTableContentHeight()
-	imageController.tableView.scrollEnabled = false  
-	self.addChildViewController(imageController)
-	pageContainer.addSubview(imageController.view)
-	imageController.view.frame = CGRectMake(0, 0, pageContainer.frame.size.width, dynamicHeight * 2)
-}
-    
-override func viewDidAppear(animated: Bool) {    
-	super.viewDidAppear(true)
-	createImageController()
-	updateScrollContentSize()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Xcode tells you about the error. Fix it now. Open your controller you want to embed and add some code.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func getTableContentHeight() -&amp;gt; CGFloat {    
-	// calculate the total height of your controller. 
-	return CGFloat(vietnamTravelLocations.count) * 44
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It’s done, run your project and see the result.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;Container view is very convenient, But don’t exploit it, especially when your embed controller change the height many times. Your app will be lag, unstable and bring a bad experience to your user.&lt;/p&gt;
-
-&lt;p&gt;You can download my demo at &lt;a href=&quot;https://github.com/nguyentruongky/DemoContainerViewDynamicLoading&quot;&gt;my github&lt;/a&gt;. Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I saw a question on stackoverflow. He ran into a problem when use ContainerView to embed other view controller. I’ll share what I did.</summary></entry></feed>
+&lt;p&gt;Some detail can’t be written here, please see more at my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Purpose</summary></entry></feed>
