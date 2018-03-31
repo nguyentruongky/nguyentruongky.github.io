@@ -7,15 +7,16 @@ background: 'https://www.coinhako.com/assets/friendliest_wallet-13ccee4871179541
 ---
 Have just joined cryptocurrencies market and select [Coinhako](https://www.coinhako.com) as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you're new to crytocurrencies, you can try this app [here](https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8).
 
-This is my thinking about how Coinhako's developers make the app, and try with a simple demo.
+When I get design from designers, I think a lot about how to make it done. Have to pick good one. If pick wrong one, it takes lots of time to change. The history screen in this is one of screen I had to think a lot. Here what I thought and what I did. 
+
 
 Screenshots from Coinhako app
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_1.PNG?alt=media&token=76851c42-e60f-4ea4-999b-4831747b19f6" width="320px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_2.PNG?alt=media&token=8b86f562-bb3f-4fc8-b724-b497c2ac131f" width="320px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_3.PNG?alt=media&token=ef118078-1859-4624-a982-81456e43d934" width="320px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_4.PNG?alt=media&token=ba3a9c48-90f9-42ca-9576-48c837fc784a" width="320px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_5.PNG?alt=media&token=9e853be9-be5b-42ba-8c02-5538c95cf724" width="320px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_1.PNG?alt=media&token=76851c42-e60f-4ea4-999b-4831747b19f6" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_2.PNG?alt=media&token=8b86f562-bb3f-4fc8-b724-b497c2ac131f" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_3.PNG?alt=media&token=ef118078-1859-4624-a982-81456e43d934" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_4.PNG?alt=media&token=ba3a9c48-90f9-42ca-9576-48c837fc784a" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_5.PNG?alt=media&token=9e853be9-be5b-42ba-8c02-5538c95cf724" width="240px"/>
 
 ## How it works
 
@@ -161,7 +162,3 @@ func showList(_ listType: ListType) {
 ```
 
 This is the most complicated portion in this demo. Other minor codes you can see in the sample on [Github](https://github.com/nguyentruongky/MultiScreensInOneDemo).
-
-## Conclusion 
-
-This is my thinking about how Coinhako's iOS app handle history screen. Not sure it is right or not. But this solution can be useful in screens like this.
