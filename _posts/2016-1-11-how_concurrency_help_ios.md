@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "How concurrency help in iOS"
-subtitle: "Concurrency, an technique can't be ignored in any languages"
+title:  "How concurrency helps in iOS"
+subtitle: "Concurrency, a technique can't be ignored in any languages"
 date:   2016-1-11
 background: '/img/posts/queue.jpg'
 ---
