@@ -12,11 +12,11 @@ When I get design from designers, I think a lot about how to make it done. Have 
 
 Screenshots from Coinhako app
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_1.PNG?alt=media&token=76851c42-e60f-4ea4-999b-4831747b19f6" width="240px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_2.PNG?alt=media&token=8b86f562-bb3f-4fc8-b724-b497c2ac131f" width="240px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_3.PNG?alt=media&token=ef118078-1859-4624-a982-81456e43d934" width="240px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_4.PNG?alt=media&token=ba3a9c48-90f9-42ca-9576-48c837fc784a" width="240px"/>
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_5.PNG?alt=media&token=9e853be9-be5b-42ba-8c02-5538c95cf724" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_1.png?alt=media&token=3294c068-91f5-4f5b-89e5-8c6226e9ad85" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_2.png?alt=media&token=8a2162c1-4c38-478b-ad21-8b272a63fd8a" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_3.png?alt=media&token=cad07161-1c66-48eb-99ec-4e268e7198f7" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_4.png?alt=media&token=425d0c31-48bd-4f61-8b8f-c48a368b647f" width="240px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_5.png?alt=media&token=6b1818c3-e292-4f52-984b-371d9a8caf11" width="240px"/>
 
 ## How it works
 
@@ -32,7 +32,7 @@ First thinking is a UITableView in a UIViewController. There are 4 datasources, 
 New thinking, make a custom view contain UITableView to display list, handle load data, reload, load more event, empty state inside the view. When user does any actions, add the view to UIViewController and remove the previous one. I will do this solution in my demo. 
 
 ## Demo 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screen_in_one_demo.gif?alt=media&token=5e529cff-97f5-4380-95fc-32619ad32727" width="320px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_demo.gif?alt=media&token=0efd1a87-910e-44b5-be56-31ac988b49e1" width="320px"/>
 
 ### Create project
 I am a big fan of Auto Layout Programatically, so that no Storyboard in my project. I added some libs for Auto Layout and some codebase. 
