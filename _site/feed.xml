@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-04T03:36:55+07:00</updated><id>http://localhost:4001/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4001/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4001/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-05T03:51:05+07:00</updated><id>http://localhost:4001/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
+
+&lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is how I make this label.&lt;/p&gt;
+
+&lt;h3 id=&quot;define-your-texts&quot;&gt;Define your texts&lt;/h3&gt;
+&lt;p&gt;Make sure the text you need to make clickable is exacly same to the full text.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let termText = &quot;By register, I agree to ... Terms of Service and Private Policy&quot;
+let term = &quot;Terms of Service&quot;
+let policy = &quot;Private Policy&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;format-the-label&quot;&gt;Format the Label&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let termLabel = UILabel()
+let formattedText = String.format(strings: [term, policy],
+                                    boldFont: UIFont.boldSystemFont(ofSize: 15),
+                                    boldColor: UIColor.blue,
+                                    inString: termText,
+                                    font: UIFont.systemFont(ofSize: 15),
+                                    color: UIColor.black)
+termLabel.attributedText = formattedText
+termLabel.numberOfLines = 0
+let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
+termLabel.addGestureRecognizer(tap)
+termLabel.isUserInteractionEnabled = true
+termLabel.textAlignment = .center
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.format&lt;/code&gt; is an extension from my code collection. This is the full function.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension String {
+    static func format(strings: [String],
+                       boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
+                       boldColor: UIColor = UIColor.blue,
+                       inString string: String,
+                       font: UIFont = UIFont.systemFont(ofSize: 14),
+                       color: UIColor = UIColor.black) -&amp;gt; NSAttributedString {
+        let attributedString =
+            NSMutableAttributedString(string: string,
+                                      attributes: [
+                                        NSAttributedStringKey.font: font,
+                                        NSAttributedStringKey.foregroundColor: color])
+        let boldFontAttribute = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: boldColor]
+        for bold in strings {
+            attributedString.addAttributes(boldFontAttribute, range: (string as NSString).range(of: bold))
+        }
+        return attributedString
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;handle-label-tap-gesture&quot;&gt;Handle Label Tap Gesture&lt;/h3&gt;
+
+&lt;p&gt;I get the tap location in the Label and check if this location belongs to term or policy text range.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc func handleTermTapped(gesture: UITapGestureRecognizer) {
+    let termString = termText as NSString
+    let termRange = termString.range(of: term)
+    let policyRange = termString.range(of: policy)
+    
+    let tapLocation = gesture.location(in: termLabel)
+    let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
+    
+    if checkRange(termRange, contain: index) == true {
+        handleViewTermOfUse()
+        return
+    }
+    
+    if checkRange(policyRange, contain: index) {
+        handleViewPrivacy()
+        return
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;supported-code&quot;&gt;Supported code&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Check if a range contain an index
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func checkRange(_ range: NSRange, contain index: Int) -&amp;gt; Bool {
+  return index &amp;gt; range.location &amp;amp;&amp;amp; index &amp;lt; range.location + range.length
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Get index from a point in UILabel
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UILabel {
+  func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -&amp;gt; Int {
+      assert(self.attributedText != nil, &quot;This method is developed for attributed string&quot;)
+      let textStorage = NSTextStorage(attributedString: self.attributedText!)
+      let layoutManager = NSLayoutManager()
+      textStorage.addLayoutManager(layoutManager)
+      let textContainer = NSTextContainer(size: self.frame.size)
+      textContainer.lineFragmentPadding = 0
+      textContainer.maximumNumberOfLines = self.numberOfLines
+      textContainer.lineBreakMode = self.lineBreakMode
+      layoutManager.addTextContainer(textContainer)
+        
+      let index = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+      return index
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;demo&quot;&gt;Demo&lt;/h3&gt;
+
+&lt;p&gt;And result is:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhyperlink-label%2Fterm_demo.gif?alt=media&amp;amp;token=9cd27012-8f3f-4d42-adfd-c6fd45df6857&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/04/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-04T00:00:00+07:00</published><updated>2018-04-04T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/04/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/04/til-today-i-learn.html">&lt;h1 id=&quot;442018&quot;&gt;4/4/2018&lt;/h1&gt;
+
+&lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
+pod deintegrate
+pod clean
+rm Podfile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;integrate-zendesk-sdk&quot;&gt;Integrate Zendesk SDK&lt;/h3&gt;
+
+&lt;p&gt;Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.&lt;/p&gt;
+
+&lt;p&gt;Add SDK manual way: Add 2 more framework from iOS &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileCoreServices.framework&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.framework.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.&lt;/p&gt;
+
+&lt;h3 id=&quot;merge-unrelated-histories-in-git&quot;&gt;Merge unrelated histories in git&lt;/h3&gt;
+&lt;p&gt;Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull origin branch_name --allow-unrelated-histories&lt;/code&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">4/4/2018</summary></entry><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4001/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4001/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;When I get design from designers, I think a lot about how to make it done. Have to pick good one. If pick wrong one, it takes lots of time to change. The history screen in this is one of screen I had to think a lot. Here what I thought and what I did.&lt;/p&gt;
 
@@ -980,76 +1112,4 @@ button.layer.addSublayer(gradient)
 
 &lt;h1&gt;#&lt;/h1&gt;
 
-&lt;p&gt;I’ve learned all of these skills throughout my iOS development. I hope these experiences can help other iOS developers continue to further their career.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.</summary></entry><entry><title type="html">4 Tips on How to Become a Global IT Freelancer</title><link href="http://localhost:4001/2017/02/02/it-freelancer.html" rel="alternate" type="text/html" title="4 Tips on How to Become a Global IT Freelancer" /><published>2017-02-02T00:00:00+07:00</published><updated>2017-02-02T00:00:00+07:00</updated><id>http://localhost:4001/2017/02/02/it-freelancer</id><content type="html" xml:base="http://localhost:4001/2017/02/02/it-freelancer.html">&lt;p&gt;Personally, working eight hours a day, five days a week in an office is boring. I love having the freedom to work anytime and anywhere. I have learned many things by having these so-called ‘free days.’ And it all comes with working as an IT freelancer.&lt;/p&gt;
-
-&lt;p&gt;Working a nine to five in various positions in application development, such as .NET, iOS, Nodejs, and more was great experience for me but my dream of becoming a full time freelancer never stopped growing. In Vietnam, becoming an IT freelancer is not necessarily the best choice for developers. Due to company’s low budgets for domestic projects these is all too low for the actual cost of living in the country. This is why I decided to become a global IT freelancer. You may wonder what is the difference between an IT freelancer and a global IT freelancer. Well, you guessed it. My work extends far beyond the borders of Vietnam. I’m no longer limited to just working in Vietnam. The whole world is at my fingertips!&lt;/p&gt;
-
-&lt;p&gt;Upon first learning about working as a global IT freelance, many people may think this is a simple job. But they don’t realise that it is actually can be more difficult working as a full time freelancer. Here are a few tips on what I had to do to get to where I am today as a global freelancer.&lt;/p&gt;
-
-&lt;h2 id=&quot;english&quot;&gt;English&lt;/h2&gt;
-
-&lt;p&gt;You won’t make it outside your country without English, especially when it comes to the IT world. All documents are in English, all relevant l forums and groups are in English, most of your clients will use English, and millions of online freelance jobs in this IT worlds are in English. With good English communication skills, your first step into the world of freedom. It’s important to note that you’re not required to be a master or an expert in English. IT freelance careers don’t ask you to write essays in English. You’ll need strong English when it comes to communicating.&lt;/p&gt;
-
-&lt;h2 id=&quot;strong-portfolio&quot;&gt;Strong Portfolio&lt;/h2&gt;
-
-&lt;p&gt;When I first started to step out into the freelancer world, I thought I could do everything. I was fully confident in applying and bidding on every project I came across. But for some reason, no one was reaching out to me. I focused on voicing my experience and technical knowledge but I didn’t have a strong portfolio to back it up. Clients who viewed my portfolio didn’t see a lot of truth in what I was telling them about my skill set.&lt;/p&gt;
-
-&lt;p&gt;A strong tech portfolio is not only necessary as an IT freelancer, but also in all online freelance jobs no matter what industry you’re working in. For most clients, your portfolio may make or break your chances of landing the job.&lt;/p&gt;
-
-&lt;p&gt;It’s important to build up your website and include relevant blog posts, apps or projects you’ve worked on to build up your freelancer profile and credibility.If they have a good idea of your background and work experience, they will be more likely to hire you for the job.&lt;/p&gt;
-
-&lt;h2 id=&quot;understand-your-clients-needs&quot;&gt;Understand Your Client’s Needs&lt;/h2&gt;
-
-&lt;h4 id=&quot;you-cant-sell-a-comb-to-someone-with-no-hair&quot;&gt;&lt;em&gt;You can’t sell a comb to someone with no hair.&lt;/em&gt;&lt;/h4&gt;
-
-&lt;p&gt;It’s important you understand what your clients want. For instance, while searching for IT freelancer jobs, you will learn that many available projects involve working with social networks, dating apps, streaming, chatting, financial, and more. These are hot topics right now in the freelancer industry. Build some projects in these areas to showcase your understanding and expertise of these products. This will make you very valuable to potential clients. Not only will you gain experience from building these projects but you will also have some demos to add to your portfolio.&lt;/p&gt;
-
-&lt;h2 id=&quot;build-your-network&quot;&gt;Build Your Network&lt;/h2&gt;
-
-&lt;p&gt;The best way for newbies to find job opportunities in the freelance world is to build up network starting with the people you know. It helps to utilise contacts you’ve made with previous projects. Reach out to them and let them know you’re looking for additional work. I found my first project from my Android friend for iOS position in his project. There are hundreds of  groups and forums specialising in specific tech projects thousands of experts to bounce ideas off of and showcase your skills. Use these groups to  learn more about what skills you may be missing in the industry, share what you’re good at and gain advice from your peers. The more you share, the bigger your network grows and more opportunities will come your way.&lt;/p&gt;
-
-&lt;p&gt;##&lt;/p&gt;
-
-&lt;p&gt;One takeaway point from this whole experience is that the more preparation and experience I had, the more successful I became at landing new clients.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Personally, working eight hours a day, five days a week in an office is boring. I love having the freedom to work anytime and anywhere. I have learned many things by having these so-called ‘free days.’ And it all comes with working as an IT freelancer.</summary></entry><entry><title type="html">3 Tips on How to Effectively Manage Your Time</title><link href="http://localhost:4001/2017/01/10/mange-your-time.html" rel="alternate" type="text/html" title="3 Tips on How to Effectively Manage Your Time" /><published>2017-01-10T00:00:00+07:00</published><updated>2017-01-10T00:00:00+07:00</updated><id>http://localhost:4001/2017/01/10/mange-your-time</id><content type="html" xml:base="http://localhost:4001/2017/01/10/mange-your-time.html">&lt;p&gt;One of the luxuries of working as a freelancer is having the ability to create your own schedule, work when you want, and at your own pace. Some see it as a blessing and some see it as a curse. If you’re new to the fast-growing freelancer industry, this might be a tough adjustment. Especially if you’re coming from a strict 9-to-5 work schedule.&lt;/p&gt;
-
-&lt;h4 id=&quot;make-the-most-of-your-24-hours&quot;&gt;Make the Most of Your 24 Hours&lt;/h4&gt;
-
-&lt;p&gt;Have you ever wished you had more than 24 hours in a day? I sure have. There came a point in my life when I had a really hard time with  time management and I wasn’t about to find a way to get out of this funk. I had no time to spend with my family, no time to work on personal improvement, no time to go out with friends, no time at all. All of my time was used up on my freelance work from coding new features, fixing bugs and much more. I was killing myself working odd hours and missing out on quality time with my family and friends.&lt;/p&gt;
-
-&lt;p&gt;I spent all of my efforts learning  how to manage my time more effectively. Finally, I found a light at the end of the tunnel. I hope these tips will help you learn how to manage your time more effectively and become a freelance rockstar.&lt;/p&gt;
-
-&lt;h2 id=&quot;switch-up-your-working-hours&quot;&gt;Switch Up Your Working Hours&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FWorking_Hours.jpg?alt=media&amp;amp;token=975b7404-cdfc-4df8-a3c0-bd27c1a5beeb&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The first step I took to implement effective time management was to change up my work hours. Everyday I spent 8 hours in the office and I spent an additional 4-6 hours after dinner to work on my freelance projects. But this system did not give me time for my freelance activities because I spent all of my energy at work. I was physically and mentally drained and there was no way I could efficiently finish my freelance work. This is one of the main reasons why working over-time is not a good idea for any type of project.&lt;/p&gt;
-
-&lt;p&gt;It’s important to recognise what times of the day you are the most productive and what times you are not. After dinner, I want to spend time with my family, play games with my kids, read a book, or simply, take part in a stimulating conversation where I’m not talking about work or another project. It’s important to use this after-work time to shut off and spend some time with your loved ones or simply in an activity that doesn’t require you to think so much.&lt;/p&gt;
-
-&lt;h4 id=&quot;what-time-do-of-the-day-do-you-work-most-efficiently&quot;&gt;What time do of the day do you work most efficiently?&lt;/h4&gt;
-
-&lt;p&gt;For me, I usually start working at 2 AM after 3 to 4 hours of sleep. This time is ideal for me because everything is quiet and there are absolutely no distractions. No phone calls, no email, no one bothers you. For me, this is the best time to get my creative juices flowing. I use this period to do some researches and to work on my side projects. I’ve found that this is the most effective way for me to manage my time and to receive the best results out of my work. I am able to contribute to more online communities, take some online and bring myself to a new experience level. And of course as a result, I am able to earn more money from my freelance projects.&lt;/p&gt;
-
-&lt;h2 id=&quot;keep-up-your-health&quot;&gt;Keep Up Your Health&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FHealth.jpg?alt=media&amp;amp;token=ca264177-c28c-4a5e-b66a-ee12e9b5e10c&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Most importantly, a healthy body is the key to reach success. I have to work 8 hours everyday in an office and an additional 4-6 hours on freelance projects. If you do the math, my body has to work 1.5 times more than usual. Crazy, right? For most people, their body and mind will become exhausted very quickly with a schedule like this. In order for me to prevent myself from becoming ill, I make a conscious effort to include additional nutrition in my meals with more fruits, protein, etc.&lt;/p&gt;
-
-&lt;p&gt;In additional to a healthy diet, it’s important to stay active.I try to incorporate a little bit of  exercise into my daily activities. For example, I use the stairs instead of the elevator, I try to walk faster, clean the floor manually, and more. Now, I know these types of activities won’t help me become an athlete, but every little bit helps to keep my health up.&lt;/p&gt;
-
-&lt;h2 id=&quot;change-your-mindset&quot;&gt;Change Your Mindset&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fbackground-of-success-ideas_1284-1184.jpg?alt=media&amp;amp;token=56fdb401-87c4-4afc-adb8-260860ff95e7&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I had a misconception of working and learning and what it took to manage your time as a freelancer and a full-time employee. I was working on more freelance projects in the hopes of expanding my knowledge and my experience. In 2015, I took on so many freelance projects and it was a big mistake.&lt;/p&gt;
-
-&lt;p&gt;When we work on a freelance project, we have a lot of  pressure to uphold the quality of code, time, and money. We have to develop new features, fix bugs, while continuously releasing and developing more new features in a very limited amount of time. And what was the result? All I was trying to was  learn how to finish the project as fast a possible. As a result of this, the quality of my work suffered. I wasn’t growing or learning from my freelance projects, and I wasn’t managing my time effectively.&lt;/p&gt;
-
-&lt;p&gt;It’s important to learn the new technology or framework, and to become strong and familiar with it before starting a new project. As a tech freelancer, this will help you go far. Learn the technology in depth, apply it to project, and experience it. Not only will this help you earn money but it will also help you manage your time better.&lt;/p&gt;
-
-&lt;h4 id=&quot;free-time-is-your-friend&quot;&gt;Free time is your friend.&lt;/h4&gt;
-
-&lt;p&gt;After one or two projects (around 2 -3 months), you should set aside some free time to learn and research. Build your library of knowledge so you can apply these skills to future projects. This will boost your career.&lt;/p&gt;
-
-&lt;p&gt;From the very first time I implemented these tips, I have earned more about 1.5 to 2 times more money than before. I still have time for family, friends, learning new skills and building my technical knowledge. It’s all a balance act. Once you’ve learned how to manage your time and mastered that, everything else will fall into place.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">One of the luxuries of working as a freelancer is having the ability to create your own schedule, work when you want, and at your own pace. Some see it as a blessing and some see it as a curse. If you’re new to the fast-growing freelancer industry, this might be a tough adjustment. Especially if you’re coming from a strict 9-to-5 work schedule.</summary></entry></feed>
+&lt;p&gt;I’ve learned all of these skills throughout my iOS development. I hope these experiences can help other iOS developers continue to further their career.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.</summary></entry></feed>

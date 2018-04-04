@@ -8,10 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>
-    Clean Blog
+    Today I learn - Clean Blog
+    
   </title>
 
-  <meta name="description" content="My personal notes, codes, reviews, ideas">
+  <meta name="description" content="4/4/2018">
 
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -21,7 +22,7 @@
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4001/">
+  <link rel="canonical" href="http://localhost:4001/2018/04/04/til-today-i-learn.html">
   <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
 
 </head>
@@ -59,135 +60,70 @@
 
     <!-- Page Header -->
 
-  <header class="masthead" style="background-image: url('/img/bg-index.jpg')">
-  
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>Clean Blog</h1>
-            
-              <span class="subheading">My personal notes, codes, reviews, ideas</span>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftoday-i-learn%2Fnever-stop-learning.jpg?alt=media&token=018d6c76-c64a-42a6-9b6c-317ec9b8b1d6')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftoday-i-learn%2Fnever-stop-learning.jpg?alt=media&token=018d6c76-c64a-42a6-9b6c-317ec9b8b1d6')">
 
+  <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-10 mx-auto">
-
-        
-
-        <!-- Home Post List -->
-        
-
-          <article class="post-preview">
-            <a href="/2018/04/05/hyperlink-label.html">
-              <h2 class="post-title">Hyperlink Label</h2>
-              
-                <h3 class="post-subtitle">Make an easy hyperlink label</h3>
-              
-            </a>
-            <p class="post-meta">Posted by
-              
-                Ky Nguyen
-              
-              on
-              April 05, 2018</p>
-          </article>
-
-          <hr>
-
-        
-
-          <article class="post-preview">
-            <a href="/2018/04/04/til-today-i-learn.html">
-              <h2 class="post-title">Today I learn</h2>
-              
-                <h3 class="post-subtitle">A note about what I learn a day, it can be anything, not only iOS.</h3>
-              
-            </a>
-            <p class="post-meta">Posted by
-              
-                Ky Nguyen
-              
-              on
-              April 04, 2018</p>
-          </article>
-
-          <hr>
-
-        
-
-          <article class="post-preview">
-            <a href="/2018/03/29/coinhako-history-demo.html">
-              <h2 class="post-title">Thinking about Coinhako history screen</h2>
-              
-                <h3 class="post-subtitle">A small note about how Coinhako make their history screen with status and filter in the same screen.</h3>
-              
-            </a>
-            <p class="post-meta">Posted by
-              
-                Ky Nguyen
-              
-              on
-              March 29, 2018</p>
-          </article>
-
-          <hr>
-
-        
-
-          <article class="post-preview">
-            <a href="/2018/03/29/different-way-i18n.html">
-              <h2 class="post-title">Different way to do multi languages in iOS</h2>
-              
-                <h3 class="post-subtitle">Save your time and effort to do multi languages in iOS</h3>
-              
-            </a>
-            <p class="post-meta">Posted by
-              
-                Ky Nguyen
-              
-              on
-              March 29, 2018</p>
-          </article>
-
-          <hr>
-
-        
-
-          <article class="post-preview">
-            <a href="/2017/10/12/UITableViewController-vs-UIViewController.html">
-              <h2 class="post-title">UITableViewController vs UIViewController + UITableView</h2>
-              
-                <h3 class="post-subtitle">A small compare advantages and disadvantages in TableViewController</h3>
-              
-            </a>
-            <p class="post-meta">Posted by
-              
-                Ky Nguyen
-              
-              on
-              October 12, 2017</p>
-          </article>
-
-          <hr>
-
-        
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="/posts">View All Posts &rarr;</a>
+        <div class="post-heading">
+          <h1>Today I learn</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">A note about what I learn a day, it can be anything, not only iOS.</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 04, 2018</span>
         </div>
-
       </div>
     </div>
   </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <h1 id="442018">4/4/2018</h1>
+
+<h3 id="how-to-remove-pod-in-ios-project">How to remove pod in iOS project</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install cocoapods-deintegrate cocoapods-clean
+pod deintegrate
+pod clean
+rm Podfile
+</code></pre></div></div>
+
+<h3 id="integrate-zendesk-sdk">Integrate Zendesk SDK</h3>
+
+<p>Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.</p>
+
+<p>Add SDK manual way: Add 2 more framework from iOS <code class="highlighter-rouge">MobileCoreServices.framework</code> and <code class="highlighter-rouge">Security.framework.</code></p>
+
+<p>Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.</p>
+
+<h3 id="merge-unrelated-histories-in-git">Merge unrelated histories in git</h3>
+<p>Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.</p>
+
+<p><code class="highlighter-rouge">git pull origin branch_name --allow-unrelated-histories</code></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/03/29/coinhako-history-demo.html" data-toggle="tooltip" data-placement="top" title="Thinking about Coinhako history screen">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2018/04/05/hyperlink-label.html" data-toggle="tooltip" data-placement="top" title="Hyperlink Label">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
 
 
     <!-- Footer -->
