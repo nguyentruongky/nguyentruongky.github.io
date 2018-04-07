@@ -1,4 +1,240 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-05T03:51:05+07:00</updated><id>http://localhost:4001/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-07T08:54:17+07:00</updated><id>http://localhost:4001/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cloning to different projects is not my solution. I choose this solution. Every market has its own setting. Do it now.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-configurations&quot;&gt;Add configurations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Access to Project Setting/Info. Rename configuration &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Red&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Red&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_configuration.png?alt=media&amp;amp;token=abe69701-38e7-4824-9f70-53e28d98627f&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Duplicate these 2 configurations and change name to &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Green&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Green&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fduplicate_configuration.png?alt=media&amp;amp;token=38bcfbc7-1db0-441b-bb54-ecee23cee2f2&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;add-schemes&quot;&gt;Add Schemes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Select current scheme and &lt;code class=&quot;highlighter-rouge&quot;&gt;Edit Scheme...&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&amp;amp;token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Duplicate Scheme&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Manage Schemes...&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Select a scheme and press Return key to rename.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_scheme.png?alt=media&amp;amp;token=e436ccc7-1416-4d22-aee4-7ee384d11388&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Double click to Scheme Red and check left hand side setting&lt;/li&gt;
+  &lt;li&gt;Make sure &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Test&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Analyze&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Red&lt;/code&gt; configuration and &lt;code class=&quot;highlighter-rouge&quot;&gt;Profile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Release&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Red&lt;/code&gt;. To change configuration, select &lt;code class=&quot;highlighter-rouge&quot;&gt;Info&lt;/code&gt; and change in &lt;code class=&quot;highlighter-rouge&quot;&gt;Build Configuration&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fchange_scheme_setting.png?alt=media&amp;amp;token=4ba4f76f-1328-4c7e-899e-86e0f85daa76&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Same to Scheme Green&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;add-user-defined-setting&quot;&gt;Add User-Defined Setting&lt;/h3&gt;
+&lt;p&gt;Red and Green have different name, bundle ID, version, build number. I have to add some User-Defined Setting&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Select Project setting/Editor/Add Build Setting/Add User-Defined&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fadd_setting_menu.png?alt=media&amp;amp;token=349c2c95-0e7b-44fa-8c35-0c40fe3bf923&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add some settings: &lt;code class=&quot;highlighter-rouge&quot;&gt;app_name&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle_id&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;version&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;build_number&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add value to new settings
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fnew_setting.png?alt=media&amp;amp;token=eae822e1-389e-4de3-ac55-f531a1d11c22&quot; width=&quot;75%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bind-user-defined-setting&quot;&gt;Bind User-Defined Setting&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;In Tab &lt;code class=&quot;highlighter-rouge&quot;&gt;Build Setting&lt;/code&gt;, search &lt;code class=&quot;highlighter-rouge&quot;&gt;Product Bundle Identifier&lt;/code&gt; and enter value &lt;code class=&quot;highlighter-rouge&quot;&gt;$(bundle_id)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fapply_setting.png?alt=media&amp;amp;token=37fd8c6b-d86d-4728-818e-b68a66d40d14&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Select Tab &lt;code class=&quot;highlighter-rouge&quot;&gt;General&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;$(app_name)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Display Name&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;$(version)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Version&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;$(build_number)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Build&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Ffinish_apply_setting.png?alt=media&amp;amp;token=35d459c5-979c-42e7-a1df-21ba261fd80e&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add some UILabel to Storyboard Main and connect outlets&lt;/li&gt;
+  &lt;li&gt;Add some code to show setting of the running app.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String
+versionLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleShortVersionString&quot;] as? String
+buildLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleVersion&quot;] as? String
+bundleIdLabel.text = Bundle.main.bundleIdentifier
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It works&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_first.png?alt=media&amp;amp;token=3fa4e33e-3c19-49cf-8cdf-cfe920f98265&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_first.png?alt=media&amp;amp;token=5293183b-716b-4a33-b4e4-147e90b51d4b&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;other-setting&quot;&gt;Other setting&lt;/h3&gt;
+&lt;p&gt;We can apply this solution to Launchscreen, App Icon by adding 2 Launchscreens, 2 App Icons with same name, just different suffix.&lt;/p&gt;
+
+&lt;p&gt;We can set &lt;code class=&quot;highlighter-rouge&quot;&gt;Launchscreen&lt;/code&gt; same to &lt;code class=&quot;highlighter-rouge&quot;&gt;Display Name&lt;/code&gt; but App Icon needs to be configured same to &lt;code class=&quot;highlighter-rouge&quot;&gt;Product Bundle Identifier&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Besides that, we need to change font family, theme color, text color depend on App. Here how to do.&lt;/p&gt;
+
+&lt;h3 id=&quot;configure-in-code&quot;&gt;Configure in code&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;protocol Configuration {
+    var themeColor: UIColor { get set }
+    var textColor: UIColor { get set }
+}
+
+struct RedConfiguration: Configuration {
+    var themeColor = UIColor.red
+    var textColor = UIColor.white
+}
+
+struct GreenConfiguration: Configuration {
+    var themeColor: UIColor = UIColor.green
+    var textColor = UIColor.blue
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In my main setting class&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let config: Configuration = {
+    if let app = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String {
+        if app == &quot;Red&quot; {
+            return RedConfiguration()
+        }
+        else {
+            return GreenConfiguration()
+        }
+    }
+    
+    return RedConfiguration()
+}()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;amp;token=5429f000-f157-419d-aad4-acc7bc3723a1&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
+
+&lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
+pod deintegrate
+pod clean
+rm Podfile
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;integrate-zendesk-sdk&quot;&gt;Integrate Zendesk SDK&lt;/h3&gt;
+
+&lt;p&gt;Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.&lt;/p&gt;
+
+&lt;p&gt;Add SDK manual way: Add 2 more framework from iOS &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileCoreServices.framework&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.framework.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.&lt;/p&gt;
+
+&lt;h3 id=&quot;merge-unrelated-histories-in-git&quot;&gt;Merge unrelated histories in git&lt;/h3&gt;
+&lt;p&gt;Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull origin branch_name --allow-unrelated-histories&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;basic-authorization&quot;&gt;Basic Authorization&lt;/h3&gt;
+
+&lt;p&gt;Learn from &lt;a href=&quot;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&quot;&gt;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let userName = &quot;myUsername&quot;
+let password = &quot;myPassword&quot;
+let authString = userName + &quot;:&quot; + password
+let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
+let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+
+let headers = [&quot;Authorization&quot;: &quot;Basic &quot; + base64Credentials]
+let url = URL(string: api)!
+Alamofire.request(url, method: .post,
+                parameters: params,
+                encoding: JSONEncoding.default,
+                headers: headers)
+    .validate().responseJSON { (response) in
+    print(response)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;05042018&quot;&gt;05/04/2018&lt;/h1&gt;
+&lt;h3 id=&quot;format-string&quot;&gt;Format string&lt;/h3&gt;
+&lt;p&gt;Always display 2 characters for Int: 09:10, 10:15&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String(format: &quot;%02d:%02d&quot;, hr, min)&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;06042018&quot;&gt;06/04/2018&lt;/h1&gt;
+&lt;h3 id=&quot;open-setting-of-my-app&quot;&gt;Open setting of my app&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if let url = URL(string: UIApplicationOpenSettingsURLString) {
+    UIApplication.shared.openURL(url)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-event-to-calendar&quot;&gt;Add event to calendar&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;struct ogeSystemCalendar {
+    let eventStore = EKEventStore()
+    func addEvent(title: String, startDate: Date,
+                  endDate: Date, notes: String?) {
+        eventStore.requestAccess(to: .event) { (granted, error) in
+            if granted == false {
+                DispatchQueue.main.async {
+                    self.tellNoPermission() }
+                return
+            }
+            
+            self.addToCalendar(title: title, start: startDate,
+                               end: endDate, notes: notes)
+        }
+    }
+    
+    private func tellNoPermission() {
+        let alert = ogeMessage.showDialog(title: &quot;no_permission&quot;.i18n, description: &quot;no_calendar_permission&quot;.i18n)
+        alert.addAction(PMAlertAction(title: &quot;OK&quot;, style: .default, action: {
+            DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
+        }))
+        appDelegate.ogeniiManager?.present(alert)
+    }
+    
+    private func addToCalendar(title: String, start startDate: Date,
+                  end endDate: Date, notes: String?) {
+        let event = EKEvent(eventStore: eventStore)
+        event.title = title
+        event.startDate = startDate
+        event.endDate = endDate
+        event.notes = notes
+        event.calendar = eventStore.defaultCalendarForNewEvents
+        do {
+            try eventStore.save(event, span: .thisEvent)
+            DispatchQueue.main.async {
+                ogeMessage.showMessage(&quot;saved_to_calendar&quot;.i18n) }
+        } catch { }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;07042018&quot;&gt;07/04/2018&lt;/h1&gt;
+
+&lt;h3 id=&quot;make-app-icon-ios&quot;&gt;Make app icon iOS&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://makeappicon.com/&quot;&gt;https://makeappicon.com/&lt;/a&gt; is a really wonderful tool. Just copy folder &lt;code class=&quot;highlighter-rouge&quot;&gt;AppIcon.appiconset&lt;/code&gt; and replace the old one in project and App Icon is set. Thanks a lot, awesome app.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
 
@@ -110,27 +346,7 @@ termLabel.textAlignment = .center
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhyperlink-label%2Fterm_demo.gif?alt=media&amp;amp;token=9cd27012-8f3f-4d42-adfd-c6fd45df6857&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/04/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-04T00:00:00+07:00</published><updated>2018-04-04T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/04/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/04/til-today-i-learn.html">&lt;h1 id=&quot;442018&quot;&gt;4/4/2018&lt;/h1&gt;
-
-&lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
-pod deintegrate
-pod clean
-rm Podfile
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;integrate-zendesk-sdk&quot;&gt;Integrate Zendesk SDK&lt;/h3&gt;
-
-&lt;p&gt;Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.&lt;/p&gt;
-
-&lt;p&gt;Add SDK manual way: Add 2 more framework from iOS &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileCoreServices.framework&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.framework.&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.&lt;/p&gt;
-
-&lt;h3 id=&quot;merge-unrelated-histories-in-git&quot;&gt;Merge unrelated histories in git&lt;/h3&gt;
-&lt;p&gt;Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull origin branch_name --allow-unrelated-histories&lt;/code&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">4/4/2018</summary></entry><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4001/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4001/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4001/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4001/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;When I get design from designers, I think a lot about how to make it done. Have to pick good one. If pick wrong one, it takes lots of time to change. The history screen in this is one of screen I had to think a lot. Here what I thought and what I did.&lt;/p&gt;
 
@@ -1056,60 +1272,4 @@ button.layer.addSublayer(gradient)
 
 &lt;h2 id=&quot;suggestions-or-feedback&quot;&gt;Suggestions or feedback?&lt;/h2&gt;
 
-&lt;p&gt;Feel free to comment, suggest, create pull request or open issue.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My Problem</summary></entry><entry><title type="html">Top Skills iOS Developers Need Today</title><link href="http://localhost:4001/2017/03/08/top-skills-ios.html" rel="alternate" type="text/html" title="Top Skills iOS Developers Need Today" /><published>2017-03-08T00:00:00+07:00</published><updated>2017-03-08T00:00:00+07:00</updated><id>http://localhost:4001/2017/03/08/top-skills-ios</id><content type="html" xml:base="http://localhost:4001/2017/03/08/top-skills-ios.html">&lt;p&gt;We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-swift&quot;&gt;1. Swift&lt;/h2&gt;
-
-&lt;p&gt;Swift is a great place to start for all iOS developers. I started learning iOS from C#, and I found out that it was a smooth transition for me. It took me just a short amount of time to work on my first iOS application with my company.&lt;/p&gt;
-
-&lt;p&gt;Swift grows quickly and some of the biggest technology companies have migrated to Swift. Most of the iOS developer job descriptions out there require Swift as a top skill.&lt;/p&gt;
-
-&lt;p&gt;However, one problem with Swift is that it grows too fast and it changes too many things in each updated version. On the other hand, the one good thing about this is that Apple tells you how to make changes for your code accordingly.&lt;/p&gt;
-
-&lt;h2 id=&quot;2-programmatically-auto-layout&quot;&gt;2. Programmatically Auto Layout&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i2.wp.com/pangara.com/wp-content/uploads/2017/03/auto_layout_programmatically.png?w=1280&amp;amp;ssl=1&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In my opinion, Auto Layout is an extremely wonderful UI builder system for iOS developers. You can try Auto Layout in two ways: Interface Builder and Programmatically.&lt;/p&gt;
-
-&lt;p&gt;I tried Auto Layout with Interface Builder and I fell in love with it. I became the best developer in my company using Auto Layout and I was requested to specifically build UI for all future projects.&lt;/p&gt;
-
-&lt;p&gt;After a long time of using Interface Builder, I received a great tutorial from Brian Voong, a skilled iOS app developer. I abandoned Interface Builder right after the tutorial and continued with Auto Layout programmatically.&lt;/p&gt;
-
-&lt;p&gt;Auto Layout programmatically allows me to use my imagination, code re-usability, and it dynamically changes. I have an ability to imagine exactly what UI will look like after 1 year of using Auto Layout programmatically.&lt;/p&gt;
-
-&lt;h2 id=&quot;3-animation&quot;&gt;3. Animation&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i2.wp.com/pangara.com/wp-content/uploads/2017/03/Animation.gif?resize=318%2C574&amp;amp;ssl=1&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The best iOS applications have gorgeous animations. Without animation, your app looks like a robot and you run the risk of losing users. Animation allows your app to come alive and fascinate its users. This is truly the future of tech and being skilled in animation will only make you more valuable to clients.&lt;/p&gt;
-
-&lt;p&gt;Now, what is the best way to start Animation? I would suggest you first watch a variety of YouTube animation videos, purchase this book from Ray Wenderlich, try them out for yourself, understand how code animates the objects, and transform your apps. Remember, practice makes perfect!&lt;/p&gt;
-
-&lt;h2 id=&quot;4-3rd-party-libraries&quot;&gt;4. 3rd-Party Libraries&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i0.wp.com/pangara.com/wp-content/uploads/2017/03/3rd_party_libs.png?resize=1024%2C807&amp;amp;ssl=1&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;There are millions of talented iOS developers out there who create amazing code everyday. Instead of developing a new custom alert view with images and animations, you can use some awesome codes from cocoacontrols website and make your app make it to the Appstore even faster.&lt;/p&gt;
-
-&lt;p&gt;There are many ways to use 3rd-party libraries in your projects, but I suggest you try one of these solutions I’ve used: Cocoapods and Carthage. For general projects, I still prefer Cocoapods. To get a better idea of which solution is more suitable for you, this blog post might be able to help.&lt;/p&gt;
-
-&lt;h2 id=&quot;5-version-control&quot;&gt;5. Version Control&lt;/h2&gt;
-
-&lt;p&gt;Version control is one skill that can’t be missing from any iOS developer. There are two popular ways to work with version control: a UI application or command lines. I always suggest my developers use command lines instead of an application. UI applications do everything for you so that you can’t understand what is going on with your version control. Using command lines helps you to understand clearly what happens with your command and how to combine commands together to solve a conflict.&lt;/p&gt;
-
-&lt;h2 id=&quot;6-framework-digging&quot;&gt;6. Framework Digging&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i1.wp.com/pangara.com/wp-content/uploads/2017/03/framework_digging.png?resize=1024%2C836&amp;amp;ssl=1&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Nowadays, iOS developers, especially from Vietnam, try framework or library to solve their problems without understanding what is exactly happening to their code. I think this a very bad habit. There are several advantages when it comes to digging into frameworks or libraries.&lt;/p&gt;
-
-&lt;p&gt;Digging into frameworks helps you to better understand the author’s purpose and to prevent unexpected issues.&lt;/p&gt;
-
-&lt;p&gt;Now, there are many libraries can help you solve a feature, but what is the best library to use for your project? You can figure this out when you dig into the source codes. By doing this, you will find out the most suitable and the one with the best performance.&lt;/p&gt;
-
-&lt;p&gt;It’s important to remember that you you can learn a lot from other iOS developers. The best way I improve my code is to read other code. I learn a lot from other libraries.&lt;/p&gt;
-
-&lt;h1&gt;#&lt;/h1&gt;
-
-&lt;p&gt;I’ve learned all of these skills throughout my iOS development. I hope these experiences can help other iOS developers continue to further their career.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">We all know that iOS development never stops. There are hundred of skills you need to become a skilled iOS developer in the tech industry today. Let’s have a look at some skills are expected of iOS developers today in this ever changing and fast-paced industry.</summary></entry></feed>
+&lt;p&gt;Feel free to comment, suggest, create pull request or open issue.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My Problem</summary></entry></feed>

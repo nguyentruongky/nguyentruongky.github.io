@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Configuration and User-Defined setting in iOS - Clean Blog
+    
+  </title>
+
+  <meta name="description" content="I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change na...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/07/user-define-setting-ios.html">
+  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser_setting.jpg?alt=media&token=4bc88186-0901-48b7-9d06-7e34fecef306')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser_setting.jpg?alt=media&token=4bc88186-0901-48b7-9d06-7e34fecef306')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Configuration and User-Defined setting in iOS</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Support different products in the same project</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 07, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255" width="75%" /></p>
+
+<p>Cloning to different projects is not my solution. I choose this solution. Every market has its own setting. Do it now.</p>
+
+<h3 id="add-configurations">Add configurations</h3>
+<ul>
+  <li>Access to Project Setting/Info. Rename configuration <code class="highlighter-rouge">Debug</code> and <code class="highlighter-rouge">Release</code> to <code class="highlighter-rouge">Debug_Red</code> and <code class="highlighter-rouge">Release_Red</code></li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_configuration.png?alt=media&amp;token=abe69701-38e7-4824-9f70-53e28d98627f" width="75%" /></p>
+
+<ul>
+  <li>Duplicate these 2 configurations and change name to <code class="highlighter-rouge">Debug_Green</code> and <code class="highlighter-rouge">Release_Green</code></li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fduplicate_configuration.png?alt=media&amp;token=38bcfbc7-1db0-441b-bb54-ecee23cee2f2" width="75%" /></p>
+
+<h3 id="add-schemes">Add Schemes</h3>
+<ul>
+  <li>Select current scheme and <code class="highlighter-rouge">Edit Scheme...</code></li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&amp;token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72" /></p>
+
+<ul>
+  <li><code class="highlighter-rouge">Duplicate Scheme</code></li>
+  <li><code class="highlighter-rouge">Manage Schemes...</code></li>
+  <li>Select a scheme and press Return key to rename.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_scheme.png?alt=media&amp;token=e436ccc7-1416-4d22-aee4-7ee384d11388" width="75%" /></p>
+
+<ul>
+  <li>Double click to Scheme Red and check left hand side setting</li>
+  <li>Make sure <code class="highlighter-rouge">Debug</code>, <code class="highlighter-rouge">Test</code>, <code class="highlighter-rouge">Analyze</code> is <code class="highlighter-rouge">Debug_Red</code> configuration and <code class="highlighter-rouge">Profile</code>, <code class="highlighter-rouge">Release</code> is <code class="highlighter-rouge">Release_Red</code>. To change configuration, select <code class="highlighter-rouge">Info</code> and change in <code class="highlighter-rouge">Build Configuration</code>.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fchange_scheme_setting.png?alt=media&amp;token=4ba4f76f-1328-4c7e-899e-86e0f85daa76" width="75%" /></p>
+
+<ul>
+  <li>Same to Scheme Green</li>
+</ul>
+
+<h3 id="add-user-defined-setting">Add User-Defined Setting</h3>
+<p>Red and Green have different name, bundle ID, version, build number. I have to add some User-Defined Setting</p>
+
+<ul>
+  <li>Select Project setting/Editor/Add Build Setting/Add User-Defined</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fadd_setting_menu.png?alt=media&amp;token=349c2c95-0e7b-44fa-8c35-0c40fe3bf923" width="75%" /></p>
+
+<ul>
+  <li>Add some settings: <code class="highlighter-rouge">app_name</code>, <code class="highlighter-rouge">bundle_id</code>, <code class="highlighter-rouge">version</code>, <code class="highlighter-rouge">build_number</code></li>
+  <li>Add value to new settings
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fnew_setting.png?alt=media&amp;token=eae822e1-389e-4de3-ac55-f531a1d11c22" width="75%" /></li>
+</ul>
+
+<h3 id="bind-user-defined-setting">Bind User-Defined Setting</h3>
+<ul>
+  <li>In Tab <code class="highlighter-rouge">Build Setting</code>, search <code class="highlighter-rouge">Product Bundle Identifier</code> and enter value <code class="highlighter-rouge">$(bundle_id)</code></li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fapply_setting.png?alt=media&amp;token=37fd8c6b-d86d-4728-818e-b68a66d40d14" width="75%" /></p>
+
+<ul>
+  <li>Select Tab <code class="highlighter-rouge">General</code></li>
+  <li>Enter <code class="highlighter-rouge">$(app_name)</code> to <code class="highlighter-rouge">Display Name</code>, <code class="highlighter-rouge">$(version)</code> to <code class="highlighter-rouge">Version</code>, <code class="highlighter-rouge">$(build_number)</code> to <code class="highlighter-rouge">Build</code></li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Ffinish_apply_setting.png?alt=media&amp;token=35d459c5-979c-42e7-a1df-21ba261fd80e" width="75%" /></p>
+
+<h3 id="result">Result</h3>
+<ul>
+  <li>Add some UILabel to Storyboard Main and connect outlets</li>
+  <li>Add some code to show setting of the running app.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+versionLabel.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+buildLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+bundleIdLabel.text = Bundle.main.bundleIdentifier
+</code></pre></div></div>
+
+<ul>
+  <li>It works</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_first.png?alt=media&amp;token=3fa4e33e-3c19-49cf-8cdf-cfe920f98265" width="240px" /> <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_first.png?alt=media&amp;token=5293183b-716b-4a33-b4e4-147e90b51d4b" width="240px" /></p>
+
+<h3 id="other-setting">Other setting</h3>
+<p>We can apply this solution to Launchscreen, App Icon by adding 2 Launchscreens, 2 App Icons with same name, just different suffix.</p>
+
+<p>We can set <code class="highlighter-rouge">Launchscreen</code> same to <code class="highlighter-rouge">Display Name</code> but App Icon needs to be configured same to <code class="highlighter-rouge">Product Bundle Identifier</code></p>
+
+<p>Besides that, we need to change font family, theme color, text color depend on App. Here how to do.</p>
+
+<h3 id="configure-in-code">Configure in code</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>protocol Configuration {
+    var themeColor: UIColor { get set }
+    var textColor: UIColor { get set }
+}
+
+struct RedConfiguration: Configuration {
+    var themeColor = UIColor.red
+    var textColor = UIColor.white
+}
+
+struct GreenConfiguration: Configuration {
+    var themeColor: UIColor = UIColor.green
+    var textColor = UIColor.blue
+}
+</code></pre></div></div>
+
+<p>In my main setting class</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let config: Configuration = {
+    if let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
+        if app == "Red" {
+            return RedConfiguration()
+        }
+        else {
+            return GreenConfiguration()
+        }
+    }
+    
+    return RedConfiguration()
+}()
+</code></pre></div></div>
+
+<h3 id="final">Final</h3>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;token=5429f000-f157-419d-aad4-acc7bc3723a1" width="240px" /> <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a" width="240px" /></p>
+
+<p>My demo source is available on <a href="https://github.com/nguyentruongky/User-Defined-Setting-iOS">Github</a></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/07/til-today-i-learn.html" data-toggle="tooltip" data-placement="top" title="Today I learn">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
