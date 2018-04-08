@@ -24,7 +24,7 @@ Cloning to different projects is not my solution. I choose this solution. Every 
 ### Add Schemes 
 - Select current scheme and `Edit Scheme...`
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72" width="65%"/>
 
 - `Duplicate Scheme`
 - `Manage Schemes...`

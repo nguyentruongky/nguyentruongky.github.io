@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-07T08:54:17+07:00</updated><id>http://localhost:4001/</id><title type="html">Clean Blog</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-09T01:40:49+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
 
@@ -22,7 +22,7 @@
   &lt;li&gt;Select current scheme and &lt;code class=&quot;highlighter-rouge&quot;&gt;Edit Scheme...&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&amp;amp;token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&amp;amp;token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72&quot; width=&quot;65%&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Duplicate Scheme&lt;/code&gt;&lt;/li&gt;
@@ -234,7 +234,24 @@ Alamofire.request(url, method: .post,
 &lt;h1 id=&quot;07042018&quot;&gt;07/04/2018&lt;/h1&gt;
 
 &lt;h3 id=&quot;make-app-icon-ios&quot;&gt;Make app icon iOS&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://makeappicon.com/&quot;&gt;https://makeappicon.com/&lt;/a&gt; is a really wonderful tool. Just copy folder &lt;code class=&quot;highlighter-rouge&quot;&gt;AppIcon.appiconset&lt;/code&gt; and replace the old one in project and App Icon is set. Thanks a lot, awesome app.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://makeappicon.com/&quot;&gt;https://makeappicon.com/&lt;/a&gt; is a really wonderful tool. Just copy folder &lt;code class=&quot;highlighter-rouge&quot;&gt;AppIcon.appiconset&lt;/code&gt; and replace the old one in project and App Icon is set. Thanks a lot, awesome app.&lt;/p&gt;
+
+&lt;h3 id=&quot;update-sql-by-removing-text-in-text&quot;&gt;Update SQL by removing text in text&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UPDATE My_Table set my_column = REPLACE(my_column, &quot;text_need_removed&quot;, '') where my_condition&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;error-in-git&quot;&gt;Error in git&lt;/h3&gt;
+&lt;p&gt;Error: &lt;code class=&quot;highlighter-rouge&quot;&gt;The requested URL returned error: 403 while accessing&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Solution:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;.git/config&lt;/code&gt; file under your repo directory&lt;/li&gt;
+  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;url=&lt;/code&gt; entry under section &lt;code class=&quot;highlighter-rouge&quot;&gt;[remote &quot;origin&quot;]&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Change all the texts before @ symbol to &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh://git&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Save&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
 

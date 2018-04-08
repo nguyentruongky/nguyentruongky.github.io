@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>
-    Today I learn - Clean Blog
+    Today I learn - &lt; Code for life /&gt;
     
   </title>
 
@@ -23,7 +23,7 @@
 
   <link rel="stylesheet" href="/assets/main.css">
   <link rel="canonical" href="http://localhost:4001/2018/04/07/til-today-i-learn.html">
-  <link rel="alternate" type="application/rss+xml" title="Clean Blog" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
 
 </head>
 
@@ -187,6 +187,22 @@ Alamofire.request(url, method: .post,
 <h3 id="make-app-icon-ios">Make app icon iOS</h3>
 <p><a href="https://makeappicon.com/">https://makeappicon.com/</a> is a really wonderful tool. Just copy folder <code class="highlighter-rouge">AppIcon.appiconset</code> and replace the old one in project and App Icon is set. Thanks a lot, awesome app.</p>
 
+<h3 id="update-sql-by-removing-text-in-text">Update SQL by removing text in text</h3>
+
+<p><code class="highlighter-rouge">UPDATE My_Table set my_column = REPLACE(my_column, "text_need_removed", '') where my_condition</code></p>
+
+<h3 id="error-in-git">Error in git</h3>
+<p>Error: <code class="highlighter-rouge">The requested URL returned error: 403 while accessing</code></p>
+
+<p>Solution:</p>
+<ul>
+  <li>Edit <code class="highlighter-rouge">.git/config</code> file under your repo directory</li>
+  <li>Find <code class="highlighter-rouge">url=</code> entry under section <code class="highlighter-rouge">[remote "origin"]</code></li>
+  <li>Change all the texts before @ symbol to <code class="highlighter-rouge">ssh://git</code></li>
+  <li>Save</li>
+</ul>
+
+<p>Source: <a href="https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed">StackOverflow</a></p>
 
 
       <hr>

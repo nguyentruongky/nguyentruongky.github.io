@@ -112,3 +112,17 @@ struct ogeSystemCalendar {
 ### Make app icon iOS 
 [https://makeappicon.com/](https://makeappicon.com/) is a really wonderful tool. Just copy folder `AppIcon.appiconset` and replace the old one in project and App Icon is set. Thanks a lot, awesome app. 
 
+### Update SQL by removing text in text 
+
+`UPDATE My_Table set my_column = REPLACE(my_column, "text_need_removed", '') where my_condition`
+
+### Error in git 
+Error: `The requested URL returned error: 403 while accessing`
+
+Solution: 
+- Edit `.git/config` file under your repo directory
+- Find `url=` entry under section `[remote "origin"]`
+- Change all the texts before @ symbol to `ssh://git`
+- Save
+
+Source: [StackOverflow](https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed)
