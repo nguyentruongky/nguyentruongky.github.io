@@ -126,3 +126,13 @@ Solution:
 - Save
 
 Source: [StackOverflow](https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed)
+
+# 11/04/2018
+### Prevent rotation in iOS
+There are three kinds of Device orientation keys there in the info.plist now.
+
+- Supported interface orientations (iPad)
+- Supported interface orientations (iPhone)
+- Supported interface orientations
+
+Source: [StackOverflow](https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app)

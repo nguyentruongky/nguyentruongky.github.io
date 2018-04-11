@@ -1,8 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-09T01:40:49+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-11T10:52:15+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production.&lt;/p&gt;
+
+&lt;p&gt;So I write some code to make it easier.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-`&quot;&gt;enum EndPoints: String {
+    case dev = &quot;http://dev.kynguyen.space&quot;
+    case pro = &quot;https://kynguyen.space&quot;
+    case staging = &quot;http://staging.kynguyen.space&quot;
+}
+
+var baseUrl: String = {
+    return EndPoints.pro.rawValue 
+}()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So everytime I need to change, I switch &lt;code class=&quot;highlighter-rouge&quot;&gt;baseUrl&lt;/code&gt; to EndPoints I need, very easy.&lt;/p&gt;
+
+&lt;p&gt;But I usually forget to switch to production endpoint when release, even one time I pushed to TestFlight. So do one more step.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var baseUrl: String = {
+    #if DEBUG
+        return EndPoints.dev.rawValue
+    #else
+        return EndPoints.pro.rawValue
+    #endif
+}()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;#if DEBUG ... #else&lt;/code&gt; is very useful for hard-coded values. Can be use widely in coding and testing.&lt;/p&gt;
+
+&lt;p&gt;When switch environment, we need to logout the current account and sign in to another account to prevent unknown error, avoid wasting time for debug. It’s a damn experience with error like this.&lt;/p&gt;
+
+&lt;p&gt;So I need to remember current enviroment to UserDefault.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var currentUrl: EndPoint {
+    get {
+        if let url = UserDefaults.standard.value(forKeyPath: &quot;currentUrl&quot;) as? String,
+            let environment = EndPoint(rawValue: url) {
+            return environment
+        }
+        return EndPoint.dev
+    }
+    set {
+        UserDefaults.standard.setValue(&quot;\(newValue)&quot;, forKeyPath: &quot;currentUrl&quot;)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;And check every time app runs. Show login if EndPoint is changed.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var isNeedToLogout: Bool {
+    if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
+        baseUrl == currentUrl { return false }
+    return true
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Just some basic tips but they save me much time in development.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is here.</summary></entry><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is know as the “Red” app.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Cloning to different projects is not my solution. I choose this solution. Every market has its own setting. Do it now.&lt;/p&gt;
+&lt;p&gt;Cloning to different projects is not my solution. Did some research and finally, I did this solution. Use different Build Settings and Schemes for markets. This is how I did&lt;/p&gt;
 
 &lt;h3 id=&quot;add-configurations&quot;&gt;Add configurations&lt;/h3&gt;
 &lt;ul&gt;
@@ -134,7 +191,7 @@ struct GreenConfiguration: Configuration {
 &lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;amp;token=5429f000-f157-419d-aad4-acc7bc3723a1&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challange: support different countries with different app’s names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app’s name is Green. Color theme, text color, font family are different by country.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
+&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challange: support different countries with different app’s names but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is know as the “Red” app.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
 
 &lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
@@ -251,7 +308,19 @@ Alamofire.request(url, method: .post,
   &lt;li&gt;Save&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;11042018&quot;&gt;11/04/2018&lt;/h1&gt;
+&lt;h3 id=&quot;prevent-rotation-in-ios&quot;&gt;Prevent rotation in iOS&lt;/h3&gt;
+&lt;p&gt;There are three kinds of Device orientation keys there in the info.plist now.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Supported interface orientations (iPad)&lt;/li&gt;
+  &lt;li&gt;Supported interface orientations (iPhone)&lt;/li&gt;
+  &lt;li&gt;Supported interface orientations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
 
@@ -1189,104 +1258,4 @@ tableView.reloadTable()
 
 &lt;p&gt;Enjoy coding.&lt;/p&gt;
 
-&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry><entry><title type="html">How to draw a gradient border button?</title><link href="http://localhost:4001/2017/04/13/gradient-border-button.html" rel="alternate" type="text/html" title="How to draw a gradient border button?" /><published>2017-04-13T00:00:00+07:00</published><updated>2017-04-13T00:00:00+07:00</updated><id>http://localhost:4001/2017/04/13/gradient-border-button</id><content type="html" xml:base="http://localhost:4001/2017/04/13/gradient-border-button.html">&lt;h2 id=&quot;my-problem&quot;&gt;My Problem&lt;/h2&gt;
-
-&lt;p&gt;Last week, my partner showed me his design for our application. Everything is great, easily implemented with some custom controls. But wait, something is not in my knowledge.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Gradient_border_button.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A button with gradient border. Never try it before. Up to now, I just created gradient background views 2 times in previous projects. Googled and found some good results.&lt;/p&gt;
-
-&lt;h2 id=&quot;other-solutions&quot;&gt;Other solutions&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
-let gradient = CAGradientLayer()
-gradient.frame =  CGRect(origin: .zero, size: button.frame.size)
-gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
-let shape = CAShapeLayer()
-shape.lineWidth = 2
-shape.path = UIBezierPath(rect: button.bounds).cgPath
-shape.strokeColor = UIColor.black.cgColor
-shape.fillColor = UIColor.clear.cgColor
-gradient.mask = shape
-button.layer.addSublayer(gradient)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Awesome, it’s perfect.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Gradient_border_rectangle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Rectangles with rounded corners are everywhere! (Steve Jobs)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Tried to make my button rounded corner. And…&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Wrong_round_corner_gradient_rectangle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Oops. It didn’t work as what I need. Did some more search and found another great one from Ian Hirschfeld here &lt;a href=&quot;https://medium.com/swift-programming/how-to-create-an-angle-gradient-border-in-swift-f4856dde4c90&quot;&gt;https://medium.com/swift-programming/how-to-create-an-angle-gradient-border-in-swift-f4856dde4c90&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;my-solution&quot;&gt;My solution&lt;/h2&gt;
-
-&lt;p&gt;It works like a charm, but it’s not my favorite solution. I need a Swifty project, not a combination with Objective-C. So don’t I try to make something simpler and easier for me and others. Finally, I did it.&lt;/p&gt;
-
-&lt;h3 id=&quot;the-idea&quot;&gt;The idea&lt;/h3&gt;
-
-&lt;p&gt;Simple idea, create a button with gradient background, fill it with a solid color view, and the padding to the button bounds is the border width.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Talk is cheap. Show me the code. (Linus Torvalds)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func setupView() {    
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.frame = bounds
-    gradientLayer.colors = colors.map({ return $0.cgColor })
-    gradientLayer.startPoint = startPoint
-    gradientLayer.endPoint = endPoint
-    layer.insertSublayer(gradientLayer, at: 0) // * important
-    
-    let backgroundView = UIView()
-    backgroundView.translatesAutoresizingMaskIntoConstraints = false
-    insertSubview(backgroundView, at: 1) // * (1)
-    backgroundView.backgroundColor = backgroundColor // (2)
-    backgroundView.fill(toView: self, space: UIEdgeInsets(space: borderWidth)) // (3)
-    createRoundCorner(cornerRadius)
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1) - The most important thing here is the order of the gradient layer and background view. The title label will be overlapped and when we use &lt;code class=&quot;highlighter-rouge&quot;&gt;addSublayer&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubview&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;(2) - backgroundColor: the view property from UIKit.&lt;/p&gt;
-
-&lt;p&gt;(3) - borderWidth is new property, we will use it every time re-setupView.&lt;/p&gt;
-
-&lt;p&gt;Now is time to create the rounded corner.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func createRoundCorner(_ radius: CGFloat) {
-    cornerRadius = radius
-    super.createRoundCorner(radius)
-    backgroundView.createRoundCorner(radius - borderWidth)
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Every time we set the radius or backgroundColor, &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; called. So that, the &lt;code class=&quot;highlighter-rouge&quot;&gt;gradientLayer&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;backgroundView&lt;/code&gt; are added many times. Keep an instance and remove it every time view setup.&lt;/p&gt;
-
-&lt;p&gt;But, no gradient border appears. The border width still zero. We need to give a non-zero value to &lt;code class=&quot;highlighter-rouge&quot;&gt;borderWidth&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; again.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func createBorder(_ width: CGFloat) {
-    borderWidth = width
-    setupView()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;See the result&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://gist.github.com/nguyentruongky/89020a5f495420b260952f2ff19c4147/raw/df4fc4447088c33ed934e8f4fb56cdc6da1b6a55/res_Final_button.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;completed-code&quot;&gt;Completed code&lt;/h3&gt;
-
-&lt;p&gt;Have a look at my completed code for this library at &lt;a href=&quot;https://github.com/nguyentruongky/knGradientBorderButton&quot;&gt;https://github.com/nguyentruongky/knGradientBorderButton&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;suggestions-or-feedback&quot;&gt;Suggestions or feedback?&lt;/h2&gt;
-
-&lt;p&gt;Feel free to comment, suggest, create pull request or open issue.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My Problem</summary></entry></feed>
+&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry></feed>

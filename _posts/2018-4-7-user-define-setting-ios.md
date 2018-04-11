@@ -6,11 +6,11 @@ date:   2018-4-7
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser_setting.jpg?alt=media&token=4bc88186-0901-48b7-9d06-7e34fecef306'
 ---
 
-I ran into a challange: support different countries with different app's names but same code. It means, when I release to Vietnam market, I have to change name to Red, release to Singapore, app's name is Green. Color theme, text color, font family are different by country. 
+I ran into a challange: support different countries with different app's names but same code. "Green" app is the original app, there is a need to convert the original "Green" app to another app with different properties, which in the demo is know as the "Red" app.
 
 <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255" width="75%"/>
 
-Cloning to different projects is not my solution. I choose this solution. Every market has its own setting. Do it now. 
+Cloning to different projects is not my solution. Did some research and finally, I did this solution. Use different Build Settings and Schemes for markets. This is how I did
 
 ### Add configurations
 - Access to Project Setting/Info. Rename configuration `Debug` and `Release` to `Debug_Red` and `Release_Red`
