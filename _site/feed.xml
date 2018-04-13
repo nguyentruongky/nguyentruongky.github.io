@@ -1,4 +1,110 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-11T10:52:15+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-13T16:19:50+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">i18n from Server</title><link href="http://localhost:4001/2018/04/13/i18n-from-server.html" rel="alternate" type="text/html" title="i18n from Server" /><published>2018-04-13T00:00:00+07:00</published><updated>2018-04-13T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/13/i18n-from-server</id><content type="html" xml:base="http://localhost:4001/2018/04/13/i18n-from-server.html">&lt;p&gt;I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or read notifications in Vietnamese, while app language is in English.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, I fully support i18n from client to server. It’s not an easy tasks for me, because I’m just a newbie in Backend - Node JS, we’re using Node JS. I’m sure this is not the best way to do but it’s a good way I can find and do at this time. Main idea is separation all texts to languages objects and get the values by the keys.&lt;/p&gt;
+
+&lt;h3 id=&quot;move-all-texts-to-language-files&quot;&gt;Move all texts to language files&lt;/h3&gt;
+&lt;p&gt;I support English and Vietnamese in &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, so I add 2 new files &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt; and move texts to an object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.texts = {
+    err_401: &quot;Your login is expired. Login again and keep learning.&quot;,
+    verification_sent: 'Your verification will be processed in 2-4 hours',
+    clazz_created: &quot;Your class is created and under review. It'll be live soon.&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.texts = {
+    err_401: &quot;Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi&quot;,
+    verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
+    clazz_created: &quot;Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-a-language-center-file&quot;&gt;Add a language center file&lt;/h3&gt;
+&lt;p&gt;I don’t connect languages file directly to others, I make a file as a center to connect all supported language to other files. I named it &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Import all supported languages to &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let En = require('./en')
+let Vi = require('./vi')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I add all language to an object like this. So don’t care how many languages will support.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let supported_langs = {
+    &quot;en&quot;: En, 
+    &quot;vi&quot;: Vi
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add an object to contain all keys. The values of this object must be exactly &lt;strong&gt;same&lt;/strong&gt; to keys of object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.keys = {
+    err_401: &quot;401&quot;,
+    verification_sent: &quot;verification_sent&quot;,
+    clazz_created: &quot;clazz_created&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add function to get a translated text from a key and requested language from client. By adding languages to object &lt;code class=&quot;highlighter-rouge&quot;&gt;supported_lang&lt;/code&gt;, we don’t need condition to get the requested language texts here, much easier.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * @desc Get string by language
+ * @param key of the text 
+ * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
+ * @return String in selected language
+ */
+function getText(key, lang) {
+    if (typeof lang !== 'string') {
+        lang = lang.headers['lang']
+    }
+    let dict = supported_langs[lang].texts
+    return dict[key]
+}
+module.exports.getText = getText
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Okay, it’s done for all messages from server, success messages, error messages, warning messages, any message we need to send to client, just add to language files and &lt;code class=&quot;highlighter-rouge&quot;&gt;keys&lt;/code&gt; objects in &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is not fully supported. Notification still is 1 language only. I saved the notification content to database, and it can’t be dynamic for multi languages. So I had to change. Just save elements to generate notification content only. Depend on elements, I can get text by language.&lt;/p&gt;
+
+&lt;h3 id=&quot;generate-notification-content-by-language&quot;&gt;Generate Notification content by language&lt;/h3&gt;
+
+&lt;p&gt;One simple example to generate message.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * @desc Generated text to display to Master when Genius book his class
+ * @desc Text structure: Genius `&amp;lt;genius_name&amp;gt;` has just booked your class `&amp;lt;clazz_title&amp;gt;`
+ * @param data: `genius_name`, `clazz_title`
+ * @param lang
+ * @return Meaningful String getting approved
+ */
+function getClazzBookedToMasterText(data, lang) {
+    let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
+    return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We should make smaller function to generate message like above, because we will need these functions several times.&lt;/p&gt;
+
+&lt;p&gt;NodeJS is not as strict as Swift, so that, I put lot of comments in my code, especially for params. It helps me easier to understand to get back or fix bugs.&lt;/p&gt;
+
+&lt;p&gt;Now, the code is 95% flexible for multi languages. Server now returns notification content by our requested language.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-language-in-push-notification&quot;&gt;Multi language in push notification&lt;/h3&gt;
+
+&lt;p&gt;Final step is push notification in multi language. Push notification is dynamic from server, when data meets some condition. Genius books a class and server pushes notification to Master, for instance. So that I save user language to database and get it when push notification is needed. When I have the language, I generate content by functions above and push to users.&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That’s all I do with multi language in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  &lt;code class=&quot;highlighter-rouge&quot;&gt;User has multi devices, and in every device, he selects a different language.&lt;/code&gt; Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.&lt;/p&gt;
+
+&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or read notifications in Vietnamese, while app language is in English.</summary></entry><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production.&lt;/p&gt;
 
@@ -595,7 +701,7 @@ extension ListView: UITableViewDelegate, UITableViewDataSource {
   &lt;li&gt;New project. Design UI like this, connect outlets&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n_demo.png?alt=media&amp;amp;token=f1ee2869-5c17-4401-ab2a-124be93b4d7f&quot; width=&quot;350px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fi18n_demo.png?alt=media&amp;amp;token=0e0a0ce4-103c-48fe-b8ef-f9f6c292c8e4&quot; width=&quot;350px&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Add 2 plist files, named Lang_en.plist, Lang_vi.plist&lt;/li&gt;
   &lt;li&gt;Add some codes for localization.&lt;/li&gt;
@@ -666,13 +772,13 @@ func refreshUI() {
   &lt;li&gt;Run the app, and try.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffinish_demo_i18n.gif?alt=media&amp;amp;token=cfc52b0b-7b74-4195-b9b9-f8b4e6c76461&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Ffinish_demo_i18n.gif?alt=media&amp;amp;token=4eda2910-d8c5-4de8-b257-100042c030f6&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;what-is-the-advantages-in-this-way&quot;&gt;What is the advantages in this way?&lt;/h3&gt;
 
 &lt;p&gt;First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fkey_exist.png?alt=media&amp;amp;token=937931c6-4480-4891-8f57-8fdb98d0db45&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fkey_exist.png?alt=media&amp;amp;token=3bb069ff-ca96-4885-9b52-9146232a1f3b&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Second, no need to worry about &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and the end of text. Once, I missed a &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and faced to error, took me much time to fix. XCode was not kind enough to tell me this problem 2 years ago.&lt;/p&gt;
 
@@ -1170,92 +1276,4 @@ underline.height(1)
 
 &lt;h2 id=&quot;how-can-i-help&quot;&gt;How can I help?&lt;/h2&gt;
 
-&lt;p&gt;Please feel free to touch to me by leaving comments below or Skype: nguyentruongky3390.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.</summary></entry><entry><title type="html">Use UITableViewController to solve very long screen</title><link href="http://localhost:4001/2017/04/18/long-screen.html" rel="alternate" type="text/html" title="Use UITableViewController to solve very long screen" /><published>2017-04-18T00:00:00+07:00</published><updated>2017-04-18T00:00:00+07:00</updated><id>http://localhost:4001/2017/04/18/long-screen</id><content type="html" xml:base="http://localhost:4001/2017/04/18/long-screen.html">&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/UITableViewController_static/Long_screen.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Do you have any solutions for long long screen like this? I’m sure have. This kind of screen is very popular in item detail (e-commercial app), room view (booking app)… I have to implement this screen in my class detail from an education app. This is how I did that.&lt;/p&gt;
-
-&lt;h2 id=&quot;my-problem&quot;&gt;My problem&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;The screen is too long, and too many controls are in every section.&lt;/li&gt;
-  &lt;li&gt;Some sections can be missing, for instance, promotion code section is only available for specially class.&lt;/li&gt;
-  &lt;li&gt;Some sections contain very complex controls, for instance, UICollectionView the editor’s picks in the above photo.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;solution&quot;&gt;Solution&lt;/h2&gt;
-
-&lt;p&gt;First I thought about the UIStackView. It can hide or show view easily. But hard to control the section’s size and have to manage scrolling.&lt;/p&gt;
-
-&lt;p&gt;I find my best solution, UITableViewController, static UITableView.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-idea&quot;&gt;The idea&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;A section is a cell in the TableView.&lt;/li&gt;
-  &lt;li&gt;I make some custom views for complex section, like an embedded UICollectionView.&lt;/li&gt;
-  &lt;li&gt;Other simple sections, like Summary, Promotion, Shipping can be define controls inside the controller.&lt;/li&gt;
-  &lt;li&gt;Develop some functions to dynamically generate cells. Don’t define variables for cells.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;sample-code&quot;&gt;Sample code&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func makeAvailibilityCell() -&amp;gt; knTableCell {
-    let cell = knTableCell()
-
-    let containerView = UIView()
-    containerView.translatesAutoresizingMaskIntoConstraints = false
-    cell.addSubview(containerView)
-    containerView.fill(toView: cell)
-    
-    let titleLabel = makeHeaderLabel(text: &quot;availability&quot;.classLocalized) // (1)
-    
-    let seeButton = ogeSupporter.createGradientBorderButton() // (2)
-    seeButton.setTitle(&quot;seeAvailability&quot;.classLocalized, for: .normal)
-    
-    containerView.addSubview(titleLabel)
-    containerView.addSubview(availabilityLabel) // (3)
-    containerView.addSubview(seeButton)
-    
-    // (4)
-    seeButton.width(160)
-    seeButton.right(toView: containerView, space: -30)
-    seeButton.centerY(toView: titleLabel)
-    
-    titleLabel.left(toView: containerView, space: 30)
-    titleLabel.width(screenWidth - 60)
-    
-    availabilityLabel.horizontal(toView: titleLabel)
-    
-    containerView.addConstraints(withFormat: &quot;V:|-15-[v0]-10-[v1]|&quot;,
-                                 views: titleLabel, availabilityLabel)
-    
-    return cell
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1) (2) - Just define a label/button. Nothing is important here. These controls are not changed text/UI, should be defined inside the functions to reduce the number of reference controls in the controllers&lt;/p&gt;
-
-&lt;p&gt;(3) - This is the content of this section. Data changes up to different items. I need to keep this reference to update data when request completed.&lt;/p&gt;
-
-&lt;p&gt;(4) - Set up the UI with auto layout.&lt;/p&gt;
-
-&lt;p&gt;**Important: ** The space between 2 sections should be define on 1 cell. Look at the &lt;code class=&quot;highlighter-rouge&quot;&gt;Promotion code&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift?&lt;/code&gt; in the photo. The padding between them should belong to &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift?&lt;/code&gt; cell.&lt;/p&gt;
-
-&lt;p&gt;It means, the &lt;code class=&quot;highlighter-rouge&quot;&gt;bottomAnchor&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;Apply button&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;Promotion code&lt;/code&gt; to the cell is 0. And the &lt;code class=&quot;highlighter-rouge&quot;&gt;topAnchor&lt;/code&gt; of &lt;code class=&quot;highlighter-rouge&quot;&gt;Is that a gift? label&lt;/code&gt; is about 54. It’s very useful in missing section. The space among sections still are good enough.&lt;/p&gt;
-
-&lt;h4 id=&quot;how-to-use&quot;&gt;How to use&lt;/h4&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cells.append(makeAboutSellerCell()) 
-cells.append(makeAddressCell())
-         
-if promotion.isAvailable == true {
-     cells.append(makePromotionCell())
-}
-tableView.reloadTable()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;It’s easy, right? It saves much time for me. If designer wants to change anything, go to exactly make cell function, change the UI.&lt;/p&gt;
-
-&lt;p&gt;Enjoy coding.&lt;/p&gt;
-
-&lt;p&gt;I use my auto layout library in this project. You can find it here: &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html"></summary></entry></feed>
+&lt;p&gt;Please feel free to touch to me by leaving comments below or Skype: nguyentruongky3390.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.</summary></entry></feed>

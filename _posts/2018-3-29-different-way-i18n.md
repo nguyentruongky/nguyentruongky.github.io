@@ -3,7 +3,7 @@ layout: post
 title:  Different way to do multi languages in iOS
 subtitle: Save your time and effort to do multi languages in iOS 
 date:   2018-3-29
-background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_lang.jpg?alt=media&token=25c8f158-be13-4b93-b913-57d4097ae69e'
+background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fmulti_lang.jpg?alt=media&token=946311d8-57d0-492d-9f56-faa3f8706c4c'
 ---
 
 Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That's a good way, I did that 2 years ago. It shows me to use string files for multi languages. 
@@ -13,7 +13,7 @@ This note I want to take note about another way I found in my recent projects. I
 ### Steps
 - New project. Design UI like this, connect outlets
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n_demo.png?alt=media&token=f1ee2869-5c17-4401-ab2a-124be93b4d7f" width="350px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fi18n_demo.png?alt=media&token=0e0a0ce4-103c-48fe-b8ef-f9f6c292c8e4" width="350px"/>
 - Add 2 plist files, named Lang_en.plist, Lang_vi.plist
 - Add some codes for localization.
 
@@ -80,13 +80,13 @@ func refreshUI() {
 
 - Run the app, and try. 
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffinish_demo_i18n.gif?alt=media&token=cfc52b0b-7b74-4195-b9b9-f8b4e6c76461" width="320px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Ffinish_demo_i18n.gif?alt=media&token=4eda2910-d8c5-4de8-b257-100042c030f6" width="320px"/>
 
 ### What is the advantages in this way? 
 
 First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication. 
 
-<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fkey_exist.png?alt=media&token=937931c6-4480-4891-8f57-8fdb98d0db45" width="350"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fkey_exist.png?alt=media&token=3bb069ff-ca96-4885-9b52-9146232a1f3b" width="350"/>
 
 Second, no need to worry about `;` and the end of text. Once, I missed a `;` and faced to error, took me much time to fix. XCode was not kind enough to tell me this problem 2 years ago. 
 

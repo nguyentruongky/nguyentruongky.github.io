@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    i18n from Server - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/13/i18n-from-server.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fi18n-server.png?alt=media&token=5b3313f8-56b1-4ebe-9bb7-96b09cbc66ec')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fi18n-server.png?alt=media&token=5b3313f8-56b1-4ebe-9bb7-96b09cbc66ec')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>i18n from Server</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">How I support multi languages for Ogenii from server</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 13, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or read notifications in Vietnamese, while app language is in English.</p>
+
+<p>In <a href="https://ogenii.com">Ogenii</a>, I fully support i18n from client to server. It’s not an easy tasks for me, because I’m just a newbie in Backend - Node JS, we’re using Node JS. I’m sure this is not the best way to do but it’s a good way I can find and do at this time. Main idea is separation all texts to languages objects and get the values by the keys.</p>
+
+<h3 id="move-all-texts-to-language-files">Move all texts to language files</h3>
+<p>I support English and Vietnamese in <a href="https://ogenii.com">Ogenii</a>, so I add 2 new files <code class="highlighter-rouge">en.js</code> and <code class="highlighter-rouge">vi.js</code> and move texts to an object <code class="highlighter-rouge">texts</code></p>
+
+<p><code class="highlighter-rouge">en.js</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.texts = {
+    err_401: "Your login is expired. Login again and keep learning.",
+    verification_sent: 'Your verification will be processed in 2-4 hours',
+    clazz_created: "Your class is created and under review. It'll be live soon."
+}
+</code></pre></div></div>
+<p><code class="highlighter-rouge">vi.js</code></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.texts = {
+    err_401: "Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi",
+    verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
+    clazz_created: "Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi"
+}
+</code></pre></div></div>
+
+<h3 id="add-a-language-center-file">Add a language center file</h3>
+<p>I don’t connect languages file directly to others, I make a file as a center to connect all supported language to other files. I named it <code class="highlighter-rouge">LangCenter.js</code>.</p>
+
+<ul>
+  <li>Import all supported languages to <code class="highlighter-rouge">LangCenter</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let En = require('./en')
+let Vi = require('./vi')
+</code></pre></div></div>
+
+<p>I add all language to an object like this. So don’t care how many languages will support.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let supported_langs = {
+    "en": En, 
+    "vi": Vi
+}
+</code></pre></div></div>
+
+<ul>
+  <li>Add an object to contain all keys. The values of this object must be exactly <strong>same</strong> to keys of object <code class="highlighter-rouge">texts</code> in <code class="highlighter-rouge">en.js</code> and <code class="highlighter-rouge">vi.js</code>.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.keys = {
+    err_401: "401",
+    verification_sent: "verification_sent",
+    clazz_created: "clazz_created"
+}
+</code></pre></div></div>
+
+<ul>
+  <li>Add function to get a translated text from a key and requested language from client. By adding languages to object <code class="highlighter-rouge">supported_lang</code>, we don’t need condition to get the requested language texts here, much easier.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * @desc Get string by language
+ * @param key of the text 
+ * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
+ * @return String in selected language
+ */
+function getText(key, lang) {
+    if (typeof lang !== 'string') {
+        lang = lang.headers['lang']
+    }
+    let dict = supported_langs[lang].texts
+    return dict[key]
+}
+module.exports.getText = getText
+</code></pre></div></div>
+
+<p>Okay, it’s done for all messages from server, success messages, error messages, warning messages, any message we need to send to client, just add to language files and <code class="highlighter-rouge">keys</code> objects in <code class="highlighter-rouge">LangCenter.js</code></p>
+
+<p>This is not fully supported. Notification still is 1 language only. I saved the notification content to database, and it can’t be dynamic for multi languages. So I had to change. Just save elements to generate notification content only. Depend on elements, I can get text by language.</p>
+
+<h3 id="generate-notification-content-by-language">Generate Notification content by language</h3>
+
+<p>One simple example to generate message.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * @desc Generated text to display to Master when Genius book his class
+ * @desc Text structure: Genius `&lt;genius_name&gt;` has just booked your class `&lt;clazz_title&gt;`
+ * @param data: `genius_name`, `clazz_title`
+ * @param lang
+ * @return Meaningful String getting approved
+ */
+function getClazzBookedToMasterText(data, lang) {
+    let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
+    return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
+}
+</code></pre></div></div>
+
+<p>We should make smaller function to generate message like above, because we will need these functions several times.</p>
+
+<p>NodeJS is not as strict as Swift, so that, I put lot of comments in my code, especially for params. It helps me easier to understand to get back or fix bugs.</p>
+
+<p>Now, the code is 95% flexible for multi languages. Server now returns notification content by our requested language.</p>
+
+<h3 id="multi-language-in-push-notification">Multi language in push notification</h3>
+
+<p>Final step is push notification in multi language. Push notification is dynamic from server, when data meets some condition. Genius books a class and server pushes notification to Master, for instance. So that I save user language to database and get it when push notification is needed. When I have the language, I generate content by functions above and push to users.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That’s all I do with multi language in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  <code class="highlighter-rouge">User has multi devices, and in every device, he selects a different language.</code> Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.</p>
+
+<p>Hope this can help.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/11/config-development-environment.html" data-toggle="tooltip" data-placement="top" title="Short note - Configure the development environments">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
