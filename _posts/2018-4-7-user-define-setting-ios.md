@@ -6,7 +6,7 @@ date:   2018-4-7
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser_setting.jpg?alt=media&token=4bc88186-0901-48b7-9d06-7e34fecef306'
 ---
 
-I ran into a challange: support different countries with different app's names but same code. "Green" app is the original app, there is a need to convert the original "Green" app to another app with different properties, which in the demo is know as the "Red" app.
+I ran into a challenge: support different countries with different app's name, icon but same code. "Green" app is the original app, there is a need to convert the original "Green" app to another app with different properties, which in the demo is known as the "Red" app.
 
 <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255" width="75%"/>
 

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Customize your UITabBarController - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="From 2017, design trending has changed to tab bar, instead of slide menu. UITabBarController has become one of the most popular controller. It’s very simple ...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/15/TabController-TabBar.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2FTabBar_2x.png?alt=media&token=62fb2b53-552d-47be-ac56-7a0680ac1e1b')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2FTabBar_2x.png?alt=media&token=62fb2b53-552d-47be-ac56-7a0680ac1e1b')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Customize your UITabBarController</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">How to make your UITabBarController be more attractive?</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 15, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>From 2017, design trending has changed to tab bar, instead of slide menu. <code class="highlighter-rouge">UITabBarController</code> has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fogenii.png?alt=media&amp;token=033df77c-7adb-40a7-aca9-ad921efb4629" width="100%" /></p>
+
+<p>or like this</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.png?alt=media&amp;token=e5a38fff-eddf-4863-b2bb-b4e15fdef4d2" width="100%" /></p>
+
+<p>I had to implement a tab bar like above in 2015. My implementation at that time was bad. I used a <code class="highlighter-rouge">UIViewController</code> as a main controller, and added a custom view like a tab bar. And everytime a tab selected, embed the other <code class="highlighter-rouge">UIViewController</code> into the main controller. That’s not good option.</p>
+
+<p>Today I make a <code class="highlighter-rouge">UITabBarController</code> with a custom view like a tab bar. With this solution, we can use the max strength of <code class="highlighter-rouge">UITabBarController</code> with the same behavior and code. Much easier and better than my implementation before. Hope anyone can easily customize to their design if they want after this note.</p>
+
+<h2 id="kntabbaritem">knTabBarItem</h2>
+<p>First thing need to be customized is the <code class="highlighter-rouge">UITabBarItem</code>. <code class="highlighter-rouge">UITabBarItem</code> is not flexible enough to be customized to anything I want. I need to use <code class="highlighter-rouge">UIButton</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class knTabBarItem: UIButton {
+    // (1)
+    var itemHeight: CGFloat = 0
+    // (2)
+    var lock = false
+    // (3)
+    var color: UIColor = UIColor.lightGray {
+        didSet {
+            guard lock == false else { return }
+            iconImageView.change(color: color)
+            textLabel.textColor = color
+        }}
+    
+    // (4)
+    private let iconImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFit)
+    private let textLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11),
+                                        color: .black, alignment: .center)
+    
+    convenience init(icon: UIImage, title: String,
+                     font: UIFont = UIFont.systemFont(ofSize: 11)) {
+        self.init()
+        translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.image = icon
+        textLabel.text = title
+        textLabel.font = UIFont(name: font.fontName, size: 11)
+        setupView()
+    }
+    
+    // (5)
+    private func setupView() {
+        addSubviews(views: iconImageView, textLabel)
+        iconImageView.top(toView: self, space: 4)
+        iconImageView.centerX(toView: self)
+        iconImageView.square()
+        
+        let iconBottomConstant: CGFloat = textLabel.text == "" ? -2 : -20
+        iconImageView.bottom(toView: self, space: iconBottomConstant)
+        
+        textLabel.bottom(toView: self, space: -2)
+        textLabel.centerX(toView: self)
+    }
+}
+</code></pre></div></div>
+
+<p>(1): Some tab items can be bigger than others. I can easily set the height for them to make difference with others.</p>
+
+<p>(2) (3): Same to (1), some tab items are very unacceptional with different color and don’t change color when selected.</p>
+
+<p>(4): knUIMaker is my collection to make controls. Just easier to make UIButton, UIImageView, UILabel by code.</p>
+
+<p>(5): <code class="highlighter-rouge">addSubviews</code>, <code class="highlighter-rouge">top</code>, <code class="highlighter-rouge">centerX</code>, <code class="highlighter-rouge">bottom</code> are from my <a href="https://github.com/nguyentruongky/knConstraints">knConstraints</a> to make auto layout. I’m a fan of auto layout programmatically, so make controls and set layouts by code is what to do hundreds of times everyday.</p>
+
+<h2 id="kntabbar">knTabBar</h2>
+<p>Next thing I have to focus on is <code class="highlighter-rouge">UITabBar</code>.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class knTabBar: UITabBar {
+    // (1)
+    var kn_items = [knTabBarItem]()
+    convenience init(items: [knTabBarItem]) {
+        self.init()
+        kn_items = items
+        translatesAutoresizingMaskIntoConstraints = false
+        setupView()
+    }
+    
+    override var tintColor: UIColor! {
+        didSet {
+            for item in kn_items {
+                item.color = tintColor
+            }}}
+    
+    func setupView() {
+        backgroundColor = .white
+        if kn_items.count == 0 { return }
+        
+        // (2)
+        let line = knUIMaker.makeLine(color: .gray, height: 0.5)
+        addSubviews(views: line)
+        line.horizontal(toView: self)
+        line.top(toView: self)
+        
+        // (3)
+        var horizontalConstraints = "H:|"
+        let itemWidth: CGFloat = screenWidth / CGFloat(kn_items.count)
+        for i in 0 ..&lt; kn_items.count {
+            let item = kn_items[i]
+            addSubviews(views: item)
+            if item.itemHeight == 0 {
+                item.vertical(toView: self)
+            }
+            else {
+                item.bottom(toView: self)
+                item.height(item.itemHeight)
+            }
+            item.width(itemWidth)
+            horizontalConstraints += String(format: "[v%d]", i)
+            if item.lock == false {
+                item.color = tintColor
+            }
+        }
+        
+        horizontalConstraints += "|"
+        addConstraints(withFormat: horizontalConstraints, arrayOf: kn_items)
+    }
+}
+</code></pre></div></div>
+<p>(1): I can’t override <code class="highlighter-rouge">items</code> in <code class="highlighter-rouge">UITabBar</code>, so I name it a little bit similar to easier to remember</p>
+
+<p>(2): Add a line to separate the tab bar to the controller. Some designs need indicator at the selected item, I will add indicator here.</p>
+
+<p>(3): Flexible to add items by programmatically. Thanks Apple for Auto Layout Programmatically.</p>
+
+<h2 id="kntabcontroller">knTabController</h2>
+<p>The easiest thing is here. Just inherit from <code class="highlighter-rouge">UITabBarController</code>, add some code, and it works.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class knTabController: UITabBarController {
+    var kn_tabBar: knTabBar!
+    var selectedColor = UIColor.darkGray
+    var normalColor = UIColor.lightGray {
+        didSet {
+            kn_tabBar.tintColor = normalColor
+        }}
+    
+    private var kn_tabBarHeight: CGFloat = 49
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBar.isHidden = true
+        setupView()
+    }
+
+    func setupView() {}
+    
+    private func setTabBar(items: [knTabBarItem], height: CGFloat = 49) {
+        guard items.count &gt; 0 else { return }
+        
+        kn_tabBar = knTabBar(items: items)
+        guard let bar = kn_tabBar else { return }
+        kn_tabBar.tintColor = normalColor
+        bar.kn_items.first?.color = selectedColor
+        
+        view.addSubviews(views: bar)
+        bar.horizontal(toView: view)
+        bar.bottom(toView: view)
+        kn_tabBarHeight = height
+        bar.height(kn_tabBarHeight)
+        for i in 0 ..&lt; items.count {
+            items[i].tag = i
+            items[i].addTarget(self, action: #selector(switchTab))
+        }
+    }
+    
+    @objc func switchTab(button: UIButton) {
+        selectedIndex = button.tag
+    }
+}
+</code></pre></div></div>
+
+<p>That’s ready for new tab bar. Just use it in a controller.</p>
+
+<h2 id="how-to-use">How to use?</h2>
+<ul>
+  <li>Inherit class <code class="highlighter-rouge">knTabController</code> to your controller.</li>
+  <li>Override <code class="highlighter-rouge">setupView</code> method.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class DoctorController: knTabController {
+  override func setupView() {
+      let home = knTabBarItem(icon: #imageLiteral(resourceName: "home"), title: "Home")
+      let appointment = knTabBarItem(icon: #imageLiteral(resourceName: "appointment"), title: "Appointment")
+      let add = knTabBarItem(icon: #imageLiteral(resourceName: "add"), title: "")
+      add.lock = true
+      add.itemHeight = 66
+      let doctors = knTabBarItem(icon: #imageLiteral(resourceName: "doctors"), title: "Doctors")
+      let porfolio = knTabBarItem(icon: #imageLiteral(resourceName: "user"), title: "Porfolio")
+
+      let red = UIViewController()
+      red.view.backgroundColor = .red
+      let green = UIViewController()
+      green.view.backgroundColor = .green
+      let blue = UIViewController()
+      blue.view.backgroundColor = .white
+      let yellow = UIViewController()
+      yellow.view.backgroundColor = .yellow
+      let gray = UIViewController()
+      gray.view.backgroundColor = .gray
+
+      setTabBar(items: [home, appointment, add, doctors, porfolio])
+      viewControllers = [red, green, blue, yellow, gray]
+      normalColor = .red
+  }
+}
+</code></pre></div>    </div>
+  </li>
+  <li>Run and see. The main button (Hexagon Add) is locked, don’t change the color when selected.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.gif?alt=media&amp;token=27df3f84-5d39-499a-9205-43eaeea87515" width="40%" /></p>
+
+<p>But it’s better if we have animation, looks much better.</p>
+
+<h2 id="add-animation">Add animation</h2>
+<ul>
+  <li>In <code class="highlighter-rouge">knTabController</code>, change method <code class="highlighter-rouge">switchTab</code> content to</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    let newIndex = button.tag
+    changeTab(from: selectedIndex, to: newIndex)
+</code></pre></div></div>
+<ul>
+  <li>Add method <code class="highlighter-rouge">changeTab</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func changeTab(from fromIndex: Int, to toIndex: Int) {
+    kn_tabBar.kn_items[fromIndex].color = normalColor
+    kn_tabBar.kn_items[toIndex].color = selectedColor
+    animateSliding(from: fromIndex, to: toIndex)
+}
+</code></pre></div></div>
+
+<ul>
+  <li>And result:</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor_slide.gif?alt=media&amp;token=2b1a56d8-aacf-4d51-924e-a44d6827a99d" width="40%" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Hope this can help anyone want to customize a tab bar can do it effortless. Code is <a href="https://github.com/nguyentruongky/knTabController">here</a>.</p>
+
+<p>I will add some more animations and some properties to make it more convenience in very near future. Suggestions and feedbacks are welcome.</p>
+
+<h3 id="notes">Notes</h3>
+<p>I am a fan of Auto Layout Programmatically, so usually use my library, knConstraints for setting constraints. knConstraints is a very simple way to setup Auto Layout with very easy to read syntax. You can try it yourself <a href="https://github.com/nguyentruongky/knConstraints">here</a>.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/13/i18n-from-server.html" data-toggle="tooltip" data-placement="top" title="i18n from Server">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

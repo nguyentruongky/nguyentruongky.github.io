@@ -1,9 +1,252 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-13T16:19:50+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">i18n from Server</title><link href="http://localhost:4001/2018/04/13/i18n-from-server.html" rel="alternate" type="text/html" title="i18n from Server" /><published>2018-04-13T00:00:00+07:00</published><updated>2018-04-13T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/13/i18n-from-server</id><content type="html" xml:base="http://localhost:4001/2018/04/13/i18n-from-server.html">&lt;p&gt;I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or read notifications in Vietnamese, while app language is in English.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-23T14:07:09+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Customize your UITabBarController</title><link href="http://localhost:4001/2018/04/15/TabController-TabBar.html" rel="alternate" type="text/html" title="Customize your UITabBarController" /><published>2018-04-15T00:00:00+07:00</published><updated>2018-04-15T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/15/TabController-TabBar</id><content type="html" xml:base="http://localhost:4001/2018/04/15/TabController-TabBar.html">&lt;p&gt;From 2017, design trending has changed to tab bar, instead of slide menu. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this&lt;/p&gt;
 
-&lt;p&gt;In &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, I fully support i18n from client to server. It’s not an easy tasks for me, because I’m just a newbie in Backend - Node JS, we’re using Node JS. I’m sure this is not the best way to do but it’s a good way I can find and do at this time. Main idea is separation all texts to languages objects and get the values by the keys.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fogenii.png?alt=media&amp;amp;token=033df77c-7adb-40a7-aca9-ad921efb4629&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;or like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.png?alt=media&amp;amp;token=e5a38fff-eddf-4863-b2bb-b4e15fdef4d2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had to implement a tab bar like above in 2015. My implementation at that time was bad. I used a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt; as a main controller, and added a custom view like a tab bar. And everytime a tab selected, embed the other &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt; into the main controller. That’s not good option.&lt;/p&gt;
+
+&lt;p&gt;Today I make a &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; with a custom view like a tab bar. With this solution, we can use the max strength of &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; with the same behavior and code. Much easier and better than my implementation before. Hope anyone can easily customize to their design if they want after this note.&lt;/p&gt;
+
+&lt;h2 id=&quot;kntabbaritem&quot;&gt;knTabBarItem&lt;/h2&gt;
+&lt;p&gt;First thing need to be customized is the &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt; is not flexible enough to be customized to anything I want. I need to use &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabBarItem: UIButton {
+    // (1)
+    var itemHeight: CGFloat = 0
+    // (2)
+    var lock = false
+    // (3)
+    var color: UIColor = UIColor.lightGray {
+        didSet {
+            guard lock == false else { return }
+            iconImageView.change(color: color)
+            textLabel.textColor = color
+        }}
+    
+    // (4)
+    private let iconImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFit)
+    private let textLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11),
+                                        color: .black, alignment: .center)
+    
+    convenience init(icon: UIImage, title: String,
+                     font: UIFont = UIFont.systemFont(ofSize: 11)) {
+        self.init()
+        translatesAutoresizingMaskIntoConstraints = false
+        iconImageView.image = icon
+        textLabel.text = title
+        textLabel.font = UIFont(name: font.fontName, size: 11)
+        setupView()
+    }
+    
+    // (5)
+    private func setupView() {
+        addSubviews(views: iconImageView, textLabel)
+        iconImageView.top(toView: self, space: 4)
+        iconImageView.centerX(toView: self)
+        iconImageView.square()
+        
+        let iconBottomConstant: CGFloat = textLabel.text == &quot;&quot; ? -2 : -20
+        iconImageView.bottom(toView: self, space: iconBottomConstant)
+        
+        textLabel.bottom(toView: self, space: -2)
+        textLabel.centerX(toView: self)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): Some tab items can be bigger than others. I can easily set the height for them to make difference with others.&lt;/p&gt;
+
+&lt;p&gt;(2) (3): Same to (1), some tab items are very unacceptional with different color and don’t change color when selected.&lt;/p&gt;
+
+&lt;p&gt;(4): knUIMaker is my collection to make controls. Just easier to make UIButton, UIImageView, UILabel by code.&lt;/p&gt;
+
+&lt;p&gt;(5): &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubviews&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;centerX&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt; are from my &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;knConstraints&lt;/a&gt; to make auto layout. I’m a fan of auto layout programmatically, so make controls and set layouts by code is what to do hundreds of times everyday.&lt;/p&gt;
+
+&lt;h2 id=&quot;kntabbar&quot;&gt;knTabBar&lt;/h2&gt;
+&lt;p&gt;Next thing I have to focus on is &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabBar: UITabBar {
+    // (1)
+    var kn_items = [knTabBarItem]()
+    convenience init(items: [knTabBarItem]) {
+        self.init()
+        kn_items = items
+        translatesAutoresizingMaskIntoConstraints = false
+        setupView()
+    }
+    
+    override var tintColor: UIColor! {
+        didSet {
+            for item in kn_items {
+                item.color = tintColor
+            }}}
+    
+    func setupView() {
+        backgroundColor = .white
+        if kn_items.count == 0 { return }
+        
+        // (2)
+        let line = knUIMaker.makeLine(color: .gray, height: 0.5)
+        addSubviews(views: line)
+        line.horizontal(toView: self)
+        line.top(toView: self)
+        
+        // (3)
+        var horizontalConstraints = &quot;H:|&quot;
+        let itemWidth: CGFloat = screenWidth / CGFloat(kn_items.count)
+        for i in 0 ..&amp;lt; kn_items.count {
+            let item = kn_items[i]
+            addSubviews(views: item)
+            if item.itemHeight == 0 {
+                item.vertical(toView: self)
+            }
+            else {
+                item.bottom(toView: self)
+                item.height(item.itemHeight)
+            }
+            item.width(itemWidth)
+            horizontalConstraints += String(format: &quot;[v%d]&quot;, i)
+            if item.lock == false {
+                item.color = tintColor
+            }
+        }
+        
+        horizontalConstraints += &quot;|&quot;
+        addConstraints(withFormat: horizontalConstraints, arrayOf: kn_items)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(1): I can’t override &lt;code class=&quot;highlighter-rouge&quot;&gt;items&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;, so I name it a little bit similar to easier to remember&lt;/p&gt;
+
+&lt;p&gt;(2): Add a line to separate the tab bar to the controller. Some designs need indicator at the selected item, I will add indicator here.&lt;/p&gt;
+
+&lt;p&gt;(3): Flexible to add items by programmatically. Thanks Apple for Auto Layout Programmatically.&lt;/p&gt;
+
+&lt;h2 id=&quot;kntabcontroller&quot;&gt;knTabController&lt;/h2&gt;
+&lt;p&gt;The easiest thing is here. Just inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;, add some code, and it works.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabController: UITabBarController {
+    var kn_tabBar: knTabBar!
+    var selectedColor = UIColor.darkGray
+    var normalColor = UIColor.lightGray {
+        didSet {
+            kn_tabBar.tintColor = normalColor
+        }}
+    
+    private var kn_tabBarHeight: CGFloat = 49
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tabBar.isHidden = true
+        setupView()
+    }
+
+    func setupView() {}
+    
+    private func setTabBar(items: [knTabBarItem], height: CGFloat = 49) {
+        guard items.count &amp;gt; 0 else { return }
+        
+        kn_tabBar = knTabBar(items: items)
+        guard let bar = kn_tabBar else { return }
+        kn_tabBar.tintColor = normalColor
+        bar.kn_items.first?.color = selectedColor
+        
+        view.addSubviews(views: bar)
+        bar.horizontal(toView: view)
+        bar.bottom(toView: view)
+        kn_tabBarHeight = height
+        bar.height(kn_tabBarHeight)
+        for i in 0 ..&amp;lt; items.count {
+            items[i].tag = i
+            items[i].addTarget(self, action: #selector(switchTab))
+        }
+    }
+    
+    @objc func switchTab(button: UIButton) {
+        selectedIndex = button.tag
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s ready for new tab bar. Just use it in a controller.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-use&quot;&gt;How to use?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Inherit class &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt; to your controller.&lt;/li&gt;
+  &lt;li&gt;Override &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class DoctorController: knTabController {
+  override func setupView() {
+      let home = knTabBarItem(icon: #imageLiteral(resourceName: &quot;home&quot;), title: &quot;Home&quot;)
+      let appointment = knTabBarItem(icon: #imageLiteral(resourceName: &quot;appointment&quot;), title: &quot;Appointment&quot;)
+      let add = knTabBarItem(icon: #imageLiteral(resourceName: &quot;add&quot;), title: &quot;&quot;)
+      add.lock = true
+      add.itemHeight = 66
+      let doctors = knTabBarItem(icon: #imageLiteral(resourceName: &quot;doctors&quot;), title: &quot;Doctors&quot;)
+      let porfolio = knTabBarItem(icon: #imageLiteral(resourceName: &quot;user&quot;), title: &quot;Porfolio&quot;)
+
+      let red = UIViewController()
+      red.view.backgroundColor = .red
+      let green = UIViewController()
+      green.view.backgroundColor = .green
+      let blue = UIViewController()
+      blue.view.backgroundColor = .white
+      let yellow = UIViewController()
+      yellow.view.backgroundColor = .yellow
+      let gray = UIViewController()
+      gray.view.backgroundColor = .gray
+
+      setTabBar(items: [home, appointment, add, doctors, porfolio])
+      viewControllers = [red, green, blue, yellow, gray]
+      normalColor = .red
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Run and see. The main button (Hexagon Add) is locked, don’t change the color when selected.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.gif?alt=media&amp;amp;token=27df3f84-5d39-499a-9205-43eaeea87515&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;But it’s better if we have animation, looks much better.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-animation&quot;&gt;Add animation&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt;, change method &lt;code class=&quot;highlighter-rouge&quot;&gt;switchTab&lt;/code&gt; content to&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    let newIndex = button.tag
+    changeTab(from: selectedIndex, to: newIndex)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;changeTab&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func changeTab(from fromIndex: Int, to toIndex: Int) {
+    kn_tabBar.kn_items[fromIndex].color = normalColor
+    kn_tabBar.kn_items[toIndex].color = selectedColor
+    animateSliding(from: fromIndex, to: toIndex)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;And result:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor_slide.gif?alt=media&amp;amp;token=2b1a56d8-aacf-4d51-924e-a44d6827a99d&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Hope this can help anyone want to customize a tab bar can do it effortless. Code is &lt;a href=&quot;https://github.com/nguyentruongky/knTabController&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I will add some more animations and some properties to make it more convenience in very near future. Suggestions and feedbacks are welcome.&lt;/p&gt;
+
+&lt;h3 id=&quot;notes&quot;&gt;Notes&lt;/h3&gt;
+&lt;p&gt;I am a fan of Auto Layout Programmatically, so usually use my library, knConstraints for setting constraints. knConstraints is a very simple way to setup Auto Layout with very easy to read syntax. You can try it yourself &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">From 2017, design trending has changed to tab bar, instead of slide menu. UITabBarController has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this</summary></entry><entry><title type="html">i18n from Server</title><link href="http://localhost:4001/2018/04/13/i18n-from-server.html" rel="alternate" type="text/html" title="i18n from Server" /><published>2018-04-13T00:00:00+07:00</published><updated>2018-04-13T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/13/i18n-from-server</id><content type="html" xml:base="http://localhost:4001/2018/04/13/i18n-from-server.html">&lt;p&gt;I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt; is fully supported i18n from client to server. It’s not an easy task for me, because I’m just a newbie in backend. I believe this is not the best way to do but it’s a good way I can find and do at this time. Main idea is separation all texts to languages objects and get the values by the keys.&lt;/p&gt;
 
 &lt;h3 id=&quot;move-all-texts-to-language-files&quot;&gt;Move all texts to language files&lt;/h3&gt;
-&lt;p&gt;I support English and Vietnamese in &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, so I add 2 new files &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt; and move texts to an object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;I support English and Vietnamese in &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, so I add 2 new files &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt; and move texts to object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.texts = {
@@ -21,7 +264,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;add-a-language-center-file&quot;&gt;Add a language center file&lt;/h3&gt;
-&lt;p&gt;I don’t connect languages file directly to others, I make a file as a center to connect all supported language to other files. I named it &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Don’t connect language files directly to others, I make a file as a center to connect all supported languages to other files and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Import all supported languages to &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter&lt;/code&gt;&lt;/li&gt;
@@ -31,7 +274,7 @@
 let Vi = require('./vi')
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;I add all language to an object like this. So don’t care how many languages will support.&lt;/p&gt;
+&lt;p&gt;Add all language to an object like this. So don’t care how many languages will support.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let supported_langs = {
     &quot;en&quot;: En, 
@@ -44,7 +287,7 @@ let Vi = require('./vi')
 &lt;/ul&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.keys = {
-    err_401: &quot;401&quot;,
+    err_401: &quot;err_401&quot;,
     verification_sent: &quot;verification_sent&quot;,
     clazz_created: &quot;clazz_created&quot;
 }
@@ -70,19 +313,19 @@ function getText(key, lang) {
 module.exports.getText = getText
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Okay, it’s done for all messages from server, success messages, error messages, warning messages, any message we need to send to client, just add to language files and &lt;code class=&quot;highlighter-rouge&quot;&gt;keys&lt;/code&gt; objects in &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Okay, it’s done for all messages from server. Any messages we need to send to client, just add to language files and &lt;code class=&quot;highlighter-rouge&quot;&gt;keys&lt;/code&gt; objects in &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;This is not fully supported. Notification still is 1 language only. I saved the notification content to database, and it can’t be dynamic for multi languages. So I had to change. Just save elements to generate notification content only. Depend on elements, I can get text by language.&lt;/p&gt;
+&lt;p&gt;This is not fully supported yet. Notification still is 1 language only. I saved the notification content to database, and it can’t be dynamic for multi languages. I had to change. Just save elements to generate notification content only. Depend on elements, I can get text by language.&lt;/p&gt;
 
 &lt;h3 id=&quot;generate-notification-content-by-language&quot;&gt;Generate Notification content by language&lt;/h3&gt;
 
-&lt;p&gt;One simple example to generate message.&lt;/p&gt;
+&lt;p&gt;One example to generate message.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
- * @desc Generated text to display to Master when Genius book his class
+ * @desc Generate text to tell Master when Genius book his class
  * @desc Text structure: Genius `&amp;lt;genius_name&amp;gt;` has just booked your class `&amp;lt;clazz_title&amp;gt;`
  * @param data: `genius_name`, `clazz_title`
  * @param lang
- * @return Meaningful String getting approved
+ * @return Meaningful String
  */
 function getClazzBookedToMasterText(data, lang) {
     let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
@@ -90,21 +333,21 @@ function getClazzBookedToMasterText(data, lang) {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We should make smaller function to generate message like above, because we will need these functions several times.&lt;/p&gt;
+&lt;p&gt;I make functions to generate messages, because I need these functions several times.&lt;/p&gt;
 
-&lt;p&gt;NodeJS is not as strict as Swift, so that, I put lot of comments in my code, especially for params. It helps me easier to understand to get back or fix bugs.&lt;/p&gt;
+&lt;p&gt;NodeJS is not as strict as Swift, so that, I put lot of comments in my code, especially for params. It helps me easier to get back or fix bugs.&lt;/p&gt;
 
-&lt;p&gt;Now, the code is 95% flexible for multi languages. Server now returns notification content by our requested language.&lt;/p&gt;
+&lt;p&gt;Now, the code is 95% flexible for multi languages. Server now returns notification content by client requested language.&lt;/p&gt;
 
 &lt;h3 id=&quot;multi-language-in-push-notification&quot;&gt;Multi language in push notification&lt;/h3&gt;
 
-&lt;p&gt;Final step is push notification in multi language. Push notification is dynamic from server, when data meets some condition. Genius books a class and server pushes notification to Master, for instance. So that I save user language to database and get it when push notification is needed. When I have the language, I generate content by functions above and push to users.&lt;/p&gt;
+&lt;p&gt;Final step is push notification in multi language. Push notification is dynamic from server, when data meets some conditions. Genius books a class and server pushes notification to Master, for instance. No request from Master, so I don’t know the Master’s current language. I have to save user language to database and get it when push notification is needed. Then generate content by functions above and push to users.&lt;/p&gt;
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;That’s all I do with multi language in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  &lt;code class=&quot;highlighter-rouge&quot;&gt;User has multi devices, and in every device, he selects a different language.&lt;/code&gt; Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.&lt;/p&gt;
+&lt;p&gt;That’s all I do with multi languages in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  &lt;code class=&quot;highlighter-rouge&quot;&gt;User has multi devices, and in every device, he selects a different language.&lt;/code&gt; Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.&lt;/p&gt;
 
-&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. But multi languages can’t finish from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or read notifications in Vietnamese, while app language is in English.</summary></entry><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.</summary></entry><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production.&lt;/p&gt;
 
@@ -161,7 +404,7 @@ var baseUrl: String = {
 
 &lt;hr /&gt;
 
-&lt;p&gt;Just some basic tips but they save me much time in development.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is here.</summary></entry><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challange: support different countries with different app’s names but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is know as the “Red” app.&lt;/p&gt;
+&lt;p&gt;Just some basic tips but they save me much time in development.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is here.</summary></entry><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
 
@@ -297,7 +540,7 @@ struct GreenConfiguration: Configuration {
 &lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;amp;token=5429f000-f157-419d-aad4-acc7bc3723a1&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challange: support different countries with different app’s names but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is know as the “Red” app.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
+&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
 
 &lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
@@ -426,7 +669,13 @@ Alamofire.request(url, method: .post,
   &lt;li&gt;Supported interface orientations&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
+&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;17042018&quot;&gt;17/04/2018&lt;/h1&gt;
+&lt;h3 id=&quot;open-location-service&quot;&gt;Open Location service&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if let url = URL(string: &quot;App-Prefs:root=Privacy&amp;amp;path=LOCATION&quot;) {
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
 
@@ -1137,143 +1386,4 @@ class SampleConfiguration /* called in viewDidLoad */ {
 
 &lt;p&gt;In your controller, &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;, call &lt;code class=&quot;highlighter-rouge&quot;&gt;SampleConfiguration.shared.config&lt;/code&gt;. And call &lt;code class=&quot;highlighter-rouge&quot;&gt;output&lt;/code&gt; to do your actions.&lt;/p&gt;
 
-&lt;p&gt;This solution saves much time for me. I hope it can help you. Save time, work better and enjoy your life.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Bitter Experience I started iOS as a 2-year-experience .NET developer. The salary range for a junior iOS dev is a little bit lower than the amount for a 2-year-experience develop get. I wanted to make myself stronger, earn more experience. I had a misconception of working and learning. I thought, freelance projects will help me strengthen my knowledge and experience. So I tried to get as more as possible freelance projects. And my nightmare started from here.</summary></entry><entry><title type="html">Auto Layout with Storyboard and Programmatically</title><link href="http://localhost:4001/2017/04/25/auto-layout.html" rel="alternate" type="text/html" title="Auto Layout with Storyboard and Programmatically" /><published>2017-04-25T00:00:00+07:00</published><updated>2017-04-25T00:00:00+07:00</updated><id>http://localhost:4001/2017/04/25/auto-layout</id><content type="html" xml:base="http://localhost:4001/2017/04/25/auto-layout.html">&lt;p&gt;I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.&lt;/p&gt;
-
-&lt;p&gt;There are many discussions about Auto Layout with Storyboard or Programmatically is better. But no one wins. Everyone has own reason and belief.&lt;/p&gt;
-
-&lt;p&gt;This post is my personal opinion. It’s written by a developer can’t live without Storyboard, and now he abandons it.&lt;/p&gt;
-
-&lt;p&gt;3 reasons why he changed to Auto Layout by programmatically.&lt;/p&gt;
-
-&lt;h2 id=&quot;why-do-i-abandon-storyboard&quot;&gt;Why do I abandon Storyboard?&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-too-many-steps-to-changes&quot;&gt;1. Too many steps to changes&lt;/h3&gt;
-&lt;p&gt;I designed a very good UI, and connected outlet, started logic coding, finished that feature. One day, I had to refactor code and found some improvement. Some &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; had gestures, should be changed to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;. No problem, made changes. What did I do?&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Found the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
-    &lt;li&gt;Delete one by one.&lt;/li&gt;
-    &lt;li&gt;Add new &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;Connect new outlets&lt;/li&gt;
-    &lt;li&gt;Setup Auto Layout constraints. (This is most painful step, dozens of constraints need setup)&lt;/li&gt;
-    &lt;li&gt;Find and change many things in code&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;And when I changed to Auto Layout programmatically:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Found the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; need change&lt;/li&gt;
-    &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;Find and change many things in code&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Easier a lot, right? Especially, no change in setting up constraints.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-open-storyboard-is-a-pain-in-the-ass&quot;&gt;2. Open Storyboard is a pain in the ass&lt;/h3&gt;
-&lt;p&gt;My first project had a huge Storyboard, all-in-one. More than &lt;strong&gt;30 Controllers&lt;/strong&gt; were in &lt;strong&gt;1 Storyboard file&lt;/strong&gt;. It’s a nightmare. Anytime I opened it, change the &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt;’s textColor, and committed. 99% had conflicts. Fix conflicts in XML is another nightmare.&lt;/p&gt;
-
-&lt;p&gt;Thanks God, some experienced developers tell about split it up. A Storyboard should contain 3 to 5 Controllers, not more. It should be splitted up as features, for instance, &lt;code class=&quot;highlighter-rouge&quot;&gt;Membership&lt;/code&gt; Storyboard contains &lt;code class=&quot;highlighter-rouge&quot;&gt;Landing&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Register&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Login&lt;/code&gt; Controllers, or &lt;code class=&quot;highlighter-rouge&quot;&gt;Password&lt;/code&gt; Controller contains &lt;code class=&quot;highlighter-rouge&quot;&gt;ForgotPassword&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Confirmation&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NewPassword&lt;/code&gt; Controllers. It’s a big improvement and save a lot of iOS developer’s lives.&lt;/p&gt;
-
-&lt;p&gt;It’s better but not the best choice. Conflicts usually occur with Storyboard, and can’t avoid. 
-Besides that, constraints list is a mess, really mess and easy to make you mad.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Constraint_list.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can debate about select a control, and select the constraint you want instead of find in the list. Believe me, many times you can’t do that, and we soon get mad with it.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-dynamically-customize-control-with-auto-layout-programmatically&quot;&gt;3. Dynamically customize control with Auto Layout programmatically&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Custom_Control.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;What would you do with this control in Storyboard? You can make a custom view with 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UILabel&lt;/code&gt; for title, 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; for text input, and 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; for underline, 1 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; for right button.&lt;/p&gt;
-
-&lt;p&gt;How to use it? Drag a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; to Storyboard, choose subclass. Remember, it’s a UIView. You have to access to the view instance, textField and change the properties.&lt;/p&gt;
-
-&lt;p&gt;But with Auto Layout programmatically, it’s a  &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt;. You can change textColor,  font,  backgroundColor easily. Again, It’s a &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;You can see how I implement this custom &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; at &lt;a href=&quot;https://github.com/nguyentruongky/knCollection/blob/develop/knCollection/Control/knGistTextField.swift&quot;&gt;knGistTextField&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reasons-prevent-you-from-using-auto-layout-programmatically&quot;&gt;Reasons prevent you from using Auto Layout programmatically&lt;/h2&gt;
-
-&lt;h3 id=&quot;too-many-code-in-a-file&quot;&gt;Too many code in a file&lt;/h3&gt;
-
-&lt;p&gt;Yes, I have to admit that. There are 600 - 700 lines of code in my file. But it’s easy to solve this problem with &lt;strong&gt;Extension&lt;/strong&gt;. 
-Why don’t we define and setup constraints in the main file, (&lt;code class=&quot;highlighter-rouge&quot;&gt;LoginController.swift&lt;/code&gt;, for instance), and move all handler, logic into new file, &lt;code class=&quot;highlighter-rouge&quot;&gt;LoginControllerHandler.swift&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;write-the-same-codes-many-times&quot;&gt;Write the same codes many times&lt;/h3&gt;
-
-&lt;p&gt;Define a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; with Auto Layout programmatically&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let button: UIButton = {
-    let title = &quot;Sample&quot;
-    let image = &quot;Sample&quot;
-    let color = UIColor.black
-    
-    let button = UIButton()
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(color, for: .normal)
-    button.setImage(UIImage(named: image), for: .normal)
-    return button
-}()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Every time I need a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;, do I have to find and copy this code? No, code snippet can help you.&lt;/p&gt;
-
-&lt;p&gt;Find out how it helps &lt;a href=&quot;http://nshipster.com/xcode-snippets/&quot;&gt;here&lt;/a&gt;.
-I define above button with &lt;code class=&quot;highlighter-rouge&quot;&gt;knButton&lt;/code&gt; key in my XCode. It’s easier that find and drag a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt; and then format it in Storyboard, right?&lt;/p&gt;
-
-&lt;h3 id=&quot;code-is-too-long-and-unreadable&quot;&gt;Code is too long and unreadable&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// (1): can't change anything 
-let underline = UIView()
-underline.translatesAutoresizingMaskIntoConstraints = false
-addSubview(underline)
-
-// (2): Constraints setup
-underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
-
-// Format control
-underline.backgroundColor = UIColor.lightGray
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The (1) is same to all controls in Auto Layout programmatically, you have to keep this format for all controls. You can make it better with this code (if you want)&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UIView {
-    func addToView(view: UIView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(self)
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1) can be changed to&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let underline = UIView()
-underline.addToView(view)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The (2), they’re default code from Apple, why don’t we make it more readable and beautiful?&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;underline.bottom(toView: view, space: -8)
-underline.horizontal(toView: view)
-underline.height(1)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Is it beautiful enough? It comes from my own Auto Layout library. You can find it at &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;https://github.com/nguyentruongky/knConstraints&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;what-can-i-do-with-auto-layout-programmatically&quot;&gt;What can I do with Auto Layout programmatically?&lt;/h2&gt;
-
-&lt;p&gt;If you wan to try a life without Storyboard, why don’t you try these following instructions?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Setup your own code snippets&lt;/li&gt;
-  &lt;li&gt;Try my Auto Layout library &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;&lt;strong&gt;knConstraints&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Develop some simple custom views, with Auto Layout programmatically.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;how-can-i-help&quot;&gt;How can I help?&lt;/h2&gt;
-
-&lt;p&gt;Please feel free to touch to me by leaving comments below or Skype: nguyentruongky3390.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I started iOS development as a .NET developer. My first impression, Storyboard is really really interesting. 80% UI of my apps is built in Storyboard. I can’t imagine how I can develop iOS without Storyboard.</summary></entry></feed>
+&lt;p&gt;This solution saves much time for me. I hope it can help you. Save time, work better and enjoy your life.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Bitter Experience I started iOS as a 2-year-experience .NET developer. The salary range for a junior iOS dev is a little bit lower than the amount for a 2-year-experience develop get. I wanted to make myself stronger, earn more experience. I had a misconception of working and learning. I thought, freelance projects will help me strengthen my knowledge and experience. So I tried to get as more as possible freelance projects. And my nightmare started from here.</summary></entry></feed>

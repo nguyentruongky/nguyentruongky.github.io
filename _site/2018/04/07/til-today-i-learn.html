@@ -215,6 +215,12 @@ Alamofire.request(url, method: .post,
 </ul>
 
 <p>Source: <a href="https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app">StackOverflow</a></p>
+<h1 id="17042018">17/04/2018</h1>
+<h3 id="open-location-service">Open Location service</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if let url = URL(string: "App-Prefs:root=Privacy&amp;path=LOCATION") {
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+}
+</code></pre></div></div>
 
 
       <hr>

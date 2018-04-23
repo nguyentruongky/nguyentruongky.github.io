@@ -136,3 +136,10 @@ There are three kinds of Device orientation keys there in the info.plist now.
 - Supported interface orientations
 
 Source: [StackOverflow](https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app)
+# 17/04/2018
+### Open Location service
+```
+if let url = URL(string: "App-Prefs:root=Privacy&path=LOCATION") {
+    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+}
+```
