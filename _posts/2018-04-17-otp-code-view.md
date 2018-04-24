@@ -160,6 +160,6 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 (2)(3)(4): Update every character from `hiddenTextField` to every indicator box. Rest of boxes will be set to empty. 
 
 ### Result
-The main part is ready. Minors methods, properties are in the lib in github. Link is below. 
+The main part is ready. Minors methods, properties are in the lib in github. Link is [https://github.com/nguyentruongky/knOtpView](https://github.com/nguyentruongky/knOtpView).
 
 <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_final.gif?alt=media&token=a60f523c-40ac-429d-9546-804344e27d1f" width="40%"/>
