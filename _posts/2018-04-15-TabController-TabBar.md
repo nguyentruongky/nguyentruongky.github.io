@@ -246,4 +246,4 @@ Hope this can help anyone want to customize a tab bar can do it effortless. Code
 I will add some more animations and some properties to make it more convenience in very near future. Suggestions and feedbacks are welcome. 
 
 ### Notes
-I am a fan of Auto Layout Programmatically, so usually use my library, knConstraints for setting constraints. knConstraints is a very simple way to setup Auto Layout with very easy to read syntax. You can try it yourself [here](https://github.com/nguyentruongky/knConstraints).
+I am a fan of Auto Layout Programmatically, so usually use my library, **knConstraints** for setting constraints. **knConstraints** is a very simple way to setup Auto Layout with very easy to read syntax. You can try it yourself [here](https://github.com/nguyentruongky/knConstraints).
