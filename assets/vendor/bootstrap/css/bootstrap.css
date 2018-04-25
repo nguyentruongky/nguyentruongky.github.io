@@ -199,6 +199,9 @@ samp {
 }
 
 pre {
+  border-radius:10px;
+  white-space: pre-wrap;
+  background-color: rgba(211, 211, 211, 0.25);
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
@@ -8931,6 +8934,9 @@ a.text-dark:hover, a.text-dark:focus {
     content: " (" attr(title) ")";
   }
   pre {
+    border-radius:10px;
+    white-space: pre-wrap;
+    background-color: rgba(211, 211, 211, 0.25);
     white-space: pre-wrap !important;
   }
   pre,
