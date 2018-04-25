@@ -16,30 +16,33 @@ Create new file name `MyPageViewController.swift`. `MyPageViewController` will c
 Create an integer variable name `contentCount`
 
 ```
-var contentCount = 0
+
+    var contentCount = 0
+
 ```
 
 Write a function to setup this controller
 
 ```
-func setupController(numberOfContent: Int) {
-    contentCount = numberOfContent
 
-    // 1
-    let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
-    pageController.dataSource = self
-    
-    // 2
-    if contentCount > 0 {
-        let firstController = getItemController(0)!
-        let startingViewControllers: NSArray = [firstController]
-        pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+    func setupController(numberOfContent: Int) {
+        contentCount = numberOfContent
+
+        // 1
+        let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+        pageController.dataSource = self
+        
+        // 2
+        if contentCount > 0 {
+            let firstController = getItemController(0)!
+            let startingViewControllers: NSArray = [firstController]
+            pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        }
+
+        // 3
+        addChildViewController(pageController)
+        self.view.addSubview(pageController.view)
     }
-
-    // 3
-    addChildViewController(pageController)
-    self.view.addSubview(pageController.view)
-}
 
 ```
 
@@ -52,28 +55,29 @@ func setupController(numberOfContent: Int) {
 Go ahead, implement `UIPageViewControllerDataSource`
 
 ```
-func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex > 0 {
-        return getItemController(itemController.itemIndex - 1)
-    }
-    return nil
-}
 
-func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex + 1 < contentCount {
-        return getItemController(itemController.itemIndex+1)
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        let itemController = viewController as! PageItemController
+        if itemController.itemIndex > 0 {
+            return getItemController(itemController.itemIndex - 1)
+        }
+        return nil
     }
-    return nil
-}
 
-private func getItemController(itemIndex: Int) -> PageItemController? {
-    if itemIndex < contentCount {
-        return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        let itemController = viewController as! PageItemController
+        if itemController.itemIndex + 1 < contentCount {
+            return getItemController(itemController.itemIndex+1)
+        }
+        return nil
     }
-    return nil
-}
+
+    private func getItemController(itemIndex: Int) -> PageItemController? {
+        if itemIndex < contentCount {
+            return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+        }
+        return nil
+    }
 
 ```
 
@@ -88,16 +92,20 @@ Find out what it is [here](https://developer.apple.com/library/ios/documentation
 Define delegate now.
 
 ```
-protocol PageViewDelegate {
-    func getPageItemAtIndex(index: Int) -> UIViewController
-}
+
+    protocol PageViewDelegate {
+        func getPageItemAtIndex(index: Int) -> UIViewController
+    }
+
 ```
 
 Write this code out of the class scope. I usually write it under import functions.
 
 And use delegate in MyPageViewController
 ```
-var delegate: PageViewDelegate?
+    
+    var delegate: PageViewDelegate?
+
 ```
 
 It's almost done here. You have to implement PageViewDelegate in your main controller. However, I want to show you the complete code for this base class. Go ahead.
@@ -105,33 +113,38 @@ It's almost done here. You have to implement PageViewDelegate in your main contr
 Add new variable to determine should we show indicator dots.
 
 ```
-var didShowPageControl = false
+
+    var didShowPageControl = false
+
 ```
 
 Add these code at the end of `setupController` method.
 
 ```
-if didShowPageControl == true {
-    setupPageControl()
-}
+    
+    if didShowPageControl == true {
+        setupPageControl()
+    }
+
 ```
 
 Add new methods
 ```
-private func setupPageControl() {
-    let appearance = UIPageControl.appearance()
-    appearance.pageIndicatorTintColor = UIColor.grayColor()
-    appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-    appearance.backgroundColor = UIColor.darkGrayColor()
-}
 
-func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-    if didShowPageControl == false { return 0 }
-    return contentCount
-}
+    private func setupPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = UIColor.grayColor()
+        appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
+        appearance.backgroundColor = UIColor.darkGrayColor()
+    }
 
-func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-    return 0 }
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+        if didShowPageControl == false { return 0 }
+        return contentCount
+    }
+
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return 0 }
 
 ```
 
@@ -142,29 +155,31 @@ Design your beautiful page item to show on UIPageViewController. Here we will us
 And in your main view controller, remove all codes in class ViewController then write some new codes. Your class looks like this:
 
 ```
-class ViewController: UIViewController, PageViewDelegate {
-    // Initialize it right away here
-    private let contentImages = ["nature_pic_1.png",
-                                 "nature_pic_2.png",
-                                 "nature_pic_3.png",
-                                 "nature_pic_4.png"];
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let pageController = MyPageViewController()
-        pageController.delegate = self
-        pageController.setupController(contentImages.count)
 
-        addChildViewController(pageController)
-        self.view.addSubview(pageController.view)
-    }
+    class ViewController: UIViewController, PageViewDelegate {
+        // Initialize it right away here
+        private let contentImages = ["nature_pic_1.png",
+                                    "nature_pic_2.png",
+                                    "nature_pic_3.png",
+                                    "nature_pic_4.png"];
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            let pageController = MyPageViewController()
+            pageController.delegate = self
+            pageController.setupController(contentImages.count)
 
-    func getPageItemAtIndex(index: Int) -> UIViewController {
-        let pageItemController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
-        pageItemController.itemIndex = index
-        pageItemController.imageName = contentImages[index]
-        return pageItemController
+            addChildViewController(pageController)
+            self.view.addSubview(pageController.view)
+        }
+
+        func getPageItemAtIndex(index: Int) -> UIViewController {
+            let pageItemController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
+            pageItemController.itemIndex = index
+            pageItemController.imageName = contentImages[index]
+            return pageItemController
+        }
     }
-}
+    
 ```
 
 You can see your `PageViewDelegate` you defined here.

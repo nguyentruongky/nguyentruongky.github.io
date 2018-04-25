@@ -100,41 +100,43 @@
   <li>Add some codes for localization.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class knI18n {
-    static let shared = knI18n()
-    
-    private let knCurrentLanguageKey = "knCurrentLanguageKey"
-    private let fileNameBase = "Lang_"
-    lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
-    func getLanguageFile() -&gt; NSDictionary {
-        let language = currentLanguage ?? "en"
-        if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: "plist") {
-            return NSDictionary(contentsOfFile: path)!
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class knI18n {
+        static let shared = knI18n()
+        
+        private let knCurrentLanguageKey = "knCurrentLanguageKey"
+        private let fileNameBase = "Lang_"
+        lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
+        func getLanguageFile() -&gt; NSDictionary {
+            let language = currentLanguage ?? "en"
+            if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: "plist") {
+                return NSDictionary(contentsOfFile: path)!
+            }
+            fatalError("Localizable file NOT found")
         }
-        fatalError("Localizable file NOT found")
+        
+        func localize(string: String) -&gt; String {
+            guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
+            return localizedString
+        }
+        
+        func setLanguage(_ language: String) {
+            currentLanguage = language
+            localizableDictionary = getLanguageFile()
+        }
+        
+        private var currentLanguage: String? {
+            get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
+            set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
+        }
     }
-    
-    func localize(string: String) -&gt; String {
-        guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
-        return localizedString
-    }
-    
-    func setLanguage(_ language: String) {
-        currentLanguage = language
-        localizableDictionary = getLanguageFile()
-    }
-    
-    private var currentLanguage: String? {
-        get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
-        set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
-    }
-}
 
-extension String {
-    var i18n: String {
-        return knI18n.shared.localize(string: self)
+    extension String {
+        var i18n: String {
+            return knI18n.shared.localize(string: self)
+        }
     }
-}
+
 </code></pre></div></div>
 
 <p>Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language.</p>
@@ -143,22 +145,24 @@ extension String {
   <li>Add some code into controller</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@objc func handleChangeToEn() {
-    knI18n.shared.setLanguage("en")
-    refreshUI()
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func handleChangeToEn() {
+        knI18n.shared.setLanguage("en")
+        refreshUI()
+    }
 
-@objc func handleChangeToVi() {
-    knI18n.shared.setLanguage("vi")
-    refreshUI()
-}
+    @objc func handleChangeToVi() {
+        knI18n.shared.setLanguage("vi")
+        refreshUI()
+    }
 
-func refreshUI() {
-    languageLabel.text = "lang".i18n
-    helloLabel.text = "hello".i18n
-    vietnameseButton.setTitle("change_vi".i18n, for: .normal)
-    englishButton.setTitle("change_en".i18n, for: .normal)
-}
+    func refreshUI() {
+        languageLabel.text = "lang".i18n
+        helloLabel.text = "hello".i18n
+        vietnameseButton.setTitle("change_vi".i18n, for: .normal)
+        englishButton.setTitle("change_en".i18n, for: .normal)
+    }
+    
 </code></pre></div></div>
 
 <ul>

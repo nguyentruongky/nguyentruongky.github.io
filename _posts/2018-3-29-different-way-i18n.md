@@ -18,41 +18,43 @@ This note I want to take note about another way I found in my recent projects. I
 - Add some codes for localization.
 
 ```
-class knI18n {
-    static let shared = knI18n()
-    
-    private let knCurrentLanguageKey = "knCurrentLanguageKey"
-    private let fileNameBase = "Lang_"
-    lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
-    func getLanguageFile() -> NSDictionary {
-        let language = currentLanguage ?? "en"
-        if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: "plist") {
-            return NSDictionary(contentsOfFile: path)!
-        }
-        fatalError("Localizable file NOT found")
-    }
-    
-    func localize(string: String) -> String {
-        guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
-        return localizedString
-    }
-    
-    func setLanguage(_ language: String) {
-        currentLanguage = language
-        localizableDictionary = getLanguageFile()
-    }
-    
-    private var currentLanguage: String? {
-        get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
-        set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
-    }
-}
 
-extension String {
-    var i18n: String {
-        return knI18n.shared.localize(string: self)
+    class knI18n {
+        static let shared = knI18n()
+        
+        private let knCurrentLanguageKey = "knCurrentLanguageKey"
+        private let fileNameBase = "Lang_"
+        lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
+        func getLanguageFile() -> NSDictionary {
+            let language = currentLanguage ?? "en"
+            if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: "plist") {
+                return NSDictionary(contentsOfFile: path)!
+            }
+            fatalError("Localizable file NOT found")
+        }
+        
+        func localize(string: String) -> String {
+            guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
+            return localizedString
+        }
+        
+        func setLanguage(_ language: String) {
+            currentLanguage = language
+            localizableDictionary = getLanguageFile()
+        }
+        
+        private var currentLanguage: String? {
+            get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
+            set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
+        }
     }
-}
+
+    extension String {
+        var i18n: String {
+            return knI18n.shared.localize(string: self)
+        }
+    }
+
 ```
 
 Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language. 
@@ -60,22 +62,24 @@ Hope code clean enough to understand. The main idea is to load the plist file in
 - Add some code into controller
 
 ```
-@objc func handleChangeToEn() {
-    knI18n.shared.setLanguage("en")
-    refreshUI()
-}
 
-@objc func handleChangeToVi() {
-    knI18n.shared.setLanguage("vi")
-    refreshUI()
-}
+    @objc func handleChangeToEn() {
+        knI18n.shared.setLanguage("en")
+        refreshUI()
+    }
 
-func refreshUI() {
-    languageLabel.text = "lang".i18n
-    helloLabel.text = "hello".i18n
-    vietnameseButton.setTitle("change_vi".i18n, for: .normal)
-    englishButton.setTitle("change_en".i18n, for: .normal)
-}
+    @objc func handleChangeToVi() {
+        knI18n.shared.setLanguage("vi")
+        refreshUI()
+    }
+
+    func refreshUI() {
+        languageLabel.text = "lang".i18n
+        helloLabel.text = "hello".i18n
+        vietnameseButton.setTitle("change_vi".i18n, for: .normal)
+        englishButton.setTitle("change_en".i18n, for: .normal)
+    }
+    
 ```
 
 - Run the app, and try. 

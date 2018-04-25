@@ -105,53 +105,57 @@
   <li>Add some code to our intention</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func loadImagesToSlideShow(images:[String]) {
-	for var i = 0; i &lt; images.count; i++ {
-            let imageSlide = formatSlide(images[i], slideIndex: i)
-            scrollView.addSubview(imageSlide)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+	func loadImagesToSlideShow(images:[String]) {
+		for var i = 0; i &lt; images.count; i++ {
+				let imageSlide = formatSlide(images[i], slideIndex: i)
+				scrollView.addSubview(imageSlide)
+		}
+		formatPageControl(images.count)
+		formatScrollView(images.count)
 	}
-	formatPageControl(images.count)
-	formatScrollView(images.count)
-}
 
-private func formatSlide(imagesName: String, slideIndex: Int) -&gt; UIImageView {
-	let imageSource = UIImage(named: imagesName)
-	let imageView = UIImageView(image: imageSource)
-	imageView.contentMode = .ScaleAspectFit
-	imageView.clipsToBounds = true    
-	var frame = scrollView.frame
-	frame.origin.x = CGFloat(slideIndex) * scrollView.frame.width
-	imageView.frame = frame
-	return imageView
-}
+	private func formatSlide(imagesName: String, slideIndex: Int) -&gt; UIImageView {
+		let imageSource = UIImage(named: imagesName)
+		let imageView = UIImageView(image: imageSource)
+		imageView.contentMode = .ScaleAspectFit
+		imageView.clipsToBounds = true    
+		var frame = scrollView.frame
+		frame.origin.x = CGFloat(slideIndex) * scrollView.frame.width
+		imageView.frame = frame
+		return imageView
+	}
 
-private func formatPageControl(pageCount: Int) {
-	indicatorPageControl.backgroundColor = UIColor.blackColor()
-	indicatorPageControl.numberOfPages = pageCount
-}
+	private func formatPageControl(pageCount: Int) {
+		indicatorPageControl.backgroundColor = UIColor.blackColor()
+		indicatorPageControl.numberOfPages = pageCount
+	}
 
-private func formatScrollView(pageCount: Int) {
-	scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageCount), scrollView.frame.height)
-}
+	private func formatScrollView(pageCount: Int) {
+		scrollView.contentSize = CGSizeMake(scrollView.frame.width * CGFloat(pageCount), scrollView.frame.height)
+	}
 
-func scrollViewDidScroll(scrollView: UIScrollView) {
-	let pageWidth = scrollView.frame.size.width
-	let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
-	indicatorPageControl.currentPage = page
-}
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		let pageWidth = scrollView.frame.size.width
+		let page = Int(floor((scrollView.contentOffset.x * 2.0 + pageWidth) / (pageWidth * 2.0)))
+		indicatorPageControl.currentPage = page
+	}
+
 </code></pre></div></div>
 
 <ul>
-  <li>Add some code to ViewController. Your ViewController looks like this:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@IBOutlet var slideShowIntention: ImageSlideShowIntention!
-override func viewDidLoad() {
-super.viewDidLoad()
-let imageNames = ["son_doong_1", "son_doong_2"]
-slideShowIntention.loadImagesToSlideShow(imageNames)
-}
-</code></pre></div>    </div>
-  </li>
+  <li>Add some code to ViewController. Your ViewController looks like this:</li>
 </ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  	@IBOutlet var slideShowIntention: ImageSlideShowIntention!
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		let imageNames = ["son_doong_1", "son_doong_2"]
+		slideShowIntention.loadImagesToSlideShow(imageNames)
+	}
+	
+</code></pre></div></div>
 
 <p>Anywhere you want to use an images slide show like this, copy the intention file, connect to your ViewController, pass an images name array and let it go.</p>
 

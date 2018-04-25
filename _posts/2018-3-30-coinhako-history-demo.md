@@ -51,114 +51,120 @@ ListView is a base view for PendingView, CompletedView, FilterView. ListView con
 This is just a simple demo, so I make a Datasource (fake data). In my regular projects, I will load data/load more by workers to handle request result and separate code for the View. 
 
 ```
-class ListView: knView {
-    let maxItemCount = 20
-    
-    let fakeData = Datasource()
-    var currentPage = 0
-    var canLoadMore = true 
-    var datasource = [String]() { didSet { tableView.reloadData() }}
-    
-    lazy var tableView: UITableView = { [weak self] in
-        let tb = UITableView()
-        tb.translatesAutoresizingMaskIntoConstraints = false
-        tb.separatorStyle = .none
-        tb.showsVerticalScrollIndicator = false
-        tb.dataSource = self
-        tb.delegate = self
-        tb.register(knTableCell.self, forCellReuseIdentifier: "knTableCell")
-        return tb
-        }()
-    
-    override func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(views: tableView)
-        tableView.fill(toView: self)
-        backgroundColor = .white
-    }
-    
-    func fetchMore() { }
-    func fetchData() { }
 
-    func checkLoadMoreAvailable(currentCount: Int) {
-        canLoadMore = currentCount == maxItemCount
-        currentPage += currentCount == maxItemCount ? 1 : 0
-    }
-}
+    class ListView: knView {
+        let maxItemCount = 20
+        
+        let fakeData = Datasource()
+        var currentPage = 0
+        var canLoadMore = true 
+        var datasource = [String]() { didSet { tableView.reloadData() }}
+        
+        lazy var tableView: UITableView = { [weak self] in
+            let tb = UITableView()
+            tb.translatesAutoresizingMaskIntoConstraints = false
+            tb.separatorStyle = .none
+            tb.showsVerticalScrollIndicator = false
+            tb.dataSource = self
+            tb.delegate = self
+            tb.register(knTableCell.self, forCellReuseIdentifier: "knTableCell")
+            return tb
+            }()
+        
+        override func setupView() {
+            translatesAutoresizingMaskIntoConstraints = false
+            addSubviews(views: tableView)
+            tableView.fill(toView: self)
+            backgroundColor = .white
+        }
+        
+        func fetchMore() { }
+        func fetchData() { }
 
-
-extension ListView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datasource.count }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == datasource.count - 1 {
-            fetchMore()
+        func checkLoadMoreAvailable(currentCount: Int) {
+            canLoadMore = currentCount == maxItemCount
+            currentPage += currentCount == maxItemCount ? 1 : 0
         }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "knTableCell", for: indexPath) as! knTableCell
-        cell.textLabel?.text = datasource[indexPath.row]
-        return cell
+
+    extension ListView: UITableViewDelegate, UITableViewDataSource {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return datasource.count }
+        
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            if indexPath.row == datasource.count - 1 {
+                fetchMore()
+            }
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "knTableCell", for: indexPath) as! knTableCell
+            cell.textLabel?.text = datasource[indexPath.row]
+            return cell
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 66 }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { return 66 }
-}
+
 ```
 
 ### Add PendingView, CompletedView, FilterView
 Add more 3 views and override `fetchData()`, `fetchMore()`. Example for PendingView
+
 ```
-class PendingView: ListView {
-    override func fetchData() {
-        let newData = fakeData.getPendingList(page: 0)
-        checkLoadMoreAvailable(currentCount: newData.count)
-        datasource = newData
+
+    class PendingView: ListView {
+        override func fetchData() {
+            let newData = fakeData.getPendingList(page: 0)
+            checkLoadMoreAvailable(currentCount: newData.count)
+            datasource = newData
+        }
+        
+        override func fetchMore() {
+            guard canLoadMore else { return }
+            let newData = fakeData.getPendingList(page: currentPage)
+            checkLoadMoreAvailable(currentCount: newData.count)
+            datasource += newData
+        }
     }
-    
-    override func fetchMore() {
-        guard canLoadMore else { return }
-        let newData = fakeData.getPendingList(page: currentPage)
-        checkLoadMoreAvailable(currentCount: newData.count)
-        datasource += newData
-    }
-}
+
 ```
 
 ### Handle logic 
 In HistoryController, handle the add view and remove previous one by setting ListType.
 
 ```
-func showList(_ listType: ListType) {
-    switch listType {
-        case .pending:
-            if pendingView.datasource.count == 0 {
-                pendingView.fetchData()
-            }
-            statusSegment.selectedSegmentIndex = 0
-            view.addSubview(pendingView)
-            pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = pendingView
-            
-        case .completed:
-            if completedView.datasource.count == 0 {
-                completedView.fetchData()
-            }
-            statusSegment.selectedSegmentIndex = 1
-            view.addSubview(completedView)
-            completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = completedView
-            
-        case .filter:
-            view.addSubview(filterView)
-            filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = filterView
+
+    func showList(_ listType: ListType) {
+        switch listType {
+            case .pending:
+                if pendingView.datasource.count == 0 {
+                    pendingView.fetchData()
+                }
+                statusSegment.selectedSegmentIndex = 0
+                view.addSubview(pendingView)
+                pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = pendingView
+                
+            case .completed:
+                if completedView.datasource.count == 0 {
+                    completedView.fetchData()
+                }
+                statusSegment.selectedSegmentIndex = 1
+                view.addSubview(completedView)
+                completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = completedView
+                
+            case .filter:
+                view.addSubview(filterView)
+                filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = filterView
         }
     }
+    
 ```
 
 This is the most complicated portion in this demo. Other minor codes you can see in the sample on [Github](https://github.com/nguyentruongky/MultiScreensInOneDemo).

@@ -162,86 +162,88 @@ Move on step by step
 2. New file and add below code: 
 
 ```
-// (1) - Define actions controller needs in protocol SampleControllerOutput
 
-protocol SampleControllerOutput: class {
-    /* action from controller */
-    func getProfile()
-}
+    // (1) - Define actions controller needs in protocol SampleControllerOutput
 
-// (2) - Define actions to respond to result in protocol 'SampleInteractorOutput'. For instance: requestSuccess, updateView...
-
-protocol SampleInteractorOutput: class {
-    func getProfileSuccess(profile: UserProfile)        
-    func getProfileFail(err: Error)
-}
-
-// (3) - Conform actions from 'SampleControllerOutput' in 'extension SampleInteractor'
-
-extension SampleInteractor: SampleControllerOutput {
-    func getProfile() {
-        GGetProfileWorker(id: id,
-                         successResponse: output?.fetchProfileSuccess,
-                         failResponse: output?.fetchProfileFail)
-            .execute()
+    protocol SampleControllerOutput: class {
+        /* action from controller */
+        func getProfile()
     }
-}
 
-// (4) - Conform actions from 'SampleInteractorOutput'
+    // (2) - Define actions to respond to result in protocol 'SampleInteractorOutput'. For instance: requestSuccess, updateView...
 
-extension SamplePresenter: SampleInteractorOutput {
-    func getProfileFail(err: Error) {
-        output?.showGetProfileFailError(err: err)
+    protocol SampleInteractorOutput: class {
+        func getProfileSuccess(profile: UserProfile)        
+        func getProfileFail(err: Error)
     }
-    func getProfileSuccess(profile: UserProfile) {
-        output?.showUserProfile(profile: profile)
+
+    // (3) - Conform actions from 'SampleControllerOutput' in 'extension SampleInteractor'
+
+    extension SampleInteractor: SampleControllerOutput {
+        func getProfile() {
+            GGetProfileWorker(id: id,
+                            successResponse: output?.fetchProfileSuccess,
+                            failResponse: output?.fetchProfileFail)
+                .execute()
+        }
     }
-}
 
-// (5) - Define actions to update directly to UI to 'SamplePresenterOutput'
+    // (4) - Conform actions from 'SampleInteractorOutput'
 
-protocol SamplePresenterOutput: class {
-    func showUserProfile(profile: UserProfile)
-    func showGetProfileFailError(err: Error)
-}
-
-// (6) - Update UI
-
-extension SampleController: SamplePresenterOutput {
-    func showGetProfileFailError(err: Error) { }
-    
-    func showUserProfile(profile: UserProfile) {
-        // update view
+    extension SamplePresenter: SampleInteractorOutput {
+        func getProfileFail(err: Error) {
+            output?.showGetProfileFailError(err: err)
+        }
+        func getProfileSuccess(profile: UserProfile) {
+            output?.showUserProfile(profile: profile)
+        }
     }
-}
 
-/* (7) - It's set up. Don't need to care about it. */
+    // (5) - Define actions to update directly to UI to 'SamplePresenterOutput'
 
-class SampleInteractor {
-    var output: SampleInteractorOutput?
-}
+    protocol SamplePresenterOutput: class {
+        func showUserProfile(profile: UserProfile)
+        func showGetProfileFailError(err: Error)
+    }
 
-class SamplePresenter {
-    weak var output: SamplePresenterOutput?
-}
+    // (6) - Update UI
 
-//MARK: Configuration
-class SampleConfiguration /* called in viewDidLoad */ {
-    static let shared = SampleConfiguration()
-    func configure(viewController: SampleController) {
+    extension SampleController: SamplePresenterOutput {
+        func showGetProfileFailError(err: Error) { }
         
-        // Presenter
-        let presenter = SamplePresenter()
-        presenter.output = viewController
-        
-        // Interactor
-        let interactor = SampleInteractor()
-        interactor.output = presenter
-        
-        // View controller
-        viewController.output = interactor
+        func showUserProfile(profile: UserProfile) {
+            // update view
+        }
     }
-}
+
+    /* (7) - It's set up. Don't need to care about it. */
+
+    class SampleInteractor {
+        var output: SampleInteractorOutput?
+    }
+
+    class SamplePresenter {
+        weak var output: SamplePresenterOutput?
+    }
+
+    //MARK: Configuration
+    class SampleConfiguration /* called in viewDidLoad */ {
+        static let shared = SampleConfiguration()
+        func configure(viewController: SampleController) {
+            
+            // Presenter
+            let presenter = SamplePresenter()
+            presenter.output = viewController
+            
+            // Interactor
+            let interactor = SampleInteractor()
+            interactor.output = presenter
+            
+            // View controller
+            viewController.output = interactor
+        }
+    }
+
 ```		    
 (1) - You define actions your controller need to do. For example: getProfile, updateProfile, viewDetail... 
 
@@ -252,15 +254,17 @@ class SampleConfiguration /* called in viewDidLoad */ {
 >How does the worker look like?
 
 ```
-struct GetUserProfile {
-    private let api = "/workshops/"
-    var id: Int
-    var successResponse: ((_ something: UserProfile) -> Void)? = nil
-    var failResponse: ((_ error: Error) -> Void)? = nil
-    func execute() {
-        // connect to server
+
+    struct GetUserProfile {
+        private let api = "/workshops/"
+        var id: Int
+        var successResponse: ((_ something: UserProfile) -> Void)? = nil
+        var failResponse: ((_ error: Error) -> Void)? = nil
+        func execute() {
+            // connect to server
+        }
     }
-}
+    
 ```
 (4) - Response to result will be here. You should change the model data to new data, which can easily set to your view. For example, change Date to String, so that you just set to your view, no need to convert Date to String in your controller. 
 

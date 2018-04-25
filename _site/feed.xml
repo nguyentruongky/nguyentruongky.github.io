@@ -1,4 +1,185 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-24T10:54:38+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">OTP Code View</title><link href="http://localhost:4001/2018/04/17/otp-code-view.html" rel="alternate" type="text/html" title="OTP Code View" /><published>2018-04-17T00:00:00+07:00</published><updated>2018-04-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/17/otp-code-view</id><content type="html" xml:base="http://localhost:4001/2018/04/17/otp-code-view.html">&lt;p&gt;Two years ago, I did a view for this purpose. Detail is on my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-25T11:20:19+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash - iOs application</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash - iOs application" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
+
+&lt;p&gt;This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes.&lt;/p&gt;
+
+&lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
+&lt;p&gt;I use some code collection from my personal codebase. You can download it at &lt;a href=&quot;https://github.com/nguyentruongky/codebase&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Init an empty project and added my &lt;code class=&quot;highlighter-rouge&quot;&gt;mustHave&lt;/code&gt; folder&lt;/p&gt;
+
+&lt;h2 id=&quot;add-tableview-to-homecontroller&quot;&gt;Add TableView to HomeController&lt;/h2&gt;
+&lt;p&gt;Change something&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;File name: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.swift&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Class name: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Main Storyboard custome class: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt; content is below.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    // (1)
+    class HomeController: knCustomTableController {
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setupView()
+        }
+        override func setupView() {
+            view.addSubview(tableView)
+            tableView.fill(toView: view)
+        }
+        override func registerCells() {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: &quot;UITableViewCell&quot;)
+        }
+    }
+
+    // (2)
+    extension HomeController {
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
+            return 5
+        }
+        
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: &quot;UITableViewCell&quot;, for: indexPath) as! UITableViewCell
+            cell.backgroundColor = UIColor.color(value: CGFloat(UInt32.random(lower: 0, upper: 255)))
+            return cell
+        }
+        
+        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat {
+            return 35
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;knCustomTableController&lt;/code&gt; is my favourite controller in my codebase. It’s a view controller, contain &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;, conform &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDataSource&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDelegate&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Why don’t I use &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt;? I have a note about this &lt;a href=&quot;https://kynguyen.space/2017/10/12/UITableViewController-vs-UIViewController.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;knCustomTableController&lt;/code&gt; is setup everything to be ready to display. You need override &lt;code class=&quot;highlighter-rouge&quot;&gt;registerCells&lt;/code&gt;, some needed methods for table datasource like (2).&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method contains something weird. It’s my constraints setting. I am a fan of Auto Layout Programmatically, so usually use my library, &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;&lt;strong&gt;knConstraints&lt;/strong&gt;&lt;/a&gt; for setting constraints.&lt;/p&gt;
+
+&lt;p&gt;Run and see a tableView with 5 rows, different colors.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-model-and-fake-data&quot;&gt;Add Model and fake data&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoModel.swift&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Add some code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class Photo {
+        var author: String
+        var url: String
+        var ratio: CGFloat = 1
+        var displayHeight: CGFloat {
+            return CGFloat(floor(Double(ratio * screenWidth)))
+        }
+        
+        init(author: String, url: String, ratio: CGFloat) {
+            self.author = author
+            self.url = url
+            self.ratio = ratio
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Update code in file &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var datasource = [Photo]()
+
+    override func registerCells() {
+        tableView.register(PhotoCell.self, forCellReuseIdentifier: &quot;PhotoCell&quot;)
+    }
+
+    override func fetchData() {
+        for _ in 0 ..&amp;lt; 5 {
+            datasource.append(Photo(author: &quot;Kyle&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, ratio: 0.667954600338083))
+            datasource.append(Photo(author: &quot;Mark&quot;, url: &quot;https://unsplash.com/photos/Y6N_w94x8ik/download&quot;, ratio: 1.5))
+        }
+        tableView.reloadData()
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
+        return datasource.count }
+        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;PhotoCell&quot;, for: indexPath) as! PhotoCell
+        cell.data = datasource[indexPath.row]
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { 
+        return UITableViewAutomaticDimension }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData()&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Can’t run because of missing PhotoCell. Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell.swift&lt;/code&gt;. Add content below to &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    import UIKit
+    class PhotoCell: knTableCell {
+        var heightConstraint: NSLayoutConstraint?
+        var data: Photo? {
+            didSet {
+                guard let data = data else { return }
+                authorLabel.text = data.author
+                photoImageView.downloadImage(from: data.url)
+                // (1)
+                heightConstraint?.constant = data.displayHeight
+            }
+        }
+
+        private let authorLabel = knUIMaker.makeLabel()
+        private let photoImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
+        
+        override func setupView() {
+            let line = knUIMaker.makeLine(color: .white, height: 1)
+            
+            addSubviews(views: photoImageView, authorLabel, line)
+            photoImageView.fill(toView: self)
+            
+            authorLabel.bottomLeft(toView: self, bottom: -8, left: 8)
+            
+            line.horizontal(toView: self)
+            line.bottom(toView: self)
+            
+            // (2)
+            heightConstraint = height(100, isActive: false)
+            heightConstraint?.priority = UILayoutPriority(999)
+            heightConstraint?.isActive = true
+        }
+    }
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I always setup Auto Layout in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method. So, want to change any layout, UI, just find &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;(1): Every photo has different ratio, and we need to keep the photoImageView the same ratio. So every photo, update the height constraint (calculated when ratio set).&lt;/p&gt;
+
+&lt;p&gt;(2): Need to descrease the priority to avoid conflict with &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView-Encapsulated-Layout-Height&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView-Encapsulated-Layout-Height&lt;/code&gt; is a constraints automatically added by iOs.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-pod&quot;&gt;Install pod&lt;/h2&gt;
+
+&lt;p&gt;Still have error at &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView.downloadImage(from: data.url)&lt;/code&gt;. You comment it before because missing &lt;code class=&quot;highlighter-rouge&quot;&gt;Kingfisher&lt;/code&gt; library. We need to install &lt;code class=&quot;highlighter-rouge&quot;&gt;Kingfisher&lt;/code&gt; to help us download image. It’s very cool lib. More detail about Kingfisher is &lt;a href=&quot;https://github.com/onevcat/Kingfisher&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use Terminal to access to your project, and &lt;code class=&quot;highlighter-rouge&quot;&gt;pod init&lt;/code&gt; then follow &lt;a href=&quot;https://github.com/onevcat/Kingfisher/wiki/Installation-Guide&quot;&gt;this instruction&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Uncomment code in &lt;code class=&quot;highlighter-rouge&quot;&gt;knUIImage.swift&lt;/code&gt; and run again&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&amp;amp;token=5e2786f0-e428-4771-8aee-879d6c3f2404&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry><entry><title type="html">OTP Code View</title><link href="http://localhost:4001/2018/04/17/otp-code-view.html" rel="alternate" type="text/html" title="OTP Code View" /><published>2018-04-17T00:00:00+07:00</published><updated>2018-04-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/17/otp-code-view</id><content type="html" xml:base="http://localhost:4001/2018/04/17/otp-code-view.html">&lt;p&gt;Two years ago, I did a view for this purpose. Detail is on my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/ActiveCode/master/E7AVZubaOT.gif&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
@@ -14,67 +195,63 @@
 
 &lt;p&gt;Anyone can customize UI themselves for more digits. Digit indicator is • or _ can save more space.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private var digitCount = 0
-private var validate: ((String) -&amp;gt; Void)?
-convenience init(digitCount: Int, validate: @escaping ((String) -&amp;gt; Void)) {
-    self.init(frame: CGRect.zero)
-    self.digitCount = digitCount
-    self.validate = validate
-    setupView()
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    private var digitCount = 0
+    private var validate: ((String) -&amp;gt; Void)?
+    convenience init(digitCount: Int, validate: @escaping ((String) -&amp;gt; Void)) {
+        self.init(frame: CGRect.zero)
+        self.digitCount = digitCount
+        self.validate = validate
+        setupView()
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;setup-the-ui&quot;&gt;Setup the UI&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;override func setupView() {
-    // (1)
-    guard digitCount &amp;gt; 0 else { return }
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        // (1)
+        guard digitCount &amp;gt; 0 else { return }
 
-    // (2)
-    var constraints = &quot;H:|-8-&quot;
-    for i in 0 ..&amp;lt; digitCount {
-        let label = makeLabel()
-        if i &amp;gt; 0 {
-            label.width(toView: labels[0])
+        // (2)
+        var constraints = &quot;H:|-8-&quot;
+        for i in 0 ..&amp;lt; digitCount {
+            let label = makeLabel()
+            if i &amp;gt; 0 {
+                label.width(toView: labels[0])
+            }
+            constraints += &quot;[v\(i)]-8-&quot;
         }
-        constraints += &quot;[v\(i)]-8-&quot;
+        constraints += &quot;|&quot;
+        addConstraints(withFormat: constraints, arrayOf: labels)
+        height(60)
+        
+        // (3)
+        setCode(at: 0, active: true)
+        hiddenTextField.becomeFirstResponder()
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder)))
     }
-    constraints += &quot;|&quot;
-    addConstraints(withFormat: constraints, arrayOf: labels)
-    height(60)
-    
-    // (3)
-    setCode(at: 0, active: true)
-    hiddenTextField.becomeFirstResponder()
-    addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder)))
-}
 
-private func makeLabel() -&amp;gt; UILabel {
-    let label = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 45),
-                                color: color_69_125_245,
-                                alignment: .center)
-    // (4)
-    label.createRoundCorner(5)
-    label.createBorder(0.5, color: color_102)
+    private func makeLabel() -&amp;gt; UILabel {
+        let label = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 45),
+                                    color: color_69_125_245,
+                                    alignment: .center)
+        // (4)
+        label.createRoundCorner(5)
+        label.createBorder(0.5, color: color_102)
 
-    // (5)
-    addSubview(label)
-    label.vertical(toView: self)
-    labels.append(label)
-    return label
-}
+        // (5)
+        addSubview(label)
+        label.vertical(toView: self)
+        labels.append(label)
+        return label
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(1): Prevent code running while no digit. Only support init view by code with init(digitCount:validate), so should prevent other init way to make wrong behaviour.&lt;/p&gt;
+&lt;p&gt;(1): Prevent code running while no digit. Only support init view by code with &lt;code class=&quot;highlighter-rouge&quot;&gt;init(digitCount:validate)&lt;/code&gt;, so should prevent other init way to make wrong behaviour.&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;(2): Set Auto layout code. Create a Visual Format Language string (like this: “H:&lt;/td&gt;
-      &lt;td&gt;-8-[v0]-[v1]-8-&lt;/td&gt;
-      &lt;td&gt;”). Detail is &lt;a href=&quot;https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html&quot;&gt;here&lt;/a&gt;.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;(2): Set Auto layout code. Create a Visual Format Language string (like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;H:|-8-[v0]-[v1]-8-|&quot;&lt;/code&gt;). Detail is &lt;a href=&quot;https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;To make sure all digit indicators have same width, I set widthConstraint equal to the first indicator.&lt;/p&gt;
 
@@ -84,71 +261,76 @@ private func makeLabel() -&amp;gt; UILabel {
 
 &lt;h3 id=&quot;set-hidden-uitextfield&quot;&gt;Set hidden UITextField&lt;/h3&gt;
 &lt;p&gt;Just add a UITextField, which is overlapped to use its keyboard and delegate. Every key input, I will update the digit indicator by catch the character in UITextFieldDelegate&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;lazy var hiddenTextField = self.addHiddenTextField()
-private func addHiddenTextField() -&amp;gt; UITextField {
-    let tf = UITextField()
-    tf.translatesAutoresizingMaskIntoConstraints = false
-    tf.keyboardType = .numberPad
-    tf.isHidden = true
-    tf.delegate = self
-    
-    addSubviews(views: tf)
-    tf.fill(toView: self)
-    
-    return tf
-}
-override func becomeFirstResponder() -&amp;gt; Bool {
-    hiddenTextField.becomeFirstResponder()
-    return true
-}
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    lazy var hiddenTextField = self.addHiddenTextField()
+    private func addHiddenTextField() -&amp;gt; UITextField {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.keyboardType = .numberPad
+        tf.isHidden = true
+        tf.delegate = self
+        
+        addSubviews(views: tf)
+        tf.fill(toView: self)
+        
+        return tf
+    }
+    override func becomeFirstResponder() -&amp;gt; Bool {
+        hiddenTextField.becomeFirstResponder()
+        return true
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Conform &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt; and update method textfield(shouldChangeCharactersIn:replacementString)&lt;/p&gt;
+&lt;p&gt;Conform &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt; and update method &lt;code class=&quot;highlighter-rouge&quot;&gt;textfield(shouldChangeCharactersIn:replacementString)&lt;/code&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -&amp;gt; Bool {
-    var newText = string
-    // (1)
-    if isInvalid {
-        isInvalid = false
-    }
-    else {
-        newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-    }
-
-    // (2)
-    let codeLength = newText.length
-    guard codeLength &amp;lt;= digitCount else { return false }
-    textField.text = newText
-    
-    // (3)
-    func setTextToActiveBox() {
-        for i in 0 ..&amp;lt; codeLength {
-            let char = textField.text!.substring(from: i, to: i)
-            labels[i].text = char
-            setCode(at: i, active: true)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -&amp;gt; Bool {
+        var newText = string
+        // (1)
+        if isInvalid {
+            isInvalid = false
         }
-    }
-    
-    // (4)
-    func setTextToInactiveBox() {
-        for i in codeLength ..&amp;lt; digitCount {
-            labels[i].text = &quot;&quot;
-            setCode(at: i, active: false)
+        else {
+            newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        }
+
+        // (2)
+        let codeLength = newText.length
+        guard codeLength &amp;lt;= digitCount else { return false }
+        textField.text = newText
+        
+        // (3)
+        func setTextToActiveBox() {
+            for i in 0 ..&amp;lt; codeLength {
+                let char = textField.text!.substring(from: i, to: i)
+                labels[i].text = char
+                setCode(at: i, active: true)
+            }
         }
         
-        if codeLength &amp;lt;= digitCount - 1 {
-            setCode(at: codeLength, active: true)
+        // (4)
+        func setTextToInactiveBox() {
+            for i in codeLength ..&amp;lt; digitCount {
+                labels[i].text = &quot;&quot;
+                setCode(at: i, active: false)
+            }
+            
+            if codeLength &amp;lt;= digitCount - 1 {
+                setCode(at: codeLength, active: true)
+            }
         }
+        
+        setTextToActiveBox()
+        setTextToInactiveBox()
+        
+        if codeLength == digitCount {
+            validateCode(code: textField.text!)
+        }
+        return false
     }
-    
-    setTextToActiveBox()
-    setTextToInactiveBox()
-    
-    if codeLength == digitCount {
-        validateCode(code: textField.text!)
-    }
-    return false
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;(1): Reset all boxes when the code is invalid and type new character.&lt;/p&gt;
@@ -156,7 +338,7 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 &lt;p&gt;(2)(3)(4): Update every character from &lt;code class=&quot;highlighter-rouge&quot;&gt;hiddenTextField&lt;/code&gt; to every indicator box. Rest of boxes will be set to empty.&lt;/p&gt;
 
 &lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
-&lt;p&gt;The main part is ready. Minors methods, properties are in the lib in github. Link is below.&lt;/p&gt;
+&lt;p&gt;The main part is ready. Minors methods, properties are in the lib in github. Link is &lt;a href=&quot;https://github.com/nguyentruongky/knOtpView&quot;&gt;https://github.com/nguyentruongky/knOtpView&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_final.gif?alt=media&amp;amp;token=a60f523c-40ac-429d-9546-804344e27d1f&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Two years ago, I did a view for this purpose. Detail is on my github: https://github.com/nguyentruongky/ActiveCode.</summary></entry><entry><title type="html">Customize your UITabBarController</title><link href="http://localhost:4001/2018/04/15/TabController-TabBar.html" rel="alternate" type="text/html" title="Customize your UITabBarController" /><published>2018-04-15T00:00:00+07:00</published><updated>2018-04-15T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/15/TabController-TabBar</id><content type="html" xml:base="http://localhost:4001/2018/04/15/TabController-TabBar.html">&lt;p&gt;From 2017, design trending has changed to tab bar, instead of slide menu. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this&lt;/p&gt;
 
@@ -173,48 +355,48 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 &lt;h2 id=&quot;kntabbaritem&quot;&gt;knTabBarItem&lt;/h2&gt;
 &lt;p&gt;First thing need to be customized is the &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt; is not flexible enough to be customized to anything I want. I need to use &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabBarItem: UIButton {
-    // (1)
-    var itemHeight: CGFloat = 0
-    // (2)
-    var lock = false
-    // (3)
-    var color: UIColor = UIColor.lightGray {
-        didSet {
-            guard lock == false else { return }
-            iconImageView.change(color: color)
-            textLabel.textColor = color
-        }}
-    
-    // (4)
-    private let iconImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFit)
-    private let textLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11),
-                                        color: .black, alignment: .center)
-    
-    convenience init(icon: UIImage, title: String,
-                     font: UIFont = UIFont.systemFont(ofSize: 11)) {
-        self.init()
-        translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.image = icon
-        textLabel.text = title
-        textLabel.font = UIFont(name: font.fontName, size: 11)
-        setupView()
-    }
-    
-    // (5)
-    private func setupView() {
-        addSubviews(views: iconImageView, textLabel)
-        iconImageView.top(toView: self, space: 4)
-        iconImageView.centerX(toView: self)
-        iconImageView.square()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    class knTabBarItem: UIButton {
+        // (1)
+        var itemHeight: CGFloat = 0
+        // (2)
+        var lock = false
+        // (3)
+        var color: UIColor = UIColor.lightGray {
+            didSet {
+                guard lock == false else { return }
+                iconImageView.change(color: color)
+                textLabel.textColor = color
+            }}
         
-        let iconBottomConstant: CGFloat = textLabel.text == &quot;&quot; ? -2 : -20
-        iconImageView.bottom(toView: self, space: iconBottomConstant)
+        // (4)
+        private let iconImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFit)
+        private let textLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11),
+                                            color: .black, alignment: .center)
         
-        textLabel.bottom(toView: self, space: -2)
-        textLabel.centerX(toView: self)
+        convenience init(icon: UIImage, title: String,
+                        font: UIFont = UIFont.systemFont(ofSize: 11)) {
+            self.init()
+            translatesAutoresizingMaskIntoConstraints = false
+            iconImageView.image = icon
+            textLabel.text = title
+            textLabel.font = UIFont(name: font.fontName, size: 11)
+            setupView()
+        }
+        
+        // (5)
+        private func setupView() {
+            addSubviews(views: iconImageView, textLabel)
+            iconImageView.top(toView: self, space: 4)
+            iconImageView.centerX(toView: self)
+            iconImageView.square()
+            
+            let iconBottomConstant: CGFloat = textLabel.text == &quot;&quot; ? -2 : -20
+            iconImageView.bottom(toView: self, space: iconBottomConstant)
+            
+            textLabel.bottom(toView: self, space: -2)
+            textLabel.centerX(toView: self)
+        }
     }
-}
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;(1): Some tab items can be bigger than others. I can easily set the height for them to make difference with others.&lt;/p&gt;
@@ -227,57 +409,61 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 
 &lt;h2 id=&quot;kntabbar&quot;&gt;knTabBar&lt;/h2&gt;
 &lt;p&gt;Next thing I have to focus on is &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabBar: UITabBar {
-    // (1)
-    var kn_items = [knTabBarItem]()
-    convenience init(items: [knTabBarItem]) {
-        self.init()
-        kn_items = items
-        translatesAutoresizingMaskIntoConstraints = false
-        setupView()
-    }
-    
-    override var tintColor: UIColor! {
-        didSet {
-            for item in kn_items {
-                item.color = tintColor
-            }}}
-    
-    func setupView() {
-        backgroundColor = .white
-        if kn_items.count == 0 { return }
-        
-        // (2)
-        let line = knUIMaker.makeLine(color: .gray, height: 0.5)
-        addSubviews(views: line)
-        line.horizontal(toView: self)
-        line.top(toView: self)
-        
-        // (3)
-        var horizontalConstraints = &quot;H:|&quot;
-        let itemWidth: CGFloat = screenWidth / CGFloat(kn_items.count)
-        for i in 0 ..&amp;lt; kn_items.count {
-            let item = kn_items[i]
-            addSubviews(views: item)
-            if item.itemHeight == 0 {
-                item.vertical(toView: self)
-            }
-            else {
-                item.bottom(toView: self)
-                item.height(item.itemHeight)
-            }
-            item.width(itemWidth)
-            horizontalConstraints += String(format: &quot;[v%d]&quot;, i)
-            if item.lock == false {
-                item.color = tintColor
-            }
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class knTabBar: UITabBar {
+        // (1)
+        var kn_items = [knTabBarItem]()
+        convenience init(items: [knTabBarItem]) {
+            self.init()
+            kn_items = items
+            translatesAutoresizingMaskIntoConstraints = false
+            setupView()
         }
         
-        horizontalConstraints += &quot;|&quot;
-        addConstraints(withFormat: horizontalConstraints, arrayOf: kn_items)
+        override var tintColor: UIColor! {
+            didSet {
+                for item in kn_items {
+                    item.color = tintColor
+                }}}
+        
+        func setupView() {
+            backgroundColor = .white
+            if kn_items.count == 0 { return }
+            
+            // (2)
+            let line = knUIMaker.makeLine(color: .gray, height: 0.5)
+            addSubviews(views: line)
+            line.horizontal(toView: self)
+            line.top(toView: self)
+            
+            // (3)
+            var horizontalConstraints = &quot;H:|&quot;
+            let itemWidth: CGFloat = screenWidth / CGFloat(kn_items.count)
+            for i in 0 ..&amp;lt; kn_items.count {
+                let item = kn_items[i]
+                addSubviews(views: item)
+                if item.itemHeight == 0 {
+                    item.vertical(toView: self)
+                }
+                else {
+                    item.bottom(toView: self)
+                    item.height(item.itemHeight)
+                }
+                item.width(itemWidth)
+                horizontalConstraints += String(format: &quot;[v%d]&quot;, i)
+                if item.lock == false {
+                    item.color = tintColor
+                }
+            }
+            
+            horizontalConstraints += &quot;|&quot;
+            addConstraints(withFormat: horizontalConstraints, arrayOf: kn_items)
+        }
     }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;(1): I can’t override &lt;code class=&quot;highlighter-rouge&quot;&gt;items&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;, so I name it a little bit similar to easier to remember&lt;/p&gt;
 
 &lt;p&gt;(2): Add a line to separate the tab bar to the controller. Some designs need indicator at the selected item, I will add indicator here.&lt;/p&gt;
@@ -287,46 +473,48 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 &lt;h2 id=&quot;kntabcontroller&quot;&gt;knTabController&lt;/h2&gt;
 &lt;p&gt;The easiest thing is here. Just inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;, add some code, and it works.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knTabController: UITabBarController {
-    var kn_tabBar: knTabBar!
-    var selectedColor = UIColor.darkGray
-    var normalColor = UIColor.lightGray {
-        didSet {
-            kn_tabBar.tintColor = normalColor
-        }}
-    
-    private var kn_tabBarHeight: CGFloat = 49
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tabBar.isHidden = true
-        setupView()
-    }
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class knTabController: UITabBarController {
+        var kn_tabBar: knTabBar!
+        var selectedColor = UIColor.darkGray
+        var normalColor = UIColor.lightGray {
+            didSet {
+                kn_tabBar.tintColor = normalColor
+            }}
+        
+        private var kn_tabBarHeight: CGFloat = 49
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            tabBar.isHidden = true
+            setupView()
+        }
 
-    func setupView() {}
-    
-    private func setTabBar(items: [knTabBarItem], height: CGFloat = 49) {
-        guard items.count &amp;gt; 0 else { return }
+        func setupView() {}
         
-        kn_tabBar = knTabBar(items: items)
-        guard let bar = kn_tabBar else { return }
-        kn_tabBar.tintColor = normalColor
-        bar.kn_items.first?.color = selectedColor
+        private func setTabBar(items: [knTabBarItem], height: CGFloat = 49) {
+            guard items.count &amp;gt; 0 else { return }
+            
+            kn_tabBar = knTabBar(items: items)
+            guard let bar = kn_tabBar else { return }
+            kn_tabBar.tintColor = normalColor
+            bar.kn_items.first?.color = selectedColor
+            
+            view.addSubviews(views: bar)
+            bar.horizontal(toView: view)
+            bar.bottom(toView: view)
+            kn_tabBarHeight = height
+            bar.height(kn_tabBarHeight)
+            for i in 0 ..&amp;lt; items.count {
+                items[i].tag = i
+                items[i].addTarget(self, action: #selector(switchTab))
+            }
+        }
         
-        view.addSubviews(views: bar)
-        bar.horizontal(toView: view)
-        bar.bottom(toView: view)
-        kn_tabBarHeight = height
-        bar.height(kn_tabBarHeight)
-        for i in 0 ..&amp;lt; items.count {
-            items[i].tag = i
-            items[i].addTarget(self, action: #selector(switchTab))
+        @objc func switchTab(button: UIButton) {
+            selectedIndex = button.tag
         }
     }
-    
-    @objc func switchTab(button: UIButton) {
-        selectedIndex = button.tag
-    }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;That’s ready for new tab bar. Just use it in a controller.&lt;/p&gt;
@@ -334,35 +522,40 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 &lt;h2 id=&quot;how-to-use&quot;&gt;How to use?&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Inherit class &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt; to your controller.&lt;/li&gt;
-  &lt;li&gt;Override &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class DoctorController: knTabController {
-  override func setupView() {
-      let home = knTabBarItem(icon: #imageLiteral(resourceName: &quot;home&quot;), title: &quot;Home&quot;)
-      let appointment = knTabBarItem(icon: #imageLiteral(resourceName: &quot;appointment&quot;), title: &quot;Appointment&quot;)
-      let add = knTabBarItem(icon: #imageLiteral(resourceName: &quot;add&quot;), title: &quot;&quot;)
-      add.lock = true
-      add.itemHeight = 66
-      let doctors = knTabBarItem(icon: #imageLiteral(resourceName: &quot;doctors&quot;), title: &quot;Doctors&quot;)
-      let porfolio = knTabBarItem(icon: #imageLiteral(resourceName: &quot;user&quot;), title: &quot;Porfolio&quot;)
+  &lt;li&gt;Override &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.&lt;/li&gt;
+&lt;/ul&gt;
 
-      let red = UIViewController()
-      red.view.backgroundColor = .red
-      let green = UIViewController()
-      green.view.backgroundColor = .green
-      let blue = UIViewController()
-      blue.view.backgroundColor = .white
-      let yellow = UIViewController()
-      yellow.view.backgroundColor = .yellow
-      let gray = UIViewController()
-      gray.view.backgroundColor = .gray
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class DoctorController: knTabController {
+        override func setupView() {
+            let home = knTabBarItem(icon: #imageLiteral(resourceName: &quot;home&quot;), title: &quot;Home&quot;)
+            let appointment = knTabBarItem(icon: #imageLiteral(resourceName: &quot;appointment&quot;), title: &quot;Appointment&quot;)
+            let add = knTabBarItem(icon: #imageLiteral(resourceName: &quot;add&quot;), title: &quot;&quot;)
+            add.lock = true
+            add.itemHeight = 66
+            let doctors = knTabBarItem(icon: #imageLiteral(resourceName: &quot;doctors&quot;), title: &quot;Doctors&quot;)
+            let porfolio = knTabBarItem(icon: #imageLiteral(resourceName: &quot;user&quot;), title: &quot;Porfolio&quot;)
 
-      setTabBar(items: [home, appointment, add, doctors, porfolio])
-      viewControllers = [red, green, blue, yellow, gray]
-      normalColor = .red
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+            let red = UIViewController()
+            red.view.backgroundColor = .red
+            let green = UIViewController()
+            green.view.backgroundColor = .green
+            let blue = UIViewController()
+            blue.view.backgroundColor = .white
+            let yellow = UIViewController()
+            yellow.view.backgroundColor = .yellow
+            let gray = UIViewController()
+            gray.view.backgroundColor = .gray
+
+            setTabBar(items: [home, appointment, add, doctors, porfolio])
+            viewControllers = [red, green, blue, yellow, gray]
+            normalColor = .red
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
   &lt;li&gt;Run and see. The main button (Hexagon Add) is locked, don’t change the color when selected.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -375,18 +568,22 @@ override func becomeFirstResponder() -&amp;gt; Bool {
   &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt;, change method &lt;code class=&quot;highlighter-rouge&quot;&gt;switchTab&lt;/code&gt; content to&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    let newIndex = button.tag
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let newIndex = button.tag
     changeTab(from: selectedIndex, to: newIndex)
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;changeTab&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;private func changeTab(from fromIndex: Int, to toIndex: Int) {
-    kn_tabBar.kn_items[fromIndex].color = normalColor
-    kn_tabBar.kn_items[toIndex].color = selectedColor
-    animateSliding(from: fromIndex, to: toIndex)
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    private func changeTab(from fromIndex: Int, to toIndex: Int) {
+        kn_tabBar.kn_items[fromIndex].color = normalColor
+        kn_tabBar.kn_items[toIndex].color = selectedColor
+        animateSliding(from: fromIndex, to: toIndex)
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
@@ -409,18 +606,23 @@ override func becomeFirstResponder() -&amp;gt; Bool {
 &lt;p&gt;I support English and Vietnamese in &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, so I add 2 new files &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt; and move texts to object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.texts = {
-    err_401: &quot;Your login is expired. Login again and keep learning.&quot;,
-    verification_sent: 'Your verification will be processed in 2-4 hours',
-    clazz_created: &quot;Your class is created and under review. It'll be live soon.&quot;
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    module.exports.texts = {
+        err_401: &quot;Your login is expired. Login again and keep learning.&quot;,
+        verification_sent: 'Your verification will be processed in 2-4 hours',
+        clazz_created: &quot;Your class is created and under review. It'll be live soon.&quot;
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.texts = {
-    err_401: &quot;Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi&quot;,
-    verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
-    clazz_created: &quot;Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi&quot;
-}
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    module.exports.texts = {
+        err_401: &quot;Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi&quot;,
+        verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
+        clazz_created: &quot;Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi&quot;
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;add-a-language-center-file&quot;&gt;Add a language center file&lt;/h3&gt;
@@ -430,47 +632,55 @@ override func becomeFirstResponder() -&amp;gt; Bool {
   &lt;li&gt;Import all supported languages to &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let En = require('./en')
-let Vi = require('./vi')
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let En = require('./en')
+    let Vi = require('./vi')
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Add all language to an object like this. So don’t care how many languages will support.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let supported_langs = {
-    &quot;en&quot;: En, 
-    &quot;vi&quot;: Vi
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let supported_langs = {
+        &quot;en&quot;: En, 
+        &quot;vi&quot;: Vi
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Add an object to contain all keys. The values of this object must be exactly &lt;strong&gt;same&lt;/strong&gt; to keys of object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module.exports.keys = {
-    err_401: &quot;err_401&quot;,
-    verification_sent: &quot;verification_sent&quot;,
-    clazz_created: &quot;clazz_created&quot;
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    module.exports.keys = {
+        err_401: &quot;err_401&quot;,
+        verification_sent: &quot;verification_sent&quot;,
+        clazz_created: &quot;clazz_created&quot;
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Add function to get a translated text from a key and requested language from client. By adding languages to object &lt;code class=&quot;highlighter-rouge&quot;&gt;supported_lang&lt;/code&gt;, we don’t need condition to get the requested language texts here, much easier.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
- * @desc Get string by language
- * @param key of the text 
- * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
- * @return String in selected language
- */
-function getText(key, lang) {
-    if (typeof lang !== 'string') {
-        lang = lang.headers['lang']
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    /**
+    * @desc Get string by language
+    * @param key of the text 
+    * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
+    * @return String in selected language
+    */
+    function getText(key, lang) {
+        if (typeof lang !== 'string') {
+            lang = lang.headers['lang']
+        }
+        let dict = supported_langs[lang].texts
+        return dict[key]
     }
-    let dict = supported_langs[lang].texts
-    return dict[key]
-}
-module.exports.getText = getText
+    module.exports.getText = getText
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Okay, it’s done for all messages from server. Any messages we need to send to client, just add to language files and &lt;code class=&quot;highlighter-rouge&quot;&gt;keys&lt;/code&gt; objects in &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;&lt;/p&gt;
@@ -480,17 +690,19 @@ module.exports.getText = getText
 &lt;h3 id=&quot;generate-notification-content-by-language&quot;&gt;Generate Notification content by language&lt;/h3&gt;
 
 &lt;p&gt;One example to generate message.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
- * @desc Generate text to tell Master when Genius book his class
- * @desc Text structure: Genius `&amp;lt;genius_name&amp;gt;` has just booked your class `&amp;lt;clazz_title&amp;gt;`
- * @param data: `genius_name`, `clazz_title`
- * @param lang
- * @return Meaningful String
- */
-function getClazzBookedToMasterText(data, lang) {
-    let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
-    return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
-}
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    /**
+    * @desc Generate text to tell Master when Genius book his class
+    * @desc Text structure: Genius `&amp;lt;genius_name&amp;gt;` has just booked your class `&amp;lt;clazz_title&amp;gt;`
+    * @param data: `genius_name`, `clazz_title`
+    * @param lang
+    * @return Meaningful String
+    */
+    function getClazzBookedToMasterText(data, lang) {
+        let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
+        return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;I make functions to generate messages, because I need these functions several times.&lt;/p&gt;
@@ -512,54 +724,66 @@ function getClazzBookedToMasterText(data, lang) {
 &lt;p&gt;But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production.&lt;/p&gt;
 
 &lt;p&gt;So I write some code to make it easier.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-`&quot;&gt;enum EndPoints: String {
-    case dev = &quot;http://dev.kynguyen.space&quot;
-    case pro = &quot;https://kynguyen.space&quot;
-    case staging = &quot;http://staging.kynguyen.space&quot;
-}
 
-var baseUrl: String = {
-    return EndPoints.pro.rawValue 
-}()
+&lt;pre&gt;&lt;code class=&quot;language-`&quot;&gt;
+    enum EndPoints: String {
+        case dev = &quot;http://dev.kynguyen.space&quot;
+        case pro = &quot;https://kynguyen.space&quot;
+        case staging = &quot;http://staging.kynguyen.space&quot;
+    }
+
+    var baseUrl: String = {
+        return EndPoints.pro.rawValue 
+    }()
+
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So everytime I need to change, I switch &lt;code class=&quot;highlighter-rouge&quot;&gt;baseUrl&lt;/code&gt; to EndPoints I need, very easy.&lt;/p&gt;
 
 &lt;p&gt;But I usually forget to switch to production endpoint when release, even one time I pushed to TestFlight. So do one more step.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var baseUrl: String = {
-    #if DEBUG
-        return EndPoints.dev.rawValue
-    #else
-        return EndPoints.pro.rawValue
-    #endif
-}()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var baseUrl: String = {
+        #if DEBUG
+            return EndPoints.dev.rawValue
+        #else
+            return EndPoints.pro.rawValue
+        #endif
+    }()
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;#if DEBUG ... #else&lt;/code&gt; is very useful for hard-coded values. Can be use widely in coding and testing.&lt;/p&gt;
 
 &lt;p&gt;When switch environment, we need to logout the current account and sign in to another account to prevent unknown error, avoid wasting time for debug. It’s a damn experience with error like this.&lt;/p&gt;
 
 &lt;p&gt;So I need to remember current enviroment to UserDefault.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var currentUrl: EndPoint {
-    get {
-        if let url = UserDefaults.standard.value(forKeyPath: &quot;currentUrl&quot;) as? String,
-            let environment = EndPoint(rawValue: url) {
-            return environment
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var currentUrl: EndPoint {
+        get {
+            if let url = UserDefaults.standard.value(forKeyPath: &quot;currentUrl&quot;) as? String,
+                let environment = EndPoint(rawValue: url) {
+                return environment
+            }
+            return EndPoint.dev
         }
-        return EndPoint.dev
+        set {
+            UserDefaults.standard.setValue(&quot;\(newValue)&quot;, forKeyPath: &quot;currentUrl&quot;)
+        }
     }
-    set {
-        UserDefaults.standard.setValue(&quot;\(newValue)&quot;, forKeyPath: &quot;currentUrl&quot;)
-    }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;And check every time app runs. Show login if EndPoint is changed.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;var isNeedToLogout: Bool {
-    if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
-        baseUrl == currentUrl { return false }
-    return true
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var isNeedToLogout: Bool {
+        if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
+            baseUrl == currentUrl { return false }
+        return true
+    }
+    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;hr /&gt;
@@ -644,10 +868,12 @@ var baseUrl: String = {
   &lt;li&gt;Add some code to show setting of the running app.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String
-versionLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleShortVersionString&quot;] as? String
-buildLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleVersion&quot;] as? String
-bundleIdLabel.text = Bundle.main.bundleIdentifier
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String
+    versionLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleShortVersionString&quot;] as? String
+    buildLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleVersion&quot;] as? String
+    bundleIdLabel.text = Bundle.main.bundleIdentifier
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
@@ -665,36 +891,40 @@ bundleIdLabel.text = Bundle.main.bundleIdentifier
 
 &lt;h3 id=&quot;configure-in-code&quot;&gt;Configure in code&lt;/h3&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;protocol Configuration {
-    var themeColor: UIColor { get set }
-    var textColor: UIColor { get set }
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    protocol Configuration {
+        var themeColor: UIColor { get set }
+        var textColor: UIColor { get set }
+    }
 
-struct RedConfiguration: Configuration {
-    var themeColor = UIColor.red
-    var textColor = UIColor.white
-}
+    struct RedConfiguration: Configuration {
+        var themeColor = UIColor.red
+        var textColor = UIColor.white
+    }
 
-struct GreenConfiguration: Configuration {
-    var themeColor: UIColor = UIColor.green
-    var textColor = UIColor.blue
-}
+    struct GreenConfiguration: Configuration {
+        var themeColor: UIColor = UIColor.green
+        var textColor = UIColor.blue
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;In my main setting class&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let config: Configuration = {
-    if let app = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String {
-        if app == &quot;Red&quot; {
-            return RedConfiguration()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let config: Configuration = {
+        if let app = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String {
+            if app == &quot;Red&quot; {
+                return RedConfiguration()
+            }
+            else {
+                return GreenConfiguration()
+            }
         }
-        else {
-            return GreenConfiguration()
-        }
-    }
+        
+        return RedConfiguration()
+    }()
     
-    return RedConfiguration()
-}()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
@@ -703,10 +933,13 @@ struct GreenConfiguration: Configuration {
 &lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
 
 &lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install cocoapods-deintegrate cocoapods-clean
-pod deintegrate
-pod clean
-rm Podfile
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    sudo gem install cocoapods-deintegrate cocoapods-clean
+    pod deintegrate
+    pod clean
+    rm Podfile
+    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;integrate-zendesk-sdk&quot;&gt;Integrate Zendesk SDK&lt;/h3&gt;
@@ -725,21 +958,24 @@ rm Podfile
 &lt;h3 id=&quot;basic-authorization&quot;&gt;Basic Authorization&lt;/h3&gt;
 
 &lt;p&gt;Learn from &lt;a href=&quot;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&quot;&gt;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let userName = &quot;myUsername&quot;
-let password = &quot;myPassword&quot;
-let authString = userName + &quot;:&quot; + password
-let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
-let base64Credentials = credentialData.base64EncodedStringWithOptions([])
 
-let headers = [&quot;Authorization&quot;: &quot;Basic &quot; + base64Credentials]
-let url = URL(string: api)!
-Alamofire.request(url, method: .post,
-                parameters: params,
-                encoding: JSONEncoding.default,
-                headers: headers)
-    .validate().responseJSON { (response) in
-    print(response)
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let userName = &quot;myUsername&quot;
+    let password = &quot;myPassword&quot;
+    let authString = userName + &quot;:&quot; + password
+    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+
+    let headers = [&quot;Authorization&quot;: &quot;Basic &quot; + base64Credentials]
+    let url = URL(string: api)!
+    Alamofire.request(url, method: .post,
+                    parameters: params,
+                    encoding: JSONEncoding.default,
+                    headers: headers)
+        .validate().responseJSON { (response) in
+        print(response)
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;05042018&quot;&gt;05/04/2018&lt;/h1&gt;
@@ -750,51 +986,55 @@ Alamofire.request(url, method: .post,
 
 &lt;h1 id=&quot;06042018&quot;&gt;06/04/2018&lt;/h1&gt;
 &lt;h3 id=&quot;open-setting-of-my-app&quot;&gt;Open setting of my app&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if let url = URL(string: UIApplicationOpenSettingsURLString) {
-    UIApplication.shared.openURL(url)
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        UIApplication.shared.openURL(url)
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;add-event-to-calendar&quot;&gt;Add event to calendar&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;struct ogeSystemCalendar {
-    let eventStore = EKEventStore()
-    func addEvent(title: String, startDate: Date,
-                  endDate: Date, notes: String?) {
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            if granted == false {
-                DispatchQueue.main.async {
-                    self.tellNoPermission() }
-                return
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    struct ogeSystemCalendar {
+        let eventStore = EKEventStore()
+        func addEvent(title: String, startDate: Date,
+                    endDate: Date, notes: String?) {
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted == false {
+                    DispatchQueue.main.async {
+                        self.tellNoPermission() }
+                    return
+                }
+                
+                self.addToCalendar(title: title, start: startDate,
+                                end: endDate, notes: notes)
             }
-            
-            self.addToCalendar(title: title, start: startDate,
-                               end: endDate, notes: notes)
+        }
+        
+        private func tellNoPermission() {
+            let alert = ogeMessage.showDialog(title: &quot;no_permission&quot;.i18n, description: &quot;no_calendar_permission&quot;.i18n)
+            alert.addAction(PMAlertAction(title: &quot;OK&quot;, style: .default, action: {
+                DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
+            }))
+            appDelegate.ogeniiManager?.present(alert)
+        }
+        
+        private func addToCalendar(title: String, start startDate: Date,
+                    end endDate: Date, notes: String?) {
+            let event = EKEvent(eventStore: eventStore)
+            event.title = title
+            event.startDate = startDate
+            event.endDate = endDate
+            event.notes = notes
+            event.calendar = eventStore.defaultCalendarForNewEvents
+            do {
+                try eventStore.save(event, span: .thisEvent)
+                DispatchQueue.main.async {
+                    ogeMessage.showMessage(&quot;saved_to_calendar&quot;.i18n) }
+            } catch { }
         }
     }
-    
-    private func tellNoPermission() {
-        let alert = ogeMessage.showDialog(title: &quot;no_permission&quot;.i18n, description: &quot;no_calendar_permission&quot;.i18n)
-        alert.addAction(PMAlertAction(title: &quot;OK&quot;, style: .default, action: {
-            DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
-        }))
-        appDelegate.ogeniiManager?.present(alert)
-    }
-    
-    private func addToCalendar(title: String, start startDate: Date,
-                  end endDate: Date, notes: String?) {
-        let event = EKEvent(eventStore: eventStore)
-        event.title = title
-        event.startDate = startDate
-        event.endDate = endDate
-        event.notes = notes
-        event.calendar = eventStore.defaultCalendarForNewEvents
-        do {
-            try eventStore.save(event, span: .thisEvent)
-            DispatchQueue.main.async {
-                ogeMessage.showMessage(&quot;saved_to_calendar&quot;.i18n) }
-        } catch { }
-    }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;07042018&quot;&gt;07/04/2018&lt;/h1&gt;
@@ -832,9 +1072,12 @@ Alamofire.request(url, method: .post,
 &lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;17042018&quot;&gt;17/04/2018&lt;/h1&gt;
 &lt;h3 id=&quot;open-location-service&quot;&gt;Open Location service&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if let url = URL(string: &quot;App-Prefs:root=Privacy&amp;amp;path=LOCATION&quot;) {
-    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-}
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    if let url = URL(string: &quot;App-Prefs:root=Privacy&amp;amp;path=LOCATION&quot;) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
@@ -844,102 +1087,117 @@ Alamofire.request(url, method: .post,
 &lt;h3 id=&quot;define-your-texts&quot;&gt;Define your texts&lt;/h3&gt;
 &lt;p&gt;Make sure the text you need to make clickable is exacly same to the full text.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let termText = &quot;By register, I agree to ... Terms of Service and Private Policy&quot;
-let term = &quot;Terms of Service&quot;
-let policy = &quot;Private Policy&quot;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let termText = &quot;By register, I agree to ... Terms of Service and Private Policy&quot;
+    let term = &quot;Terms of Service&quot;
+    let policy = &quot;Private Policy&quot;
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;format-the-label&quot;&gt;Format the Label&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let termLabel = UILabel()
-let formattedText = String.format(strings: [term, policy],
-                                    boldFont: UIFont.boldSystemFont(ofSize: 15),
-                                    boldColor: UIColor.blue,
-                                    inString: termText,
-                                    font: UIFont.systemFont(ofSize: 15),
-                                    color: UIColor.black)
-termLabel.attributedText = formattedText
-termLabel.numberOfLines = 0
-let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
-termLabel.addGestureRecognizer(tap)
-termLabel.isUserInteractionEnabled = true
-termLabel.textAlignment = .center
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let termLabel = UILabel()
+    let formattedText = String.format(strings: [term, policy],
+                                        boldFont: UIFont.boldSystemFont(ofSize: 15),
+                                        boldColor: UIColor.blue,
+                                        inString: termText,
+                                        font: UIFont.systemFont(ofSize: 15),
+                                        color: UIColor.black)
+    termLabel.attributedText = formattedText
+    termLabel.numberOfLines = 0
+    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
+    termLabel.addGestureRecognizer(tap)
+    termLabel.isUserInteractionEnabled = true
+    termLabel.textAlignment = .center
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.format&lt;/code&gt; is an extension from my code collection. This is the full function.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension String {
-    static func format(strings: [String],
-                       boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
-                       boldColor: UIColor = UIColor.blue,
-                       inString string: String,
-                       font: UIFont = UIFont.systemFont(ofSize: 14),
-                       color: UIColor = UIColor.black) -&amp;gt; NSAttributedString {
-        let attributedString =
-            NSMutableAttributedString(string: string,
-                                      attributes: [
-                                        NSAttributedStringKey.font: font,
-                                        NSAttributedStringKey.foregroundColor: color])
-        let boldFontAttribute = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: boldColor]
-        for bold in strings {
-            attributedString.addAttributes(boldFontAttribute, range: (string as NSString).range(of: bold))
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    extension String {
+        static func format(strings: [String],
+                        boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
+                        boldColor: UIColor = UIColor.blue,
+                        inString string: String,
+                        font: UIFont = UIFont.systemFont(ofSize: 14),
+                        color: UIColor = UIColor.black) -&amp;gt; NSAttributedString {
+            let attributedString =
+                NSMutableAttributedString(string: string,
+                                        attributes: [
+                                            NSAttributedStringKey.font: font,
+                                            NSAttributedStringKey.foregroundColor: color])
+            let boldFontAttribute = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: boldColor]
+            for bold in strings {
+                attributedString.addAttributes(boldFontAttribute, range: (string as NSString).range(of: bold))
+            }
+            return attributedString
         }
-        return attributedString
     }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;handle-label-tap-gesture&quot;&gt;Handle Label Tap Gesture&lt;/h3&gt;
 
 &lt;p&gt;I get the tap location in the Label and check if this location belongs to term or policy text range.&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc func handleTermTapped(gesture: UITapGestureRecognizer) {
-    let termString = termText as NSString
-    let termRange = termString.range(of: term)
-    let policyRange = termString.range(of: policy)
-    
-    let tapLocation = gesture.location(in: termLabel)
-    let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
-    
-    if checkRange(termRange, contain: index) == true {
-        handleViewTermOfUse()
-        return
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func handleTermTapped(gesture: UITapGestureRecognizer) {
+        let termString = termText as NSString
+        let termRange = termString.range(of: term)
+        let policyRange = termString.range(of: policy)
+        
+        let tapLocation = gesture.location(in: termLabel)
+        let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
+        
+        if checkRange(termRange, contain: index) == true {
+            handleViewTermOfUse()
+            return
+        }
+        
+        if checkRange(policyRange, contain: index) {
+            handleViewPrivacy()
+            return
+        }
     }
-    
-    if checkRange(policyRange, contain: index) {
-        handleViewPrivacy()
-        return
-    }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;supported-code&quot;&gt;Supported code&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Check if a range contain an index
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func checkRange(_ range: NSRange, contain index: Int) -&amp;gt; Bool {
-  return index &amp;gt; range.location &amp;amp;&amp;amp; index &amp;lt; range.location + range.length
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Get index from a point in UILabel
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;extension UILabel {
-  func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -&amp;gt; Int {
-      assert(self.attributedText != nil, &quot;This method is developed for attributed string&quot;)
-      let textStorage = NSTextStorage(attributedString: self.attributedText!)
-      let layoutManager = NSLayoutManager()
-      textStorage.addLayoutManager(layoutManager)
-      let textContainer = NSTextContainer(size: self.frame.size)
-      textContainer.lineFragmentPadding = 0
-      textContainer.maximumNumberOfLines = self.numberOfLines
-      textContainer.lineBreakMode = self.lineBreakMode
-      layoutManager.addTextContainer(textContainer)
-        
-      let index = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-      return index
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Check if a range contain an index&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    func checkRange(_ range: NSRange, contain index: Int) -&amp;gt; Bool {
+        return index &amp;gt; range.location &amp;amp;&amp;amp; index &amp;lt; range.location + range.length
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Get index from a point in UILabel&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    extension UILabel {
+        func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -&amp;gt; Int {
+            assert(self.attributedText != nil, &quot;This method is developed for attributed string&quot;)
+            let textStorage = NSTextStorage(attributedString: self.attributedText!)
+            let layoutManager = NSLayoutManager()
+            textStorage.addLayoutManager(layoutManager)
+            let textContainer = NSTextContainer(size: self.frame.size)
+            textContainer.lineFragmentPadding = 0
+            textContainer.maximumNumberOfLines = self.numberOfLines
+            textContainer.lineBreakMode = self.lineBreakMode
+            layoutManager.addTextContainer(textContainer)
+            
+            let index = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+            return index
+        }
+    }
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;demo&quot;&gt;Demo&lt;/h3&gt;
 
@@ -993,112 +1251,118 @@ FilterController contains only UIButton to turn filter on/off.&lt;/p&gt;
 
 &lt;p&gt;This is just a simple demo, so I make a Datasource (fake data). In my regular projects, I will load data/load more by workers to handle request result and separate code for the View.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class ListView: knView {
-    let maxItemCount = 20
-    
-    let fakeData = Datasource()
-    var currentPage = 0
-    var canLoadMore = true 
-    var datasource = [String]() { didSet { tableView.reloadData() }}
-    
-    lazy var tableView: UITableView = { [weak self] in
-        let tb = UITableView()
-        tb.translatesAutoresizingMaskIntoConstraints = false
-        tb.separatorStyle = .none
-        tb.showsVerticalScrollIndicator = false
-        tb.dataSource = self
-        tb.delegate = self
-        tb.register(knTableCell.self, forCellReuseIdentifier: &quot;knTableCell&quot;)
-        return tb
-        }()
-    
-    override func setupView() {
-        translatesAutoresizingMaskIntoConstraints = false
-        addSubviews(views: tableView)
-        tableView.fill(toView: self)
-        backgroundColor = .white
-    }
-    
-    func fetchMore() { }
-    func fetchData() { }
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class ListView: knView {
+        let maxItemCount = 20
+        
+        let fakeData = Datasource()
+        var currentPage = 0
+        var canLoadMore = true 
+        var datasource = [String]() { didSet { tableView.reloadData() }}
+        
+        lazy var tableView: UITableView = { [weak self] in
+            let tb = UITableView()
+            tb.translatesAutoresizingMaskIntoConstraints = false
+            tb.separatorStyle = .none
+            tb.showsVerticalScrollIndicator = false
+            tb.dataSource = self
+            tb.delegate = self
+            tb.register(knTableCell.self, forCellReuseIdentifier: &quot;knTableCell&quot;)
+            return tb
+            }()
+        
+        override func setupView() {
+            translatesAutoresizingMaskIntoConstraints = false
+            addSubviews(views: tableView)
+            tableView.fill(toView: self)
+            backgroundColor = .white
+        }
+        
+        func fetchMore() { }
+        func fetchData() { }
 
-    func checkLoadMoreAvailable(currentCount: Int) {
-        canLoadMore = currentCount == maxItemCount
-        currentPage += currentCount == maxItemCount ? 1 : 0
-    }
-}
-
-
-extension ListView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
-        return datasource.count }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == datasource.count - 1 {
-            fetchMore()
+        func checkLoadMoreAvailable(currentCount: Int) {
+            canLoadMore = currentCount == maxItemCount
+            currentPage += currentCount == maxItemCount ? 1 : 0
         }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;knTableCell&quot;, for: indexPath) as! knTableCell
-        cell.textLabel?.text = datasource[indexPath.row]
-        return cell
+
+    extension ListView: UITableViewDelegate, UITableViewDataSource {
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
+            return datasource.count }
+        
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            if indexPath.row == datasource.count - 1 {
+                fetchMore()
+            }
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: &quot;knTableCell&quot;, for: indexPath) as! knTableCell
+            cell.textLabel?.text = datasource[indexPath.row]
+            return cell
+        }
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { return 66 }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { return 66 }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;add-pendingview-completedview-filterview&quot;&gt;Add PendingView, CompletedView, FilterView&lt;/h3&gt;
 &lt;p&gt;Add more 3 views and override &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchMore()&lt;/code&gt;. Example for PendingView&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class PendingView: ListView {
-    override func fetchData() {
-        let newData = fakeData.getPendingList(page: 0)
-        checkLoadMoreAvailable(currentCount: newData.count)
-        datasource = newData
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class PendingView: ListView {
+        override func fetchData() {
+            let newData = fakeData.getPendingList(page: 0)
+            checkLoadMoreAvailable(currentCount: newData.count)
+            datasource = newData
+        }
+        
+        override func fetchMore() {
+            guard canLoadMore else { return }
+            let newData = fakeData.getPendingList(page: currentPage)
+            checkLoadMoreAvailable(currentCount: newData.count)
+            datasource += newData
+        }
     }
-    
-    override func fetchMore() {
-        guard canLoadMore else { return }
-        let newData = fakeData.getPendingList(page: currentPage)
-        checkLoadMoreAvailable(currentCount: newData.count)
-        datasource += newData
-    }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;handle-logic&quot;&gt;Handle logic&lt;/h3&gt;
 &lt;p&gt;In HistoryController, handle the add view and remove previous one by setting ListType.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;func showList(_ listType: ListType) {
-    switch listType {
-        case .pending:
-            if pendingView.datasource.count == 0 {
-                pendingView.fetchData()
-            }
-            statusSegment.selectedSegmentIndex = 0
-            view.addSubview(pendingView)
-            pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = pendingView
-            
-        case .completed:
-            if completedView.datasource.count == 0 {
-                completedView.fetchData()
-            }
-            statusSegment.selectedSegmentIndex = 1
-            view.addSubview(completedView)
-            completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = completedView
-            
-        case .filter:
-            view.addSubview(filterView)
-            filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
-            currentList?.removeFromParentView()
-            currentList = filterView
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func showList(_ listType: ListType) {
+        switch listType {
+            case .pending:
+                if pendingView.datasource.count == 0 {
+                    pendingView.fetchData()
+                }
+                statusSegment.selectedSegmentIndex = 0
+                view.addSubview(pendingView)
+                pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = pendingView
+                
+            case .completed:
+                if completedView.datasource.count == 0 {
+                    completedView.fetchData()
+                }
+                statusSegment.selectedSegmentIndex = 1
+                view.addSubview(completedView)
+                completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = completedView
+                
+            case .filter:
+                view.addSubview(filterView)
+                filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
+                currentList?.removeFromParentView()
+                currentList = filterView
         }
     }
+    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;This is the most complicated portion in this demo. Other minor codes you can see in the sample on &lt;a href=&quot;https://github.com/nguyentruongky/MultiScreensInOneDemo&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app here.</summary></entry><entry><title type="html">Different way to do multi languages in iOS</title><link href="http://localhost:4001/2018/03/29/different-way-i18n.html" rel="alternate" type="text/html" title="Different way to do multi languages in iOS" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/different-way-i18n</id><content type="html" xml:base="http://localhost:4001/2018/03/29/different-way-i18n.html">&lt;p&gt;Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.&lt;/p&gt;
@@ -1116,41 +1380,43 @@ extension ListView: UITableViewDelegate, UITableViewDataSource {
   &lt;li&gt;Add some codes for localization.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class knI18n {
-    static let shared = knI18n()
-    
-    private let knCurrentLanguageKey = &quot;knCurrentLanguageKey&quot;
-    private let fileNameBase = &quot;Lang_&quot;
-    lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
-    func getLanguageFile() -&amp;gt; NSDictionary {
-        let language = currentLanguage ?? &quot;en&quot;
-        if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: &quot;plist&quot;) {
-            return NSDictionary(contentsOfFile: path)!
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class knI18n {
+        static let shared = knI18n()
+        
+        private let knCurrentLanguageKey = &quot;knCurrentLanguageKey&quot;
+        private let fileNameBase = &quot;Lang_&quot;
+        lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
+        func getLanguageFile() -&amp;gt; NSDictionary {
+            let language = currentLanguage ?? &quot;en&quot;
+            if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: &quot;plist&quot;) {
+                return NSDictionary(contentsOfFile: path)!
+            }
+            fatalError(&quot;Localizable file NOT found&quot;)
         }
-        fatalError(&quot;Localizable file NOT found&quot;)
+        
+        func localize(string: String) -&amp;gt; String {
+            guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
+            return localizedString
+        }
+        
+        func setLanguage(_ language: String) {
+            currentLanguage = language
+            localizableDictionary = getLanguageFile()
+        }
+        
+        private var currentLanguage: String? {
+            get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
+            set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
+        }
     }
-    
-    func localize(string: String) -&amp;gt; String {
-        guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
-        return localizedString
-    }
-    
-    func setLanguage(_ language: String) {
-        currentLanguage = language
-        localizableDictionary = getLanguageFile()
-    }
-    
-    private var currentLanguage: String? {
-        get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
-        set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
-    }
-}
 
-extension String {
-    var i18n: String {
-        return knI18n.shared.localize(string: self)
+    extension String {
+        var i18n: String {
+            return knI18n.shared.localize(string: self)
+        }
     }
-}
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language.&lt;/p&gt;
@@ -1159,22 +1425,24 @@ extension String {
   &lt;li&gt;Add some code into controller&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@objc func handleChangeToEn() {
-    knI18n.shared.setLanguage(&quot;en&quot;)
-    refreshUI()
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func handleChangeToEn() {
+        knI18n.shared.setLanguage(&quot;en&quot;)
+        refreshUI()
+    }
 
-@objc func handleChangeToVi() {
-    knI18n.shared.setLanguage(&quot;vi&quot;)
-    refreshUI()
-}
+    @objc func handleChangeToVi() {
+        knI18n.shared.setLanguage(&quot;vi&quot;)
+        refreshUI()
+    }
 
-func refreshUI() {
-    languageLabel.text = &quot;lang&quot;.i18n
-    helloLabel.text = &quot;hello&quot;.i18n
-    vietnameseButton.setTitle(&quot;change_vi&quot;.i18n, for: .normal)
-    englishButton.setTitle(&quot;change_en&quot;.i18n, for: .normal)
-}
+    func refreshUI() {
+        languageLabel.text = &quot;lang&quot;.i18n
+        helloLabel.text = &quot;hello&quot;.i18n
+        vietnameseButton.setTitle(&quot;change_vi&quot;.i18n, for: .normal)
+        englishButton.setTitle(&quot;change_en&quot;.i18n, for: .normal)
+    }
+    
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
@@ -1220,48 +1488,4 @@ func refreshUI() {
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;Hope this solution can help iOS developer work with i18n easier. Download project at &lt;a href=&quot;https://github.com/nguyentruongky/i18n_Demo&quot;&gt;https://github.com/nguyentruongky/i18n_Demo&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.</summary></entry><entry><title type="html">UITableViewController vs UIViewController + UITableView</title><link href="http://localhost:4001/2017/10/12/UITableViewController-vs-UIViewController.html" rel="alternate" type="text/html" title="UITableViewController vs UIViewController + UITableView" /><published>2017-10-12T00:00:00+07:00</published><updated>2017-10-12T00:00:00+07:00</updated><id>http://localhost:4001/2017/10/12/UITableViewController-vs-UIViewController</id><content type="html" xml:base="http://localhost:4001/2017/10/12/UITableViewController-vs-UIViewController.html">&lt;p&gt;Have you ever used &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt;? Have you ever used &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController and UITableView&lt;/code&gt;? What are the differences between these two solutions? What are good practice for them? This note is a quick compare about UITableViewController and &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController + UITableView&lt;/code&gt;. I will call the &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController + UITableView&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;Free TableView&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;uitableviewcontroller&quot;&gt;UITableViewController&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt; is a UIViewController. Its view is a UITableView, can’t change constraints. You can’t add view into &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;, without a cell.&lt;/p&gt;
-&lt;h4 id=&quot;advantages&quot;&gt;Advantages&lt;/h4&gt;
-&lt;p&gt;It’s good at handling text field become first responder. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt; will automatically move contentOffset to the current active text field. 
-Good practice for chat log screen, form screen. 
-Accept static table view: very easy and fast to design form with Storyboard&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FUITableViewController_demo.gif?alt=media&amp;amp;token=38ba3d36-a2e1-428d-9eb8-873811278776&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;disadvantages&quot;&gt;Disadvantages&lt;/h4&gt;
-&lt;p&gt;It’s bad for state view (empty state, loading state, error state). Can’t display state view by adding to view. You can do that by adding to tableHeaderView or tableFooterView, but you have to handle much things. 
-It’s bad for sticked top or bottom view.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ffooter_sticked.jpeg?alt=media&amp;amp;token=9aa2b05e-3e08-43ba-9ebc-a617f0dce5ce&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fheader_sticked.png?alt=media&amp;amp;token=33755b92-a998-4350-9f35-53623c0f6fce&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Can’t inherit from BaseController. You have a BaseController with many setting inside, such as, stateView, loadData, setupUI, etc… and you can’t inherit that with &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;free-tableview&quot;&gt;Free TableView&lt;/h3&gt;
-&lt;p&gt;Free TableView is a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt; and add a &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt; into the view. You can easily set constraints for &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;advantages-1&quot;&gt;Advantages&lt;/h4&gt;
-&lt;p&gt;Very flexible. You can show/hide the tableView, set padding for tableView. 
-Good for state display. In the demo, I show an empty state is a green UIView, at the center of the screen.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftableview_empty_state.gif?alt=media&amp;amp;token=0d79ce30-5071-4c93-a68f-046518cbf833&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;disadvantages-1&quot;&gt;Disadvantages&lt;/h4&gt;
-&lt;p&gt;Not accept static table view. I have a trick for this: use Dynamic table view, but datasource is a collection of &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableCell&lt;/code&gt;. 
-But it will not automatically adjust when the textfield activate. We need lib to help us take care of it. I suggest this lib from Håkon Bogen (download at &lt;a href=&quot;https://github.com/haaakon/SingleLineKeyboardResize/blob/master/UIViewController%2BKeyboard.swift&quot;&gt;Github&lt;/a&gt;). Really good lib.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftableview_wrong_keyboard.gif?alt=media&amp;amp;token=242a50e8-db70-40f6-bab9-10bb5a303bdd&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftableview_right_keyboard.gif?alt=media&amp;amp;token=5576301e-bcc6-46dd-a6c1-4b1784a00c35&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;explain-for-demo&quot;&gt;Explain for demo&lt;/h3&gt;
-&lt;p&gt;I have a demo for this. Download &lt;a href=&quot;https://github.com/nguyentruongky/TableViewController-vs-FreeTableView&quot;&gt;here&lt;/a&gt;. Some code in demo I need to tell you.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;knController&lt;/code&gt; is UIViewController. I made my own controller to manage building UI by code.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;knCustomTableController&lt;/code&gt; is Free TableView&lt;/li&gt;
-  &lt;li&gt;Some functions like &lt;code class=&quot;highlighter-rouge&quot;&gt;horizontal:toView:space&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fill:toView:space&lt;/code&gt; are my Auto Layout Libs, called &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;knContrainsts&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Empty state in demo is just a green UIView. I don’t want to add more code to make it more complicated.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Free TableView&lt;/code&gt; has disadvantages but can be solved easily. This solution is much more flexible and easier to manage. But &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt; still has good practice which can’t replace by &lt;code class=&quot;highlighter-rouge&quot;&gt;Free TableView&lt;/code&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have you ever used UITableViewController? Have you ever used UIViewController and UITableView? What are the differences between these two solutions? What are good practice for them? This note is a quick compare about UITableViewController and UIViewController + UITableView. I will call the UIViewController + UITableView is Free TableView</summary></entry></feed>
+&lt;p&gt;Hope this solution can help iOS developer work with i18n easier. Download project at &lt;a href=&quot;https://github.com/nguyentruongky/i18n_Demo&quot;&gt;https://github.com/nguyentruongky/i18n_Demo&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.</summary></entry></feed>

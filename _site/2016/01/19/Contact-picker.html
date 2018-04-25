@@ -112,55 +112,63 @@
 
 <p>You have to ask permission to access to contact.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
-	// warn the user that because they just denied permission, this functionality won't work
-	// also let them know that they have to fix this in settings
-	if granted == false { return }
-	// load contact 
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
+        // warn the user that because they just denied permission, this functionality won't work
+        // also let them know that they have to fix this in settings
+        if granted == false { return }
+        // load contact 
+    }
+
 </code></pre></div></div>
 
 <p>Load all contacts</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+
 </code></pre></div></div>
 
 <p>All contacts are here. Run a loop and load every contact, find the phone number and consider this contact with every number is a contact item.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func getNameFromContact(currentContact: ABRecordRef) -&gt; String {
-	let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
-	let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
-	var currentName = ""
-	if firstName == nil &amp;&amp; lastName == nil { // prevent anonymous contact
-            currentName = ""
-	} else {
-		currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
-	}
-	return currentName
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private func getNameFromContact(currentContact: ABRecordRef) -&gt; String {
+        let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
+        let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
+        var currentName = ""
+        if firstName == nil &amp;&amp; lastName == nil { // prevent anonymous contact
+                currentName = ""
+        } else {
+            currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
+        }
+        return currentName
+    }
+
 </code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">ABRecordCopyCompositeName</code> function can get the contact’s full name for you, but if there is a contact without first name or last name, your app crashes. Take care some anonymous friends with this func.</p>
 
 <p>Get the phone numbers.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -&gt; [String]? {
-    var phoneNumberList = [String]()
-    let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
-    for var j: CFIndex = 0; j &lt; ABMultiValueGetCount(phones); j++ {
-        let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
-        if mobileLabel == kABPersonPhoneMobileLabel ||
-            mobileLabel == kABHomeLabel ||
-            mobileLabel == kABPersonPhoneMainLabel ||
-            mobileLabel == kABPersonPhoneIPhoneLabel ||
-            mobileLabel == kABOtherLabel ||
-            mobileLabel == kABWorkLabel {
-                let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
-                phoneNumberList.append(phone)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -&gt; [String]? {
+        var phoneNumberList = [String]()
+        let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
+        for var j: CFIndex = 0; j &lt; ABMultiValueGetCount(phones); j++ {
+            let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
+            if mobileLabel == kABPersonPhoneMobileLabel ||
+                mobileLabel == kABHomeLabel ||
+                mobileLabel == kABPersonPhoneMainLabel ||
+                mobileLabel == kABPersonPhoneIPhoneLabel ||
+                mobileLabel == kABOtherLabel ||
+                mobileLabel == kABWorkLabel {
+                    let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
+                    phoneNumberList.append(phone)
+            }
         }
+        return phoneNumberList
     }
-    return phoneNumberList
-}
+
 </code></pre></div></div>
 
 <p>There are a few phone number types such as Mobile, Home, Work. And those types are marked with the Label. We have to get the phones multi value and find the phone number conform to the labels.</p>
@@ -169,21 +177,25 @@
 
 <p>If you want to get email, try this func</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func getEmail(currentContact: ABRecordRef) -&gt; String {
-    let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
-    var emailString = ""
-    if ABMultiValueGetCount(email) &gt; 0 {
-        emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func getEmail(currentContact: ABRecordRef) -&gt; String {
+        let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
+        var emailString = ""
+        if ABMultiValueGetCount(email) &gt; 0 {
+            emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+        }
+        return emailString
     }
-    return emailString
-}
+
 </code></pre></div></div>
 
 <p>You can download my complete project at <a href="https://github.com/nguyentruongky/ContactPicker">my github</a>
 You can use this intention anywhere you want with simple actions, copy the file and use it in ViewController.
 ViewController</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contactPickerIntention.getAllContacts()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    contactPickerIntention.getAllContacts()
+    
 </code></pre></div></div>
 
 <h3 id="conclusion">Conclusion</h3>

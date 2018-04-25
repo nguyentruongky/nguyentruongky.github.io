@@ -103,41 +103,39 @@
 
 <p>In below demo, I downloaded 4 images by using serial queue.</p>
 
-<blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func runSerialQueue() {
-    let serialQueue = dispatch_queue_create("imagesQueue", DISPATCH_QUEUE_SERIAL)
-    dispatch_async(serialQueue) { () -&gt; Void in
-        self.runDownloadTask(0)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func runSerialQueue() {
+        let serialQueue = dispatch_queue_create("imagesQueue", DISPATCH_QUEUE_SERIAL)
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(0)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(1)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(2)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(3)
+        }
     }
-    dispatch_async(serialQueue) { () -&gt; Void in
-        self.runDownloadTask(1)
-    }
-    dispatch_async(serialQueue) { () -&gt; Void in
-        self.runDownloadTask(2)
-    }
-    dispatch_async(serialQueue) { () -&gt; Void in
-        self.runDownloadTask(3)
-    }
-}
-
-</code></pre></div>  </div>
-</blockquote>
+ 
+</code></pre></div></div>
 
 <p>You can create more queues and add task to new queues. Those queues will run concurrently with <code class="highlighter-rouge">imagesQueue</code>.</p>
 
 <p>And here is download function:</p>
 
-<blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func runDownloadTask(index: Int) {
-    let img = self.downloadImage(self.imageUrl[index])
-    dispatch_async(dispatch_get_main_queue(), {
-        self.images[index].image = img
-        self.downloadCompleted()
-    })
-}
-
-</code></pre></div>  </div>
-</blockquote>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func runDownloadTask(index: Int) {
+        let img = self.downloadImage(self.imageUrl[index])
+        dispatch_async(dispatch_get_main_queue(), {
+            self.images[index].image = img
+            self.downloadCompleted()
+        })
+    }
+ 
+</code></pre></div></div>
 
 <p>Take a look at this cheat sheet. It can help you remember about GCD.</p>
 
@@ -158,24 +156,24 @@
 
 <p>Here is how to download images with concurrent queues</p>
 
-<blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func runConcurrentQueue() {
-    let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-    dispatch_async(queue) { () -&gt; Void in
-        self.runDownloadTask(0)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func runConcurrentQueue() {
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(0)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(1)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(2)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(3)
+        }
     }
-    dispatch_async(queue) { () -&gt; Void in
-       self.runDownloadTask(1)
-    }
-    dispatch_async(queue) { () -&gt; Void in
-        self.runDownloadTask(2)
-    }
-    dispatch_async(queue) { () -&gt; Void in
-        self.runDownloadTask(3)
-    }
-}
-</code></pre></div>  </div>
-</blockquote>
+
+</code></pre></div></div>
 
 <h2 id="operation-queue">Operation Queue</h2>
 
@@ -202,42 +200,34 @@
 
 <p>Let’s see how it works.</p>
 
-<blockquote>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> func runNSOperationQueue() {
-
-    queue = NSOperationQueue();
-
-    func createOperation(index: Int) -&gt; NSBlockOperation {
-
-        let operation = NSBlockOperation(block: {
-
-            self.runDownloadTask(index)
-        })
-
-        operation.completionBlock = {
-            print("Operation \(index + 1) completed, cancelled:\(operation.cancelled)")
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func runNSOperationQueue() {
+        queue = NSOperationQueue();
+        
+        func createOperation(index: Int) - NSBlockOperation {
+            let operation = NSBlockOperation(block: {
+                self.runDownloadTask(index) })
+            operation.completionBlock = {
+                print("Operation \(index + 1) completed, cancelled:\(operation.cancelled)") }
+            return operation
         }
+ 
+        let operation1 = createOperation(0)
+        queue.addOperation(operation1)
 
-        return operation
+        let operation2 = createOperation(1)
+        operation2.addDependency(operation1)
+        queue.addOperation(operation2)
+
+        let operation3 = createOperation(2)
+        operation3.addDependency(operation2)
+        queue.addOperation(operation3)
+
+        let operation4 = createOperation(3)
+        queue.addOperation(operation4)
     }
-
-    let operation1 = createOperation(0)
-    queue.addOperation(operation1)
-
-    let operation2 = createOperation(1)
-    operation2.addDependency(operation1)
-    queue.addOperation(operation2)
-
-    let operation3 = createOperation(2)
-    operation3.addDependency(operation2)
-    queue.addOperation(operation3)
-
-    let operation4 = createOperation(3)
-    queue.addOperation(operation4)
-}
-
-</code></pre></div>  </div>
-</blockquote>
+ 
+</code></pre></div></div>
 
 <p>We can see operation 2 (op2) depends on op1 and op3 depends on op2. It means, op1 and op4 run at a time and op1 completed, op2 runs and same to op3.</p>
 
@@ -253,6 +243,8 @@ You can download the complete project <a href="https://github.com/nguyentruongky
 
       <div class="clearfix">
 
+        
+        <a class="btn btn-primary float-left" href="/2016/01/02/embed-controller.html" data-toggle="tooltip" data-placement="top" title="Dynamically load view controller into another">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
         
         
         <a class="btn btn-primary float-right" href="/2016/01/12/PageViewController.html" data-toggle="tooltip" data-placement="top" title="PageViewController">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>

@@ -15,18 +15,21 @@ Last week, my partner showed me his design for our application. Everything is gr
 A button with gradient border. Never try it before. Up to now, I just created gradient background views 2 times in previous projects. Googled and found some good results. 
 
 ## Other solutions 
+
 ```
-let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
-let gradient = CAGradientLayer()
-gradient.frame =  CGRect(origin: .zero, size: button.frame.size)
-gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
-let shape = CAShapeLayer()
-shape.lineWidth = 2
-shape.path = UIBezierPath(rect: button.bounds).cgPath
-shape.strokeColor = UIColor.black.cgColor
-shape.fillColor = UIColor.clear.cgColor
-gradient.mask = shape
-button.layer.addSublayer(gradient)
+
+    let button = UIButton(frame: CGRect(x: 100, y: 100, width: 200, height: 100))
+    let gradient = CAGradientLayer()
+    gradient.frame =  CGRect(origin: .zero, size: button.frame.size)
+    gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
+    let shape = CAShapeLayer()
+    shape.lineWidth = 2
+    shape.path = UIBezierPath(rect: button.bounds).cgPath
+    shape.strokeColor = UIColor.black.cgColor
+    shape.fillColor = UIColor.clear.cgColor
+    gradient.mask = shape
+    button.layer.addSublayer(gradient)
+
 ```
 Awesome, it's perfect. 
 
@@ -51,21 +54,23 @@ Simple idea, create a button with gradient background, fill it with a solid colo
 > Talk is cheap. Show me the code. (Linus Torvalds)
 
 ```
-func setupView() {    
-    let gradientLayer = CAGradientLayer()
-    gradientLayer.frame = bounds
-    gradientLayer.colors = colors.map({ return $0.cgColor })
-    gradientLayer.startPoint = startPoint
-    gradientLayer.endPoint = endPoint
-    layer.insertSublayer(gradientLayer, at: 0) // * important
-    
-    let backgroundView = UIView()
-    backgroundView.translatesAutoresizingMaskIntoConstraints = false
-    insertSubview(backgroundView, at: 1) // * (1)
-    backgroundView.backgroundColor = backgroundColor // (2)
-    backgroundView.fill(toView: self, space: UIEdgeInsets(space: borderWidth)) // (3)
-    createRoundCorner(cornerRadius)
-}
+
+    func setupView() {    
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors.map({ return $0.cgColor })
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        layer.insertSublayer(gradientLayer, at: 0) // * important
+        
+        let backgroundView = UIView()
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        insertSubview(backgroundView, at: 1) // * (1)
+        backgroundView.backgroundColor = backgroundColor // (2)
+        backgroundView.fill(toView: self, space: UIEdgeInsets(space: borderWidth)) // (3)
+        createRoundCorner(cornerRadius)
+    }
+
 ```
 
 (1) - The most important thing here is the order of the gradient layer and background view. The title label will be overlapped and when we use `addSublayer` or `addSubview`. 
@@ -77,11 +82,13 @@ func setupView() {
 Now is time to create the rounded corner. 
 
 ```
-func createRoundCorner(_ radius: CGFloat) {
-    cornerRadius = radius
-    super.createRoundCorner(radius)
-    backgroundView.createRoundCorner(radius - borderWidth)
-}
+
+    func createRoundCorner(_ radius: CGFloat) {
+        cornerRadius = radius
+        super.createRoundCorner(radius)
+        backgroundView.createRoundCorner(radius - borderWidth)
+    }
+
 ```
 
 Every time we set the radius or backgroundColor, `setupView` called. So that, the `gradientLayer` and `backgroundView` are added many times. Keep an instance and remove it every time view setup. 
@@ -89,10 +96,12 @@ Every time we set the radius or backgroundColor, `setupView` called. So that, th
 But, no gradient border appears. The border width still zero. We need to give a non-zero value to `borderWidth` and `setupView` again. 
 
 ```
-func createBorder(_ width: CGFloat) {
-    borderWidth = width
-    setupView()
-}
+
+    func createBorder(_ width: CGFloat) {
+        borderWidth = width
+        setupView()
+    }
+    
 ```
 See the result 
 

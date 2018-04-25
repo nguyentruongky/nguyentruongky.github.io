@@ -2,7 +2,7 @@
 layout: post
 title:  Dynamically load view controller into another
 subtitle: Embed a view controller to container view
-date:   2016-1-29
+date:   2016-1-2
 background: '/img/posts/embed.jpg'
 ---
 I saw a question on [stackoverflow](http://stackoverflow.com/questions/35011539/how-to-make-view-scroll-like-instagrams-profile-vc-with-segmentedcontroller/35079835#35079835). He ran into a problem when use ContainerView to embed other view controller. I'll share what I did.

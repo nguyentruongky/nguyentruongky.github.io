@@ -27,7 +27,7 @@ I designed a very good UI, and connected outlet, started logic coding, finished 
 
 And when I changed to Auto Layout programmatically: 
 
->- Found the `UILabel` need change
+- Found the `UILabel` need change
 - Change `UILabel` to `UIButton`
 - Find and change many things in code
 
@@ -46,8 +46,6 @@ Besides that, constraints list is a mess, really mess and easy to make you mad.
 You can debate about select a control, and select the constraint you want instead of find in the list. Believe me, many times you can't do that, and we soon get mad with it. 
 
 ### 3. Dynamically customize control with Auto Layout programmatically 
-
-
 
 <img src="https://raw.githubusercontent.com/nguyentruongky/Photos_storage/master/Auto_Layout_Programmatically/Custom_Control.png" width="500">
 
@@ -69,19 +67,22 @@ Why don't we define and setup constraints in the main file, (`LoginController.sw
 ### Write the same codes many times
 
 Define a `UIButton` with Auto Layout programmatically 
+
 ```
-let button: UIButton = {
-    let title = "Sample"
-    let image = "Sample"
-    let color = UIColor.black
-    
-    let button = UIButton()
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(color, for: .normal)
-    button.setImage(UIImage(named: image), for: .normal)
-    return button
-}()
+
+    let button: UIButton = {
+        let title = "Sample"
+        let image = "Sample"
+        let color = UIColor.black
+        
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.setImage(UIImage(named: image), for: .normal)
+        return button
+    }()
+
 ```
 
 Every time I need a `UIButton`, do I have to find and copy this code? No, code snippet can help you. 
@@ -90,43 +91,54 @@ Find out how it helps [here](http://nshipster.com/xcode-snippets/).
 I define above button with `knButton` key in my XCode. It's easier that find and drag a `UIButton` and then format it in Storyboard, right? 
 
 ### Code is too long and unreadable 
+
 ```
-// (1): can't change anything 
-let underline = UIView()
-underline.translatesAutoresizingMaskIntoConstraints = false
-addSubview(underline)
 
-// (2): Constraints setup
-underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    // (1): can't change anything 
+    let underline = UIView()
+    underline.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(underline)
 
-// Format control
-underline.backgroundColor = UIColor.lightGray
+    // (2): Constraints setup
+    underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+    underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+    underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+    // Format control
+    underline.backgroundColor = UIColor.lightGray
+
 ```
 
 The (1) is same to all controls in Auto Layout programmatically, you have to keep this format for all controls. You can make it better with this code (if you want) 
+
 ```
-extension UIView {
-    func addToView(view: UIView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(self)
+    
+    extension UIView {
+        func addToView(view: UIView) {
+            translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(self)
+        }
     }
-}
+
 ```
 
 (1) can be changed to 
+
 ```
-let underline = UIView()
-underline.addToView(view)
+
+    let underline = UIView()
+    underline.addToView(view)
+
 ```
 The (2), they're default code from Apple, why don't we make it more readable and beautiful? 
 
 ```
-underline.bottom(toView: view, space: -8)
-underline.horizontal(toView: view)
-underline.height(1)
+
+    underline.bottom(toView: view, space: -8)
+    underline.horizontal(toView: view)
+    underline.height(1)
+    
 ```
 
 Is it beautiful enough? It comes from my own Auto Layout library. You can find it at [https://github.com/nguyentruongky/knConstraints](https://github.com/nguyentruongky/knConstraints)

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Unsplash - iOs application - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/20/unsplash-homescreen.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Unsplash - iOs application</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Make an application like Unsplash</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 20, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</p>
+
+<p>This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes.</p>
+
+<h2 id="preparation">Preparation</h2>
+<p>I use some code collection from my personal codebase. You can download it at <a href="https://github.com/nguyentruongky/codebase">github</a></p>
+
+<p>Init an empty project and added my <code class="highlighter-rouge">mustHave</code> folder</p>
+
+<h2 id="add-tableview-to-homecontroller">Add TableView to HomeController</h2>
+<p>Change something</p>
+
+<ul>
+  <li>File name: <code class="highlighter-rouge">ViewController.swift</code> to <code class="highlighter-rouge">HomeController.swift</code></li>
+  <li>Class name: <code class="highlighter-rouge">ViewController</code> to <code class="highlighter-rouge">HomeController</code></li>
+  <li>Main Storyboard custome class: <code class="highlighter-rouge">ViewController</code> to <code class="highlighter-rouge">HomeController</code></li>
+  <li>Class <code class="highlighter-rouge">HomeController</code> content is below.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    // (1)
+    class HomeController: knCustomTableController {
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setupView()
+        }
+        override func setupView() {
+            view.addSubview(tableView)
+            tableView.fill(toView: view)
+        }
+        override func registerCells() {
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        }
+    }
+
+    // (2)
+    extension HomeController {
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int { 
+            return 5
+        }
+        
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! UITableViewCell
+            cell.backgroundColor = UIColor.color(value: CGFloat(UInt32.random(lower: 0, upper: 255)))
+            return cell
+        }
+        
+        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&gt; CGFloat {
+            return 35
+        }
+    }
+
+</code></pre></div></div>
+
+<p>(1): <code class="highlighter-rouge">knCustomTableController</code> is my favourite controller in my codebase. It’s a view controller, contain <code class="highlighter-rouge">UITableView</code>, conform <code class="highlighter-rouge">UITableViewDataSource</code> and <code class="highlighter-rouge">UITableViewDelegate</code>.</p>
+
+<p>Why don’t I use <code class="highlighter-rouge">UITableViewController</code>? I have a note about this <a href="https://kynguyen.space/2017/10/12/UITableViewController-vs-UIViewController.html">here</a>.</p>
+
+<p><code class="highlighter-rouge">knCustomTableController</code> is setup everything to be ready to display. You need override <code class="highlighter-rouge">registerCells</code>, some needed methods for table datasource like (2).</p>
+
+<p>The <code class="highlighter-rouge">setupView</code> method contains something weird. It’s my constraints setting. I am a fan of Auto Layout Programmatically, so usually use my library, <a href="https://github.com/nguyentruongky/knConstraints"><strong>knConstraints</strong></a> for setting constraints.</p>
+
+<p>Run and see a tableView with 5 rows, different colors.</p>
+
+<h2 id="add-model-and-fake-data">Add Model and fake data</h2>
+<ul>
+  <li>Add new file name <code class="highlighter-rouge">PhotoModel.swift</code></li>
+  <li>Add some code</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class Photo {
+        var author: String
+        var url: String
+        var ratio: CGFloat = 1
+        var displayHeight: CGFloat {
+            return CGFloat(floor(Double(ratio * screenWidth)))
+        }
+        
+        init(author: String, url: String, ratio: CGFloat) {
+            self.author = author
+            self.url = url
+            self.ratio = ratio
+        }
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Update code in file <code class="highlighter-rouge">HomeController.swift</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var datasource = [Photo]()
+
+    override func registerCells() {
+        tableView.register(PhotoCell.self, forCellReuseIdentifier: "PhotoCell")
+    }
+
+    override func fetchData() {
+        for _ in 0 ..&lt; 5 {
+            datasource.append(Photo(author: "Kyle", url: "https://unsplash.com/photos/zydhjnjppEc/download", ratio: 0.667954600338083))
+            datasource.append(Photo(author: "Mark", url: "https://unsplash.com/photos/Y6N_w94x8ik/download", ratio: 1.5))
+        }
+        tableView.reloadData()
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int { 
+        return datasource.count }
+        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
+        cell.data = datasource[indexPath.row]
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&gt; CGFloat { 
+        return UITableViewAutomaticDimension }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Add <code class="highlighter-rouge">fetchData()</code> to <code class="highlighter-rouge">viewDidLoad</code></li>
+  <li>Can’t run because of missing PhotoCell. Add new file <code class="highlighter-rouge">PhotoCell.swift</code>. Add content below to <code class="highlighter-rouge">PhotoCell.swift</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    import UIKit
+    class PhotoCell: knTableCell {
+        var heightConstraint: NSLayoutConstraint?
+        var data: Photo? {
+            didSet {
+                guard let data = data else { return }
+                authorLabel.text = data.author
+                photoImageView.downloadImage(from: data.url)
+                // (1)
+                heightConstraint?.constant = data.displayHeight
+            }
+        }
+
+        private let authorLabel = knUIMaker.makeLabel()
+        private let photoImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
+        
+        override func setupView() {
+            let line = knUIMaker.makeLine(color: .white, height: 1)
+            
+            addSubviews(views: photoImageView, authorLabel, line)
+            photoImageView.fill(toView: self)
+            
+            authorLabel.bottomLeft(toView: self, bottom: -8, left: 8)
+            
+            line.horizontal(toView: self)
+            line.bottom(toView: self)
+            
+            // (2)
+            heightConstraint = height(100, isActive: false)
+            heightConstraint?.priority = UILayoutPriority(999)
+            heightConstraint?.isActive = true
+        }
+    }
+    
+</code></pre></div></div>
+
+<p>I always setup Auto Layout in <code class="highlighter-rouge">setupView</code> method. So, want to change any layout, UI, just find <code class="highlighter-rouge">setupView</code>.</p>
+
+<p>(1): Every photo has different ratio, and we need to keep the photoImageView the same ratio. So every photo, update the height constraint (calculated when ratio set).</p>
+
+<p>(2): Need to descrease the priority to avoid conflict with <code class="highlighter-rouge">UIView-Encapsulated-Layout-Height</code>. <code class="highlighter-rouge">UIView-Encapsulated-Layout-Height</code> is a constraints automatically added by iOs.</p>
+
+<h2 id="install-pod">Install pod</h2>
+
+<p>Still have error at <code class="highlighter-rouge">photoImageView.downloadImage(from: data.url)</code>. You comment it before because missing <code class="highlighter-rouge">Kingfisher</code> library. We need to install <code class="highlighter-rouge">Kingfisher</code> to help us download image. It’s very cool lib. More detail about Kingfisher is <a href="https://github.com/onevcat/Kingfisher">here</a>.</p>
+
+<ul>
+  <li>
+    <p>Use Terminal to access to your project, and <code class="highlighter-rouge">pod init</code> then follow <a href="https://github.com/onevcat/Kingfisher/wiki/Installation-Guide">this instruction</a>.</p>
+  </li>
+  <li>
+    <p>Uncomment code in <code class="highlighter-rouge">knUIImage.swift</code> and run again</p>
+  </li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&amp;token=5e2786f0-e428-4771-8aee-879d6c3f2404" width="40%" /></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/17/otp-code-view.html" data-toggle="tooltip" data-placement="top" title="OTP Code View">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

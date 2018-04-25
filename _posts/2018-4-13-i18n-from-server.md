@@ -15,19 +15,24 @@ I support English and Vietnamese in [Ogenii](https://ogenii.com), so I add 2 new
 
 `en.js`
 ```
-module.exports.texts = {
-    err_401: "Your login is expired. Login again and keep learning.",
-    verification_sent: 'Your verification will be processed in 2-4 hours',
-    clazz_created: "Your class is created and under review. It'll be live soon."
-}
+
+    module.exports.texts = {
+        err_401: "Your login is expired. Login again and keep learning.",
+        verification_sent: 'Your verification will be processed in 2-4 hours',
+        clazz_created: "Your class is created and under review. It'll be live soon."
+    }
+
 ```
 `vi.js`
+
 ```
-module.exports.texts = {
-    err_401: "Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi",
-    verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
-    clazz_created: "Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi"
-}
+
+    module.exports.texts = {
+        err_401: "Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi",
+        verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
+        clazz_created: "Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi"
+    }
+
 ```
 
 ### Add a language center file 
@@ -36,46 +41,54 @@ Don't connect language files directly to others, I make a file as a center to co
 - Import all supported languages to `LangCenter`
 
 ```
-let En = require('./en')
-let Vi = require('./vi')
+
+    let En = require('./en')
+    let Vi = require('./vi')
+
 ```
 
 Add all language to an object like this. So don't care how many languages will support. 
 
 ```
-let supported_langs = {
-    "en": En, 
-    "vi": Vi
-}
+
+    let supported_langs = {
+        "en": En, 
+        "vi": Vi
+    }
+
 ```
 
 - Add an object to contain all keys. The values of this object must be exactly **same** to keys of object `texts` in `en.js` and `vi.js`.
 
 ```
-module.exports.keys = {
-    err_401: "err_401",
-    verification_sent: "verification_sent",
-    clazz_created: "clazz_created"
-}
+
+    module.exports.keys = {
+        err_401: "err_401",
+        verification_sent: "verification_sent",
+        clazz_created: "clazz_created"
+    }
+
 ```
 
 - Add function to get a translated text from a key and requested language from client. By adding languages to object `supported_lang`, we don't need condition to get the requested language texts here, much easier. 
 
 ```
-/**
- * @desc Get string by language
- * @param key of the text 
- * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
- * @return String in selected language
- */
-function getText(key, lang) {
-    if (typeof lang !== 'string') {
-        lang = lang.headers['lang']
+
+    /**
+    * @desc Get string by language
+    * @param key of the text 
+    * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
+    * @return String in selected language
+    */
+    function getText(key, lang) {
+        if (typeof lang !== 'string') {
+            lang = lang.headers['lang']
+        }
+        let dict = supported_langs[lang].texts
+        return dict[key]
     }
-    let dict = supported_langs[lang].texts
-    return dict[key]
-}
-module.exports.getText = getText
+    module.exports.getText = getText
+
 ```
 
 Okay, it's done for all messages from server. Any messages we need to send to client, just add to language files and `keys` objects in `LangCenter.js`
@@ -85,18 +98,20 @@ This is not fully supported yet. Notification still is 1 language only. I saved 
 ### Generate Notification content by language 
 
 One example to generate message.
+
 ```
-/**
- * @desc Generate text to tell Master when Genius book his class
- * @desc Text structure: Genius `<genius_name>` has just booked your class `<clazz_title>`
- * @param data: `genius_name`, `clazz_title`
- * @param lang
- * @return Meaningful String
- */
-function getClazzBookedToMasterText(data, lang) {
-    let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
-    return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
-}
+    /**
+    * @desc Generate text to tell Master when Genius book his class
+    * @desc Text structure: Genius `<genius_name>` has just booked your class `<clazz_title>`
+    * @param data: `genius_name`, `clazz_title`
+    * @param lang
+    * @return Meaningful String
+    */
+    function getClazzBookedToMasterText(data, lang) {
+        let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
+        return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
+    }
+
 ```
 
 I make functions to generate messages, because I need these functions several times. 

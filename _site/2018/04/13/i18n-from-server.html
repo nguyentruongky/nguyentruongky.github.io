@@ -93,18 +93,23 @@
 <p>I support English and Vietnamese in <a href="https://ogenii.com">Ogenii</a>, so I add 2 new files <code class="highlighter-rouge">en.js</code> and <code class="highlighter-rouge">vi.js</code> and move texts to object <code class="highlighter-rouge">texts</code></p>
 
 <p><code class="highlighter-rouge">en.js</code></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.texts = {
-    err_401: "Your login is expired. Login again and keep learning.",
-    verification_sent: 'Your verification will be processed in 2-4 hours',
-    clazz_created: "Your class is created and under review. It'll be live soon."
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    module.exports.texts = {
+        err_401: "Your login is expired. Login again and keep learning.",
+        verification_sent: 'Your verification will be processed in 2-4 hours',
+        clazz_created: "Your class is created and under review. It'll be live soon."
+    }
+
 </code></pre></div></div>
 <p><code class="highlighter-rouge">vi.js</code></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.texts = {
-    err_401: "Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi",
-    verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
-    clazz_created: "Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi"
-}
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    module.exports.texts = {
+        err_401: "Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi",
+        verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
+        clazz_created: "Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi"
+    }
+
 </code></pre></div></div>
 
 <h3 id="add-a-language-center-file">Add a language center file</h3>
@@ -114,47 +119,55 @@
   <li>Import all supported languages to <code class="highlighter-rouge">LangCenter</code></li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let En = require('./en')
-let Vi = require('./vi')
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let En = require('./en')
+    let Vi = require('./vi')
+
 </code></pre></div></div>
 
 <p>Add all language to an object like this. So don’t care how many languages will support.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let supported_langs = {
-    "en": En, 
-    "vi": Vi
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let supported_langs = {
+        "en": En, 
+        "vi": Vi
+    }
+
 </code></pre></div></div>
 
 <ul>
   <li>Add an object to contain all keys. The values of this object must be exactly <strong>same</strong> to keys of object <code class="highlighter-rouge">texts</code> in <code class="highlighter-rouge">en.js</code> and <code class="highlighter-rouge">vi.js</code>.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module.exports.keys = {
-    err_401: "err_401",
-    verification_sent: "verification_sent",
-    clazz_created: "clazz_created"
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    module.exports.keys = {
+        err_401: "err_401",
+        verification_sent: "verification_sent",
+        clazz_created: "clazz_created"
+    }
+
 </code></pre></div></div>
 
 <ul>
   <li>Add function to get a translated text from a key and requested language from client. By adding languages to object <code class="highlighter-rouge">supported_lang</code>, we don’t need condition to get the requested language texts here, much easier.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
- * @desc Get string by language
- * @param key of the text 
- * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
- * @return String in selected language
- */
-function getText(key, lang) {
-    if (typeof lang !== 'string') {
-        lang = lang.headers['lang']
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    /**
+    * @desc Get string by language
+    * @param key of the text 
+    * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
+    * @return String in selected language
+    */
+    function getText(key, lang) {
+        if (typeof lang !== 'string') {
+            lang = lang.headers['lang']
+        }
+        let dict = supported_langs[lang].texts
+        return dict[key]
     }
-    let dict = supported_langs[lang].texts
-    return dict[key]
-}
-module.exports.getText = getText
+    module.exports.getText = getText
+
 </code></pre></div></div>
 
 <p>Okay, it’s done for all messages from server. Any messages we need to send to client, just add to language files and <code class="highlighter-rouge">keys</code> objects in <code class="highlighter-rouge">LangCenter.js</code></p>
@@ -164,17 +177,19 @@ module.exports.getText = getText
 <h3 id="generate-notification-content-by-language">Generate Notification content by language</h3>
 
 <p>One example to generate message.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
- * @desc Generate text to tell Master when Genius book his class
- * @desc Text structure: Genius `&lt;genius_name&gt;` has just booked your class `&lt;clazz_title&gt;`
- * @param data: `genius_name`, `clazz_title`
- * @param lang
- * @return Meaningful String
- */
-function getClazzBookedToMasterText(data, lang) {
-    let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
-    return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
-}
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    /**
+    * @desc Generate text to tell Master when Genius book his class
+    * @desc Text structure: Genius `&lt;genius_name&gt;` has just booked your class `&lt;clazz_title&gt;`
+    * @param data: `genius_name`, `clazz_title`
+    * @param lang
+    * @return Meaningful String
+    */
+    function getClazzBookedToMasterText(data, lang) {
+        let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
+        return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
+    }
+
 </code></pre></div></div>
 
 <p>I make functions to generate messages, because I need these functions several times.</p>

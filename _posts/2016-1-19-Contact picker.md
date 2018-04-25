@@ -28,34 +28,40 @@ Let's begin.
 You have to ask permission to access to contact.
 
 ```
-ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
-	// warn the user that because they just denied permission, this functionality won't work
-	// also let them know that they have to fix this in settings
-	if granted == false { return }
-	// load contact 
-}
+
+    ABAddressBookRequestAccessWithCompletion(addressBook) { granted, error in
+        // warn the user that because they just denied permission, this functionality won't work
+        // also let them know that they have to fix this in settings
+        if granted == false { return }
+        // load contact 
+    }
+
 ```
 
 Load all contacts
 
 ```
-let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+
+    let allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue() as Array
+
 ```
 
 All contacts are here. Run a loop and load every contact, find the phone number and consider this contact with every number is a contact item.
 
 ```
-private func getNameFromContact(currentContact: ABRecordRef) -> String {
-	let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
-	let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
-	var currentName = ""
-	if firstName == nil && lastName == nil { // prevent anonymous contact
-            currentName = ""
-	} else {
-		currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
-	}
-	return currentName
-}
+
+    private func getNameFromContact(currentContact: ABRecordRef) -> String {
+        let firstName = ABRecordCopyValue(currentContact, kABPersonFirstNameProperty)
+        let lastName = ABRecordCopyValue(currentContact, kABPersonLastNameProperty)
+        var currentName = ""
+        if firstName == nil && lastName == nil { // prevent anonymous contact
+                currentName = ""
+        } else {
+            currentName = ABRecordCopyCompositeName(currentContact).takeRetainedValue() as String
+        }
+        return currentName
+    }
+
 ```
 
 The `ABRecordCopyCompositeName` function can get the contact's full name for you, but if there is a contact without first name or last name, your app crashes. Take care some anonymous friends with this func.
@@ -63,23 +69,25 @@ The `ABRecordCopyCompositeName` function can get the contact's full name for you
 Get the phone numbers.
 
 ```
-private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -> [String]? {
-    var phoneNumberList = [String]()
-    let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
-    for var j: CFIndex = 0; j < ABMultiValueGetCount(phones); j++ {
-        let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
-        if mobileLabel == kABPersonPhoneMobileLabel ||
-            mobileLabel == kABHomeLabel ||
-            mobileLabel == kABPersonPhoneMainLabel ||
-            mobileLabel == kABPersonPhoneIPhoneLabel ||
-            mobileLabel == kABOtherLabel ||
-            mobileLabel == kABWorkLabel {
-                let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
-                phoneNumberList.append(phone)
+
+    private func getPhoneNumbersFromContact(currentContact: ABRecordRef) -> [String]? {
+        var phoneNumberList = [String]()
+        let phones:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonPhoneProperty).takeRetainedValue()
+        for var j: CFIndex = 0; j < ABMultiValueGetCount(phones); j++ {
+            let mobileLabel = ABMultiValueCopyLabelAtIndex(phones, j).takeRetainedValue()
+            if mobileLabel == kABPersonPhoneMobileLabel ||
+                mobileLabel == kABHomeLabel ||
+                mobileLabel == kABPersonPhoneMainLabel ||
+                mobileLabel == kABPersonPhoneIPhoneLabel ||
+                mobileLabel == kABOtherLabel ||
+                mobileLabel == kABWorkLabel {
+                    let phone = ABMultiValueCopyValueAtIndex(phones, j).takeRetainedValue() as! String
+                    phoneNumberList.append(phone)
+            }
         }
+        return phoneNumberList
     }
-    return phoneNumberList
-}
+
 ```
 
 There are a few phone number types such as Mobile, Home, Work. And those types are marked with the Label. We have to get the phones multi value and find the phone number conform to the labels.
@@ -89,14 +97,16 @@ I created struct `Contact` to keep the name and the phone number. And a dictiona
 If you want to get email, try this func
 
 ```
-func getEmail(currentContact: ABRecordRef) -> String {
-    let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
-    var emailString = ""
-    if ABMultiValueGetCount(email) > 0 {
-        emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+
+    func getEmail(currentContact: ABRecordRef) -> String {
+        let email:ABMultiValueRef = ABRecordCopyValue(currentContact, kABPersonEmailProperty).takeRetainedValue()
+        var emailString = ""
+        if ABMultiValueGetCount(email) > 0 {
+            emailString = ABMultiValueCopyValueAtIndex(email, 0).takeRetainedValue() as! String
+        }
+        return emailString
     }
-    return emailString
-}
+
 ```
 
 You can download my complete project at [my github](https://github.com/nguyentruongky/ContactPicker)
@@ -104,7 +114,9 @@ You can use this intention anywhere you want with simple actions, copy the file 
 ViewController
 
 ```
-contactPickerIntention.getAllContacts()
+
+    contactPickerIntention.getAllContacts()
+    
 ```
 
 ### Conclusion

@@ -65,10 +65,12 @@ Red and Green have different name, bundle ID, version, build number. I have to a
 - Add some code to show setting of the running app. 
 
 ```
-appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
-versionLabel.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-buildLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-bundleIdLabel.text = Bundle.main.bundleIdentifier
+
+    appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+    versionLabel.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    buildLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    bundleIdLabel.text = Bundle.main.bundleIdentifier
+
 ```
 
 - It works
@@ -85,37 +87,41 @@ Besides that, we need to change font family, theme color, text color depend on A
 ### Configure in code 
 
 ```
-protocol Configuration {
-    var themeColor: UIColor { get set }
-    var textColor: UIColor { get set }
-}
 
-struct RedConfiguration: Configuration {
-    var themeColor = UIColor.red
-    var textColor = UIColor.white
-}
+    protocol Configuration {
+        var themeColor: UIColor { get set }
+        var textColor: UIColor { get set }
+    }
 
-struct GreenConfiguration: Configuration {
-    var themeColor: UIColor = UIColor.green
-    var textColor = UIColor.blue
-}
+    struct RedConfiguration: Configuration {
+        var themeColor = UIColor.red
+        var textColor = UIColor.white
+    }
+
+    struct GreenConfiguration: Configuration {
+        var themeColor: UIColor = UIColor.green
+        var textColor = UIColor.blue
+    }
+
 ```
 
 In my main setting class
 
 ```
-let config: Configuration = {
-    if let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
-        if app == "Red" {
-            return RedConfiguration()
+
+    let config: Configuration = {
+        if let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
+            if app == "Red" {
+                return RedConfiguration()
+            }
+            else {
+                return GreenConfiguration()
+            }
         }
-        else {
-            return GreenConfiguration()
-        }
-    }
+        
+        return RedConfiguration()
+    }()
     
-    return RedConfiguration()
-}()
 ```
 
 ### Final 

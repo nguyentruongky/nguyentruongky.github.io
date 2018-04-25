@@ -9,11 +9,14 @@ background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com
 # 04/04/2018
 
 ### How to remove pod in iOS project
+
 ```
-sudo gem install cocoapods-deintegrate cocoapods-clean
-pod deintegrate
-pod clean
-rm Podfile
+
+    sudo gem install cocoapods-deintegrate cocoapods-clean
+    pod deintegrate
+    pod clean
+    rm Podfile
+    
 ```
 
 ### Integrate Zendesk SDK 
@@ -32,22 +35,25 @@ Usually have this issue when create new project in local, create repo in git the
 ### Basic Authorization 
 
 Learn from [https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77](https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77)
-```
-let userName = "myUsername"
-let password = "myPassword"
-let authString = userName + ":" + password
-let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
-let base64Credentials = credentialData.base64EncodedStringWithOptions([])
 
-let headers = ["Authorization": "Basic " + base64Credentials]
-let url = URL(string: api)!
-Alamofire.request(url, method: .post,
-                parameters: params,
-                encoding: JSONEncoding.default,
-                headers: headers)
-    .validate().responseJSON { (response) in
-    print(response)
-}
+```
+
+    let userName = "myUsername"
+    let password = "myPassword"
+    let authString = userName + ":" + password
+    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+
+    let headers = ["Authorization": "Basic " + base64Credentials]
+    let url = URL(string: api)!
+    Alamofire.request(url, method: .post,
+                    parameters: params,
+                    encoding: JSONEncoding.default,
+                    headers: headers)
+        .validate().responseJSON { (response) in
+        print(response)
+    }
+
 ```
 
 # 05/04/2018
@@ -59,52 +65,56 @@ Always display 2 characters for Int: 09:10, 10:15
 # 06/04/2018
 ### Open setting of my app
 ```
-if let url = URL(string: UIApplicationOpenSettingsURLString) {
-    UIApplication.shared.openURL(url)
-}
+    
+    if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        UIApplication.shared.openURL(url)
+    }
+
 ```
 
 ### Add event to calendar 
 ```
-struct ogeSystemCalendar {
-    let eventStore = EKEventStore()
-    func addEvent(title: String, startDate: Date,
-                  endDate: Date, notes: String?) {
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            if granted == false {
-                DispatchQueue.main.async {
-                    self.tellNoPermission() }
-                return
+
+    struct ogeSystemCalendar {
+        let eventStore = EKEventStore()
+        func addEvent(title: String, startDate: Date,
+                    endDate: Date, notes: String?) {
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted == false {
+                    DispatchQueue.main.async {
+                        self.tellNoPermission() }
+                    return
+                }
+                
+                self.addToCalendar(title: title, start: startDate,
+                                end: endDate, notes: notes)
             }
-            
-            self.addToCalendar(title: title, start: startDate,
-                               end: endDate, notes: notes)
+        }
+        
+        private func tellNoPermission() {
+            let alert = ogeMessage.showDialog(title: "no_permission".i18n, description: "no_calendar_permission".i18n)
+            alert.addAction(PMAlertAction(title: "OK", style: .default, action: {
+                DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
+            }))
+            appDelegate.ogeniiManager?.present(alert)
+        }
+        
+        private func addToCalendar(title: String, start startDate: Date,
+                    end endDate: Date, notes: String?) {
+            let event = EKEvent(eventStore: eventStore)
+            event.title = title
+            event.startDate = startDate
+            event.endDate = endDate
+            event.notes = notes
+            event.calendar = eventStore.defaultCalendarForNewEvents
+            do {
+                try eventStore.save(event, span: .thisEvent)
+                DispatchQueue.main.async {
+                    ogeMessage.showMessage("saved_to_calendar".i18n) }
+            } catch { }
         }
     }
-    
-    private func tellNoPermission() {
-        let alert = ogeMessage.showDialog(title: "no_permission".i18n, description: "no_calendar_permission".i18n)
-        alert.addAction(PMAlertAction(title: "OK", style: .default, action: {
-            DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
-        }))
-        appDelegate.ogeniiManager?.present(alert)
-    }
-    
-    private func addToCalendar(title: String, start startDate: Date,
-                  end endDate: Date, notes: String?) {
-        let event = EKEvent(eventStore: eventStore)
-        event.title = title
-        event.startDate = startDate
-        event.endDate = endDate
-        event.notes = notes
-        event.calendar = eventStore.defaultCalendarForNewEvents
-        do {
-            try eventStore.save(event, span: .thisEvent)
-            DispatchQueue.main.async {
-                ogeMessage.showMessage("saved_to_calendar".i18n) }
-        } catch { }
-    }
-}
+
 ```
 
 # 07/04/2018
@@ -138,8 +148,11 @@ There are three kinds of Device orientation keys there in the info.plist now.
 Source: [StackOverflow](https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app)
 # 17/04/2018
 ### Open Location service
+
 ```
-if let url = URL(string: "App-Prefs:root=Privacy&path=LOCATION") {
-    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-}
+
+    if let url = URL(string: "App-Prefs:root=Privacy&path=LOCATION") {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
 ```

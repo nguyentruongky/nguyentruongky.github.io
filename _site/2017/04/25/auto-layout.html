@@ -111,13 +111,11 @@
 
 <p>And when I changed to Auto Layout programmatically:</p>
 
-<blockquote>
-  <ul>
-    <li>Found the <code class="highlighter-rouge">UILabel</code> need change</li>
-    <li>Change <code class="highlighter-rouge">UILabel</code> to <code class="highlighter-rouge">UIButton</code></li>
-    <li>Find and change many things in code</li>
-  </ul>
-</blockquote>
+<ul>
+  <li>Found the <code class="highlighter-rouge">UILabel</code> need change</li>
+  <li>Change <code class="highlighter-rouge">UILabel</code> to <code class="highlighter-rouge">UIButton</code></li>
+  <li>Find and change many things in code</li>
+</ul>
 
 <p>Easier a lot, right? Especially, no change in setting up constraints.</p>
 
@@ -155,18 +153,21 @@ Why don’t we define and setup constraints in the main file, (<code class="high
 <h3 id="write-the-same-codes-many-times">Write the same codes many times</h3>
 
 <p>Define a <code class="highlighter-rouge">UIButton</code> with Auto Layout programmatically</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let button: UIButton = {
-    let title = "Sample"
-    let image = "Sample"
-    let color = UIColor.black
-    
-    let button = UIButton()
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitle(title, for: .normal)
-    button.setTitleColor(color, for: .normal)
-    button.setImage(UIImage(named: image), for: .normal)
-    return button
-}()
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let button: UIButton = {
+        let title = "Sample"
+        let image = "Sample"
+        let color = UIColor.black
+        
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color, for: .normal)
+        button.setImage(UIImage(named: image), for: .normal)
+        return button
+    }()
+
 </code></pre></div></div>
 
 <p>Every time I need a <code class="highlighter-rouge">UIButton</code>, do I have to find and copy this code? No, code snippet can help you.</p>
@@ -175,39 +176,50 @@ Why don’t we define and setup constraints in the main file, (<code class="high
 I define above button with <code class="highlighter-rouge">knButton</code> key in my XCode. It’s easier that find and drag a <code class="highlighter-rouge">UIButton</code> and then format it in Storyboard, right?</p>
 
 <h3 id="code-is-too-long-and-unreadable">Code is too long and unreadable</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// (1): can't change anything 
-let underline = UIView()
-underline.translatesAutoresizingMaskIntoConstraints = false
-addSubview(underline)
 
-// (2): Constraints setup
-underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
-underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    // (1): can't change anything 
+    let underline = UIView()
+    underline.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(underline)
 
-// Format control
-underline.backgroundColor = UIColor.lightGray
+    // (2): Constraints setup
+    underline.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+    underline.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    underline.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+    underline.heightAnchor.constraint(equalToConstant: 1).isActive = true
+
+    // Format control
+    underline.backgroundColor = UIColor.lightGray
+
 </code></pre></div></div>
 
 <p>The (1) is same to all controls in Auto Layout programmatically, you have to keep this format for all controls. You can make it better with this code (if you want)</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>extension UIView {
-    func addToView(view: UIView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(self)
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    extension UIView {
+        func addToView(view: UIView) {
+            translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(self)
+        }
     }
-}
+
 </code></pre></div></div>
 
 <p>(1) can be changed to</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let underline = UIView()
-underline.addToView(view)
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let underline = UIView()
+    underline.addToView(view)
+
 </code></pre></div></div>
 <p>The (2), they’re default code from Apple, why don’t we make it more readable and beautiful?</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>underline.bottom(toView: view, space: -8)
-underline.horizontal(toView: view)
-underline.height(1)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    underline.bottom(toView: view, space: -8)
+    underline.horizontal(toView: view)
+    underline.height(1)
+    
 </code></pre></div></div>
 
 <p>Is it beautiful enough? It comes from my own Auto Layout library. You can find it at <a href="https://github.com/nguyentruongky/knConstraints">https://github.com/nguyentruongky/knConstraints</a></p>

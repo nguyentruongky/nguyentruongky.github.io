@@ -165,10 +165,12 @@
   <li>Add some code to show setting of the running app.</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
-versionLabel.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-buildLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-bundleIdLabel.text = Bundle.main.bundleIdentifier
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+    versionLabel.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    buildLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    bundleIdLabel.text = Bundle.main.bundleIdentifier
+
 </code></pre></div></div>
 
 <ul>
@@ -186,36 +188,40 @@ bundleIdLabel.text = Bundle.main.bundleIdentifier
 
 <h3 id="configure-in-code">Configure in code</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>protocol Configuration {
-    var themeColor: UIColor { get set }
-    var textColor: UIColor { get set }
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    protocol Configuration {
+        var themeColor: UIColor { get set }
+        var textColor: UIColor { get set }
+    }
 
-struct RedConfiguration: Configuration {
-    var themeColor = UIColor.red
-    var textColor = UIColor.white
-}
+    struct RedConfiguration: Configuration {
+        var themeColor = UIColor.red
+        var textColor = UIColor.white
+    }
 
-struct GreenConfiguration: Configuration {
-    var themeColor: UIColor = UIColor.green
-    var textColor = UIColor.blue
-}
+    struct GreenConfiguration: Configuration {
+        var themeColor: UIColor = UIColor.green
+        var textColor = UIColor.blue
+    }
+
 </code></pre></div></div>
 
 <p>In my main setting class</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let config: Configuration = {
-    if let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
-        if app == "Red" {
-            return RedConfiguration()
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let config: Configuration = {
+        if let app = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
+            if app == "Red" {
+                return RedConfiguration()
+            }
+            else {
+                return GreenConfiguration()
+            }
         }
-        else {
-            return GreenConfiguration()
-        }
-    }
+        
+        return RedConfiguration()
+    }()
     
-    return RedConfiguration()
-}()
 </code></pre></div></div>
 
 <h3 id="final">Final</h3>

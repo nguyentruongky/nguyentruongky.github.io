@@ -30,38 +30,40 @@ I find my best solution, UITableViewController, static UITableView.
 ## Sample code 
 
 ```
-func makeAvailibilityCell() -> knTableCell {
-    let cell = knTableCell()
 
-    let containerView = UIView()
-    containerView.translatesAutoresizingMaskIntoConstraints = false
-    cell.addSubview(containerView)
-    containerView.fill(toView: cell)
-    
-    let titleLabel = makeHeaderLabel(text: "availability".classLocalized) // (1)
-    
-    let seeButton = ogeSupporter.createGradientBorderButton() // (2)
-    seeButton.setTitle("seeAvailability".classLocalized, for: .normal)
-    
-    containerView.addSubview(titleLabel)
-    containerView.addSubview(availabilityLabel) // (3)
-    containerView.addSubview(seeButton)
-    
-    // (4)
-    seeButton.width(160)
-    seeButton.right(toView: containerView, space: -30)
-    seeButton.centerY(toView: titleLabel)
-    
-    titleLabel.left(toView: containerView, space: 30)
-    titleLabel.width(screenWidth - 60)
-    
-    availabilityLabel.horizontal(toView: titleLabel)
-    
-    containerView.addConstraints(withFormat: "V:|-15-[v0]-10-[v1]|",
-                                 views: titleLabel, availabilityLabel)
-    
-    return cell
-}
+    func makeAvailibilityCell() -> knTableCell {
+        let cell = knTableCell()
+
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        cell.addSubview(containerView)
+        containerView.fill(toView: cell)
+        
+        let titleLabel = makeHeaderLabel(text: "availability".classLocalized) // (1)
+        
+        let seeButton = ogeSupporter.createGradientBorderButton() // (2)
+        seeButton.setTitle("seeAvailability".classLocalized, for: .normal)
+        
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(availabilityLabel) // (3)
+        containerView.addSubview(seeButton)
+        
+        // (4)
+        seeButton.width(160)
+        seeButton.right(toView: containerView, space: -30)
+        seeButton.centerY(toView: titleLabel)
+        
+        titleLabel.left(toView: containerView, space: 30)
+        titleLabel.width(screenWidth - 60)
+        
+        availabilityLabel.horizontal(toView: titleLabel)
+        
+        containerView.addConstraints(withFormat: "V:|-15-[v0]-10-[v1]|",
+                                    views: titleLabel, availabilityLabel)
+        
+        return cell
+    }
+
 ```
 
 (1) (2) - Just define a label/button. Nothing is important here. These controls are not changed text/UI, should be defined inside the functions to reduce the number of reference controls in the controllers 
@@ -77,13 +79,15 @@ It means, the `bottomAnchor` of `Apply button` in `Promotion code` to the cell i
 #### How to use 
 
 ```
-cells.append(makeAboutSellerCell()) 
-cells.append(makeAddressCell())
-         
-if promotion.isAvailable == true {
-     cells.append(makePromotionCell())
-}
-tableView.reloadTable()
+
+    cells.append(makeAboutSellerCell()) 
+    cells.append(makeAddressCell())
+            
+    if promotion.isAvailable == true {
+        cells.append(makePromotionCell())
+    }
+    tableView.reloadTable()
+    
 ```
 
 ## Conclusion 

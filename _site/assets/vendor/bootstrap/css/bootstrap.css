@@ -41,6 +41,10 @@
   box-sizing: border-box;
 }
 
+highlight {
+  background: green
+}
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -516,6 +520,7 @@ code {
   font-size: 87.5%;
   color: #e83e8c;
   word-break: break-word;
+  background-color: green;
 }
 
 a > code {
@@ -540,12 +545,14 @@ pre {
   display: block;
   font-size: 87.5%;
   color: #212529;
+  background-color: green;
 }
 
 pre code {
   font-size: inherit;
   color: inherit;
   word-break: normal;
+  background-color: green;
 }
 
 .pre-scrollable {

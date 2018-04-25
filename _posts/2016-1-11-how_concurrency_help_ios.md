@@ -24,39 +24,41 @@ Serial queues are useful for managing shared resources and avoiding race conditi
 
 In below demo, I downloaded 4 images by using serial queue.
 
-> ```
-> func runSerialQueue() {
->     let serialQueue = dispatch_queue_create("imagesQueue", DISPATCH_QUEUE_SERIAL)
->     dispatch_async(serialQueue) { () -> Void in
->         self.runDownloadTask(0)
->     }
->     dispatch_async(serialQueue) { () -> Void in
->         self.runDownloadTask(1)
->     }
->     dispatch_async(serialQueue) { () -> Void in
->         self.runDownloadTask(2)
->     }
->     dispatch_async(serialQueue) { () -> Void in
->         self.runDownloadTask(3)
->     }
-> }
-> 
-> ```
+ ```
+
+    func runSerialQueue() {
+        let serialQueue = dispatch_queue_create("imagesQueue", DISPATCH_QUEUE_SERIAL)
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(0)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(1)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(2)
+        }
+        dispatch_async(serialQueue) { () - Void in
+            self.runDownloadTask(3)
+        }
+    }
+ 
+ ```
 
 You can create more queues and add task to new queues. Those queues will run concurrently with `imagesQueue`.
 
 And here is download function:
 
-> ```
-> func runDownloadTask(index: Int) {
->     let img = self.downloadImage(self.imageUrl[index])
->     dispatch_async(dispatch_get_main_queue(), {
->         self.images[index].image = img
->         self.downloadCompleted()
->     })
-> }
-> 
-> ```
+ ```
+
+    func runDownloadTask(index: Int) {
+        let img = self.downloadImage(self.imageUrl[index])
+        dispatch_async(dispatch_get_main_queue(), {
+            self.images[index].image = img
+            self.downloadCompleted()
+        })
+    }
+ 
+ ```
 
 Take a look at this cheat sheet. It can help you remember about GCD.
 
@@ -75,23 +77,25 @@ Besides the main queue, the system provides four concurrent queues. We call them
 
 Here is how to download images with concurrent queues
 
-> ```
-> func runConcurrentQueue() {
->     let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
->     dispatch_async(queue) { () -> Void in
->         self.runDownloadTask(0)
->     }
->     dispatch_async(queue) { () -> Void in
->        self.runDownloadTask(1)
->     }
->     dispatch_async(queue) { () -> Void in
->         self.runDownloadTask(2)
->     }
->     dispatch_async(queue) { () -> Void in
->         self.runDownloadTask(3)
->     }
-> }
-> ```
+ ```
+
+    func runConcurrentQueue() {
+        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(0)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(1)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(2)
+        }
+        dispatch_async(queue) { () - Void in
+            self.runDownloadTask(3)
+        }
+    }
+
+ ```
 
 ## Operation Queue
 
@@ -112,41 +116,35 @@ The advantages of NSOperation
 
 Let's see how it works.
 
-> ```
->  func runNSOperationQueue() {
-> 
->     queue = NSOperationQueue();
-> 
->     func createOperation(index: Int) -> NSBlockOperation {
-> 
->         let operation = NSBlockOperation(block: {
-> 
->             self.runDownloadTask(index)
->         })
-> 
->         operation.completionBlock = {
->             print("Operation \(index + 1) completed, cancelled:\(operation.cancelled)")
->         }
-> 
->         return operation
->     }
-> 
->     let operation1 = createOperation(0)
->     queue.addOperation(operation1)
-> 
->     let operation2 = createOperation(1)
->     operation2.addDependency(operation1)
->     queue.addOperation(operation2)
-> 
->     let operation3 = createOperation(2)
->     operation3.addDependency(operation2)
->     queue.addOperation(operation3)
-> 
->     let operation4 = createOperation(3)
->     queue.addOperation(operation4)
-> }
-> 
-> ```
+ ```
+
+    func runNSOperationQueue() {
+        queue = NSOperationQueue();
+        
+        func createOperation(index: Int) - NSBlockOperation {
+            let operation = NSBlockOperation(block: {
+                self.runDownloadTask(index) })
+            operation.completionBlock = {
+                print("Operation \(index + 1) completed, cancelled:\(operation.cancelled)") }
+            return operation
+        }
+ 
+        let operation1 = createOperation(0)
+        queue.addOperation(operation1)
+
+        let operation2 = createOperation(1)
+        operation2.addDependency(operation1)
+        queue.addOperation(operation2)
+
+        let operation3 = createOperation(2)
+        operation3.addDependency(operation2)
+        queue.addOperation(operation3)
+
+        let operation4 = createOperation(3)
+        queue.addOperation(operation4)
+    }
+ 
+ ```
 
 We can see operation 2 (op2) depends on op1 and op3 depends on op2. It means, op1 and op4 run at a time and op1 completed, op2 runs and same to op3.
 

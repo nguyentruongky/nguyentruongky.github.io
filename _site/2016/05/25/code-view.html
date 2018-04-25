@@ -111,22 +111,24 @@
 <p>The character view includes 2 elements: 1 label for code and 1 view for underline.
 Setup the code label and underline view</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupCode() {
-    codeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-    codeLabel.font = UIFont.systemFontOfSize(defaultFontSize)
-    codeLabel.textAlignment = NSTextAlignment.Center
-    self.addSubview(codeLabel)
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private func setupCode() {
+        codeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        codeLabel.font = UIFont.systemFontOfSize(defaultFontSize)
+        codeLabel.textAlignment = NSTextAlignment.Center
+        self.addSubview(codeLabel)
+    }
 
-private func setupUnderline() {
-    underlineView = UIView(frame: CGRect(
-        x: codeLabel.frame.origin.x,
-        y: codeLabel.frame.origin.y + codeLabel.frame.height + 4,
-        width: codeLabel.frame.width,
-        height: codeLabel.frame.width / 10))
-    underlineView.backgroundColor = Color.inactiveColor
-    self.addSubview(underlineView)
-}
+    private func setupUnderline() {
+        underlineView = UIView(frame: CGRect(
+            x: codeLabel.frame.origin.x,
+            y: codeLabel.frame.origin.y + codeLabel.frame.height + 4,
+            width: codeLabel.frame.width,
+            height: codeLabel.frame.width / 10))
+        underlineView.backgroundColor = Color.inactiveColor
+        self.addSubview(underlineView)
+    }
+
 </code></pre></div></div>
 
 <p>There are some errors here.</p>
@@ -137,22 +139,26 @@ private func setupUnderline() {
 
 <p>The character view has active, inactive states. These methods to do that.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func activate() { 
-    changeStateWithColor(Color.activeColor) 
-}
-func deactivate() { 
-    changeStateWithColor(Color.inactiveColor) 
-}
-private func changeStateWithColor(color: UIColor) { 
-    codeLabel.textColor = color; - 
-    underlineView.backgroundColor = color; 
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func activate() { 
+        changeStateWithColor(Color.activeColor) 
+    }
+    func deactivate() { 
+        changeStateWithColor(Color.inactiveColor) 
+    }
+    private func changeStateWithColor(color: UIColor) { 
+        codeLabel.textColor = color; - 
+        underlineView.backgroundColor = color; 
+    }
+
 </code></pre></div></div>
 <p>And another method to change to string in code label.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func changeCodeWithString(string: String) { 
-    codeLabel.text = string 
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func changeCodeWithString(string: String) { 
+        codeLabel.text = string 
+    }
+
 </code></pre></div></div>
 
 <h4 id="code-view">Code View</h4>
@@ -168,92 +174,102 @@ private func changeStateWithColor(color: UIColor) {
 
 <p>Initialize the view</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
 
-override init(frame: CGRect) { super.init(frame: frame) }
+    override init(frame: CGRect) { super.init(frame: frame) }
 
-convenience init(frame: CGRect, numberOfCharacter: Int) {
-    self.init(frame: frame)
-    setupCodeField()
-    let value = calculateSizeForScreenBaseOnWidth(frame.width, numberOfCharacter: numberOfCharacter)
-    let horizontalSpacing: CGFloat = value.spacing
-    let baseSize = value.baseSize
-    var labelX = calculateFirstLabelXBaseOnLabelWidth(baseSize.width,
-                                                      viewWidth: frame.width,
-                                                      numberOfCharacter: numberOfCharacter,
-                                                      horizontalSpacing: horizontalSpacing)
+    convenience init(frame: CGRect, numberOfCharacter: Int) {
+        self.init(frame: frame)
+        setupCodeField()
+        let value = calculateSizeForScreenBaseOnWidth(frame.width, numberOfCharacter: numberOfCharacter)
+        let horizontalSpacing: CGFloat = value.spacing
+        let baseSize = value.baseSize
+        var labelX = calculateFirstLabelXBaseOnLabelWidth(baseSize.width,
+                                                        viewWidth: frame.width,
+                                                        numberOfCharacter: numberOfCharacter,
+                                                        horizontalSpacing: horizontalSpacing)
 
-    for _ in 0 ..&lt; numberOfCharacter {
-        self.addSubview(createCharacterViewWithSize(baseSize, atX: labelX))
-        labelX += horizontalSpacing + baseSize.width
+        for _ in 0 ..&lt; numberOfCharacter {
+            self.addSubview(createCharacterViewWithSize(baseSize, atX: labelX))
+            labelX += horizontalSpacing + baseSize.width
+        }
+
+        activeCodeAtIndex(0)
     }
 
-    activeCodeAtIndex(0)
-}
 </code></pre></div></div>
 
 <p>We have to setup the hidden textfield. Don’t forget conform UITextFieldDelegate</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupCodeField() {
-    codeField.delegate = self
-    self.addSubview(codeField)
-    codeField.becomeFirstResponder()
-    codeField.autocorrectionType = UITextAutocorrectionType.No
-    codeField.autocapitalizationType = UITextAutocapitalizationType.None
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private func setupCodeField() {
+        codeField.delegate = self
+        self.addSubview(codeField)
+        codeField.becomeFirstResponder()
+        codeField.autocorrectionType = UITextAutocorrectionType.No
+        codeField.autocapitalizationType = UITextAutocapitalizationType.None
+    }
+
 </code></pre></div></div>
 
 <p>We have to calculate the character size and font size base on the code view and number of character. For example: with 6-character-code, the font size can be 40+pt and the horizontal spacing is 16. But with 12-character-code, we can’t do that. The font size has to be decreased. This is a recursion method to find the suitable size.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func calculateSizeForScreenBaseOnWidth(viewWidth: CGFloat, numberOfCharacter: Int) -&gt; (chracterSize: CGSize, spacing: CGFloat) {
-    let baseSize = calculateSizeBaseOnFontSize(defaultFontSize)
-    if viewWidth / CGFloat(numberOfCharacter) &gt; baseSize.width + horizontalSpacing { return (baseSize, horizontalSpacing) }
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func calculateSizeForScreenBaseOnWidth(viewWidth: CGFloat, numberOfCharacter: Int) -&gt; (chracterSize: CGSize, spacing: CGFloat) {
+        let baseSize = calculateSizeBaseOnFontSize(defaultFontSize)
+        if viewWidth / CGFloat(numberOfCharacter) &gt; baseSize.width + horizontalSpacing { return (baseSize, horizontalSpacing) }
 
-    horizontalSpacing -=  horizontalSpacing &gt; 8 ? 2 : 0
-    defaultFontSize -= 4
-    return calculateSizeForScreenBaseOnWidth(viewWidth, numberOfCharacter: numberOfCharacter)
-}
+        horizontalSpacing -=  horizontalSpacing &gt; 8 ? 2 : 0
+        defaultFontSize -= 4
+        return calculateSizeForScreenBaseOnWidth(viewWidth, numberOfCharacter: numberOfCharacter)
+    }
+
 </code></pre></div></div>
 
 <p>This method returns a tuple with the character view size and the horizontal spacing between 2 character views.
 Next, we have to calculate the x coordinate for the first character view.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func calculateFirstLabelXBaseOnLabelWidth(width: CGFloat,
-                                          viewWidth: CGFloat,
-                                          numberOfCharacter: Int,
-                                          horizontalSpacing spacing: CGFloat) -&gt; CGFloat {
-    var labelX: CGFloat = width * CGFloat(numberOfCharacter)
-    labelX += spacing * CGFloat(numberOfCharacter - 1)
-    labelX = (viewWidth - labelX) / 2
-    return labelX
-}
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func calculateFirstLabelXBaseOnLabelWidth(width: CGFloat,
+                                            viewWidth: CGFloat,
+                                            numberOfCharacter: Int,
+                                            horizontalSpacing spacing: CGFloat) -&gt; CGFloat {
+        var labelX: CGFloat = width * CGFloat(numberOfCharacter)
+        labelX += spacing * CGFloat(numberOfCharacter - 1)
+        labelX = (viewWidth - labelX) / 2
+        return labelX
+    }
+
 </code></pre></div></div>
 
 <p>And the most important method is the textfield delegate.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -&gt; Bool {
-    let codeLength = textField.text!.characters.count
-    // delete character
-    guard string.isEmpty == false &amp;&amp; range.length != 1 else {
-        characterViews[codeLength - 1].changeCodeWithString(string)
-        activeCodeAtIndex(codeLength - 1)
-        deactivateCodeAtIndex(codeLength)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -&gt; Bool {
+        let codeLength = textField.text!.characters.count
+        // delete character
+        guard string.isEmpty == false &amp;&amp; range.length != 1 else {
+            characterViews[codeLength - 1].changeCodeWithString(string)
+            activeCodeAtIndex(codeLength - 1)
+            deactivateCodeAtIndex(codeLength)
+            return true
+        }
+
+        // enter new character
+        guard codeLength &lt; characterViews.count else { return false }
+        enterCodeAtIndex(codeLength, withString: string)
+
+        // validate code
+        if codeLength + 1 == characterViews.count {
+            let code = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            print("validate code \(code)")
+            if let validateCode = validateCode {
+                validateCode(code)
+            }
+        }
         return true
     }
-
-    // enter new character
-    guard codeLength &lt; characterViews.count else { return false }
-    enterCodeAtIndex(codeLength, withString: string)
-
-    // validate code
-    if codeLength + 1 == characterViews.count {
-        let code = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        print("validate code \(code)")
-        if let validateCode = validateCode {
-            validateCode(code)
-        }
-    }
-    return true
-}
 
 </code></pre></div></div>
 
@@ -280,7 +296,7 @@ Next, we have to calculate the x coordinate for the first character view.</p>
       <div class="clearfix">
 
         
-        <a class="btn btn-primary float-left" href="/2016/01/29/embed-controller.html" data-toggle="tooltip" data-placement="top" title="Dynamically load view controller into another">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        <a class="btn btn-primary float-left" href="/2016/01/27/Airbnb-home.html" data-toggle="tooltip" data-placement="top" title="Airbnb Home screen sample">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
         
         
         <a class="btn btn-primary float-right" href="/2017/01/10/mange-your-time.html" data-toggle="tooltip" data-placement="top" title="3 Tips on How to Effectively Manage Your Time">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>

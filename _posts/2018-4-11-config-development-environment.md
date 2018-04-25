@@ -10,16 +10,19 @@ My previous note is about configuration to release multi apps in the same projec
 But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: `production`, `staging`, `development`. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production. 
 
 So I write some code to make it easier. 
-````
-enum EndPoints: String {
-    case dev = "http://dev.kynguyen.space"
-    case pro = "https://kynguyen.space"
-    case staging = "http://staging.kynguyen.space"
-}
 
-var baseUrl: String = {
-    return EndPoints.pro.rawValue 
-}()
+````
+
+    enum EndPoints: String {
+        case dev = "http://dev.kynguyen.space"
+        case pro = "https://kynguyen.space"
+        case staging = "http://staging.kynguyen.space"
+    }
+
+    var baseUrl: String = {
+        return EndPoints.pro.rawValue 
+    }()
+
 ```
 
 So everytime I need to change, I switch `baseUrl` to EndPoints I need, very easy. 
@@ -27,42 +30,50 @@ So everytime I need to change, I switch `baseUrl` to EndPoints I need, very easy
 But I usually forget to switch to production endpoint when release, even one time I pushed to TestFlight. So do one more step. 
 
 ```
-var baseUrl: String = {
-    #if DEBUG
-        return EndPoints.dev.rawValue
-    #else
-        return EndPoints.pro.rawValue
-    #endif
-}()
+
+    var baseUrl: String = {
+        #if DEBUG
+            return EndPoints.dev.rawValue
+        #else
+            return EndPoints.pro.rawValue
+        #endif
+    }()
+
 ```
+
 `#if DEBUG ... #else` is very useful for hard-coded values. Can be use widely in coding and testing. 
 
 When switch environment, we need to logout the current account and sign in to another account to prevent unknown error, avoid wasting time for debug. It's a damn experience with error like this. 
 
-
 So I need to remember current enviroment to UserDefault. 
+
 ```
-var currentUrl: EndPoint {
-    get {
-        if let url = UserDefaults.standard.value(forKeyPath: "currentUrl") as? String,
-            let environment = EndPoint(rawValue: url) {
-            return environment
+
+    var currentUrl: EndPoint {
+        get {
+            if let url = UserDefaults.standard.value(forKeyPath: "currentUrl") as? String,
+                let environment = EndPoint(rawValue: url) {
+                return environment
+            }
+            return EndPoint.dev
         }
-        return EndPoint.dev
+        set {
+            UserDefaults.standard.setValue("\(newValue)", forKeyPath: "currentUrl")
+        }
     }
-    set {
-        UserDefaults.standard.setValue("\(newValue)", forKeyPath: "currentUrl")
-    }
-}
+
 ```
+
 And check every time app runs. Show login if EndPoint is changed. 
 
 ```
-var isNeedToLogout: Bool {
-    if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
-        baseUrl == currentUrl { return false }
-    return true
-}
+
+    var isNeedToLogout: Bool {
+        if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
+            baseUrl == currentUrl { return false }
+        return true
+    }
+    
 ```
 
 <hr/>

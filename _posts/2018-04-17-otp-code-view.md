@@ -23,60 +23,64 @@ Init view with number of digits you need and an action to validate your OTP from
 Anyone can customize UI themselves for more digits. Digit indicator is • or _ can save more space.
 
 ```
-private var digitCount = 0
-private var validate: ((String) -> Void)?
-convenience init(digitCount: Int, validate: @escaping ((String) -> Void)) {
-    self.init(frame: CGRect.zero)
-    self.digitCount = digitCount
-    self.validate = validate
-    setupView()
-}
+
+    private var digitCount = 0
+    private var validate: ((String) -> Void)?
+    convenience init(digitCount: Int, validate: @escaping ((String) -> Void)) {
+        self.init(frame: CGRect.zero)
+        self.digitCount = digitCount
+        self.validate = validate
+        setupView()
+    }
+
 ```
 
 ### Setup the UI 
 
 ```
-override func setupView() {
-    // (1)
-    guard digitCount > 0 else { return }
 
-    // (2)
-    var constraints = "H:|-8-"
-    for i in 0 ..< digitCount {
-        let label = makeLabel()
-        if i > 0 {
-            label.width(toView: labels[0])
+    override func setupView() {
+        // (1)
+        guard digitCount > 0 else { return }
+
+        // (2)
+        var constraints = "H:|-8-"
+        for i in 0 ..< digitCount {
+            let label = makeLabel()
+            if i > 0 {
+                label.width(toView: labels[0])
+            }
+            constraints += "[v\(i)]-8-"
         }
-        constraints += "[v\(i)]-8-"
+        constraints += "|"
+        addConstraints(withFormat: constraints, arrayOf: labels)
+        height(60)
+        
+        // (3)
+        setCode(at: 0, active: true)
+        hiddenTextField.becomeFirstResponder()
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder)))
     }
-    constraints += "|"
-    addConstraints(withFormat: constraints, arrayOf: labels)
-    height(60)
-    
-    // (3)
-    setCode(at: 0, active: true)
-    hiddenTextField.becomeFirstResponder()
-    addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder)))
-}
 
-private func makeLabel() -> UILabel {
-    let label = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 45),
-                                color: color_69_125_245,
-                                alignment: .center)
-    // (4)
-    label.createRoundCorner(5)
-    label.createBorder(0.5, color: color_102)
+    private func makeLabel() -> UILabel {
+        let label = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 45),
+                                    color: color_69_125_245,
+                                    alignment: .center)
+        // (4)
+        label.createRoundCorner(5)
+        label.createBorder(0.5, color: color_102)
 
-    // (5)
-    addSubview(label)
-    label.vertical(toView: self)
-    labels.append(label)
-    return label
-}
+        // (5)
+        addSubview(label)
+        label.vertical(toView: self)
+        labels.append(label)
+        return label
+    }
+
 ```
-(1): Prevent code running while no digit. Only support init view by code with init(digitCount:validate), so should prevent other init way to make wrong behaviour. 
+(1): Prevent code running while no digit. Only support init view by code with `init(digitCount:validate)`, so should prevent other init way to make wrong behaviour. 
 
-(2): Set Auto layout code. Create a Visual Format Language string (like this: "H:|-8-[v0]-[v1]-8-|"). Detail is [here](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html). 
+(2): Set Auto layout code. Create a Visual Format Language string (like this: `"H:|-8-[v0]-[v1]-8-|"`). Detail is [here](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html). 
 
 To make sure all digit indicators have same width, I set widthConstraint equal to the first indicator. 
 
@@ -86,73 +90,78 @@ To make sure all digit indicators have same width, I set widthConstraint equal t
 
 ### Set hidden UITextField 
 Just add a UITextField, which is overlapped to use its keyboard and delegate. Every key input, I will update the digit indicator by catch the character in UITextFieldDelegate
-```
-lazy var hiddenTextField = self.addHiddenTextField()
-private func addHiddenTextField() -> UITextField {
-    let tf = UITextField()
-    tf.translatesAutoresizingMaskIntoConstraints = false
-    tf.keyboardType = .numberPad
-    tf.isHidden = true
-    tf.delegate = self
-    
-    addSubviews(views: tf)
-    tf.fill(toView: self)
-    
-    return tf
-}
-override func becomeFirstResponder() -> Bool {
-    hiddenTextField.becomeFirstResponder()
-    return true
-}
-```
-
-Conform `UITextFieldDelegate` and update method textfield(shouldChangeCharactersIn:replacementString)
 
 ```
-func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    var newText = string
-    // (1)
-    if isInvalid {
-        isInvalid = false
+
+    lazy var hiddenTextField = self.addHiddenTextField()
+    private func addHiddenTextField() -> UITextField {
+        let tf = UITextField()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.keyboardType = .numberPad
+        tf.isHidden = true
+        tf.delegate = self
+        
+        addSubviews(views: tf)
+        tf.fill(toView: self)
+        
+        return tf
     }
-    else {
-        newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    override func becomeFirstResponder() -> Bool {
+        hiddenTextField.becomeFirstResponder()
+        return true
     }
 
-    // (2)
-    let codeLength = newText.length
-    guard codeLength <= digitCount else { return false }
-    textField.text = newText
-    
-    // (3)
-    func setTextToActiveBox() {
-        for i in 0 ..< codeLength {
-            let char = textField.text!.substring(from: i, to: i)
-            labels[i].text = char
-            setCode(at: i, active: true)
+```
+
+Conform `UITextFieldDelegate` and update method `textfield(shouldChangeCharactersIn:replacementString)`
+
+```
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var newText = string
+        // (1)
+        if isInvalid {
+            isInvalid = false
         }
-    }
-    
-    // (4)
-    func setTextToInactiveBox() {
-        for i in codeLength ..< digitCount {
-            labels[i].text = ""
-            setCode(at: i, active: false)
+        else {
+            newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        }
+
+        // (2)
+        let codeLength = newText.length
+        guard codeLength <= digitCount else { return false }
+        textField.text = newText
+        
+        // (3)
+        func setTextToActiveBox() {
+            for i in 0 ..< codeLength {
+                let char = textField.text!.substring(from: i, to: i)
+                labels[i].text = char
+                setCode(at: i, active: true)
+            }
         }
         
-        if codeLength <= digitCount - 1 {
-            setCode(at: codeLength, active: true)
+        // (4)
+        func setTextToInactiveBox() {
+            for i in codeLength ..< digitCount {
+                labels[i].text = ""
+                setCode(at: i, active: false)
+            }
+            
+            if codeLength <= digitCount - 1 {
+                setCode(at: codeLength, active: true)
+            }
         }
+        
+        setTextToActiveBox()
+        setTextToInactiveBox()
+        
+        if codeLength == digitCount {
+            validateCode(code: textField.text!)
+        }
+        return false
     }
-    
-    setTextToActiveBox()
-    setTextToInactiveBox()
-    
-    if codeLength == digitCount {
-        validateCode(code: textField.text!)
-    }
-    return false
-}
+
 ```
 
 (1): Reset all boxes when the code is invalid and type new character. 

@@ -88,10 +88,13 @@
       <h1 id="04042018">04/04/2018</h1>
 
 <h3 id="how-to-remove-pod-in-ios-project">How to remove pod in iOS project</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install cocoapods-deintegrate cocoapods-clean
-pod deintegrate
-pod clean
-rm Podfile
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    sudo gem install cocoapods-deintegrate cocoapods-clean
+    pod deintegrate
+    pod clean
+    rm Podfile
+    
 </code></pre></div></div>
 
 <h3 id="integrate-zendesk-sdk">Integrate Zendesk SDK</h3>
@@ -110,21 +113,24 @@ rm Podfile
 <h3 id="basic-authorization">Basic Authorization</h3>
 
 <p>Learn from <a href="https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77">https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77</a></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let userName = "myUsername"
-let password = "myPassword"
-let authString = userName + ":" + password
-let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
-let base64Credentials = credentialData.base64EncodedStringWithOptions([])
 
-let headers = ["Authorization": "Basic " + base64Credentials]
-let url = URL(string: api)!
-Alamofire.request(url, method: .post,
-                parameters: params,
-                encoding: JSONEncoding.default,
-                headers: headers)
-    .validate().responseJSON { (response) in
-    print(response)
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let userName = "myUsername"
+    let password = "myPassword"
+    let authString = userName + ":" + password
+    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+
+    let headers = ["Authorization": "Basic " + base64Credentials]
+    let url = URL(string: api)!
+    Alamofire.request(url, method: .post,
+                    parameters: params,
+                    encoding: JSONEncoding.default,
+                    headers: headers)
+        .validate().responseJSON { (response) in
+        print(response)
+    }
+
 </code></pre></div></div>
 
 <h1 id="05042018">05/04/2018</h1>
@@ -135,51 +141,55 @@ Alamofire.request(url, method: .post,
 
 <h1 id="06042018">06/04/2018</h1>
 <h3 id="open-setting-of-my-app">Open setting of my app</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if let url = URL(string: UIApplicationOpenSettingsURLString) {
-    UIApplication.shared.openURL(url)
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        UIApplication.shared.openURL(url)
+    }
+
 </code></pre></div></div>
 
 <h3 id="add-event-to-calendar">Add event to calendar</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct ogeSystemCalendar {
-    let eventStore = EKEventStore()
-    func addEvent(title: String, startDate: Date,
-                  endDate: Date, notes: String?) {
-        eventStore.requestAccess(to: .event) { (granted, error) in
-            if granted == false {
-                DispatchQueue.main.async {
-                    self.tellNoPermission() }
-                return
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    struct ogeSystemCalendar {
+        let eventStore = EKEventStore()
+        func addEvent(title: String, startDate: Date,
+                    endDate: Date, notes: String?) {
+            eventStore.requestAccess(to: .event) { (granted, error) in
+                if granted == false {
+                    DispatchQueue.main.async {
+                        self.tellNoPermission() }
+                    return
+                }
+                
+                self.addToCalendar(title: title, start: startDate,
+                                end: endDate, notes: notes)
             }
-            
-            self.addToCalendar(title: title, start: startDate,
-                               end: endDate, notes: notes)
+        }
+        
+        private func tellNoPermission() {
+            let alert = ogeMessage.showDialog(title: "no_permission".i18n, description: "no_calendar_permission".i18n)
+            alert.addAction(PMAlertAction(title: "OK", style: .default, action: {
+                DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
+            }))
+            appDelegate.ogeniiManager?.present(alert)
+        }
+        
+        private func addToCalendar(title: String, start startDate: Date,
+                    end endDate: Date, notes: String?) {
+            let event = EKEvent(eventStore: eventStore)
+            event.title = title
+            event.startDate = startDate
+            event.endDate = endDate
+            event.notes = notes
+            event.calendar = eventStore.defaultCalendarForNewEvents
+            do {
+                try eventStore.save(event, span: .thisEvent)
+                DispatchQueue.main.async {
+                    ogeMessage.showMessage("saved_to_calendar".i18n) }
+            } catch { }
         }
     }
-    
-    private func tellNoPermission() {
-        let alert = ogeMessage.showDialog(title: "no_permission".i18n, description: "no_calendar_permission".i18n)
-        alert.addAction(PMAlertAction(title: "OK", style: .default, action: {
-            DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
-        }))
-        appDelegate.ogeniiManager?.present(alert)
-    }
-    
-    private func addToCalendar(title: String, start startDate: Date,
-                  end endDate: Date, notes: String?) {
-        let event = EKEvent(eventStore: eventStore)
-        event.title = title
-        event.startDate = startDate
-        event.endDate = endDate
-        event.notes = notes
-        event.calendar = eventStore.defaultCalendarForNewEvents
-        do {
-            try eventStore.save(event, span: .thisEvent)
-            DispatchQueue.main.async {
-                ogeMessage.showMessage("saved_to_calendar".i18n) }
-        } catch { }
-    }
-}
+
 </code></pre></div></div>
 
 <h1 id="07042018">07/04/2018</h1>
@@ -217,9 +227,12 @@ Alamofire.request(url, method: .post,
 <p>Source: <a href="https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app">StackOverflow</a></p>
 <h1 id="17042018">17/04/2018</h1>
 <h3 id="open-location-service">Open Location service</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if let url = URL(string: "App-Prefs:root=Privacy&amp;path=LOCATION") {
-    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-}
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    if let url = URL(string: "App-Prefs:root=Privacy&amp;path=LOCATION") {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+
 </code></pre></div></div>
 
 

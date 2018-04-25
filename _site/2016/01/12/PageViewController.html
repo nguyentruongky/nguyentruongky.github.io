@@ -95,29 +95,32 @@ Follow <a href="http://swiftiostutorials.com/ios-tutorial-using-uipageviewcontro
 
 <p>Create an integer variable name <code class="highlighter-rouge">contentCount</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var contentCount = 0
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var contentCount = 0
+
 </code></pre></div></div>
 
 <p>Write a function to setup this controller</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func setupController(numberOfContent: Int) {
-    contentCount = numberOfContent
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func setupController(numberOfContent: Int) {
+        contentCount = numberOfContent
 
-    // 1
-    let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
-    pageController.dataSource = self
-    
-    // 2
-    if contentCount &gt; 0 {
-        let firstController = getItemController(0)!
-        let startingViewControllers: NSArray = [firstController]
-        pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        // 1
+        let pageController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+        pageController.dataSource = self
+        
+        // 2
+        if contentCount &gt; 0 {
+            let firstController = getItemController(0)!
+            let startingViewControllers: NSArray = [firstController]
+            pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+        }
+
+        // 3
+        addChildViewController(pageController)
+        self.view.addSubview(pageController.view)
     }
-
-    // 3
-    addChildViewController(pageController)
-    self.view.addSubview(pageController.view)
-}
 
 </code></pre></div></div>
 
@@ -129,28 +132,29 @@ Follow <a href="http://swiftiostutorials.com/ios-tutorial-using-uipageviewcontro
 
 <p>Go ahead, implement <code class="highlighter-rouge">UIPageViewControllerDataSource</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -&gt; UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex &gt; 0 {
-        return getItemController(itemController.itemIndex - 1)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -&gt; UIViewController? {
+        let itemController = viewController as! PageItemController
+        if itemController.itemIndex &gt; 0 {
+            return getItemController(itemController.itemIndex - 1)
+        }
+        return nil
     }
-    return nil
-}
 
-func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -&gt; UIViewController? {
-    let itemController = viewController as! PageItemController
-    if itemController.itemIndex + 1 &lt; contentCount {
-        return getItemController(itemController.itemIndex+1)
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -&gt; UIViewController? {
+        let itemController = viewController as! PageItemController
+        if itemController.itemIndex + 1 &lt; contentCount {
+            return getItemController(itemController.itemIndex+1)
+        }
+        return nil
     }
-    return nil
-}
 
-private func getItemController(itemIndex: Int) -&gt; PageItemController? {
-    if itemIndex &lt; contentCount {
-        return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+    private func getItemController(itemIndex: Int) -&gt; PageItemController? {
+        if itemIndex &lt; contentCount {
+            return delegate?.getPageItemAtIndex(itemIndex) as? PageItemController
+        }
+        return nil
     }
-    return nil
-}
 
 </code></pre></div></div>
 
@@ -164,46 +168,55 @@ private func getItemController(itemIndex: Int) -&gt; PageItemController? {
 
 <p>Define delegate now.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>protocol PageViewDelegate {
-    func getPageItemAtIndex(index: Int) -&gt; UIViewController
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    protocol PageViewDelegate {
+        func getPageItemAtIndex(index: Int) -&gt; UIViewController
+    }
+
 </code></pre></div></div>
 
 <p>Write this code out of the class scope. I usually write it under import functions.</p>
 
 <p>And use delegate in MyPageViewController</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var delegate: PageViewDelegate?
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    var delegate: PageViewDelegate?
+
 </code></pre></div></div>
 
 <p>It’s almost done here. You have to implement PageViewDelegate in your main controller. However, I want to show you the complete code for this base class. Go ahead.</p>
 
 <p>Add new variable to determine should we show indicator dots.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var didShowPageControl = false
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var didShowPageControl = false
+
 </code></pre></div></div>
 
 <p>Add these code at the end of <code class="highlighter-rouge">setupController</code> method.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if didShowPageControl == true {
-    setupPageControl()
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    if didShowPageControl == true {
+        setupPageControl()
+    }
+
 </code></pre></div></div>
 
 <p>Add new methods</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private func setupPageControl() {
-    let appearance = UIPageControl.appearance()
-    appearance.pageIndicatorTintColor = UIColor.grayColor()
-    appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-    appearance.backgroundColor = UIColor.darkGrayColor()
-}
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private func setupPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = UIColor.grayColor()
+        appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
+        appearance.backgroundColor = UIColor.darkGrayColor()
+    }
 
-func presentationCountForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
-    if didShowPageControl == false { return 0 }
-    return contentCount
-}
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
+        if didShowPageControl == false { return 0 }
+        return contentCount
+    }
 
-func presentationIndexForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
-    return 0 }
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -&gt; Int {
+        return 0 }
 
 </code></pre></div></div>
 
@@ -213,29 +226,31 @@ func presentationIndexForPageViewController(pageViewController: UIPageViewContro
 
 <p>And in your main view controller, remove all codes in class ViewController then write some new codes. Your class looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ViewController: UIViewController, PageViewDelegate {
-    // Initialize it right away here
-    private let contentImages = ["nature_pic_1.png",
-                                 "nature_pic_2.png",
-                                 "nature_pic_3.png",
-                                 "nature_pic_4.png"];
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let pageController = MyPageViewController()
-        pageController.delegate = self
-        pageController.setupController(contentImages.count)
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class ViewController: UIViewController, PageViewDelegate {
+        // Initialize it right away here
+        private let contentImages = ["nature_pic_1.png",
+                                    "nature_pic_2.png",
+                                    "nature_pic_3.png",
+                                    "nature_pic_4.png"];
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            let pageController = MyPageViewController()
+            pageController.delegate = self
+            pageController.setupController(contentImages.count)
 
-        addChildViewController(pageController)
-        self.view.addSubview(pageController.view)
-    }
+            addChildViewController(pageController)
+            self.view.addSubview(pageController.view)
+        }
 
-    func getPageItemAtIndex(index: Int) -&gt; UIViewController {
-        let pageItemController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
-        pageItemController.itemIndex = index
-        pageItemController.imageName = contentImages[index]
-        return pageItemController
+        func getPageItemAtIndex(index: Int) -&gt; UIViewController {
+            let pageItemController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ItemController") as! PageItemController
+            pageItemController.itemIndex = index
+            pageItemController.imageName = contentImages[index]
+            return pageItemController
+        }
     }
-}
+    
 </code></pre></div></div>
 
 <p>You can see your <code class="highlighter-rouge">PageViewDelegate</code> you defined here.</p>

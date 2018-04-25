@@ -60,6 +60,6 @@ Now, there are many libraries can help you solve a feature, but what is the best
 
 It’s important to remember that you you can learn a lot from other iOS developers. The best way I improve my code is to read other code. I learn a lot from other libraries.
 
-##
+<hr/>
 
 I’ve learned all of these skills throughout my iOS development. I hope these experiences can help other iOS developers continue to further their career.

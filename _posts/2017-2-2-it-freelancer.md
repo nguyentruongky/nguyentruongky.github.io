@@ -34,6 +34,6 @@ It’s important you understand what your clients want. For instance, while sear
 
 The best way for newbies to find job opportunities in the freelance world is to build up network starting with the people you know. It helps to utilise contacts you’ve made with previous projects. Reach out to them and let them know you’re looking for additional work. I found my first project from my Android friend for iOS position in his project. There are hundreds of  groups and forums specialising in specific tech projects thousands of experts to bounce ideas off of and showcase your skills. Use these groups to  learn more about what skills you may be missing in the industry, share what you’re good at and gain advice from your peers. The more you share, the bigger your network grows and more opportunities will come your way.
 
-## 
+<hr/>
 
 One takeaway point from this whole experience is that the more preparation and experience I had, the more successful I became at landing new clients. 
