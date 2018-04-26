@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Unsplash - iOs application
-subtitle: Make an application like Unsplash
+title: Unsplash iOs - Homescreen - List 
+subtitle: Make an iOs application like Unsplash
 date:   2018-4-20
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a'
 ---
@@ -140,7 +140,7 @@ Run and see a tableView with 5 rows, different colors.
             }
         }
 
-        private let authorLabel = knUIMaker.makeLabel()
+        private let authorLabel = knUIMaker.makeLabel(color: .white)
         private let photoImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
         
         override func setupView() {

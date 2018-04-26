@@ -156,3 +156,10 @@ Source: [StackOverflow](https://stackoverflow.com/questions/10125050/can-you-dis
     }
 
 ```
+
+### Createy symbol link nginx
+```
+
+    sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
+
+```

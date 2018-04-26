@@ -1,4 +1,310 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-25T11:57:07+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash - iOs application</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash - iOs application" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-27T04:55:19+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series. First part is &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;photogroupview&quot;&gt;PhotoGroupView&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupView.swift&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class PhotoGroupView: knView {
+        var datasource = [PhotoGroup]() { didSet { collectionView.reloadData() }}
+        lazy var collectionView: UICollectionView = { [weak self] in
+
+            // (1)
+            let layout = FAPaginationLayout()
+            layout.scrollDirection = .horizontal
+            let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            cv.translatesAutoresizingMaskIntoConstraints = false
+            cv.backgroundColor = .white
+            // (2)
+            cv.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            cv.register(PhotoGroupCell.self, forCellWithReuseIdentifier: &quot;PhotoGroupCell&quot;)
+            cv.showsHorizontalScrollIndicator = false
+            cv.showsVerticalScrollIndicator = false
+            cv.delegate = self
+            cv.dataSource = self
+            return cv
+        }()
+        
+        override func setupView() {
+            addSubviews(views: collectionView)
+            collectionView.fill(toView: self)
+        }
+    }
+
+    extension PhotoGroupView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&amp;gt; Int { return datasource.count }
+        
+        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&amp;gt; UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: &quot;PhotoGroupCell&quot;, for: indexPath) as! PhotoGroupCell
+            cell.data = datasource[indexPath.row]
+            return cell
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -&amp;gt; CGFloat { return 8 }
+        
+        // (3)
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -&amp;gt; CGSize {
+            var cellSize: CGSize = collectionView.bounds.size
+            cellSize.width -= collectionView.contentInset.left
+            cellSize.width -= collectionView.contentInset.right
+            return cellSize
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;FAPaginationLayout&lt;/code&gt; is a layout to center the item. It’s good library I used in some recently projects. You can see it on &lt;a href=&quot;https://github.com/fahidattique55/FAPaginationLayout&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(2): ContentInset left and right are 16 to make a space 16px when scroll to the first and last items.&lt;/p&gt;
+
+&lt;p&gt;(3): calculate the item size, item stretches all the horizontal without the left and right inset like (2)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupCell.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class PhotoGroupCell: knCollectionCell {
+        var data: PhotoGroup? {
+            didSet {
+                titleLabel.text = data?.name
+                imageView.downloadImage(from: data?.url)
+            }}
+        
+        let imageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
+        let titleLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 16), color: .white, numberOfLines: 3, alignment: .center)
+        
+        override func setupView() {
+            addSubviews(views: imageView, titleLabel)
+            
+            imageView.fill(toView: self)
+            titleLabel.horizontal(toView: self, space: 8)
+            titleLabel.centerY(toView: self)
+            
+            createRoundCorner(7)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;An error about missing &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroup&lt;/code&gt;. Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupModel.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    struct PhotoGroup {
+        var name: String
+        var url: String
+        var id: String        
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;One more step. Add some code to class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    // (1)
+    let categoryView = PhotoGroupView()
+
+    // (2)
+    lazy var photoGroupCell = self.makePhotoGroupCell()
+    func makePhotoGroupCell() -&amp;gt; knTableCell {
+        let font = UIFont.boldSystemFont(ofSize: 16)
+        let explore = knUIMaker.makeLabel(text: &quot;Explore&quot;, font: font, color: .black)
+        let new = knUIMaker.makeLabel(text: &quot;New&quot;, font: font, color: .black)
+        
+        let cell = knTableCell()
+        cell.addSubviews(views: categoryView, explore, new)
+        cell.addConstraints(withFormat: &quot;V:|-12-[v0]-8-[v1]-12-[v2]-8-|&quot;, views: explore, categoryView, new)
+        
+        categoryView.horizontal(toView: cell)
+        explore.left(toView: cell, space: 16)
+        new.left(toView: explore)
+        
+        categoryView.height(150)
+        return cell
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): You can add &lt;code class=&quot;highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewCell&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; as what I am doing. It is shorter way, but can’t reuse in other project. This kind of design is very popular, maybe we need in other projects, so I make a custom view, instead of a custom cell.&lt;/p&gt;
+
+&lt;p&gt;(2): Define &lt;code class=&quot;highlighter-rouge&quot;&gt;photoGroupCell&lt;/code&gt; is a &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy var&lt;/code&gt; property.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Lazy properties are useful when the initial value for a property is dependent on outside factors whose values are not known until after an instance’s initialization is complete. Lazy properties are also useful when the initial value for a property requires complex or computationally expensive setup that should not be performed unless or until it is needed. (from &lt;a href=&quot;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html&quot;&gt;Apple Developer Document&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I usually use this way to define properties need to complex actions to initialize. This way can help to manage to code easier, you are able to fold/unfold codes, move initialization method to extension or somewhere.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Update &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDatasource&lt;/code&gt;: Datasource for homescreen is a Photo array, so we can’t put an extra Photo into that array. Need a trick here.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
+        return datasource.count + 1 }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+        
+        if indexPath.row == 0 { return photoGroupCell }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;PhotoCell&quot;, for: indexPath) as! PhotoCell
+        cell.data = datasource[indexPath.row - 1] // (*)
+        return cell
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We will return one more row in the table, and cell for this row is &lt;code class=&quot;highlighter-rouge&quot;&gt;photoGroupCell&lt;/code&gt; created before.&lt;/p&gt;
+
+&lt;p&gt;(*) is very important. Without minus 1, app crashes when scroll to the final item. Example will be easier to understand.&lt;/p&gt;
+
+&lt;p&gt;You have 10 Photo instances in array &lt;code class=&quot;highlighter-rouge&quot;&gt;datasource&lt;/code&gt;, but have 11 rows to display. So the final row will get item at index 10 in &lt;code class=&quot;highlighter-rouge&quot;&gt;datasource&lt;/code&gt;. That’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Fatal error: Index out of range&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run and see.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fempty_collection.png?alt=media&amp;amp;token=76cf0e38-5a1e-44c0-a7f6-b21464849af4&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Empty space in top. It’s work. But no data setup, so it’s empty. Add test data into &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData&lt;/code&gt; method&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var categories = [PhotoGroup]()
+    for _ in 0 ..&amp;lt; 5 {
+        categories.append(PhotoGroup(name: &quot;Sport&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, id: &quot;12bawr&quot;))
+        categories.append(PhotoGroup(name: &quot;Computer&quot;, url: &quot;https://unsplash.com/photos/Y6N_w94x8ik/download&quot;, id: &quot;nvljx91&quot;))
+    }
+    categoryView.datasource = categories
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run again and see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fdata_collection.png?alt=media&amp;amp;token=32ba9c94-e280-4569-a2ab-0540f77ae774&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;headerview&quot;&gt;HeaderView&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderView.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class HeaderView: knView {
+    
+        var data: Photo? {didSet {
+            guard let data = data else { return }
+            authorLabel.text = &quot;photo by &quot; + data.author
+            imageView.downloadImage(from: data.url)
+            }}
+        
+        let imageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
+        let authorLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 16), color: .white, alignment: .center)
+        let titleLabel = knUIMaker.makeLabel(text: &quot;Photos for everyone&quot;, font: UIFont.boldSystemFont(ofSize: 32), color: .white, alignment: .center)
+        let searchTextField = knUIMaker.makeTextField(placeholder: &quot;Search photos&quot;)
+        
+        override func setupView() {
+            // (1)
+            translatesAutoresizingMaskIntoConstraints = true
+            
+            searchTextField.createRoundCorner(8)
+            searchTextField.setLeftViewWithImage(#imageLiteral(resourceName: &quot;search&quot;))
+            searchTextField.height(44)
+            searchTextField.changePlaceholderTextColor(.white)
+            addBlur(to: searchTextField, size: CGSize(width: screenWidth - 16 * 2, height: 44))
+            
+            addSubviews(views: imageView, titleLabel, searchTextField, authorLabel)
+            
+            imageView.fill(toView: self)
+            
+            titleLabel.centerY(toView: self, space: -48)
+            titleLabel.centerX(toView: self)
+            
+            searchTextField.horizontal(toView: self, space: 16)
+            searchTextField.verticalSpacing(toView: titleLabel, space: 16)
+            
+            authorLabel.centerX(toView: self)
+            authorLabel.bottom(toView: self, space: -16)
+        }
+        
+        func addBlur(to view: UIView, size: CGSize) {
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.addSubview(blurEffectView)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): Need to set &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; to true because in knView, it’s set to false by default. &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; is used for auto layout by code. But here, we will set frame for headerView.&lt;/p&gt;
+
+&lt;p&gt;The search textfield in Unsplash is very nice. It has a blur background. That’s why I add blur to it by &lt;code class=&quot;highlighter-rouge&quot;&gt;addBlur(to:size)&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Back to class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt; and add new view &lt;code class=&quot;highlighter-rouge&quot;&gt;let headerView = HeaderView()&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method, add these codes at before method close bracket&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    // (1)
+    let headerHeight: CGFloat = 350
+    headerView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: headerHeight)
+    tableView.tableHeaderView = headerView
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): We don’t need headerView automatically adjust height, so set a fixed height for it. Without a height, table view can’t render properly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fstatus_bar.png?alt=media&amp;amp;token=967b3402-7b86-4e81-b23e-5b535445bbf3&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s better when the photo fill the status bar. Just one line in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Wait, the status bar is black and the header is black, too. It’s bad. Change the status bar to light content&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Right click on &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Open As\Source Code&lt;/code&gt;, paste this the before &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/dict&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &amp;lt;key&amp;gt;UIViewControllerBasedStatusBarAppearance&amp;lt;/key&amp;gt;
+    &amp;lt;false/&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method, add one more line&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    statusBarStyle = .lightContent
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;statusBarStyle&lt;/code&gt; is my custom property, you can see it more detail by press &lt;code class=&quot;highlighter-rouge&quot;&gt;control + command&lt;/code&gt; and click on it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run again and see&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Ffinal_part_2.png?alt=media&amp;amp;token=93cbf937-735a-4705-b64d-ac14be383f72&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series. First part is here.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - List</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - List" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
 
 &lt;p&gt;This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes.&lt;/p&gt;
 
@@ -137,7 +443,7 @@
             }
         }
 
-        private let authorLabel = knUIMaker.makeLabel()
+        private let authorLabel = knUIMaker.makeLabel(color: .white)
         private let photoImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
         
         override func setupView() {
@@ -1078,6 +1384,12 @@
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;createy-symbol-link-nginx&quot;&gt;Createy symbol link nginx&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
 
 &lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
@@ -1365,127 +1677,4 @@ FilterController contains only UIButton to turn filter on/off.&lt;/p&gt;
     
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;This is the most complicated portion in this demo. Other minor codes you can see in the sample on &lt;a href=&quot;https://github.com/nguyentruongky/MultiScreensInOneDemo&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app here.</summary></entry><entry><title type="html">Different way to do multi languages in iOS</title><link href="http://localhost:4001/2018/03/29/different-way-i18n.html" rel="alternate" type="text/html" title="Different way to do multi languages in iOS" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/different-way-i18n</id><content type="html" xml:base="http://localhost:4001/2018/03/29/different-way-i18n.html">&lt;p&gt;Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.&lt;/p&gt;
-
-&lt;p&gt;This note I want to take note about another way I found in my recent projects. I use plist files to save languages. Do it now.&lt;/p&gt;
-
-&lt;h3 id=&quot;steps&quot;&gt;Steps&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;New project. Design UI like this, connect outlets&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fi18n_demo.png?alt=media&amp;amp;token=0e0a0ce4-103c-48fe-b8ef-f9f6c292c8e4&quot; width=&quot;350px&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Add 2 plist files, named Lang_en.plist, Lang_vi.plist&lt;/li&gt;
-  &lt;li&gt;Add some codes for localization.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class knI18n {
-        static let shared = knI18n()
-        
-        private let knCurrentLanguageKey = &quot;knCurrentLanguageKey&quot;
-        private let fileNameBase = &quot;Lang_&quot;
-        lazy var localizableDictionary: NSDictionary! = self.getLanguageFile()
-        func getLanguageFile() -&amp;gt; NSDictionary {
-            let language = currentLanguage ?? &quot;en&quot;
-            if let path = Bundle.main.path(forResource: fileNameBase + language, ofType: &quot;plist&quot;) {
-                return NSDictionary(contentsOfFile: path)!
-            }
-            fatalError(&quot;Localizable file NOT found&quot;)
-        }
-        
-        func localize(string: String) -&amp;gt; String {
-            guard let localizedString = localizableDictionary.value(forKeyPath: string) as? String else { return string }
-            return localizedString
-        }
-        
-        func setLanguage(_ language: String) {
-            currentLanguage = language
-            localizableDictionary = getLanguageFile()
-        }
-        
-        private var currentLanguage: String? {
-            get { return UserDefaults.standard.value(forKeyPath: knCurrentLanguageKey) as? String }
-            set { UserDefaults.standard.setValue(newValue, forKeyPath: knCurrentLanguageKey) }
-        }
-    }
-
-    extension String {
-        var i18n: String {
-            return knI18n.shared.localize(string: self)
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Hope code clean enough to understand. The main idea is to load the plist file into a dictionary and get the value for key I want to change language.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add some code into controller&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    @objc func handleChangeToEn() {
-        knI18n.shared.setLanguage(&quot;en&quot;)
-        refreshUI()
-    }
-
-    @objc func handleChangeToVi() {
-        knI18n.shared.setLanguage(&quot;vi&quot;)
-        refreshUI()
-    }
-
-    func refreshUI() {
-        languageLabel.text = &quot;lang&quot;.i18n
-        helloLabel.text = &quot;hello&quot;.i18n
-        vietnameseButton.setTitle(&quot;change_vi&quot;.i18n, for: .normal)
-        englishButton.setTitle(&quot;change_en&quot;.i18n, for: .normal)
-    }
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run the app, and try.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Ffinish_demo_i18n.gif?alt=media&amp;amp;token=4eda2910-d8c5-4de8-b257-100042c030f6&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-the-advantages-in-this-way&quot;&gt;What is the advantages in this way?&lt;/h3&gt;
-
-&lt;p&gt;First, I can easily add new text, without worries about key duplication. XCode will tell key exists, and I never to face to error on key duplication.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fi18n%2Fkey_exist.png?alt=media&amp;amp;token=3bb069ff-ca96-4885-9b52-9146232a1f3b&quot; width=&quot;350&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Second, no need to worry about &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and the end of text. Once, I missed a &lt;code class=&quot;highlighter-rouge&quot;&gt;;&lt;/code&gt; and faced to error, took me much time to fix. XCode was not kind enough to tell me this problem 2 years ago.&lt;/p&gt;
-
-&lt;p&gt;Third, very easy to add new languages, just new plist files with name start with &lt;code class=&quot;highlighter-rouge&quot;&gt;Lang_&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Minor note: XCode can be very slow anytime, so, I like to shorten the name to &lt;code class=&quot;highlighter-rouge&quot;&gt;i18n&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;knI18n&lt;/code&gt; to easier to type without suggestion.&lt;/p&gt;
-
-&lt;h3 id=&quot;but-still-have-disadvantages-in-this-way&quot;&gt;But still have disadvantages in this way&lt;/h3&gt;
-
-&lt;p&gt;I can’t send these plist files to translator, difficult for them to open and do their work. These attached files can help.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GenerateText&lt;/code&gt; is used to export text from language file to text, then I can easily send to translators.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;GeneratePlist&lt;/code&gt; is used to convert translated text file to plist. And can import directly to project.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;How to use?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Put &lt;code class=&quot;highlighter-rouge&quot;&gt;GenerateText&lt;/code&gt; app in the same place with plist file, run Terminal at that folder, type &lt;code class=&quot;highlighter-rouge&quot;&gt;./GenerateText&lt;/code&gt;. New file text is generated and ready to send to translators.&lt;/p&gt;
-
-&lt;p&gt;Put translated file in the same folder with &lt;code class=&quot;highlighter-rouge&quot;&gt;GeneratePlist&lt;/code&gt; app, type &lt;code class=&quot;highlighter-rouge&quot;&gt;./GeneratePlist&lt;/code&gt; in Terminal to generate new plist file.&lt;/p&gt;
-
-&lt;p&gt;My app can backup your plist file before generate new one. But should backup manual will be more secure.&lt;/p&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-
-&lt;p&gt;Hope this solution can help iOS developer work with i18n easier. Download project at &lt;a href=&quot;https://github.com/nguyentruongky/i18n_Demo&quot;&gt;https://github.com/nguyentruongky/i18n_Demo&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Google about multi languages in iOS, I find some step-by-step tuts to do multi languages. That’s a good way, I did that 2 years ago. It shows me to use string files for multi languages.</summary></entry></feed>
+&lt;p&gt;This is the most complicated portion in this demo. Other minor codes you can see in the sample on &lt;a href=&quot;https://github.com/nguyentruongky/MultiScreensInOneDemo&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app here.</summary></entry></feed>
