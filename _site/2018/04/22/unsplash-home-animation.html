@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Unsplash iOs - Homescreen - Animation - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/22/unsplash-home-animation.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Unsplash iOs - Homescreen - Animation</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Animate the Table header view - scrolling and zooming</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 22, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</p>
+
+<p>Unsplash does a great job here. A cool animation when scrolling makes app more interesting.</p>
+
+<p>Today I will make an animation like Unsplash, not 100% same, but not bad, I think :D. I don’t record Unsplash animation, you should download the app and enjoy it. Really cool. Cool app worths to be downloaded and rated. You can download <a href="https://itunes.apple.com/us/app/unsplash/id1290631746?mt=8">here</a>.</p>
+
+<h2 id="whole-series">Whole series</h2>
+
+<p>I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.</p>
+
+<ul>
+  <li>
+    <p>Part 1: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p>Part 2: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p><strong>Part 3</strong>: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a></p>
+  </li>
+</ul>
+
+<h2 id="lets-do-it">Let’s do it</h2>
+
+<ul>
+  <li>In <code class="highlighter-rouge">HomeController</code>, add a new HeaderView</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let animatedHeader = HeaderView()
+
+</code></pre></div></div>
+
+<ul>
+  <li>Replace this code to <code class="highlighter-rouge">view.addSubviews(views: tableView)</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    view.addSubviews(views: animatedHeader, tableView)
+
+    // (2)
+    animatedHeader.translatesAutoresizingMaskIntoConstraints = false
+    animatedHeader.horizontal(toView: view)
+    // (3)
+    animatedHeaderHeightConstraint = animatedHeader.height(headerHeight)
+    animatedHeader.top(toView: view)
+
+</code></pre></div></div>
+
+<p>That means the <code class="highlighter-rouge">animatedHeader</code> is behind the tableView.</p>
+
+<p>(2) is very important. Do you know why? We need to setup auto layout for <code class="highlighter-rouge">animatedHeader</code> so that, we need to set <code class="highlighter-rouge">translatesAutoresizingMaskIntoConstraints</code> to false.</p>
+
+<p>(3): We need to keep the animatedHeader height constraint to animate it later.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">animatedHeader</code> and <code class="highlighter-rouge">headerView</code> need same data. Set the same data for <code class="highlighter-rouge">animatedHeader</code> in <code class="highlighter-rouge">fetchData</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    animatedHeader.data = headerView.data
+
+</code></pre></div></div>
+
+<ul>
+  <li>The keypoint is here. Add method <code class="highlighter-rouge">scrollViewDidScroll</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // (1)
+        let yOffset = scrollView.contentOffset.y
+        // (2)
+        let stopPoint: CGFloat = 96
+        let newHeight = headerHeight - yOffset
+
+        if newHeight &gt; stopPoint {
+            // (3)
+            animatedHeaderHeightConstraint?.constant = newHeight
+            // view.layoutIfNeeded()
+
+            // (4)
+            headerView.isHidden = true
+        }
+        else {
+            headerView.isHidden = false
+        }
+    }
+
+</code></pre></div></div>
+
+<p>Move very slowly to understand clearly.</p>
+
+<p>(1): Animation will animate by the changing of <code class="highlighter-rouge">scrollView.contentOffset.y</code>. Most of animations in <code class="highlighter-rouge">UITableView</code> need this property.</p>
+
+<p>(2): Why <code class="highlighter-rouge">stopPoint</code> is 96? 96 is total of some paddings. First, the padding from the <code class="highlighter-rouge">searchTextField</code> to the <code class="highlighter-rouge">titleLabel</code> in <code class="highlighter-rouge">HeaderView</code>, it’s 16px. Second, the padding from <code class="highlighter-rouge">searchTextField</code> to the bottom of the <code class="highlighter-rouge">HeaderView</code>, it should be equal to first padding, 16px. Third, the status bar height, 20px. Final, the <code class="highlighter-rouge">searchTextField</code> height, 44px. It’s 16 + 16 + 20 + 44.</p>
+
+<p>Stop point means when the <code class="highlighter-rouge">tableView</code> scroll (yOffset) to greater than <code class="highlighter-rouge">stopPoint</code>, animation will stop.</p>
+
+<p>Forgot to tell you. We need to move <code class="highlighter-rouge">let headerHeight: CGFloat = 350</code> from <code class="highlighter-rouge">setupView</code> to class.</p>
+
+<p>(3): Update the <code class="highlighter-rouge">animatedHeaderHeightConstraint</code>. iOs 9 needs call <code class="highlighter-rouge">view.layoutIfNeeded()</code> to update the constraints.</p>
+
+<p>(4): We have to hide the real <code class="highlighter-rouge">headerView</code> because the <code class="highlighter-rouge">animatedHeader</code> is behind the tableView, so we can’t see anything if the real <code class="highlighter-rouge">headerView</code> is shown.</p>
+
+<p>Run the project. And you see white space at <code class="highlighter-rouge">headerView</code> portion. The <code class="highlighter-rouge">tableView.backgroundColor</code> is white, it has to be clear. Set <code class="highlighter-rouge">tableView.backgroundColor = .clear</code> in <code class="highlighter-rouge">setupView</code>.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_1.gif?alt=media&amp;token=4ff5e4ba-72c1-4783-a294-5a79ba04c651" width="40%" /></p>
+
+<ul>
+  <li>The animation doesn’t stop at stopPoint. Actually, it stops, but we can’t see it. The <code class="highlighter-rouge">tableView</code> overlaps the <code class="highlighter-rouge">animatedHeader</code>. So we need to bring it to front.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func bringFakeViewToFontIf(isTop: Bool) {
+        view.bringSubview(toFront: isTop ? tableView : animatedHeader)
+    }
+
+</code></pre></div></div>
+
+<p>In <code class="highlighter-rouge">scrollViewDidScroll</code>, add code after line <code class="highlighter-rouge">let newHeight = headerHeight - yOffset</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   
+    bringFakeViewToFontIf(isTop: yOffset == 0)
+
+</code></pre></div></div>
+
+<p>Run again and see</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_2.gif?alt=media&amp;token=ee7b5983-675e-49f0-a33e-ec9f857e2d78" width="40%" /></p>
+
+<p>Yeah, it stops. But you can see the problem, <code class="highlighter-rouge">titleLabel</code> and <code class="highlighter-rouge">authorLabel</code> are in wrong position. In Unsplash, they’re fading out. Do the same thing.</p>
+
+<ul>
+  <li>Fade out <code class="highlighter-rouge">titleLabel</code> and <code class="highlighter-rouge">authorLabel</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    var opacity = (newHeight - stopPoint) / headerHeight
+    opacity = opacity &gt; 0 ? opacity : 0
+
+</code></pre></div></div>
+
+<p>Add these lines after <code class="highlighter-rouge">headerView.isHidden = true</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    animatedHeader.authorLabel.alpha = opacity
+    animatedHeader.titleLabel.alpha = opacity
+
+</code></pre></div></div>
+
+<p>Run and see, it works.</p>
+
+<ul>
+  <li>Next, we need to change the background from an image to white.</li>
+</ul>
+
+<p>Open <code class="highlighter-rouge">HeadView.swift</code>, define new view</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let whiteView = knUIMaker.makeView(background: .white)
+
+</code></pre></div></div>
+
+<p>Change <code class="highlighter-rouge">addSubviews(views: imageView, titleLabel, searchTextField, authorLabel)</code> to</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    addSubviews(views: imageView, whiteView, titleLabel, searchTextField, authorLabel)    
+    whiteView.fill(toView: self)
+
+</code></pre></div></div>
+
+<p>Add new method</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func animateWhiteView(by opacity: CGFloat) {
+        let whiteViewOpacity = opacity &gt; 0 ? opacity : 0
+        whiteView.alpha = 1 - whiteViewOpacity
+    }
+
+</code></pre></div></div>
+
+<p>Back to <code class="highlighter-rouge">HomeController</code>, add these before close bracket of <code class="highlighter-rouge">scrollViewDidScroll</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let whiteViewOpacity = (newHeight * 2.2) / headerHeight
+    animatedHeader.animateWhiteView(by: whiteViewOpacity)
+
+</code></pre></div></div>
+
+<p>Why <code class="highlighter-rouge">whiteViewOpacity</code> is <code class="highlighter-rouge">(newHeight * 2.2) / headerHeight</code>? The whiteView need to be white when scroll up upto the <code class="highlighter-rouge">categoryView</code> is overlapped, so it needs to be calculated with a higher value. <code class="highlighter-rouge">2.2</code> is just a guess and try value. I had to try several times before and found 2.2 is a good value for this purpose.</p>
+
+<p>We need to change the status bar style to default.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    if newHeight &gt; stopPoint {
+        ...
+        statusBarStyle = .lightContent
+    }
+    else {
+        ...
+        statusBarStyle = .default
+    }
+
+</code></pre></div></div>
+
+<p>Run and see.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_3.gif?alt=media&amp;token=80e8ae5b-1c62-4bd2-9cff-cb5b698b5f3d" width="40%" /></p>
+
+<ul>
+  <li>Almost there. We need to change the searchTextField backgroundColor, placeholder text color, the search icon color.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func changeSearchTextFieldStyle(_ style: Style) {
+        if style == .light {
+            blurEffectView.removeFromSuperview()
+            searchTextField.backgroundColor = UIColor.color(value: 230)
+            let color = UIColor.color(value: 150)
+            searchTextField.changePlaceholderTextColor(color)
+            (searchTextField.leftView as? UIImageView)?.change(color: color)
+        }
+        else {
+            addBlur(to: searchTextField, size: CGSize(width: screenWidth - 16 * 2, height: 44))
+            let color = UIColor.white
+            searchTextField.changePlaceholderTextColor(color)
+            (searchTextField.leftView as? UIImageView)?.change(color: color)
+        }
+    }
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    enum Style {
+        case dark, light
+    }
+
+</code></pre></div></div>
+
+<p>Move <code class="highlighter-rouge">blurEffectView</code> from <code class="highlighter-rouge">addBlur</code> method and init in the class <code class="highlighter-rouge">HeaderView</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+
+</code></pre></div></div>
+
+<p>Back to <code class="highlighter-rouge">HomeController</code>, in <code class="highlighter-rouge">scrollViewDidScroll</code> method</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    if newHeight &gt; stopPoint {
+        ...
+        animatedHeader.changeSearchTextFieldStyle(.dark)
+    }
+    else {
+        ...
+        animatedHeader.changeSearchTextFieldStyle(.light)
+    }
+
+</code></pre></div></div>
+<ul>
+  <li>Finally, animation is here.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_final.gif?alt=media&amp;token=b71dd320-749d-41fd-ad8e-66444a46747a" width="40%" /></p>
+
+<hr />
+
+<p>That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/21/unsplash-header-collection.html" data-toggle="tooltip" data-placement="top" title="Unsplash iOs - Homescreen - Header and Collection Scroll">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+    <script id="dsq-count-scr" src="//kynguyen.disqus.com/count.js" async></script>
+
+  </body>
+
+</html>

@@ -1,12 +1,20 @@
 ---
 layout: post
-title: Unsplash - Homescreen - Header and Collection Scroll
+title: Unsplash iOs - Homescreen - Header and Collection Scroll
 subtitle: TableHeaderView and Custom UICollectionView in Homescreen
 date:   2018-4-21
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a'
 ---
 
-I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series. First part is <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">here</a>.
+## Whole series 
+
+I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.
+
+- Part 1: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a>
+
+- **Part 2**: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
+
+- Part 3: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
 
 ### PhotoGroupView
 - Add new file name `PhotoGroupView.swift`. 
@@ -258,6 +266,14 @@ The search textfield in Unsplash is very nice. It has a blur background. That's 
 ```
 
 (1): We don't need headerView automatically adjust height, so set a fixed height for it. Without a height, table view can't render properly.
+
+- Add data to header in `fetchData` method 
+
+```
+
+    headerView.data = Photo(author: "Kyle", url: "https://unsplash.com/photos/zydhjnjppEc/download", ratio: 0.667954600338083)
+
+```
 
 <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fstatus_bar.png?alt=media&token=967b3402-7b86-4e81-b23e-5b535445bbf3" width="40%"/>
 

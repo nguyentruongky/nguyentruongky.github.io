@@ -1,4 +1,286 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-27T04:55:19+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series. First part is &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-28T03:35:25+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/22/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-22T00:00:00+07:00</published><updated>2018-04-22T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/22/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/22/unsplash-home-animation.html">&lt;p&gt;Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.&lt;/p&gt;
+
+&lt;p&gt;Unsplash does a great job here. A cool animation when scrolling makes app more interesting.&lt;/p&gt;
+
+&lt;p&gt;Today I will make an animation like Unsplash, not 100% same, but not bad, I think :D. I don’t record Unsplash animation, you should download the app and enjoy it. Really cool. Cool app worths to be downloaded and rated. You can download &lt;a href=&quot;https://itunes.apple.com/us/app/unsplash/id1290631746?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+
+&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Part 3&lt;/strong&gt;: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;lets-do-it&quot;&gt;Let’s do it&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, add a new HeaderView&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let animatedHeader = HeaderView()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Replace this code to &lt;code class=&quot;highlighter-rouge&quot;&gt;view.addSubviews(views: tableView)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    view.addSubviews(views: animatedHeader, tableView)
+
+    // (2)
+    animatedHeader.translatesAutoresizingMaskIntoConstraints = false
+    animatedHeader.horizontal(toView: view)
+    // (3)
+    animatedHeaderHeightConstraint = animatedHeader.height(headerHeight)
+    animatedHeader.top(toView: view)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That means the &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt; is behind the tableView.&lt;/p&gt;
+
+&lt;p&gt;(2) is very important. Do you know why? We need to setup auto layout for &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt; so that, we need to set &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; to false.&lt;/p&gt;
+
+&lt;p&gt;(3): We need to keep the animatedHeader height constraint to animate it later.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;headerView&lt;/code&gt; need same data. Set the same data for &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    animatedHeader.data = headerView.data
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The keypoint is here. Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollViewDidScroll&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // (1)
+        let yOffset = scrollView.contentOffset.y
+        // (2)
+        let stopPoint: CGFloat = 96
+        let newHeight = headerHeight - yOffset
+
+        if newHeight &amp;gt; stopPoint {
+            // (3)
+            animatedHeaderHeightConstraint?.constant = newHeight
+            // view.layoutIfNeeded()
+
+            // (4)
+            headerView.isHidden = true
+        }
+        else {
+            headerView.isHidden = false
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Move very slowly to understand clearly.&lt;/p&gt;
+
+&lt;p&gt;(1): Animation will animate by the changing of &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollView.contentOffset.y&lt;/code&gt;. Most of animations in &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt; need this property.&lt;/p&gt;
+
+&lt;p&gt;(2): Why &lt;code class=&quot;highlighter-rouge&quot;&gt;stopPoint&lt;/code&gt; is 96? 96 is total of some paddings. First, the padding from the &lt;code class=&quot;highlighter-rouge&quot;&gt;searchTextField&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;titleLabel&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderView&lt;/code&gt;, it’s 16px. Second, the padding from &lt;code class=&quot;highlighter-rouge&quot;&gt;searchTextField&lt;/code&gt; to the bottom of the &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderView&lt;/code&gt;, it should be equal to first padding, 16px. Third, the status bar height, 20px. Final, the &lt;code class=&quot;highlighter-rouge&quot;&gt;searchTextField&lt;/code&gt; height, 44px. It’s 16 + 16 + 20 + 44.&lt;/p&gt;
+
+&lt;p&gt;Stop point means when the &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; scroll (yOffset) to greater than &lt;code class=&quot;highlighter-rouge&quot;&gt;stopPoint&lt;/code&gt;, animation will stop.&lt;/p&gt;
+
+&lt;p&gt;Forgot to tell you. We need to move &lt;code class=&quot;highlighter-rouge&quot;&gt;let headerHeight: CGFloat = 350&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; to class.&lt;/p&gt;
+
+&lt;p&gt;(3): Update the &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeaderHeightConstraint&lt;/code&gt;. iOs 9 needs call &lt;code class=&quot;highlighter-rouge&quot;&gt;view.layoutIfNeeded()&lt;/code&gt; to update the constraints.&lt;/p&gt;
+
+&lt;p&gt;(4): We have to hide the real &lt;code class=&quot;highlighter-rouge&quot;&gt;headerView&lt;/code&gt; because the &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt; is behind the tableView, so we can’t see anything if the real &lt;code class=&quot;highlighter-rouge&quot;&gt;headerView&lt;/code&gt; is shown.&lt;/p&gt;
+
+&lt;p&gt;Run the project. And you see white space at &lt;code class=&quot;highlighter-rouge&quot;&gt;headerView&lt;/code&gt; portion. The &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView.backgroundColor&lt;/code&gt; is white, it has to be clear. Set &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView.backgroundColor = .clear&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_1.gif?alt=media&amp;amp;token=4ff5e4ba-72c1-4783-a294-5a79ba04c651&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The animation doesn’t stop at stopPoint. Actually, it stops, but we can’t see it. The &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; overlaps the &lt;code class=&quot;highlighter-rouge&quot;&gt;animatedHeader&lt;/code&gt;. So we need to bring it to front.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func bringFakeViewToFontIf(isTop: Bool) {
+        view.bringSubview(toFront: isTop ? tableView : animatedHeader)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollViewDidScroll&lt;/code&gt;, add code after line &lt;code class=&quot;highlighter-rouge&quot;&gt;let newHeight = headerHeight - yOffset&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   
+    bringFakeViewToFontIf(isTop: yOffset == 0)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run again and see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_2.gif?alt=media&amp;amp;token=ee7b5983-675e-49f0-a33e-ec9f857e2d78&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yeah, it stops. But you can see the problem, &lt;code class=&quot;highlighter-rouge&quot;&gt;titleLabel&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;authorLabel&lt;/code&gt; are in wrong position. In Unsplash, they’re fading out. Do the same thing.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fade out &lt;code class=&quot;highlighter-rouge&quot;&gt;titleLabel&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;authorLabel&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    var opacity = (newHeight - stopPoint) / headerHeight
+    opacity = opacity &amp;gt; 0 ? opacity : 0
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add these lines after &lt;code class=&quot;highlighter-rouge&quot;&gt;headerView.isHidden = true&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    animatedHeader.authorLabel.alpha = opacity
+    animatedHeader.titleLabel.alpha = opacity
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run and see, it works.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Next, we need to change the background from an image to white.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;HeadView.swift&lt;/code&gt;, define new view&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let whiteView = knUIMaker.makeView(background: .white)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubviews(views: imageView, titleLabel, searchTextField, authorLabel)&lt;/code&gt; to&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    addSubviews(views: imageView, whiteView, titleLabel, searchTextField, authorLabel)    
+    whiteView.fill(toView: self)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add new method&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func animateWhiteView(by opacity: CGFloat) {
+        let whiteViewOpacity = opacity &amp;gt; 0 ? opacity : 0
+        whiteView.alpha = 1 - whiteViewOpacity
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, add these before close bracket of &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollViewDidScroll&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let whiteViewOpacity = (newHeight * 2.2) / headerHeight
+    animatedHeader.animateWhiteView(by: whiteViewOpacity)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Why &lt;code class=&quot;highlighter-rouge&quot;&gt;whiteViewOpacity&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;(newHeight * 2.2) / headerHeight&lt;/code&gt;? The whiteView need to be white when scroll up upto the &lt;code class=&quot;highlighter-rouge&quot;&gt;categoryView&lt;/code&gt; is overlapped, so it needs to be calculated with a higher value. &lt;code class=&quot;highlighter-rouge&quot;&gt;2.2&lt;/code&gt; is just a guess and try value. I had to try several times before and found 2.2 is a good value for this purpose.&lt;/p&gt;
+
+&lt;p&gt;We need to change the status bar style to default.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    if newHeight &amp;gt; stopPoint {
+        ...
+        statusBarStyle = .lightContent
+    }
+    else {
+        ...
+        statusBarStyle = .default
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run and see.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_3.gif?alt=media&amp;amp;token=80e8ae5b-1c62-4bd2-9cff-cb5b698b5f3d&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Almost there. We need to change the searchTextField backgroundColor, placeholder text color, the search icon color.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func changeSearchTextFieldStyle(_ style: Style) {
+        if style == .light {
+            blurEffectView.removeFromSuperview()
+            searchTextField.backgroundColor = UIColor.color(value: 230)
+            let color = UIColor.color(value: 150)
+            searchTextField.changePlaceholderTextColor(color)
+            (searchTextField.leftView as? UIImageView)?.change(color: color)
+        }
+        else {
+            addBlur(to: searchTextField, size: CGSize(width: screenWidth - 16 * 2, height: 44))
+            let color = UIColor.white
+            searchTextField.changePlaceholderTextColor(color)
+            (searchTextField.leftView as? UIImageView)?.change(color: color)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    enum Style {
+        case dark, light
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Move &lt;code class=&quot;highlighter-rouge&quot;&gt;blurEffectView&lt;/code&gt; from &lt;code class=&quot;highlighter-rouge&quot;&gt;addBlur&lt;/code&gt; method and init in the class &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    private let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.dark))
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, in &lt;code class=&quot;highlighter-rouge&quot;&gt;scrollViewDidScroll&lt;/code&gt; method&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    if newHeight &amp;gt; stopPoint {
+        ...
+        animatedHeader.changeSearchTextFieldStyle(.dark)
+    }
+    else {
+        ...
+        animatedHeader.changeSearchTextFieldStyle(.light)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;Finally, animation is here.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fanimation_final.gif?alt=media&amp;amp;token=b71dd320-749d-41fd-ad8e-66444a46747a&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+
+&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;photogroupview&quot;&gt;PhotoGroupView&lt;/h3&gt;
 &lt;ul&gt;
@@ -264,6 +546,15 @@
 
 &lt;p&gt;(1): We don’t need headerView automatically adjust height, so set a fixed height for it. Without a height, table view can’t render properly.&lt;/p&gt;
 
+&lt;ul&gt;
+  &lt;li&gt;Add data to header in &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData&lt;/code&gt; method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    headerView.data = Photo(author: &quot;Kyle&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, ratio: 0.667954600338083)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fstatus_bar.png?alt=media&amp;amp;token=967b3402-7b86-4e81-b23e-5b535445bbf3&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -304,9 +595,23 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series. First part is here.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - List</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - List" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
+&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - List</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - List" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
 
 &lt;p&gt;This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes.&lt;/p&gt;
+
+&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Part 1&lt;/strong&gt;: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
 &lt;p&gt;I use some code collection from my personal codebase. You can download it at &lt;a href=&quot;https://github.com/nguyentruongky/codebase&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
@@ -485,7 +790,11 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&amp;amp;token=5e2786f0-e428-4771-8aee-879d6c3f2404&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry><entry><title type="html">OTP Code View</title><link href="http://localhost:4001/2018/04/17/otp-code-view.html" rel="alternate" type="text/html" title="OTP Code View" /><published>2018-04-17T00:00:00+07:00</published><updated>2018-04-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/17/otp-code-view</id><content type="html" xml:base="http://localhost:4001/2018/04/17/otp-code-view.html">&lt;p&gt;Two years ago, I did a view for this purpose. Detail is on my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&amp;amp;token=5e2786f0-e428-4771-8aee-879d6c3f2404&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That’s it. Next part is coming.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry><entry><title type="html">OTP Code View</title><link href="http://localhost:4001/2018/04/17/otp-code-view.html" rel="alternate" type="text/html" title="OTP Code View" /><published>2018-04-17T00:00:00+07:00</published><updated>2018-04-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/17/otp-code-view</id><content type="html" xml:base="http://localhost:4001/2018/04/17/otp-code-view.html">&lt;p&gt;Two years ago, I did a view for this purpose. Detail is on my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/ActiveCode/master/E7AVZubaOT.gif&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
@@ -1517,164 +1826,4 @@
 
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhyperlink-label%2Fterm_demo.gif?alt=media&amp;amp;token=9cd27012-8f3f-4d42-adfd-c6fd45df6857&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry><entry><title type="html">Thinking about Coinhako history screen</title><link href="http://localhost:4001/2018/03/29/coinhako-history-demo.html" rel="alternate" type="text/html" title="Thinking about Coinhako history screen" /><published>2018-03-29T00:00:00+07:00</published><updated>2018-03-29T00:00:00+07:00</updated><id>http://localhost:4001/2018/03/29/coinhako-history-demo</id><content type="html" xml:base="http://localhost:4001/2018/03/29/coinhako-history-demo.html">&lt;p&gt;Have just joined cryptocurrencies market and select &lt;a href=&quot;https://www.coinhako.com&quot;&gt;Coinhako&lt;/a&gt; as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app &lt;a href=&quot;https://itunes.apple.com/us/app/coinhako-wallet/id1137855704?mt=8&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;When I get design from designers, I think a lot about how to make it done. Have to pick good one. If pick wrong one, it takes lots of time to change. The history screen in this is one of screen I had to think a lot. Here what I thought and what I did.&lt;/p&gt;
-
-&lt;p&gt;Screenshots from Coinhako app&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_1.png?alt=media&amp;amp;token=3294c068-91f5-4f5b-89e5-8c6226e9ad85&quot; width=&quot;240px&quot; /&gt;
-&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_2.png?alt=media&amp;amp;token=8a2162c1-4c38-478b-ad21-8b272a63fd8a&quot; width=&quot;240px&quot; /&gt;
-&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_3.png?alt=media&amp;amp;token=cad07161-1c66-48eb-99ec-4e268e7198f7&quot; width=&quot;240px&quot; /&gt;
-&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_4.png?alt=media&amp;amp;token=425d0c31-48bd-4f61-8b8f-c48a368b647f&quot; width=&quot;240px&quot; /&gt;
-&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_5.png?alt=media&amp;amp;token=6b1818c3-e292-4f52-984b-371d9a8caf11&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Display 2 lists of status: Pending transactions and Completed transactions. This can be done with a UITableView in a UIViewController.&lt;/li&gt;
-  &lt;li&gt;There is filter, and filter result is a list of transaction, no matter what status. It looks like displayed in the same screen with 2 status lists before.&lt;/li&gt;
-  &lt;li&gt;Every list has empty state.&lt;/li&gt;
-  &lt;li&gt;Every list can load more if available.&lt;/li&gt;
-  &lt;li&gt;Every list can reload when displayed.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;my-thinking&quot;&gt;My thinking&lt;/h2&gt;
-&lt;p&gt;First thinking is a UITableView in a UIViewController. There are 4 datasources, &lt;code class=&quot;highlighter-rouge&quot;&gt;pendingDatasource&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;completedDatasource&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;filterDatasource&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;mainDatasource&lt;/code&gt;. When user selects pending segment or completed segment or filter, app will update the correct datasource and &lt;code class=&quot;highlighter-rouge&quot;&gt;mainDatasource&lt;/code&gt; then reload UITableView. Empty state will be dislay if the selected datasource is empty. This can be the good solution. But I am concern about load more and reload. Very difficult to handle all of them to reload and load more.&lt;/p&gt;
-
-&lt;p&gt;New thinking, make a custom view contain UITableView to display list, handle load data, reload, load more event, empty state inside the view. When user does any actions, add the view to UIViewController and remove the previous one. I will do this solution in my demo.&lt;/p&gt;
-
-&lt;h2 id=&quot;demo&quot;&gt;Demo&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fmulti_screens_in_one%2Fmulti_screen_in_one_demo.gif?alt=media&amp;amp;token=0efd1a87-910e-44b5-be56-31ac988b49e1&quot; width=&quot;320px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;create-project&quot;&gt;Create project&lt;/h3&gt;
-&lt;p&gt;I am a big fan of Auto Layout Programatically, so that no Storyboard in my project. I added some libs for Auto Layout and some codebase.&lt;/p&gt;
-
-&lt;p&gt;The demo has HistoryController and FilterController.&lt;/p&gt;
-
-&lt;p&gt;HistoryController contains a UISegmentControl for status and a bar button to show filter. 
-FilterController contains only UIButton to turn filter on/off.&lt;/p&gt;
-
-&lt;p&gt;UI for controller is in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;add-listview&quot;&gt;Add ListView&lt;/h3&gt;
-
-&lt;p&gt;ListView is a base view for PendingView, CompletedView, FilterView. ListView contains a UITableView and conform UITableViewDelegate, UITableViewDataSource. ListView also handles load data or load more, status (empty, error, loading).&lt;/p&gt;
-
-&lt;p&gt;This is just a simple demo, so I make a Datasource (fake data). In my regular projects, I will load data/load more by workers to handle request result and separate code for the View.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class ListView: knView {
-        let maxItemCount = 20
-        
-        let fakeData = Datasource()
-        var currentPage = 0
-        var canLoadMore = true 
-        var datasource = [String]() { didSet { tableView.reloadData() }}
-        
-        lazy var tableView: UITableView = { [weak self] in
-            let tb = UITableView()
-            tb.translatesAutoresizingMaskIntoConstraints = false
-            tb.separatorStyle = .none
-            tb.showsVerticalScrollIndicator = false
-            tb.dataSource = self
-            tb.delegate = self
-            tb.register(knTableCell.self, forCellReuseIdentifier: &quot;knTableCell&quot;)
-            return tb
-            }()
-        
-        override func setupView() {
-            translatesAutoresizingMaskIntoConstraints = false
-            addSubviews(views: tableView)
-            tableView.fill(toView: self)
-            backgroundColor = .white
-        }
-        
-        func fetchMore() { }
-        func fetchData() { }
-
-        func checkLoadMoreAvailable(currentCount: Int) {
-            canLoadMore = currentCount == maxItemCount
-            currentPage += currentCount == maxItemCount ? 1 : 0
-        }
-    }
-
-    extension ListView: UITableViewDelegate, UITableViewDataSource {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int {
-            return datasource.count }
-        
-        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-            if indexPath.row == datasource.count - 1 {
-                fetchMore()
-            }
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: &quot;knTableCell&quot;, for: indexPath) as! knTableCell
-            cell.textLabel?.text = datasource[indexPath.row]
-            return cell
-        }
-        
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { return 66 }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-pendingview-completedview-filterview&quot;&gt;Add PendingView, CompletedView, FilterView&lt;/h3&gt;
-&lt;p&gt;Add more 3 views and override &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchMore()&lt;/code&gt;. Example for PendingView&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class PendingView: ListView {
-        override func fetchData() {
-            let newData = fakeData.getPendingList(page: 0)
-            checkLoadMoreAvailable(currentCount: newData.count)
-            datasource = newData
-        }
-        
-        override func fetchMore() {
-            guard canLoadMore else { return }
-            let newData = fakeData.getPendingList(page: currentPage)
-            checkLoadMoreAvailable(currentCount: newData.count)
-            datasource += newData
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;handle-logic&quot;&gt;Handle logic&lt;/h3&gt;
-&lt;p&gt;In HistoryController, handle the add view and remove previous one by setting ListType.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    func showList(_ listType: ListType) {
-        switch listType {
-            case .pending:
-                if pendingView.datasource.count == 0 {
-                    pendingView.fetchData()
-                }
-                statusSegment.selectedSegmentIndex = 0
-                view.addSubview(pendingView)
-                pendingView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-                currentList?.removeFromParentView()
-                currentList = pendingView
-                
-            case .completed:
-                if completedView.datasource.count == 0 {
-                    completedView.fetchData()
-                }
-                statusSegment.selectedSegmentIndex = 1
-                view.addSubview(completedView)
-                completedView.fill(toView: view, space: UIEdgeInsets(top: 16 * 2 + 44 + 84, left: 0, bottom: 0, right: 0))
-                currentList?.removeFromParentView()
-                currentList = completedView
-                
-            case .filter:
-                view.addSubview(filterView)
-                filterView.fill(toView: view, space: UIEdgeInsets(top: 66, left: 0, bottom: 0, right: 0))
-                currentList?.removeFromParentView()
-                currentList = filterView
-        }
-    }
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This is the most complicated portion in this demo. Other minor codes you can see in the sample on &lt;a href=&quot;https://github.com/nguyentruongky/MultiScreensInOneDemo&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Have just joined cryptocurrencies market and select Coinhako as a wallet because of its simplicity. The UI is really simple for newcomers like me. But the UI make me feel excited, some screens are interesting to implement. If you’re new to crytocurrencies, you can try this app here.</summary></entry></feed>
+&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry></feed>

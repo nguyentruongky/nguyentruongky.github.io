@@ -9,6 +9,14 @@ I found an excellent app, Unsplash. It's simple and good at UX. Some techniques 
 
 This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes. 
 
+## Whole series 
+
+- **Part 1**: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a>
+
+- Part 2: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
+
+- Part 3: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
+
 ## Preparation
 I use some code collection from my personal codebase. You can download it at [github](https://github.com/nguyentruongky/codebase)
 
@@ -178,3 +186,6 @@ Still have error at `photoImageView.downloadImage(from: data.url)`. You comment 
 - Uncomment code in `knUIImage.swift` and run again
 
 <img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&token=5e2786f0-e428-4771-8aee-879d6c3f2404" width="40%"/>
+
+<hr/>
+That's it. Next part is coming. 
