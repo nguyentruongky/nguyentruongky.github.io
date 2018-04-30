@@ -1,4 +1,332 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-28T03:35:25+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/22/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-22T00:00:00+07:00</published><updated>2018-04-22T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/22/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/22/unsplash-home-animation.html">&lt;p&gt;Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-30T13:39:38+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-24T00:00:00+07:00</published><updated>2018-04-24T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/24/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+
+&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Part 4&lt;/strong&gt;: &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;We add animation in previous part (Part 3) to animate table header view when scrolling and zooming. Today, we will download photo when long pressing at a photo and moving to the download zone. These action needs a series of animations. Not too easy but not too hard. We can do it.&lt;/p&gt;
+
+&lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
+&lt;p&gt;You need to install the Unsplash app in &lt;a href=&quot;https://itunes.apple.com/us/app/unsplash/id1290631746?mt=8&quot;&gt;Appstore&lt;/a&gt; and try to understand the download behaviour from the original app.&lt;/p&gt;
+
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+&lt;h3 id=&quot;add-long-press-gesture-recognizer&quot;&gt;Add long press gesture recognizer&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open class &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;UILongPressGestureRecognizer&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(detectLongPress))
+    addGestureRecognizer(longGesture)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;detectLongPress&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func detectLongPress(gesture: UILongPressGestureRecognizer) {
+        longGestureAction?(gesture)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add property &lt;code class=&quot;highlighter-rouge&quot;&gt;longGestureAction&lt;/code&gt;. This property will be passed from &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var longGestureAction: ((_ gesture: UILongPressGestureRecognizer) -&amp;gt; Void)?
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-gesture-handler-in-homecontroller&quot;&gt;Add gesture handler in HomeController&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add code to tableView(cellForRowAt)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    cell.longGestureAction = { [weak self] recognizer in self?.didLongPressCell(recognizer: recognizer)}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func didLongPressCell (recognizer: UILongPressGestureRecognizer) {
+        animator.recognizer = recognizer
+        animator.detectDownloading()
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Compiler tells it doesn’t &lt;code class=&quot;highlighter-rouge&quot;&gt;animator&lt;/code&gt;. No worries, leave it there. We get back to it later.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-animator&quot;&gt;Add animator&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;Animator.swift&lt;/code&gt; and class &lt;code class=&quot;highlighter-rouge&quot;&gt;Animator&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We need some properties to handle these animations&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var view = UIView()
+    lazy var dropZone = self.makeDropZone()
+    var dragImageView: UIImageView?
+    var startPoint = CGPoint.zero
+    var recognizer: UILongPressGestureRecognizer?
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;detectDownloading&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func detectDownloading() {
+        guard let recognizer = recognizer, let imageView = recognizer.view?.viewWithTag(1001) as? UIImageView else { return }
+        
+        switch recognizer.state {
+        case .began:
+            dragImageView = cloneImageView(from: imageView)
+            view.addSubviews(views: dragImageView!)
+            dragImageView!.frame = changeFrameToView(from: imageView)
+            startPoint = locationInView(from: recognizer)
+            zoom(view: dragImageView!, to: 1.02)
+        case .changed:
+            guard let dragImageView = dragImageView else { return }
+            let newPoint = locationInView(from: recognizer)
+            if newPoint == startPoint { return }
+            zoom(view: dragImageView, to: 0.5)
+            dragImageView.center = newPoint
+            animateDropZone(visible: true)
+            view.bringSubview(toFront: dragImageView)
+            
+            if checkContain(bigView: dragImageView, smallView: dropZone) {
+                zoomDropZone(bigger: true)
+            }
+            else {
+                zoomDropZone(bigger: false)
+            }
+            
+        case .ended:
+            guard let dragImageView = dragImageView else { return }
+            if (checkContain(bigView: dragImageView, smallView: dropZone)) {
+                print(&quot;Downloading&quot;)
+                animateImageWhenDownload()
+                animateDropZone(visible: false)
+            } else {
+                print(&quot;Cancel download&quot;)
+                let originalFrame = changeFrameToView(from: imageView)
+                animateImageWhenCancel(to: originalFrame)
+                animateDropZone(visible: false)
+            }
+        default:
+            return
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is an important method. I will go slowly here and hope it is easy to understand for you.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    guard let recognizer = recognizer, let imageView = recognizer.view?.viewWithTag(1001) as? UIImageView else { return }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;recognizer&lt;/code&gt; is passed from &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;. We need UIImageView from the view in &lt;code class=&quot;highlighter-rouge&quot;&gt;UIGestureRecognizer&lt;/code&gt;. We added gesture to the &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt;, so the &lt;code class=&quot;highlighter-rouge&quot;&gt;recognizer.view&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt;. We have 2 options:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt; to public and we can access by &lt;code class=&quot;highlighter-rouge&quot;&gt;(recognizer?.view as? PhotoCell)?.photoImageView&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add a tag 1001 to &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt; and access by &lt;code class=&quot;highlighter-rouge&quot;&gt;viewWithTag&lt;/code&gt; like this &lt;code class=&quot;highlighter-rouge&quot;&gt;recognizer.view?.viewWithTag(1001) as? UIImageView&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I follow the second option, because I don’t want to open photoImageView to public. Keep everything in private if I can.&lt;/p&gt;
+
+&lt;p&gt;Next, the switch case of &lt;code class=&quot;highlighter-rouge&quot;&gt;UIGestureRecognizerState&lt;/code&gt;. We need to focus on the following state&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    case .began:
+        // (1)
+        dragImageView = cloneImageView(from: imageView)
+        view.addSubviews(views: dragImageView!)
+
+        // (2)
+        dragImageView!.frame = changeFrameToView(from: imageView)
+
+        // (3)
+        startPoint = locationInView(from: recognizer)
+
+        // (4)
+        zoom(view: dragImageView!, to: 1.02)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): We need to clone the &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;dragImageView&lt;/code&gt; in the selected &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt; and add it to the main view. Why do we have to clone it? Without this action, we will move the &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell&lt;/code&gt; around, and the cell will have a blank space for this imageView.&lt;/p&gt;
+
+&lt;p&gt;You can see the implementation of &lt;code class=&quot;highlighter-rouge&quot;&gt;cloneImageView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;changeFrameToView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;locationInView&lt;/code&gt; methods in 
+ &lt;a href=&quot;https://gist.github.com/nguyentruongky/a484459983ee52bf11a750d682e6dd9b&quot; target=&quot;_blank&quot;&gt;this file&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(2): Why do we need to &lt;code class=&quot;highlighter-rouge&quot;&gt;changeFrameToView&lt;/code&gt;? The &lt;code class=&quot;highlighter-rouge&quot;&gt;dragImageView&lt;/code&gt; frame currently is in the UITableView, because it belongs to a cell. We need to move it out of the tableView. Changing frame to main view is neccessary.&lt;/p&gt;
+
+&lt;p&gt;(3): When &lt;code class=&quot;highlighter-rouge&quot;&gt;UIGestureRecognizerState&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;.began&lt;/code&gt;, it calls &lt;code class=&quot;highlighter-rouge&quot;&gt;.changed&lt;/code&gt; also and calls several times. We have to save &lt;code class=&quot;highlighter-rouge&quot;&gt;startPoint&lt;/code&gt; to prevent it state &lt;code class=&quot;highlighter-rouge&quot;&gt;.changed&lt;/code&gt; called unpredictably.&lt;/p&gt;
+
+&lt;p&gt;(4): A slight animation zoom in make user focus on what happen. Only zoom in to 1.02 or 1.04 is great, not larger.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    case .changed:
+        guard let dragImageView = dragImageView else { return }
+
+        // (1)
+        let newPoint = locationInView(from: recognizer)
+        if newPoint == startPoint { return }
+
+        // (2)
+        zoom(view: dragImageView, to: 0.5)
+
+        // (3)
+        dragImageView.center = newPoint
+
+        // (4)
+        animateDropZone(visible: true)
+
+        // (5)
+        if checkContain(bigView: dragImageView, smallView: dropZone) {
+            zoomDropZone(bigger: true)
+        }
+        else {
+            zoomDropZone(bigger: false)
+        }
+
+        // (6)
+        view.bringSubview(toFront: dragImageView)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The state &lt;code class=&quot;highlighter-rouge&quot;&gt;.changed&lt;/code&gt; when we move the finger around. The selected photo needs to be moved around while moving.&lt;/p&gt;
+
+&lt;p&gt;(1): This is how we prevent unpreditable action in &lt;code class=&quot;highlighter-rouge&quot;&gt;.begin&lt;/code&gt; state. It in the same location but don’t know why it fires &lt;code class=&quot;highlighter-rouge&quot;&gt;.changed&lt;/code&gt; state.&lt;/p&gt;
+
+&lt;p&gt;(2): OK, animation here. Zoom out the photo to smaller while moving. You can zoom out to 0.3 - 0.6. But when the &lt;code class=&quot;highlighter-rouge&quot;&gt;dragImageView&lt;/code&gt; is in the dropZone, the &lt;code class=&quot;highlighter-rouge&quot;&gt;downloadZone&lt;/code&gt; will zoom in a little bit, and zoom out when it is out. That’s what (5) do.&lt;/p&gt;
+
+&lt;p&gt;(3): Move the image view around with your finger. Please take note here, in the &lt;code class=&quot;highlighter-rouge&quot;&gt;cloneImageView&lt;/code&gt; method, we have to change &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; to true. &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; was false because it is setup by auto layout, but now we have to change frame and animate by frame.&lt;/p&gt;
+
+&lt;p&gt;(4): The original app has a download zone at the bottom right. It zooms in to appear while moving. The implementation is in the file. I write detail about download zone later.&lt;/p&gt;
+
+&lt;p&gt;(6): We need to bring th &lt;code class=&quot;highlighter-rouge&quot;&gt;dragImagView&lt;/code&gt; to the top unless it is overlaped by the download zone.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    case .ended:
+        guard let dragImageView = dragImageView else { return }
+        if (checkContain(bigView: dragImageView, smallView: dropZone)) {
+            if let image = dragImageView.image {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+            animateImageWhenDownload()
+            animateDropZone(visible: false)
+        } else {
+            print(&quot;Cancel download&quot;)
+            let originalFrame = changeFrameToView(from: imageView)
+            animateImageWhenCancel(to: originalFrame)
+            animateDropZone(visible: false)
+        }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;State &lt;code class=&quot;highlighter-rouge&quot;&gt;.end&lt;/code&gt; is fired when you lift your finger. If your lift point is in dropZone, the photo will be downloaded and saved into your Photos Library. And do nothing when it’s out the zone.&lt;/p&gt;
+
+&lt;h3 id=&quot;request-permisson-to-save-photo&quot;&gt;Request permisson to save photo&lt;/h3&gt;
+
+&lt;p&gt;Without request permisson, the app will be crashed, and you can see the mesage like this.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This app has crashed because it attempted to access privacy-sensitive data without a usage description.  The app’s Info.plist must contain an NSPhotoLibraryAddUsageDescription key with a string value explaining to the user how the app uses this data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Very easy to fix. Just open &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt; as Source code and add lines before &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/dict&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    &amp;lt;key&amp;gt;NSPhotoLibraryAddUsageDescription&amp;lt;/key&amp;gt;
+    &amp;lt;string&amp;gt;Save photo from Unplash to your Photos Library&amp;lt;/string&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-animator-to-homecontroller&quot;&gt;Add animator to HomeController&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, add new property &lt;code class=&quot;highlighter-rouge&quot;&gt;let animator = Animator()&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;, add these code to the end of the method&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    animator.view = view
+    view.addSubviews(views: animator.dropZone)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Replace method &lt;code class=&quot;highlighter-rouge&quot;&gt;didLongPressCell&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func didLongPressCell(recognizer: UILongPressGestureRecognizer) {
+        animator.recognizer = recognizer
+        animator.detectDownloading()
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run and see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fdownload_animation.gif?alt=media&amp;amp;token=4770cc2f-6e58-4ee3-bb9c-a7ad378341d3&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;downloadzone&quot;&gt;DownloadZone&lt;/h3&gt;
+
+&lt;p&gt;I write a little bit about how I make the download zone view and how to animated it, not too detail, just the idea to do.&lt;/p&gt;
+
+&lt;p&gt;The download zone view is created and animated by frame, not auto layout. Same to the label in side the view. When make the view, we will set its frame out of the main frame, so it’s not visible in the view. And will update frame when appear and zoom. If we just update the view only, the label inside will be moved unwanted. So we need to update frame to both download view and the label inside.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;There are many things we can improve in this code. I will do that at the end of the project. You can do it yourself and drop me text in github or skype. We can discuss more about this. Love to hear from you.&lt;/p&gt;
+
+&lt;p&gt;PS: After this note, I found the Unsplash app only support for iOs 11, so maybe the team is using Drag and Drop in iOs 11 only. You can try it yourself.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/22/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-22T00:00:00+07:00</published><updated>2018-04-22T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/22/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/22/unsplash-home-animation.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.&lt;/p&gt;
 
 &lt;p&gt;Unsplash does a great job here. A cool animation when scrolling makes app more interesting.&lt;/p&gt;
 
@@ -17,6 +345,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Part 3&lt;/strong&gt;: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -266,7 +597,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.&lt;/p&gt;
 
@@ -279,6 +610,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -610,6 +944,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1699,131 +2036,4 @@
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
     sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry><entry><title type="html">Hyperlink Label</title><link href="http://localhost:4001/2018/04/05/hyperlink-label.html" rel="alternate" type="text/html" title="Hyperlink Label" /><published>2018-04-05T00:00:00+07:00</published><updated>2018-04-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/05/hyperlink-label</id><content type="html" xml:base="http://localhost:4001/2018/04/05/hyperlink-label.html">&lt;p&gt;Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:&lt;/p&gt;
-
-&lt;p&gt;By register, I agree to … &lt;strong&gt;Terms of Service&lt;/strong&gt; and &lt;strong&gt;Private Policy&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;This is how I make this label.&lt;/p&gt;
-
-&lt;h3 id=&quot;define-your-texts&quot;&gt;Define your texts&lt;/h3&gt;
-&lt;p&gt;Make sure the text you need to make clickable is exacly same to the full text.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let termText = &quot;By register, I agree to ... Terms of Service and Private Policy&quot;
-    let term = &quot;Terms of Service&quot;
-    let policy = &quot;Private Policy&quot;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;format-the-label&quot;&gt;Format the Label&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let termLabel = UILabel()
-    let formattedText = String.format(strings: [term, policy],
-                                        boldFont: UIFont.boldSystemFont(ofSize: 15),
-                                        boldColor: UIColor.blue,
-                                        inString: termText,
-                                        font: UIFont.systemFont(ofSize: 15),
-                                        color: UIColor.black)
-    termLabel.attributedText = formattedText
-    termLabel.numberOfLines = 0
-    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTermTapped))
-    termLabel.addGestureRecognizer(tap)
-    termLabel.isUserInteractionEnabled = true
-    termLabel.textAlignment = .center
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String.format&lt;/code&gt; is an extension from my code collection. This is the full function.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    extension String {
-        static func format(strings: [String],
-                        boldFont: UIFont = UIFont.boldSystemFont(ofSize: 14),
-                        boldColor: UIColor = UIColor.blue,
-                        inString string: String,
-                        font: UIFont = UIFont.systemFont(ofSize: 14),
-                        color: UIColor = UIColor.black) -&amp;gt; NSAttributedString {
-            let attributedString =
-                NSMutableAttributedString(string: string,
-                                        attributes: [
-                                            NSAttributedStringKey.font: font,
-                                            NSAttributedStringKey.foregroundColor: color])
-            let boldFontAttribute = [NSAttributedStringKey.font: boldFont, NSAttributedStringKey.foregroundColor: boldColor]
-            for bold in strings {
-                attributedString.addAttributes(boldFontAttribute, range: (string as NSString).range(of: bold))
-            }
-            return attributedString
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;handle-label-tap-gesture&quot;&gt;Handle Label Tap Gesture&lt;/h3&gt;
-
-&lt;p&gt;I get the tap location in the Label and check if this location belongs to term or policy text range.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    @objc func handleTermTapped(gesture: UITapGestureRecognizer) {
-        let termString = termText as NSString
-        let termRange = termString.range(of: term)
-        let policyRange = termString.range(of: policy)
-        
-        let tapLocation = gesture.location(in: termLabel)
-        let index = termLabel.indexOfAttributedTextCharacterAtPoint(point: tapLocation)
-        
-        if checkRange(termRange, contain: index) == true {
-            handleViewTermOfUse()
-            return
-        }
-        
-        if checkRange(policyRange, contain: index) {
-            handleViewPrivacy()
-            return
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;supported-code&quot;&gt;Supported code&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Check if a range contain an index&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    func checkRange(_ range: NSRange, contain index: Int) -&amp;gt; Bool {
-        return index &amp;gt; range.location &amp;amp;&amp;amp; index &amp;lt; range.location + range.length
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Get index from a point in UILabel&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    extension UILabel {
-        func indexOfAttributedTextCharacterAtPoint(point: CGPoint) -&amp;gt; Int {
-            assert(self.attributedText != nil, &quot;This method is developed for attributed string&quot;)
-            let textStorage = NSTextStorage(attributedString: self.attributedText!)
-            let layoutManager = NSLayoutManager()
-            textStorage.addLayoutManager(layoutManager)
-            let textContainer = NSTextContainer(size: self.frame.size)
-            textContainer.lineFragmentPadding = 0
-            textContainer.maximumNumberOfLines = self.numberOfLines
-            textContainer.lineBreakMode = self.lineBreakMode
-            layoutManager.addTextContainer(textContainer)
-            
-            let index = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-            return index
-        }
-    }
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;demo&quot;&gt;Demo&lt;/h3&gt;
-
-&lt;p&gt;And result is:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fhyperlink-label%2Fterm_demo.gif?alt=media&amp;amp;token=9cd27012-8f3f-4d42-adfd-c6fd45df6857&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Demo is &lt;a href=&quot;https://github.com/nguyentruongky/HyperlinkLabel&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Clickable Label is very popular in iOS, especially in Login, Register screen. You can easily see some text like this:</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry></feed>
