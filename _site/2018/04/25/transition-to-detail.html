@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Unsplash iOs - Homescreen - Transition to view photo fullscreen - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="Whole series">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/04/25/transition-to-detail.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Unsplash iOs - Homescreen - Transition to view photo fullscreen</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Animation to open detail screen and go back.</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on April 25, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <h2 id="whole-series">Whole series</h2>
+
+<p>I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.</p>
+
+<ul>
+  <li>
+    <p>Part 1: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p>Part 2: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p>Part 3: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p>Part 4: <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a></p>
+  </li>
+  <li>
+    <p><strong>Part 5</strong>: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a></p>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>In any photo apps, when select a photo, user can view fullscreen photo, double tap to zoom, and pinch zoom. It should have animation to make the transition look smooth and make sense.</p>
+
+<p>In my note, I only tell you how to make transition to view detail and go back to the list. Double tap to zoom you can read in the project. Pinch zoom you can easily google.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<h3 id="add-method-in-homecontroller">Add method in HomeController</h3>
+
+<ul>
+  <li>Add <code class="highlighter-rouge">tableView(didSelectRowAt)</code> to fire transition and show detail controller</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // (1)
+        if indexPath.row == 0 { return }
+        let cell = tableView.cellForRow(at: indexPath)
+
+        // (2)
+        guard let imageView = cell?.viewWithTag(1001) as? UIImageView else { return }
+        let newImageView = animator.cloneImageView(from: imageView)
+
+        // (3)
+        let originalFrame = animator.changeFrameToView(from: imageView)
+        newImageView.frame = originalFrame
+
+        // (4)
+        view.addSubviews(views: newImageView)
+
+        UIView.animate(withDuration: 0.35, animations: {
+            // (5)
+            newImageView.backgroundColor = .black
+            newImageView.contentMode = .scaleAspectFit
+            newImageView.frame = UIScreen.main.bounds
+        }, completion: { _ in
+            let controller = DetailController()
+            
+            // (6)
+            controller.originalFrame = originalFrame
+            controller.index = indexPath.row - 1
+
+            // (7)
+            controller.modalPresentationStyle = .overCurrentContext
+            self.present(controller, animated: false)
+            newImageView.removeFromSuperview()
+        })
+    }
+
+</code></pre></div></div>
+
+<p>(1): The first cell is PhotoGroupCell, we don’t show DetailController while first cell tapped.</p>
+
+<p>(2): Get the <code class="highlighter-rouge">photoImageView</code> inside the selected cell, same to animation when long press to download.</p>
+
+<p>(3): We need to save <code class="highlighter-rouge">originalFrame</code> to go back at the same position. It’s cool when you select a photo, it moves to a position, and you swipe down, the photo goes back to the previous position.</p>
+
+<p>(4): Add <code class="highlighter-rouge">newImageView</code> to view and we will animate this imageView. Same idea to download animation.</p>
+
+<p>(5): We use the strength of imageView to display an image fit the current size at the center but keep the aspect. The other space will be the backgroundColor.</p>
+
+<p>(6): We paste the <code class="highlighter-rouge">originalFrame</code>, current index to <code class="highlighter-rouge">DetailController</code>. Current index will be used to display correct photo in <code class="highlighter-rouge">DetailController</code>.</p>
+
+<p>(7): We present <code class="highlighter-rouge">DetailController</code> with a transparent background. When close <code class="highlighter-rouge">DetailController</code>, we will have a cool animation here.</p>
+
+<h3 id="add-detailcontroller">Add DetailController</h3>
+
+<ul>
+  <li>
+    <p>Add new file <code class="highlighter-rouge">DetailController.swift</code></p>
+  </li>
+  <li>
+    <p>Add properties to class <code class="highlighter-rouge">DetailController</code>, inherit from <code class="highlighter-rouge">knCollectionController</code></p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var datasource = [Photo]()
+    var currentPhotoIndex = 0
+    var originalFrame = CGRect.zero
+
+</code></pre></div></div>
+
+<ul>
+  <li>Wee need to show correct photo in the collection view, add these code</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionView.contentOffset = CGPoint(x: currentPhotoIndex * Int(screenWidth), y: 0)
+    }
+
+</code></pre></div></div>
+
+<p>This controller is not too difficult, so that, I don’t write too detail, just something important.</p>
+
+<ul>
+  <li>Add code to <code class="highlighter-rouge">setupView</code></li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func setupView() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
+        collectionView.backgroundColor = .black
+        view.addSubviews(views: collectionView)
+        collectionView.fill(toView: view)
+        
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        statusBarStyle = .lightContent
+
+        view.backgroundColor = .clear
+        view.isOpaque = false
+        
+        // add close button here
+    }
+
+</code></pre></div></div>
+
+<p>I think <code class="highlighter-rouge">setupView</code> is clean enough to understand.</p>
+
+<ul>
+  <li>Add action to close detail controller</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func closeView() {
+        guard let cell = collectionView.visibleCells.first as? DetailCell else { return }
+        let imageView = cell.imageView
+        let newImageView = cloneImageView(from: imageView)
+        view.addSubviews(views: newImageView)
+        newImageView.frame = view.frame
+        collectionView.isHidden = true
+        
+        UIView.animate(withDuration: 0.4, animations: { [unowned self] in
+            newImageView.frame = self.originalFrame
+        }, completion: { [weak self] _ in
+            self?.dismiss(animated: false) })
+    }
+
+</code></pre></div></div>
+
+<p>Same idea before, we get the imageView inside the current cell, clone it and animate it.</p>
+
+<ul>
+  <li>It will be cooler when you swipe down and close the view. <code class="highlighter-rouge">UIPanGestureRecognizer</code> can help to do this.</li>
+</ul>
+
+<p>We need <code class="highlighter-rouge">DetailCell</code> before, but it’s very simple so I don’t write it down here. Just contain an imageView and some buttons. I didn’t implement too detail about buttons, you can do it easily.</p>
+
+<p>Open <code class="highlighter-rouge">DetailCell</code>, add a property to keep in touch with <code class="highlighter-rouge">DetailController</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var panAction: ((UIPanGestureRecognizer) -&gt; Void)?
+
+</code></pre></div></div>
+
+<p>In <code class="highlighter-rouge">setupView</code>, add gesture to cell</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(detectPan))
+    panGesture.delegate = self
+    addGestureRecognizer(panGesture)
+
+</code></pre></div></div>
+
+<p>And handle the gesture</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func detectPan(recognizer: UIPanGestureRecognizer) {
+        panAction?(recognizer)
+    }
+
+</code></pre></div></div>
+
+<p>Back to <code class="highlighter-rouge">DetailController</code>, in <code class="highlighter-rouge">itemForRowAtIndex</code>, add code to connect to cell</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    cell.panAction = { [weak self] gesture in self?.detectPan(gesture: gesture) }
+
+</code></pre></div></div>
+
+<p>Hanlde the gesture</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func detectPan(gesture: UIPanGestureRecognizer) {
+        let touchPoint = gesture.location(in: view)
+        
+        switch gesture.state {
+        case .began:
+            initialTouchPoint = touchPoint
+        case .ended, .cancelled:
+            // (1)
+            if touchPoint.y - initialTouchPoint.y &gt; 100 &amp;&amp;
+                abs(touchPoint.x - initialTouchPoint.x) &lt; 5 {
+                closeView()
+            }
+        default:
+            break
+        }
+    }
+
+</code></pre></div></div>
+
+<p>(1): If you swipe down in a straight line, we will close the the controller. Without condition <code class="highlighter-rouge">abs(touchPoint.x - initialTouchPoint.x) &lt; 5</code>, we can close controller while swipe left and right to see other photos.</p>
+
+<h3 id="its-run-time">It’s run time</h3>
+
+<p>Run and see your result.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Ftransition.gif?alt=media&amp;token=5b23d44c-54be-499e-b474-ea02f3954667" width="40%" /></p>
+
+<p>Ah, I change datasource for both HomeController and DetailController. Up to now, we are manually manage the datasource with fake data. We will change that next part.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Unsplash team is very precise. App is simple but very cool. Love what the team doing.</p>
+
+<p>I will not cover all the app. Just 2 more parts for this series, one about connect to their api, and the last part is for some improvement in code and features. Hope you keep reading.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/24/drap-drop-tableview-animation.html" data-toggle="tooltip" data-placement="top" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+    <script id="dsq-count-scr" src="//kynguyen.disqus.com/count.js" async></script>
+
+  </body>
+
+</html>

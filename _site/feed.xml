@@ -1,4 +1,248 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-04-30T13:39:38+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-24T00:00:00+07:00</published><updated>2018-04-24T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/24/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-05-01T05:39:26+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/25/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-25T00:00:00+07:00</published><updated>2018-04-25T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/25/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/25/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+
+&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 4: &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Part 5&lt;/strong&gt;: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;In any photo apps, when select a photo, user can view fullscreen photo, double tap to zoom, and pinch zoom. It should have animation to make the transition look smooth and make sense.&lt;/p&gt;
+
+&lt;p&gt;In my note, I only tell you how to make transition to view detail and go back to the list. Double tap to zoom you can read in the project. Pinch zoom you can easily google.&lt;/p&gt;
+
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;/h2&gt;
+
+&lt;h3 id=&quot;add-method-in-homecontroller&quot;&gt;Add method in HomeController&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView(didSelectRowAt)&lt;/code&gt; to fire transition and show detail controller&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // (1)
+        if indexPath.row == 0 { return }
+        let cell = tableView.cellForRow(at: indexPath)
+
+        // (2)
+        guard let imageView = cell?.viewWithTag(1001) as? UIImageView else { return }
+        let newImageView = animator.cloneImageView(from: imageView)
+
+        // (3)
+        let originalFrame = animator.changeFrameToView(from: imageView)
+        newImageView.frame = originalFrame
+
+        // (4)
+        view.addSubviews(views: newImageView)
+
+        UIView.animate(withDuration: 0.35, animations: {
+            // (5)
+            newImageView.backgroundColor = .black
+            newImageView.contentMode = .scaleAspectFit
+            newImageView.frame = UIScreen.main.bounds
+        }, completion: { _ in
+            let controller = DetailController()
+            
+            // (6)
+            controller.originalFrame = originalFrame
+            controller.index = indexPath.row - 1
+
+            // (7)
+            controller.modalPresentationStyle = .overCurrentContext
+            self.present(controller, animated: false)
+            newImageView.removeFromSuperview()
+        })
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): The first cell is PhotoGroupCell, we don’t show DetailController while first cell tapped.&lt;/p&gt;
+
+&lt;p&gt;(2): Get the &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView&lt;/code&gt; inside the selected cell, same to animation when long press to download.&lt;/p&gt;
+
+&lt;p&gt;(3): We need to save &lt;code class=&quot;highlighter-rouge&quot;&gt;originalFrame&lt;/code&gt; to go back at the same position. It’s cool when you select a photo, it moves to a position, and you swipe down, the photo goes back to the previous position.&lt;/p&gt;
+
+&lt;p&gt;(4): Add &lt;code class=&quot;highlighter-rouge&quot;&gt;newImageView&lt;/code&gt; to view and we will animate this imageView. Same idea to download animation.&lt;/p&gt;
+
+&lt;p&gt;(5): We use the strength of imageView to display an image fit the current size at the center but keep the aspect. The other space will be the backgroundColor.&lt;/p&gt;
+
+&lt;p&gt;(6): We paste the &lt;code class=&quot;highlighter-rouge&quot;&gt;originalFrame&lt;/code&gt;, current index to &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;. Current index will be used to display correct photo in &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;(7): We present &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt; with a transparent background. When close &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;, we will have a cool animation here.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-detailcontroller&quot;&gt;Add DetailController&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController.swift&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add properties to class &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;, inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;knCollectionController&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var datasource = [Photo]()
+    var currentPhotoIndex = 0
+    var originalFrame = CGRect.zero
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Wee need to show correct photo in the collection view, add these code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        collectionView.contentOffset = CGPoint(x: currentPhotoIndex * Int(screenWidth), y: 0)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This controller is not too difficult, so that, I don’t write too detail, just something important.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add code to &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        
+        collectionView.backgroundColor = .black
+        view.addSubviews(views: collectionView)
+        collectionView.fill(toView: view)
+        
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+        statusBarStyle = .lightContent
+
+        view.backgroundColor = .clear
+        view.isOpaque = false
+        
+        // add close button here
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I think &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; is clean enough to understand.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add action to close detail controller&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func closeView() {
+        guard let cell = collectionView.visibleCells.first as? DetailCell else { return }
+        let imageView = cell.imageView
+        let newImageView = cloneImageView(from: imageView)
+        view.addSubviews(views: newImageView)
+        newImageView.frame = view.frame
+        collectionView.isHidden = true
+        
+        UIView.animate(withDuration: 0.4, animations: { [unowned self] in
+            newImageView.frame = self.originalFrame
+        }, completion: { [weak self] _ in
+            self?.dismiss(animated: false) })
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Same idea before, we get the imageView inside the current cell, clone it and animate it.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It will be cooler when you swipe down and close the view. &lt;code class=&quot;highlighter-rouge&quot;&gt;UIPanGestureRecognizer&lt;/code&gt; can help to do this.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailCell&lt;/code&gt; before, but it’s very simple so I don’t write it down here. Just contain an imageView and some buttons. I didn’t implement too detail about buttons, you can do it easily.&lt;/p&gt;
+
+&lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailCell&lt;/code&gt;, add a property to keep in touch with &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var panAction: ((UIPanGestureRecognizer) -&amp;gt; Void)?
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;, add gesture to cell&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let panGesture = UIPanGestureRecognizer(target: self, action: #selector(detectPan))
+    panGesture.delegate = self
+    addGestureRecognizer(panGesture)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And handle the gesture&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func detectPan(recognizer: UIPanGestureRecognizer) {
+        panAction?(recognizer)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;DetailController&lt;/code&gt;, in &lt;code class=&quot;highlighter-rouge&quot;&gt;itemForRowAtIndex&lt;/code&gt;, add code to connect to cell&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    cell.panAction = { [weak self] gesture in self?.detectPan(gesture: gesture) }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Hanlde the gesture&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func detectPan(gesture: UIPanGestureRecognizer) {
+        let touchPoint = gesture.location(in: view)
+        
+        switch gesture.state {
+        case .began:
+            initialTouchPoint = touchPoint
+        case .ended, .cancelled:
+            // (1)
+            if touchPoint.y - initialTouchPoint.y &amp;gt; 100 &amp;amp;&amp;amp;
+                abs(touchPoint.x - initialTouchPoint.x) &amp;lt; 5 {
+                closeView()
+            }
+        default:
+            break
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): If you swipe down in a straight line, we will close the the controller. Without condition &lt;code class=&quot;highlighter-rouge&quot;&gt;abs(touchPoint.x - initialTouchPoint.x) &amp;lt; 5&lt;/code&gt;, we can close controller while swipe left and right to see other photos.&lt;/p&gt;
+
+&lt;h3 id=&quot;its-run-time&quot;&gt;It’s run time&lt;/h3&gt;
+
+&lt;p&gt;Run and see your result.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Ftransition.gif?alt=media&amp;amp;token=5b23d44c-54be-499e-b474-ea02f3954667&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ah, I change datasource for both HomeController and DetailController. Up to now, we are manually manage the datasource with fake data. We will change that next part.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Unsplash team is very precise. App is simple but very cool. Love what the team doing.&lt;/p&gt;
+
+&lt;p&gt;I will not cover all the app. Just 2 more parts for this series, one about connect to their api, and the last part is for some improvement in code and features. Hope you keep reading.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-24T00:00:00+07:00</published><updated>2018-04-24T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/24/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -14,6 +258,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Part 4&lt;/strong&gt;: &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -349,6 +596,9 @@
   &lt;li&gt;
     &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;lets-do-it&quot;&gt;Let’s do it&lt;/h2&gt;
@@ -613,6 +863,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -947,6 +1200,9 @@
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1882,158 +2138,4 @@
 &lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;amp;token=5429f000-f157-419d-aad4-acc7bc3723a1&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.</summary></entry><entry><title type="html">Today I learn</title><link href="http://localhost:4001/2018/04/07/til-today-i-learn.html" rel="alternate" type="text/html" title="Today I learn" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/til-today-i-learn</id><content type="html" xml:base="http://localhost:4001/2018/04/07/til-today-i-learn.html">&lt;h1 id=&quot;04042018&quot;&gt;04/04/2018&lt;/h1&gt;
-
-&lt;h3 id=&quot;how-to-remove-pod-in-ios-project&quot;&gt;How to remove pod in iOS project&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    sudo gem install cocoapods-deintegrate cocoapods-clean
-    pod deintegrate
-    pod clean
-    rm Podfile
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;integrate-zendesk-sdk&quot;&gt;Integrate Zendesk SDK&lt;/h3&gt;
-
-&lt;p&gt;Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.&lt;/p&gt;
-
-&lt;p&gt;Add SDK manual way: Add 2 more framework from iOS &lt;code class=&quot;highlighter-rouge&quot;&gt;MobileCoreServices.framework&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Security.framework.&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.&lt;/p&gt;
-
-&lt;h3 id=&quot;merge-unrelated-histories-in-git&quot;&gt;Merge unrelated histories in git&lt;/h3&gt;
-&lt;p&gt;Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;git pull origin branch_name --allow-unrelated-histories&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;basic-authorization&quot;&gt;Basic Authorization&lt;/h3&gt;
-
-&lt;p&gt;Learn from &lt;a href=&quot;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&quot;&gt;https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let userName = &quot;myUsername&quot;
-    let password = &quot;myPassword&quot;
-    let authString = userName + &quot;:&quot; + password
-    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
-    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
-
-    let headers = [&quot;Authorization&quot;: &quot;Basic &quot; + base64Credentials]
-    let url = URL(string: api)!
-    Alamofire.request(url, method: .post,
-                    parameters: params,
-                    encoding: JSONEncoding.default,
-                    headers: headers)
-        .validate().responseJSON { (response) in
-        print(response)
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;05042018&quot;&gt;05/04/2018&lt;/h1&gt;
-&lt;h3 id=&quot;format-string&quot;&gt;Format string&lt;/h3&gt;
-&lt;p&gt;Always display 2 characters for Int: 09:10, 10:15&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;String(format: &quot;%02d:%02d&quot;, hr, min)&lt;/code&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;06042018&quot;&gt;06/04/2018&lt;/h1&gt;
-&lt;h3 id=&quot;open-setting-of-my-app&quot;&gt;Open setting of my app&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
-    if let url = URL(string: UIApplicationOpenSettingsURLString) {
-        UIApplication.shared.openURL(url)
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-event-to-calendar&quot;&gt;Add event to calendar&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    struct ogeSystemCalendar {
-        let eventStore = EKEventStore()
-        func addEvent(title: String, startDate: Date,
-                    endDate: Date, notes: String?) {
-            eventStore.requestAccess(to: .event) { (granted, error) in
-                if granted == false {
-                    DispatchQueue.main.async {
-                        self.tellNoPermission() }
-                    return
-                }
-                
-                self.addToCalendar(title: title, start: startDate,
-                                end: endDate, notes: notes)
-            }
-        }
-        
-        private func tellNoPermission() {
-            let alert = ogeMessage.showDialog(title: &quot;no_permission&quot;.i18n, description: &quot;no_calendar_permission&quot;.i18n)
-            alert.addAction(PMAlertAction(title: &quot;OK&quot;, style: .default, action: {
-                DispatchQueue.main.async { ogeSystemInteractor.openCalendar() }
-            }))
-            appDelegate.ogeniiManager?.present(alert)
-        }
-        
-        private func addToCalendar(title: String, start startDate: Date,
-                    end endDate: Date, notes: String?) {
-            let event = EKEvent(eventStore: eventStore)
-            event.title = title
-            event.startDate = startDate
-            event.endDate = endDate
-            event.notes = notes
-            event.calendar = eventStore.defaultCalendarForNewEvents
-            do {
-                try eventStore.save(event, span: .thisEvent)
-                DispatchQueue.main.async {
-                    ogeMessage.showMessage(&quot;saved_to_calendar&quot;.i18n) }
-            } catch { }
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;07042018&quot;&gt;07/04/2018&lt;/h1&gt;
-
-&lt;h3 id=&quot;make-app-icon-ios&quot;&gt;Make app icon iOS&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://makeappicon.com/&quot;&gt;https://makeappicon.com/&lt;/a&gt; is a really wonderful tool. Just copy folder &lt;code class=&quot;highlighter-rouge&quot;&gt;AppIcon.appiconset&lt;/code&gt; and replace the old one in project and App Icon is set. Thanks a lot, awesome app.&lt;/p&gt;
-
-&lt;h3 id=&quot;update-sql-by-removing-text-in-text&quot;&gt;Update SQL by removing text in text&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UPDATE My_Table set my_column = REPLACE(my_column, &quot;text_need_removed&quot;, '') where my_condition&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;error-in-git&quot;&gt;Error in git&lt;/h3&gt;
-&lt;p&gt;Error: &lt;code class=&quot;highlighter-rouge&quot;&gt;The requested URL returned error: 403 while accessing&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Solution:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;.git/config&lt;/code&gt; file under your repo directory&lt;/li&gt;
-  &lt;li&gt;Find &lt;code class=&quot;highlighter-rouge&quot;&gt;url=&lt;/code&gt; entry under section &lt;code class=&quot;highlighter-rouge&quot;&gt;[remote &quot;origin&quot;]&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Change all the texts before @ symbol to &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh://git&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Save&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;11042018&quot;&gt;11/04/2018&lt;/h1&gt;
-&lt;h3 id=&quot;prevent-rotation-in-ios&quot;&gt;Prevent rotation in iOS&lt;/h3&gt;
-&lt;p&gt;There are three kinds of Device orientation keys there in the info.plist now.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Supported interface orientations (iPad)&lt;/li&gt;
-  &lt;li&gt;Supported interface orientations (iPhone)&lt;/li&gt;
-  &lt;li&gt;Supported interface orientations&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Source: &lt;a href=&quot;https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app&quot;&gt;StackOverflow&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;17042018&quot;&gt;17/04/2018&lt;/h1&gt;
-&lt;h3 id=&quot;open-location-service&quot;&gt;Open Location service&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    if let url = URL(string: &quot;App-Prefs:root=Privacy&amp;amp;path=LOCATION&quot;) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;createy-symbol-link-nginx&quot;&gt;Createy symbol link nginx&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">04/04/2018</summary></entry></feed>
+&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.</summary></entry></feed>

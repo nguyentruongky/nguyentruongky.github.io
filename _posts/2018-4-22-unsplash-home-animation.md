@@ -26,6 +26,8 @@ I am making an app like Unsplash iOs to practise skills. This is the part 3 in t
 
 - Part 4 <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
 
+- Part 5: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
+
 ## Let's do it
 
 - In `HomeController`, add a new HeaderView

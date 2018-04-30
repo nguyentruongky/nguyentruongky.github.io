@@ -17,6 +17,9 @@ I am making an app like Unsplash iOs to practise skills. This is the part 3 in t
 
 - **Part 4**: <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
 
+- Part 5: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
+
+
 ## Introduction
 We add animation in previous part (Part 3) to animate table header view when scrolling and zooming. Today, we will download photo when long pressing at a photo and moving to the download zone. These action needs a series of animations. Not too easy but not too hard. We can do it. 
 

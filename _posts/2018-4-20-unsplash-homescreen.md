@@ -19,6 +19,8 @@ This note is about homescreen. I will make a basic homescreen with photos like U
 
 - Part 4 <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
 
+- Part 5: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
+
 ## Preparation
 I use some code collection from my personal codebase. You can download it at [github](https://github.com/nguyentruongky/codebase)
 
