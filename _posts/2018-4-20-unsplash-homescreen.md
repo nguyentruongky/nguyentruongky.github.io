@@ -13,13 +13,13 @@ This note is about homescreen. I will make a basic homescreen with photos like U
 
 - **Part 1**: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a>
 
-- Part 2: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
+- Part 2: <a href="/2018/04/23/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
 
-- Part 3: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
+- Part 3: <a href="/2018/04/26/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
 
-- Part 4 <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
+- Part 4 <a href="/2018/04/28/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
 
-- Part 5: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
+- Part 5: <a href="/2018/04/30/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
 
 ## Preparation
 I use some code collection from my personal codebase. You can download it at [github](https://github.com/nguyentruongky/codebase)

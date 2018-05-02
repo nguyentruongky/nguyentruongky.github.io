@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-05-02T12:57:50+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/25/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-25T00:00:00+07:00</published><updated>2018-04-25T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/25/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/25/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-05-02T13:36:13+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/30/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-30T00:00:00+07:00</published><updated>2018-04-30T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/30/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/30/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -7,16 +7,16 @@
     &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 4: &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 4: &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 5&lt;/strong&gt;: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Part 5&lt;/strong&gt;: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -242,7 +242,7 @@
 
 &lt;p&gt;I do not cover all the app. This is the end of this series. Learn a lot from Unsplash app. Unsplash team is very precise. App is simple but very cool. Love what the team doing. Thanks Unplash team.&lt;/p&gt;
 
-&lt;p&gt;You can find final source at &lt;a href=&quot;https://github.com/nguyentruongky/Unsplash&quot;&gt;my Github Unsplash&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-24T00:00:00+07:00</published><updated>2018-04-24T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/24/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/24/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;You can find final source at &lt;a href=&quot;https://github.com/nguyentruongky/Unsplash&quot;&gt;my Github Unsplash&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/28/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-28T00:00:00+07:00</published><updated>2018-04-28T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/28/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/28/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -251,16 +251,16 @@
     &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 4&lt;/strong&gt;: &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Part 4&lt;/strong&gt;: &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -572,7 +572,7 @@
 
 &lt;p&gt;There are many things we can improve in this code. I will do that at the end of the project. You can do it yourself and drop me text in github or skype. We can discuss more about this. Love to hear from you.&lt;/p&gt;
 
-&lt;p&gt;PS: After this note, I found the Unsplash app only support for iOs 11, so maybe the team is using Drag and Drop in iOs 11 only. You can try it yourself.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/22/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-22T00:00:00+07:00</published><updated>2018-04-22T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/22/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/22/unsplash-home-animation.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;PS: After this note, I found the Unsplash app only support for iOs 11, so maybe the team is using Drag and Drop in iOs 11 only. You can try it yourself.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/26/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-26T00:00:00+07:00</published><updated>2018-04-26T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/26/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/26/unsplash-home-animation.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.&lt;/p&gt;
 
 &lt;p&gt;Unsplash does a great job here. A cool animation when scrolling makes app more interesting.&lt;/p&gt;
@@ -588,16 +588,16 @@
     &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 3&lt;/strong&gt;: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Part 3&lt;/strong&gt;: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -847,7 +847,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/21/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-21T00:00:00+07:00</published><updated>2018-04-21T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/21/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/21/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/23/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-23T00:00:00+07:00</published><updated>2018-04-23T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/23/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/23/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.&lt;/p&gt;
 
@@ -856,16 +856,16 @@
     &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1193,16 +1193,16 @@
     &lt;p&gt;&lt;strong&gt;Part 1&lt;/strong&gt;: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/21/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/22/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/24/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/25/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 

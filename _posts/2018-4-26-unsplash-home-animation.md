@@ -2,7 +2,7 @@
 layout: post
 title: Unsplash iOs - Homescreen - Animation
 subtitle: Animate the Table header view - scrolling and zooming
-date:   2018-4-22
+date:   2018-4-26
 background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash.png?alt=media&token=b4e42f63-f873-4161-ab0d-1c865e971c9a'
 ---
 
@@ -20,13 +20,13 @@ I am making an app like Unsplash iOs to practise skills. This is the part 3 in t
 
 - Part 1: <a href="/2018/04/20/unsplash-homescreen.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX" target="_blank">Source</a>
 
-- Part 2: <a href="/2018/04/21/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
+- Part 2: <a href="/2018/04/23/unsplash-header-collection.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY" target="_blank">Source</a>
 
-- **Part 3**: <a href="/2018/04/22/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
+- **Part 3**: <a href="/2018/04/26/unsplash-home-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY" target="_blank">Source</a>
 
-- Part 4 <a href="/2018/04/24/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
+- Part 4 <a href="/2018/04/28/drap-drop-tableview-animation.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX" target="_blank">Source</a>
 
-- Part 5: <a href="/2018/04/25/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
+- Part 5: <a href="/2018/04/30/transition-to-detail.html" target="_blank">Note</a> <a href="https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL" target="_blank">Source</a>
 
 ## Let's do it
 
