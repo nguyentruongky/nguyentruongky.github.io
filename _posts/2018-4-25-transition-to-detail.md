@@ -235,6 +235,4 @@ Ah, I change datasource for both HomeController and DetailController. Up to now,
 
 ## Conclusion 
 
-Unsplash team is very precise. App is simple but very cool. Love what the team doing.
-
-I will not cover all the app. Just 2 more parts for this series, one about connect to their api, and the last part is for some improvement in code and features. Hope you keep reading. 
+I do not cover all the app. This is the end of this series. Learn a lot from Unsplash app. Unsplash team is very precise. App is simple but very cool. Love what the team doing. Thanks Unplash team. 
