@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Tasks iOs - Create task - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/05/17/tasks-create-task.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118652981-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-118652981-1');
+  </script>
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/til">Today I learn</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftodo.jpg?alt=media&token=58593177-6f60-45cd-b801-c0b73548fc95')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftodo.jpg?alt=media&token=58593177-6f60-45cd-b801-c0b73548fc95')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Tasks iOs - Create task</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Make a cool todo app like Google Tasks</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on May 17, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to</p>
+
+<ul>
+  <li>Display a list of task</li>
+  <li>Add new tasks</li>
+  <li>Make some animations</li>
+</ul>
+
+<h3 id="add-uitableview-to-controller">Add UITableView to controller</h3>
+
+<ul>
+  <li>
+    <p>Open file <code class="highlighter-rouge">ViewController.swift</code> and change <code class="highlighter-rouge">ViewController</code> class to <code class="highlighter-rouge">tkTasksListController</code>.</p>
+  </li>
+  <li>
+    <p>Change file <code class="highlighter-rouge">ViewController.swift</code> to <code class="highlighter-rouge">TaskList.swift</code></p>
+  </li>
+  <li>
+    <p>Open <code class="highlighter-rouge">AppDelegate</code> and clear all content of class <code class="highlighter-rouge">AppDelegate</code>. Paste these code to it</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var window: UIWindow?
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+        setupApp()
+        return true
+    }
+    
+    func setupApp() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        // (1)
+        window!.rootViewController = tkTasksListController()
+        window!.backgroundColor = UIColor.white
+        window?.makeKeyAndVisible()
+    }
+
+</code></pre></div></div>
+
+<p>I am a fan of auto layout by code, so I usually use this way to show the controller instead of Storyboard. You can replace <code class="highlighter-rouge">takTaskListController</code> to any controller you want.</p>
+
+<p>I will wrap the rootViewController to a UINavigationController, but not now.</p>
+
+<ul>
+  <li>
+    <p>Keep moving, open file <code class="highlighter-rouge">Info.plist</code>, and change data of line <code class="highlighter-rouge">Main storyboard file base name</code> to empty</p>
+  </li>
+  <li>
+    <p>Run the app. App works well. We can safely remove <code class="highlighter-rouge">Main.storyboard</code>.</p>
+  </li>
+  <li>
+    <p>Back to class <code class="highlighter-rouge">tkTasksListController</code>. We change a little bit. Class now look like this</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class tkTasksListController: knCustomTableController {
+        var datasource = [tkTask]()
+
+        override func setupView() {
+            // (1)
+            view.addSubviews(views: titleLabel, tableView, stateView, functionView)
+            
+            tableView.horizontal(toView: view)
+            tableView.verticalSpacing(toView: titleLabel, space: 24)
+            tableView.bottom(toAnchor: functionView.topAnchor, space: -24)
+            ...
+        }
+        ...
+    }
+
+    extension tkTasksListController {
+        // (2)
+        override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -&gt; Int {
+            return datasource.count }
+        
+        // (3)
+        override func tableView(_ tableView: UITableView,
+                                heightForRowAt indexPath: IndexPath) -&gt; CGFloat {
+            return UITableViewAutomaticDimension }
+        
+        // (4)
+        override func tableView(_ tableView: UITableView,
+                                cellForRowAt indexPath: IndexPath) -&gt; UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "tkTaskCell",
+                                                    for: indexPath) as! tkTaskCell
+            cell.data = datasource[indexPath.row]
+            return cell
+        }
+    }
+
+    // (5)
+    override func registerCells() {
+        tableView.register(tkTaskCell.self, forCellReuseIdentifier: "tkTaskCell")
+    }
+
+</code></pre></div></div>
+
+<p>(1): Add <code class="highlighter-rouge">tableView</code> to view and set auto layout for it. <code class="highlighter-rouge">tableView</code> is stretched from the bottom of <code class="highlighter-rouge">titleLabel</code> to the top of <code class="highlighter-rouge">functionView</code></p>
+
+<p>(2), (3), (4): is tableView DataSource. It’s basic for <code class="highlighter-rouge">UITableView</code>, you know it very well, I think.</p>
+
+<p>(5): We need to register the cell to reuse, without this step, <code class="highlighter-rouge">UITableView</code> doesn’t know your cell and throw an exception.</p>
+
+<h3 id="design-cell">Design Cell</h3>
+
+<p><code class="highlighter-rouge">UITableView</code> needs <code class="highlighter-rouge">UITableCell</code>. Help it with new file name <code class="highlighter-rouge">TaskCell.swift</code> with content below</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    import UIKit
+
+    // (1)
+    class tkTask {
+        var name: String?
+        var finish = false
+        
+        init() {}
+        init(name: String) {
+            self.name = name
+        }
+    }
+
+    // (2)
+    class tkTaskCell: knTableCell {
+        var data: tkTask? {
+            didSet {
+                guard let data = data else { return }
+                nameLabel.text = data.name
+            }
+        }
+        
+        let doneButton = knUIMaker.makeButton()
+        let nameLabel = knUIMaker.makeLabel(font: .systemFont(ofSize: 16),
+                                            color: .black,
+                                            numberOfLines: 0)
+        
+        override func setupView() {
+            let line = knUIMaker.makeLine(color: UIColor.color(value: 230), height: 1)
+            addSubviews(views: doneButton, nameLabel, line)
+            
+            doneButton.left(toView: self, space: 24)
+            doneButton.centerY(toView: nameLabel)
+            
+            nameLabel.vertical(toView: self, space: 24)
+            nameLabel.leftHorizontalSpacing(toView: doneButton, space: -24)
+            nameLabel.right(toView: self, space: -24)
+            
+            line.horizontal(toView: self)
+            line.bottom(toView: self)
+            
+            doneButton.createBorder(2, color: UIColor.color(value: 110))
+            doneButton.square(edge: 24)
+            doneButton.createRoundCorner(12)
+        }
+    }
+
+</code></pre></div></div>
+
+<p>(1): We need a model to keep the task content, this model is not as simple as this, it will expand to bigger soon. Keep it simple first.</p>
+
+<p>(2): Same to model, the cell is designed in the simplest way first.</p>
+
+<ul>
+  <li>Now we can run the app. But I am sure, you can’t see the <code class="highlighter-rouge">tableView</code>. Add <code class="highlighter-rouge">tableView.backgroundColor = .green</code> to the last of <code class="highlighter-rouge">setupView</code> method. App will be like this</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_tableview.png?alt=media&amp;token=b309df22-4e15-4b05-850b-7e23ac9618db" width="40%" /></p>
+
+<ul>
+  <li>Problem found. We will hide the <code class="highlighter-rouge">tableView</code> show the <code class="highlighter-rouge">stateView</code> when there is no task. We can solve it by replace</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var datasource = [tkTask]()
+
+</code></pre></div></div>
+
+<p>to</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+    var datasource = [tkTask]() { didSet {
+        tableView.reloadData()
+        let isEmpty = datasource.count &gt; 0
+        stateView.isHidden = isEmpty
+        tableView.isHidden = !isEmpty
+        }
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Add dummy data</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func fetchData() {
+        datasource = [
+            tkTask(name: "Hehe"),
+            tkTask(name: "Aloha"),
+        ]
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Run and see. Don’t forget to remove <code class="highlighter-rouge">tableView.backgroundColor = .green</code> in <code class="highlighter-rouge">setupView</code> method.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_tableview_data.png?alt=media&amp;token=34ddc947-a628-4ce2-b8c5-08b453004571" width="40%" /></p>
+
+<h3 id="add-new-task">Add new task</h3>
+
+<ul>
+  <li>Add these 2 lines to the end of the <code class="highlighter-rouge">setupView</code> method</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    newTaskView.saveButton.addTarget(self, action: #selector(addNewTask))
+    newTaskView.textField.delegate = self
+
+</code></pre></div></div>
+
+<p>We can select save button or tap return key on the keyboard to save task.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    // (1)
+    @objc func addNewTask() {
+        datasource.insert(tkTask(name: newTaskView.textField.text!), at: 0)
+        newTaskView.textField.text = ""
+        hideCreateTaskView()
+    }
+
+    // (2)
+    extension tkTasksListController: UITextFieldDelegate {
+        func textFieldShouldReturn(_ textField: UITextField) -&gt; Bool {
+            addNewTask()
+            return true
+        }
+    }
+</code></pre></div></div>
+
+<p>(1): We will add new task directly to datasource, and <code class="highlighter-rouge">tableView</code> will reload to display new data. Same to the Google Task, we need to clear the textfield content and hide the <code class="highlighter-rouge">newTaskView</code>.</p>
+
+<p>(2): Action for event return key pressed.</p>
+
+<p>The textfield is automatically correct my text, but I am using Vietnamese to test, so it makes me annoy. I turn if off in <code class="highlighter-rouge">tkCreateTaskView</code>, <code class="highlighter-rouge">setupView</code> method.</p>
+
+<h3 id="animate-to-show-more-options">Animate to show more options</h3>
+
+<p>App is not as simple as text. App needs animation.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_animate_show_task_option.gif?alt=media&amp;token=4bb7773c-7ecb-441c-828f-dd1f8cf3f916" width="40%" /></p>
+
+<p>Very simple animation. We can see 4 things we need to do.</p>
+
+<ol>
+  <li>Zoom animation for <code class="highlighter-rouge">addButton</code></li>
+  <li>Rotate <code class="highlighter-rouge">addButton</code></li>
+  <li>Change <code class="highlighter-rouge">addButton</code> color</li>
+  <li>Animate <code class="highlighter-rouge">detailButton</code> and <code class="highlighter-rouge">calendarButton</code></li>
+</ol>
+
+<p>Do step by step.</p>
+
+<ul>
+  <li>Press <code class="highlighter-rouge">cmd + shift + O</code> to quick open file <code class="highlighter-rouge">knUIButton.swift</code>. This is my extensions for UIButton. We need to add 2 extensions here.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    extension UIButton {
+        func animateZooming() {
+            // (1)
+            guard let parentView = superview,
+                  let edge = imageView?.frame.size.height else { return }
+            let circo = UIView(frame: CGRect(x: 0, y: 0, width: edge, height: edge))
+            circo.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
+            
+            parentView.addSubviews(views: circo)
+            circo.center = center
+            circo.createRoundCorner(edge / 2)
+
+            // (2)
+            let level: CGFloat = 2.5
+            UIView.animate(withDuration: 0.3, animations: {
+                circo.transform = CGAffineTransform(scaleX: level, y: level)
+            }, completion: { _ in
+                circo.removeFromSuperview()
+            })
+        }
+        
+        // (3)
+        func animateRotation(angle: CGFloat) {
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                guard let `self` = self else { return }
+                self.transform = self.transform.rotated(by: angle)
+            })
+        }
+    }
+
+</code></pre></div></div>
+
+<p>Method <code class="highlighter-rouge">animateZooming</code> only used for <code class="highlighter-rouge">addButton</code> or other buttons with same size at this moment. Why? Because the level (2) is specific for it. We will make it flexible for other buttons later if needed. We can do this yourself. Just try and find a good number for you.</p>
+
+<p>(1): The idea is to add a view to the superView of button and animate this view. Nothing affects to button. There are many ways to make this animation, but I choose the easiest one.</p>
+
+<p>(2): Just simple rotate the whole button with an angle.</p>
+
+<ul>
+  <li>Open file <code class="highlighter-rouge">CreateTaskView.swift</code> to add new buttons and animation</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let detailButton = knUIMaker.makeButton(image: UIImage(named: "detail"))
+    let calendarButton = knUIMaker.makeButton(image: UIImage(named: "event"))
+
+    override func setupView() {
+        addSubviews(views: textField, addButton, saveButton, detailButton, calendarButton)
+        ...
+        detailButton.fill(toView: addButton)
+        calendarButton.fill(toView: addButton)
+
+        detailButton.alpha = 0
+        calendarButton.alpha = 0
+        ...
+
+        addButton.addTarget(self, action: #selector(showTaskOption))
+    }
+</code></pre></div></div>
+
+<p>Setup layout for new 2 buttons, and hide them by changing their opacity to 0, we will animate to display them.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    var taskOptionShown = false
+    @objc func showTaskOption() {
+
+        addButton.animateZooming()
+        if taskOptionShown == false {
+            changeAddButtonColor(UIColor.color(r: 96, g: 99, b: 104))
+            addButton.animateRotation(angle: CGFloat.pi / 4)
+            animateDetailButton(visible: true)
+            animateCalendarButton(visible: true)
+        }
+        else {
+            changeAddButtonColor(UIColor.color(r: 71, g: 136, b: 241))
+            addButton.animateRotation(angle: -CGFloat.pi / 4)
+            animateDetailButton(visible: false)
+            animateCalendarButton(visible: false)
+        }
+        
+        taskOptionShown = !taskOptionShown
+    }
+
+    func changeAddButtonColor(_ color: UIColor) {
+        addButton.tintColor = color
+    }
+    
+    func animateDetailButton(visible: Bool) {
+        let xPos = detailButton.center.x + 8 * (visible ? 1 : -1)
+        let alpha: CGFloat = visible ? 1 : 0
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
+            guard let detailButton = self?.detailButton else { return }
+            detailButton.transform = CGAffineTransform(translationX: xPos, y: 0)
+            detailButton.alpha = alpha
+        })
+    }
+    
+    func animateCalendarButton(visible: Bool) {
+        let xPos = detailButton.center.x + 64 * (visible ? 1 : -1)
+        let alpha: CGFloat = visible ? 1 : 0
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
+            guard let calendarButton = self?.calendarButton else { return }
+            calendarButton.transform = CGAffineTransform(translationX: xPos, y: 0)
+            calendarButton.alpha = alpha
+        })
+    }
+
+</code></pre></div></div>
+
+<p>We have a flag <code class="highlighter-rouge">taskOptionShown</code> to mark whether buttons displayed.</p>
+
+<p>As I said before, we have 4 things to do in this animation, these are 4 things.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    addButton.animateZooming()
+    changeAddButtonColor
+    addButton.animateRotation
+    animateDetailButton + animateCalendarButton
+
+</code></pre></div></div>
+
+<p>Zoom animation in the gif image is too fast. You can run and see in your project.</p>
+
+<p>Run the app and you can see the animation but the addButton color is not changed. We need extra step.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let addButton = knUIMaker.makeButton(image: UIImage(named: "add_fill")?.changeColor())
+
+    override func setupView() {
+        ...
+        addButton.tintColor = UIColor.color(r: 71, g: 136, b: 241)
+    }
+
+</code></pre></div></div>
+
+<p>We need to make the image for imageView inside the button available to be changed color and set default color for it.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_demo_part_2.gif?alt=media&amp;token=f7ad3b36-69bc-4285-a533-b9bc4fef7dd6" width="40%" /></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>That’s enough for today. Keep reading, I’ll come back soon.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/05/16/tasks-home.html" data-toggle="tooltip" data-placement="top" title="Tasks iOs - Homescreen">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

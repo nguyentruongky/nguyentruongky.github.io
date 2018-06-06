@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Tasks iOs - Homescreen - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/05/16/tasks-home.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118652981-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-118652981-1');
+  </script>
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/til">Today I learn</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftodo.jpg?alt=media&token=58593177-6f60-45cd-b801-c0b73548fc95')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftodo.jpg?alt=media&token=58593177-6f60-45cd-b801-c0b73548fc95')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Tasks iOs - Homescreen</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Make a cool todo app like Google Tasks</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on May 16, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.</p>
+
+<p>I admire this app and want to make a good app like this. In this series, I will try to copy Google Tasks in iOS. Hope you keep reading.</p>
+
+<h3 id="preparation">Preparation</h3>
+<p>I use some code collection from my personal codebase. You can download it at <a href="https://github.com/nguyentruongky/codebase">github</a></p>
+
+<p>Init an empty project and added my <code class="highlighter-rouge">mustHave</code> folder</p>
+
+<h3 id="design-ui">Design UI</h3>
+<p>Today, we design this screen</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F1.fresh_start.png?alt=media&amp;token=c7be1937-b1e8-4021-95d4-9614213e8e82" width="40%" /></p>
+
+<p>There are some parts we need do:</p>
+
+<ul>
+  <li>Create custom views for the state view (center part) and the function view (bottom part)</li>
+  <li>Design views and set auto layout</li>
+  <li>Add animation when select <code class="highlighter-rouge">Add a new task</code></li>
+</ul>
+
+<h3 id="create-state-view">Create state view</h3>
+<p>App has states, and app needs state view. So if we design a good view, we can reuse in other apps. <strong>This is not a good design, just make it done for this project only.</strong></p>
+
+<ul>
+  <li>Add new file <code class="highlighter-rouge">StateView.swift</code></li>
+  <li>Paste these code into file</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    import UIKit
+
+    class tkStateView: knView {
+        let imageView = knUIMaker.makeImageView(image: UIImage(named: "first_empty"), contentMode: .scaleAspectFill)
+        let emptyBoldLabel = knUIMaker.makeLabel(text: "A fresh start",
+                                                font: UIFont.boldSystemFont(ofSize: 16),
+                                                color: .black, alignment: .center)
+        let emptyActionLabel = knUIMaker.makeLabel(text: "Anything to add?",
+                                                font: UIFont.systemFont(ofSize: 16),
+                                                color: UIColor.color(r: 96, g: 99, b: 104),
+                                                alignment: .center)
+        override func setupView() {
+            addSubviews(views: imageView, emptyBoldLabel, emptyActionLabel)
+            addConstraints(withFormat: "V:|[v0]-44-[v1]-8-[v2]|", views: imageView, emptyBoldLabel, emptyActionLabel)
+            
+            imageView.square(edge: screenWidth / 2)
+            imageView.horizontal(toView: self)
+            
+            emptyBoldLabel.horizontal(toView: self)
+        
+            emptyActionLabel.horizontal(toView: self)
+        }
+    }
+
+</code></pre></div></div>
+
+<p><em>*Note</em></p>
+<hr />
+
+<blockquote>
+  <p>I usually use alias to start the name of class/struct. In this project, it’s <code class="highlighter-rouge">tk</code>. With this alias, we can prevent some same names, like NotificationCenter…</p>
+</blockquote>
+<hr />
+
+<p>Hope code is easy to understand. This view can automatically calculate the size. Its width is <code class="highlighter-rouge">screen width / 2</code>, equal to <code class="highlighter-rouge">imageView</code>. Its height is calculated by constraints <code class="highlighter-rouge">V:|[v0]-44-[v1]-8-[v2]|</code>.</p>
+
+<h3 id="create-function-view">Create function view</h3>
+<ul>
+  <li>Add new file name <code class="highlighter-rouge">FunctionView.swift</code> and paste code below</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class tkFunctionView: knView {
+        let addButton = knUIMaker.makeButton()
+        let listOptionButton = knUIMaker.makeButton(image: UIImage(named: "dot_menu"))
+        let accountOptionButton = knUIMaker.makeButton(image: UIImage(named: "dash_menu"))
+        
+        override func setupView() {
+            let plusIcon = knUIMaker.makeImageView(image: UIImage(named: "add")!,
+                                                contentMode: .scaleAspectFit)
+            plusIcon.change(color: .white)
+            let addLabel = knUIMaker.makeLabel(text: "Add a new task",
+                                           font: .boldSystemFont(ofSize: 16),
+                                           color: .white)
+            let addView = knUIMaker.makeView()
+            addView.addSubviews(views: plusIcon, addLabel)
+            addView.addConstraints(withFormat: "H:|[v0]-16-[v1]|",
+                               views: plusIcon, addLabel)
+            plusIcon.centerY(toView: addView)
+            addLabel.centerY(toView: addView)
+            
+            addButton.addSubviews(views: addView)
+            addView.center(toView: addButton)
+            addButton.createRoundCorner(30)
+            addButton.backgroundColor = UIColor.color(r: 71, g: 136, b: 241)
+            
+            let line = knUIMaker.makeLine(color: .color(value: 234), height: 3)
+            addSubviews(views: line, addButton, listOptionButton, accountOptionButton)
+            
+            line.horizontal(toView: self)
+            line.centerY(toView: addButton)
+            
+            addButton.top(toView: self)
+            addButton.centerX(toView: self)
+            addButton.size(CGSize(width: screenWidth / 1.8, height: 60))
+            
+            listOptionButton.right(toView: self, space: -24)
+            listOptionButton.verticalSpacing(toView: addButton)
+            
+            accountOptionButton.left(toView: self, space: 24)
+            accountOptionButton.verticalSpacing(toView: addButton)
+        }
+    }
+
+</code></pre></div></div>
+
+<p><strong>Note</strong></p>
+
+<hr />
+
+<blockquote>
+  <p>When you work in a project, I’m sure you don’t do like this. I have to try to design UI in the main view. When everything works great, I split them up to smaller view to be easier to reuse.</p>
+</blockquote>
+<hr />
+
+<h3 id="implement-homescreen-ui">Implement homescreen UI</h3>
+
+<ul>
+  <li>
+    <p>Open file <code class="highlighter-rouge">ViewController.swift</code> and change base class to <code class="highlighter-rouge">knController</code>. That’s just a UIViewController but I added some other extension for it.</p>
+  </li>
+  <li>
+    <p>Define some views</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let titleLabel = knUIMaker.makeLabel(text: "My Tasks",
+                                            font: UIFont.systemFont(ofSize: 36),
+                                            color: .black)
+    let stateView = tkStateView()
+    let functionView = tkFunctionView()
+
+</code></pre></div></div>
+
+<ul>
+  <li>Override <code class="highlighter-rouge">setupView</code> method from base class</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func setupView() {
+        view.addSubviews(views: titleLabel, stateView, functionView)
+        
+        titleLabel.topLeft(toView: view, top: 68, left: 54)
+        
+        stateView.center(toView: view)
+        
+        functionView.horizontal(toView: view)
+        functionView.bottom(toView: view)
+        functionView.height(120)        
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Run and see.</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F1.result_fresh_start.png?alt=media&amp;token=13a4dbcd-f277-4510-8860-f4f4eb6c34a7" width="40%" /></p>
+
+<p>I don’t like shadow, so I skip drop shadow for the line and the add button in <code class="highlighter-rouge">tkFunctionView</code></p>
+
+<h3 id="add-createtaskview">Add CreateTaskView</h3>
+
+<ul>
+  <li>Add new file name <code class="highlighter-rouge">CreateTaskView.swift</code> and paste code below</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class tkCreateTaskView: knView {
+        let taskNameTextView = knUIMaker.makeTextView(placeholder: "New task",
+                                                  font: .systemFont(ofSize: 18),
+                                                  color: .black)
+        let addButton = knUIMaker.makeButton(image: UIImage(named: "add_fill"))
+        let saveButton = knUIMaker.makeButton(title: "Save",
+                                          titleColor: .color(r: 68, g: 137, b: 242),
+                                          font: .boldSystemFont(ofSize: 18))
+        var officalBounds = CGRect.zero
+        
+        override func setupView() {
+            taskNameTextView.showsVerticalScrollIndicator = false
+            taskNameTextView.returnKeyType = .done
+            taskNameTextView.autocorrectionType = .no
+
+            addSubviews(views: taskNameTextView, addButton, saveButton)
+            
+            taskNameTextView.horizontal(toView: self, space: 24)
+            taskNameTextView.top(toView: self, space: 16)
+            
+            addButton.bottomLeft(toView: self, bottom: -16, left: 24)
+            addButton.square(edge: 44)
+            
+            saveButton.right(toView: self, space: -24)
+            saveButton.centerY(toView: addButton)
+            
+            taskNameTextView.height(44)
+            backgroundColor = .white
+        }
+        
+        override func layoutSubviews() {
+            // (1)
+            guard officalBounds != bounds else { return }
+            officalBounds = bounds
+            makeRoundCorner()
+        }
+
+        func makeRoundCorner() {
+            let maskPath = UIBezierPath(roundedRect: bounds,
+                                        byRoundingCorners: [.topRight, .topLeft],
+                                        cornerRadii: CGSize(width: 20, height: 20))
+            let shape = CAShapeLayer()
+            shape.path = maskPath.cgPath
+            layer.mask = shape
+        }
+    }
+
+</code></pre></div></div>
+
+<p>(1): method <code class="highlighter-rouge">layoutSubviews</code> is called multi times. We don’t need to do anything if <code class="highlighter-rouge">bounds</code> does not change.</p>
+
+<h3 id="animate-to-show-createtaskview">Animate to show CreateTaskView</h3>
+
+<p>Official UI</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F2.add_task.jpeg?alt=media&amp;token=7550a6e5-c464-4d68-a4d7-8036fbad53ac" width="40%" /></p>
+
+<ul>
+  <li>Open <code class="highlighter-rouge">ViewController</code> class and add some code</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let newTaskView: tkCreateTaskView = {
+        let view = tkCreateTaskView()
+        view.frame.size = CGSize(width: screenWidth, height: 130)
+        // (1)
+        view.alpha = 0
+        return view
+    }()
+    
+    // (2)
+    override var inputAccessoryView: UIView? { return newTaskView }
+    override var canBecomeFirstResponder: Bool { return true }
+
+</code></pre></div></div>
+
+<p>(1): We will animate the view opacity in next step</p>
+
+<p>(2): There are 2 ways to make the UI like this</p>
+
+<ol>
+  <li>
+    <p>First, add <code class="highlighter-rouge">newTaskView</code> to <code class="highlighter-rouge">view</code> and set auto layout. Observe Keyboard Notification and animate the constraints.</p>
+  </li>
+  <li>
+    <p>Second, set <code class="highlighter-rouge">newTaskView</code> as <code class="highlighter-rouge">inputAccessoryView</code>. Much easier. This is what I am doing</p>
+  </li>
+</ol>
+
+<ul>
+  <li>Add action to show <code class="highlighter-rouge">newTaskView</code> in <code class="highlighter-rouge">setupView</code> method</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func setupView() {
+        ...
+        functionView.addButton.addTarget(self, action: #selector(showCreateTaskView))
+    }
+
+    @objc func showCreateTaskView() {
+        newTaskView.taskNameTextView.becomeFirstResponder()
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.newTaskView.alpha = 1
+        })
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>Run and see.</li>
+  <li>Almost done. Just miss a black view overlay the main view. Get it done.</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func showBlackView() {
+        let blackButton = knUIMaker.makeButton()
+        blackButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        blackButton.tag = 1001
+        view.addSubviews(views: blackButton)
+        blackButton.fill(toView: view)
+        blackButton.addTarget(self, action: #selector(hideCreateTaskView))
+    }
+
+    @objc func hideCreateTaskView() {
+        let blackButton = view.viewWithTag(1001)
+        newTaskView.taskNameTextView.resignFirstResponder()
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.newTaskView.alpha = 0
+            blackButton?.alpha = 0
+        })
+
+        run({ blackButton?.removeFromSuperview()
+            }, after: 0.35)
+    }
+
+    @objc func showCreateTaskView() {
+        showBlackView() 
+        ...
+    }
+
+</code></pre></div></div>
+
+<ul>
+  <li>OK, run again for final result</li>
+</ul>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F2.result_add_task.gif?alt=media&amp;token=ac236b54-5f44-4e47-948c-974854a8f929" width="40%" /></p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>We’ve done the first part. You can download the source <a href="https://drive.google.com/open?id=1jX8toVMnIAHmmvM_HwCXjvgur6x4dquF">here</a>.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/04/30/transition-to-detail.html" data-toggle="tooltip" data-placement="top" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+        <a class="btn btn-primary float-right" href="/2018/05/17/tasks-create-task.html" data-toggle="tooltip" data-placement="top" title="Tasks iOs - Create task">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

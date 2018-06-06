@@ -12,7 +12,7 @@
     
   </title>
 
-  <meta name="description" content="04/04/2018">
+  <meta name="description" content="If you don&#39;t build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.">
 
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4001/2018/04/07/til-today-i-learn.html">
+  <link rel="canonical" href="http://localhost:4001/til.html">
   <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -56,11 +56,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/posts">Posts</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/til">Today I learn</a>
         </li>
       </ul>
     </div>
@@ -70,21 +70,17 @@
 
     <!-- Page Header -->
 
-<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftoday-i-learn%2Fnever-stop-learning.jpg?alt=media&token=018d6c76-c64a-42a6-9b6c-317ec9b8b1d6')"> -->
 <header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftoday-i-learn%2Fnever-stop-learning.jpg?alt=media&token=018d6c76-c64a-42a6-9b6c-317ec9b8b1d6')">
 
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-10 mx-auto">
-        <div class="post-heading">
+        <div class="page-heading">
           <h1>Today I learn</h1>
           
-          <h2 class="subheading" style="line-height:1.4">A note about what I learn a day, it can be anything, not only iOS.</h2>
+            <span class="subheading">A note about what I learn a day, it can be anything, not only iOS.</span>
           
-          <span class="meta">Posted by
-            <a href="/about">Ky Nguyen</a>
-            on April 07, 2018</span>
         </div>
       </div>
     </div>
@@ -95,59 +91,113 @@
   <div class="row">
     <div class="col-lg-10 col-md-10 mx-auto">
 
-      <h1 id="04042018">04/04/2018</h1>
+      <p><br /></p>
+<hr />
 
-<h3 id="how-to-remove-pod-in-ios-project">How to remove pod in iOS project</h3>
+<p><br /></p>
+
+<h1 id="18052018">18/05/2018</h1>
+
+<h3 id="create-breakpoint-to-catch-error">Create breakpoint to catch error</h3>
+
+<p>To see the actual statement that is causing the error add an exception breakpoint:</p>
+
+<ul>
+  <li>
+    <p>From the Main Menu Debug:Breakpoints:Create Exception Breakpoint.</p>
+  </li>
+  <li>
+    <p>Right-click the breakpoint and set the exception to Objective-C. This will ignore other types of exceptions such as from C++. There are parts of the APIs that use exceptions such as Core Data (Apple is Special).</p>
+  </li>
+  <li>
+    <p>Add an action: “po $arg1”.</p>
+  </li>
+</ul>
+
+<p>Run the app to get the breakpoint and you will be at the line that causes the exception and the error message will be in the debugger console.</p>
+
+<p><br /></p>
+<hr />
+
+<p><br /></p>
+
+<h1 id="852018">8/5/2018</h1>
+<h3 id="change-time-format-pm2">Change time format pm2</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    sudo gem install cocoapods-deintegrate cocoapods-clean
-    pod deintegrate
-    pod clean
-    rm Podfile
-    
+    pm2 start bin/www --log-date-format "YYYY-MM-DD HH:mm"
+
 </code></pre></div></div>
 
-<h3 id="integrate-zendesk-sdk">Integrate Zendesk SDK</h3>
+<p><br /></p>
+<hr />
 
-<p>Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.</p>
+<p><br /></p>
 
-<p>Add SDK manual way: Add 2 more framework from iOS <code class="highlighter-rouge">MobileCoreServices.framework</code> and <code class="highlighter-rouge">Security.framework.</code></p>
+<h1 id="17042018">17/04/2018</h1>
 
-<p>Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.</p>
-
-<h3 id="merge-unrelated-histories-in-git">Merge unrelated histories in git</h3>
-<p>Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.</p>
-
-<p><code class="highlighter-rouge">git pull origin branch_name --allow-unrelated-histories</code></p>
-
-<h3 id="basic-authorization">Basic Authorization</h3>
-
-<p>Learn from <a href="https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77">https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77</a></p>
+<h3 id="open-location-service">Open Location service</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    let userName = "myUsername"
-    let password = "myPassword"
-    let authString = userName + ":" + password
-    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
-    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
-
-    let headers = ["Authorization": "Basic " + base64Credentials]
-    let url = URL(string: api)!
-    Alamofire.request(url, method: .post,
-                    parameters: params,
-                    encoding: JSONEncoding.default,
-                    headers: headers)
-        .validate().responseJSON { (response) in
-        print(response)
+    if let url = URL(string: "App-Prefs:root=Privacy&amp;path=LOCATION") {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
 </code></pre></div></div>
 
-<h1 id="05042018">05/04/2018</h1>
-<h3 id="format-string">Format string</h3>
-<p>Always display 2 characters for Int: 09:10, 10:15</p>
+<h3 id="create-symbol-link-nginx">Create symbol link nginx</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
 
-<p><code class="highlighter-rouge">String(format: "%02d:%02d", hr, min)</code></p>
+</code></pre></div></div>
+<p><br /></p>
+<hr />
+
+<p><br /></p>
+
+<h1 id="11042018">11/04/2018</h1>
+<h3 id="prevent-rotation-in-ios">Prevent rotation in iOS</h3>
+<p>There are three kinds of Device orientation keys there in the info.plist now.</p>
+
+<ul>
+  <li>Supported interface orientations (iPad)</li>
+  <li>Supported interface orientations (iPhone)</li>
+  <li>Supported interface orientations</li>
+</ul>
+
+<p>Source: <a href="https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app">StackOverflow</a></p>
+
+<p><br /></p>
+<hr />
+
+<p><br /></p>
+
+<h1 id="07042018">07/04/2018</h1>
+
+<h3 id="make-app-icon-ios">Make app icon iOS</h3>
+<p><a href="https://makeappicon.com/">https://makeappicon.com/</a> is a really wonderful tool. Just copy folder <code class="highlighter-rouge">AppIcon.appiconset</code> and replace the old one in project and App Icon is set. Thanks a lot, awesome app.</p>
+
+<h3 id="update-sql-by-removing-text-in-text">Update SQL by removing text in text</h3>
+
+<p><code class="highlighter-rouge">UPDATE My_Table set my_column = REPLACE(my_column, "text_need_removed", '') where my_condition</code></p>
+
+<h3 id="error-in-git">Error in git</h3>
+<p>Error: <code class="highlighter-rouge">The requested URL returned error: 403 while accessing</code></p>
+
+<p>Solution:</p>
+<ul>
+  <li>Edit <code class="highlighter-rouge">.git/config</code> file under your repo directory</li>
+  <li>Find <code class="highlighter-rouge">url=</code> entry under section <code class="highlighter-rouge">[remote "origin"]</code></li>
+  <li>Change all the texts before @ symbol to <code class="highlighter-rouge">ssh://git</code></li>
+  <li>Save</li>
+</ul>
+
+<p>Source: <a href="https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed">StackOverflow</a></p>
+
+<p><br /></p>
+<hr />
+
+<p><br /></p>
 
 <h1 id="06042018">06/04/2018</h1>
 <h3 id="open-setting-of-my-app">Open setting of my app</h3>
@@ -202,68 +252,76 @@
 
 </code></pre></div></div>
 
-<h1 id="07042018">07/04/2018</h1>
+<p><br /></p>
+<hr />
 
-<h3 id="make-app-icon-ios">Make app icon iOS</h3>
-<p><a href="https://makeappicon.com/">https://makeappicon.com/</a> is a really wonderful tool. Just copy folder <code class="highlighter-rouge">AppIcon.appiconset</code> and replace the old one in project and App Icon is set. Thanks a lot, awesome app.</p>
+<p><br /></p>
 
-<h3 id="update-sql-by-removing-text-in-text">Update SQL by removing text in text</h3>
+<h1 id="05042018">05/04/2018</h1>
+<h3 id="format-string">Format string</h3>
+<p>Always display 2 characters for Int: 09:10, 10:15</p>
 
-<p><code class="highlighter-rouge">UPDATE My_Table set my_column = REPLACE(my_column, "text_need_removed", '') where my_condition</code></p>
+<p><code class="highlighter-rouge">String(format: "%02d:%02d", hr, min)</code></p>
 
-<h3 id="error-in-git">Error in git</h3>
-<p>Error: <code class="highlighter-rouge">The requested URL returned error: 403 while accessing</code></p>
+<p><br /></p>
+<hr />
 
-<p>Solution:</p>
-<ul>
-  <li>Edit <code class="highlighter-rouge">.git/config</code> file under your repo directory</li>
-  <li>Find <code class="highlighter-rouge">url=</code> entry under section <code class="highlighter-rouge">[remote "origin"]</code></li>
-  <li>Change all the texts before @ symbol to <code class="highlighter-rouge">ssh://git</code></li>
-  <li>Save</li>
-</ul>
+<p><br /></p>
 
-<p>Source: <a href="https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed">StackOverflow</a></p>
+<h1 id="04042018">04/04/2018</h1>
+<hr />
 
-<h1 id="11042018">11/04/2018</h1>
-<h3 id="prevent-rotation-in-ios">Prevent rotation in iOS</h3>
-<p>There are three kinds of Device orientation keys there in the info.plist now.</p>
-
-<ul>
-  <li>Supported interface orientations (iPad)</li>
-  <li>Supported interface orientations (iPhone)</li>
-  <li>Supported interface orientations</li>
-</ul>
-
-<p>Source: <a href="https://stackoverflow.com/questions/10125050/can-you-disable-rotation-globally-in-an-ios-app">StackOverflow</a></p>
-<h1 id="17042018">17/04/2018</h1>
-<h3 id="open-location-service">Open Location service</h3>
+<h3 id="how-to-remove-pod-in-ios-project">How to remove pod in iOS project</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    if let url = URL(string: "App-Prefs:root=Privacy&amp;path=LOCATION") {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    sudo gem install cocoapods-deintegrate cocoapods-clean
+    pod deintegrate
+    pod clean
+    rm Podfile
+    
+</code></pre></div></div>
+
+<h3 id="integrate-zendesk-sdk">Integrate Zendesk SDK</h3>
+
+<p>Do not follow pod instruction from Zendesk tutorial, take too much time to fix but can’t run.</p>
+
+<p>Add SDK manual way: Add 2 more framework from iOS <code class="highlighter-rouge">MobileCoreServices.framework</code> and <code class="highlighter-rouge">Security.framework.</code></p>
+
+<p>Access to Tagets/General, add all Zendesk SDK files to Embedded Binaries.</p>
+
+<h3 id="merge-unrelated-histories-in-git">Merge unrelated histories in git</h3>
+<p>Usually have this issue when create new project in local, create repo in git then add remote url from git to local project.</p>
+
+<p><code class="highlighter-rouge">git pull origin branch_name --allow-unrelated-histories</code></p>
+
+<h3 id="basic-authorization">Basic Authorization</h3>
+
+<p>Learn from <a href="https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77">https://gist.github.com/cmoulton/c26dc371d771c5cbaff325de6bbe5c77</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    let userName = "myUsername"
+    let password = "myPassword"
+    let authString = userName + ":" + password
+    let credentialData = authString.dataUsingEncoding(NSUTF8StringEncoding)!
+    let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+
+    let headers = ["Authorization": "Basic " + base64Credentials]
+    let url = URL(string: api)!
+    Alamofire.request(url, method: .post,
+                    parameters: params,
+                    encoding: JSONEncoding.default,
+                    headers: headers)
+        .validate().responseJSON { (response) in
+        print(response)
     }
 
 </code></pre></div></div>
 
-<h3 id="createy-symbol-link-nginx">Createy symbol link nginx</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-    sudo ln -s /etc/nginx/sites-available/testapp /etc/nginx/sites-enabled/testapp
+<p><br /></p>
+<hr />
 
-</code></pre></div></div>
+<p><br /></p>
 
-
-      <hr>
-
-      <div class="clearfix">
-
-        
-        <a class="btn btn-primary float-left" href="/2018/04/05/hyperlink-label.html" data-toggle="tooltip" data-placement="top" title="Hyperlink Label">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
-        
-        
-        <a class="btn btn-primary float-right" href="/2018/04/07/user-define-setting-ios.html" data-toggle="tooltip" data-placement="top" title="Configuration and User-Defined setting in iOS">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
-        
-
-      </div>
 
     </div>
   </div>
@@ -352,8 +410,6 @@
 
 
 
-
-    <script id="dsq-count-scr" src="//kynguyen.disqus.com/count.js" async></script>
 
   </body>
 

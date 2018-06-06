@@ -1,4 +1,745 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-05-04T03:37:28+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>My personal notes, codes, reviews, ideas</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/30/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-30T00:00:00+07:00</published><updated>2018-04-30T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/30/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/30/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-06-07T03:15:40+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Tasks iOs - Create task</title><link href="http://localhost:4001/2018/05/17/tasks-create-task.html" rel="alternate" type="text/html" title="Tasks iOs - Create task" /><published>2018-05-17T00:00:00+07:00</published><updated>2018-05-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/17/tasks-create-task</id><content type="html" xml:base="http://localhost:4001/2018/05/17/tasks-create-task.html">&lt;p&gt;Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Display a list of task&lt;/li&gt;
+  &lt;li&gt;Add new tasks&lt;/li&gt;
+  &lt;li&gt;Make some animations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;add-uitableview-to-controller&quot;&gt;Add UITableView to controller&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open file &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; and change &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; class to &lt;code class=&quot;highlighter-rouge&quot;&gt;tkTasksListController&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Change file &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;TaskList.swift&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt; and clear all content of class &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;. Paste these code to it&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var window: UIWindow?
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&amp;gt; Bool {
+        setupApp()
+        return true
+    }
+    
+    func setupApp() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        // (1)
+        window!.rootViewController = tkTasksListController()
+        window!.backgroundColor = UIColor.white
+        window?.makeKeyAndVisible()
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I am a fan of auto layout by code, so I usually use this way to show the controller instead of Storyboard. You can replace &lt;code class=&quot;highlighter-rouge&quot;&gt;takTaskListController&lt;/code&gt; to any controller you want.&lt;/p&gt;
+
+&lt;p&gt;I will wrap the rootViewController to a UINavigationController, but not now.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Keep moving, open file &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;, and change data of line &lt;code class=&quot;highlighter-rouge&quot;&gt;Main storyboard file base name&lt;/code&gt; to empty&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the app. App works well. We can safely remove &lt;code class=&quot;highlighter-rouge&quot;&gt;Main.storyboard&lt;/code&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Back to class &lt;code class=&quot;highlighter-rouge&quot;&gt;tkTasksListController&lt;/code&gt;. We change a little bit. Class now look like this&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class tkTasksListController: knCustomTableController {
+        var datasource = [tkTask]()
+
+        override func setupView() {
+            // (1)
+            view.addSubviews(views: titleLabel, tableView, stateView, functionView)
+            
+            tableView.horizontal(toView: view)
+            tableView.verticalSpacing(toView: titleLabel, space: 24)
+            tableView.bottom(toAnchor: functionView.topAnchor, space: -24)
+            ...
+        }
+        ...
+    }
+
+    extension tkTasksListController {
+        // (2)
+        override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -&amp;gt; Int {
+            return datasource.count }
+        
+        // (3)
+        override func tableView(_ tableView: UITableView,
+                                heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat {
+            return UITableViewAutomaticDimension }
+        
+        // (4)
+        override func tableView(_ tableView: UITableView,
+                                cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: &quot;tkTaskCell&quot;,
+                                                    for: indexPath) as! tkTaskCell
+            cell.data = datasource[indexPath.row]
+            return cell
+        }
+    }
+
+    // (5)
+    override func registerCells() {
+        tableView.register(tkTaskCell.self, forCellReuseIdentifier: &quot;tkTaskCell&quot;)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): Add &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; to view and set auto layout for it. &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; is stretched from the bottom of &lt;code class=&quot;highlighter-rouge&quot;&gt;titleLabel&lt;/code&gt; to the top of &lt;code class=&quot;highlighter-rouge&quot;&gt;functionView&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;(2), (3), (4): is tableView DataSource. It’s basic for &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;, you know it very well, I think.&lt;/p&gt;
+
+&lt;p&gt;(5): We need to register the cell to reuse, without this step, &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt; doesn’t know your cell and throw an exception.&lt;/p&gt;
+
+&lt;h3 id=&quot;design-cell&quot;&gt;Design Cell&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt; needs &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableCell&lt;/code&gt;. Help it with new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;TaskCell.swift&lt;/code&gt; with content below&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    import UIKit
+
+    // (1)
+    class tkTask {
+        var name: String?
+        var finish = false
+        
+        init() {}
+        init(name: String) {
+            self.name = name
+        }
+    }
+
+    // (2)
+    class tkTaskCell: knTableCell {
+        var data: tkTask? {
+            didSet {
+                guard let data = data else { return }
+                nameLabel.text = data.name
+            }
+        }
+        
+        let doneButton = knUIMaker.makeButton()
+        let nameLabel = knUIMaker.makeLabel(font: .systemFont(ofSize: 16),
+                                            color: .black,
+                                            numberOfLines: 0)
+        
+        override func setupView() {
+            let line = knUIMaker.makeLine(color: UIColor.color(value: 230), height: 1)
+            addSubviews(views: doneButton, nameLabel, line)
+            
+            doneButton.left(toView: self, space: 24)
+            doneButton.centerY(toView: nameLabel)
+            
+            nameLabel.vertical(toView: self, space: 24)
+            nameLabel.leftHorizontalSpacing(toView: doneButton, space: -24)
+            nameLabel.right(toView: self, space: -24)
+            
+            line.horizontal(toView: self)
+            line.bottom(toView: self)
+            
+            doneButton.createBorder(2, color: UIColor.color(value: 110))
+            doneButton.square(edge: 24)
+            doneButton.createRoundCorner(12)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): We need a model to keep the task content, this model is not as simple as this, it will expand to bigger soon. Keep it simple first.&lt;/p&gt;
+
+&lt;p&gt;(2): Same to model, the cell is designed in the simplest way first.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Now we can run the app. But I am sure, you can’t see the &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt;. Add &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView.backgroundColor = .green&lt;/code&gt; to the last of &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method. App will be like this&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_tableview.png?alt=media&amp;amp;token=b309df22-4e15-4b05-850b-7e23ac9618db&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Problem found. We will hide the &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; show the &lt;code class=&quot;highlighter-rouge&quot;&gt;stateView&lt;/code&gt; when there is no task. We can solve it by replace&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var datasource = [tkTask]()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    
+    var datasource = [tkTask]() { didSet {
+        tableView.reloadData()
+        let isEmpty = datasource.count &amp;gt; 0
+        stateView.isHidden = isEmpty
+        tableView.isHidden = !isEmpty
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add dummy data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func fetchData() {
+        datasource = [
+            tkTask(name: &quot;Hehe&quot;),
+            tkTask(name: &quot;Aloha&quot;),
+        ]
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run and see. Don’t forget to remove &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView.backgroundColor = .green&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_tableview_data.png?alt=media&amp;amp;token=34ddc947-a628-4ce2-b8c5-08b453004571&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;add-new-task&quot;&gt;Add new task&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add these 2 lines to the end of the &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    newTaskView.saveButton.addTarget(self, action: #selector(addNewTask))
+    newTaskView.textField.delegate = self
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can select save button or tap return key on the keyboard to save task.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    // (1)
+    @objc func addNewTask() {
+        datasource.insert(tkTask(name: newTaskView.textField.text!), at: 0)
+        newTaskView.textField.text = &quot;&quot;
+        hideCreateTaskView()
+    }
+
+    // (2)
+    extension tkTasksListController: UITextFieldDelegate {
+        func textFieldShouldReturn(_ textField: UITextField) -&amp;gt; Bool {
+            addNewTask()
+            return true
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): We will add new task directly to datasource, and &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt; will reload to display new data. Same to the Google Task, we need to clear the textfield content and hide the &lt;code class=&quot;highlighter-rouge&quot;&gt;newTaskView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;(2): Action for event return key pressed.&lt;/p&gt;
+
+&lt;p&gt;The textfield is automatically correct my text, but I am using Vietnamese to test, so it makes me annoy. I turn if off in &lt;code class=&quot;highlighter-rouge&quot;&gt;tkCreateTaskView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;h3 id=&quot;animate-to-show-more-options&quot;&gt;Animate to show more options&lt;/h3&gt;
+
+&lt;p&gt;App is not as simple as text. App needs animation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_animate_show_task_option.gif?alt=media&amp;amp;token=4bb7773c-7ecb-441c-828f-dd1f8cf3f916&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Very simple animation. We can see 4 things we need to do.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Zoom animation for &lt;code class=&quot;highlighter-rouge&quot;&gt;addButton&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Rotate &lt;code class=&quot;highlighter-rouge&quot;&gt;addButton&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;addButton&lt;/code&gt; color&lt;/li&gt;
+  &lt;li&gt;Animate &lt;code class=&quot;highlighter-rouge&quot;&gt;detailButton&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;calendarButton&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Do step by step.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Press &lt;code class=&quot;highlighter-rouge&quot;&gt;cmd + shift + O&lt;/code&gt; to quick open file &lt;code class=&quot;highlighter-rouge&quot;&gt;knUIButton.swift&lt;/code&gt;. This is my extensions for UIButton. We need to add 2 extensions here.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    extension UIButton {
+        func animateZooming() {
+            // (1)
+            guard let parentView = superview,
+                  let edge = imageView?.frame.size.height else { return }
+            let circo = UIView(frame: CGRect(x: 0, y: 0, width: edge, height: edge))
+            circo.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
+            
+            parentView.addSubviews(views: circo)
+            circo.center = center
+            circo.createRoundCorner(edge / 2)
+
+            // (2)
+            let level: CGFloat = 2.5
+            UIView.animate(withDuration: 0.3, animations: {
+                circo.transform = CGAffineTransform(scaleX: level, y: level)
+            }, completion: { _ in
+                circo.removeFromSuperview()
+            })
+        }
+        
+        // (3)
+        func animateRotation(angle: CGFloat) {
+            UIView.animate(withDuration: 0.3, animations: { [weak self] in
+                guard let `self` = self else { return }
+                self.transform = self.transform.rotated(by: angle)
+            })
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Method &lt;code class=&quot;highlighter-rouge&quot;&gt;animateZooming&lt;/code&gt; only used for &lt;code class=&quot;highlighter-rouge&quot;&gt;addButton&lt;/code&gt; or other buttons with same size at this moment. Why? Because the level (2) is specific for it. We will make it flexible for other buttons later if needed. We can do this yourself. Just try and find a good number for you.&lt;/p&gt;
+
+&lt;p&gt;(1): The idea is to add a view to the superView of button and animate this view. Nothing affects to button. There are many ways to make this animation, but I choose the easiest one.&lt;/p&gt;
+
+&lt;p&gt;(2): Just simple rotate the whole button with an angle.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open file &lt;code class=&quot;highlighter-rouge&quot;&gt;CreateTaskView.swift&lt;/code&gt; to add new buttons and animation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let detailButton = knUIMaker.makeButton(image: UIImage(named: &quot;detail&quot;))
+    let calendarButton = knUIMaker.makeButton(image: UIImage(named: &quot;event&quot;))
+
+    override func setupView() {
+        addSubviews(views: textField, addButton, saveButton, detailButton, calendarButton)
+        ...
+        detailButton.fill(toView: addButton)
+        calendarButton.fill(toView: addButton)
+
+        detailButton.alpha = 0
+        calendarButton.alpha = 0
+        ...
+
+        addButton.addTarget(self, action: #selector(showTaskOption))
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Setup layout for new 2 buttons, and hide them by changing their opacity to 0, we will animate to display them.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    var taskOptionShown = false
+    @objc func showTaskOption() {
+
+        addButton.animateZooming()
+        if taskOptionShown == false {
+            changeAddButtonColor(UIColor.color(r: 96, g: 99, b: 104))
+            addButton.animateRotation(angle: CGFloat.pi / 4)
+            animateDetailButton(visible: true)
+            animateCalendarButton(visible: true)
+        }
+        else {
+            changeAddButtonColor(UIColor.color(r: 71, g: 136, b: 241))
+            addButton.animateRotation(angle: -CGFloat.pi / 4)
+            animateDetailButton(visible: false)
+            animateCalendarButton(visible: false)
+        }
+        
+        taskOptionShown = !taskOptionShown
+    }
+
+    func changeAddButtonColor(_ color: UIColor) {
+        addButton.tintColor = color
+    }
+    
+    func animateDetailButton(visible: Bool) {
+        let xPos = detailButton.center.x + 8 * (visible ? 1 : -1)
+        let alpha: CGFloat = visible ? 1 : 0
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
+            guard let detailButton = self?.detailButton else { return }
+            detailButton.transform = CGAffineTransform(translationX: xPos, y: 0)
+            detailButton.alpha = alpha
+        })
+    }
+    
+    func animateCalendarButton(visible: Bool) {
+        let xPos = detailButton.center.x + 64 * (visible ? 1 : -1)
+        let alpha: CGFloat = visible ? 1 : 0
+        UIView.animate(withDuration: 0.25, animations: { [weak self] in
+            guard let calendarButton = self?.calendarButton else { return }
+            calendarButton.transform = CGAffineTransform(translationX: xPos, y: 0)
+            calendarButton.alpha = alpha
+        })
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We have a flag &lt;code class=&quot;highlighter-rouge&quot;&gt;taskOptionShown&lt;/code&gt; to mark whether buttons displayed.&lt;/p&gt;
+
+&lt;p&gt;As I said before, we have 4 things to do in this animation, these are 4 things.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    addButton.animateZooming()
+    changeAddButtonColor
+    addButton.animateRotation
+    animateDetailButton + animateCalendarButton
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Zoom animation in the gif image is too fast. You can run and see in your project.&lt;/p&gt;
+
+&lt;p&gt;Run the app and you can see the animation but the addButton color is not changed. We need extra step.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let addButton = knUIMaker.makeButton(image: UIImage(named: &quot;add_fill&quot;)?.changeColor())
+
+    override func setupView() {
+        ...
+        addButton.tintColor = UIColor.color(r: 71, g: 136, b: 241)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to make the image for imageView inside the button available to be changed color and set default color for it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2Ftask_demo_part_2.gif?alt=media&amp;amp;token=f7ad3b36-69bc-4285-a533-b9bc4fef7dd6&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;That’s enough for today. Keep reading, I’ll come back soon.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to</summary></entry><entry><title type="html">Tasks iOs - Homescreen</title><link href="http://localhost:4001/2018/05/16/tasks-home.html" rel="alternate" type="text/html" title="Tasks iOs - Homescreen" /><published>2018-05-16T00:00:00+07:00</published><updated>2018-05-16T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/16/tasks-home</id><content type="html" xml:base="http://localhost:4001/2018/05/16/tasks-home.html">&lt;p&gt;Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.&lt;/p&gt;
+
+&lt;p&gt;I admire this app and want to make a good app like this. In this series, I will try to copy Google Tasks in iOS. Hope you keep reading.&lt;/p&gt;
+
+&lt;h3 id=&quot;preparation&quot;&gt;Preparation&lt;/h3&gt;
+&lt;p&gt;I use some code collection from my personal codebase. You can download it at &lt;a href=&quot;https://github.com/nguyentruongky/codebase&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Init an empty project and added my &lt;code class=&quot;highlighter-rouge&quot;&gt;mustHave&lt;/code&gt; folder&lt;/p&gt;
+
+&lt;h3 id=&quot;design-ui&quot;&gt;Design UI&lt;/h3&gt;
+&lt;p&gt;Today, we design this screen&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F1.fresh_start.png?alt=media&amp;amp;token=c7be1937-b1e8-4021-95d4-9614213e8e82&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are some parts we need do:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create custom views for the state view (center part) and the function view (bottom part)&lt;/li&gt;
+  &lt;li&gt;Design views and set auto layout&lt;/li&gt;
+  &lt;li&gt;Add animation when select &lt;code class=&quot;highlighter-rouge&quot;&gt;Add a new task&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;create-state-view&quot;&gt;Create state view&lt;/h3&gt;
+&lt;p&gt;App has states, and app needs state view. So if we design a good view, we can reuse in other apps. &lt;strong&gt;This is not a good design, just make it done for this project only.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;StateView.swift&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Paste these code into file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    import UIKit
+
+    class tkStateView: knView {
+        let imageView = knUIMaker.makeImageView(image: UIImage(named: &quot;first_empty&quot;), contentMode: .scaleAspectFill)
+        let emptyBoldLabel = knUIMaker.makeLabel(text: &quot;A fresh start&quot;,
+                                                font: UIFont.boldSystemFont(ofSize: 16),
+                                                color: .black, alignment: .center)
+        let emptyActionLabel = knUIMaker.makeLabel(text: &quot;Anything to add?&quot;,
+                                                font: UIFont.systemFont(ofSize: 16),
+                                                color: UIColor.color(r: 96, g: 99, b: 104),
+                                                alignment: .center)
+        override func setupView() {
+            addSubviews(views: imageView, emptyBoldLabel, emptyActionLabel)
+            addConstraints(withFormat: &quot;V:|[v0]-44-[v1]-8-[v2]|&quot;, views: imageView, emptyBoldLabel, emptyActionLabel)
+            
+            imageView.square(edge: screenWidth / 2)
+            imageView.horizontal(toView: self)
+            
+            emptyBoldLabel.horizontal(toView: self)
+        
+            emptyActionLabel.horizontal(toView: self)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;*Note&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I usually use alias to start the name of class/struct. In this project, it’s &lt;code class=&quot;highlighter-rouge&quot;&gt;tk&lt;/code&gt;. With this alias, we can prevent some same names, like NotificationCenter…&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Hope code is easy to understand. This view can automatically calculate the size. Its width is &lt;code class=&quot;highlighter-rouge&quot;&gt;screen width / 2&lt;/code&gt;, equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;imageView&lt;/code&gt;. Its height is calculated by constraints &lt;code class=&quot;highlighter-rouge&quot;&gt;V:|[v0]-44-[v1]-8-[v2]|&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-function-view&quot;&gt;Create function view&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;FunctionView.swift&lt;/code&gt; and paste code below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class tkFunctionView: knView {
+        let addButton = knUIMaker.makeButton()
+        let listOptionButton = knUIMaker.makeButton(image: UIImage(named: &quot;dot_menu&quot;))
+        let accountOptionButton = knUIMaker.makeButton(image: UIImage(named: &quot;dash_menu&quot;))
+        
+        override func setupView() {
+            let plusIcon = knUIMaker.makeImageView(image: UIImage(named: &quot;add&quot;)!,
+                                                contentMode: .scaleAspectFit)
+            plusIcon.change(color: .white)
+            let addLabel = knUIMaker.makeLabel(text: &quot;Add a new task&quot;,
+                                           font: .boldSystemFont(ofSize: 16),
+                                           color: .white)
+            let addView = knUIMaker.makeView()
+            addView.addSubviews(views: plusIcon, addLabel)
+            addView.addConstraints(withFormat: &quot;H:|[v0]-16-[v1]|&quot;,
+                               views: plusIcon, addLabel)
+            plusIcon.centerY(toView: addView)
+            addLabel.centerY(toView: addView)
+            
+            addButton.addSubviews(views: addView)
+            addView.center(toView: addButton)
+            addButton.createRoundCorner(30)
+            addButton.backgroundColor = UIColor.color(r: 71, g: 136, b: 241)
+            
+            let line = knUIMaker.makeLine(color: .color(value: 234), height: 3)
+            addSubviews(views: line, addButton, listOptionButton, accountOptionButton)
+            
+            line.horizontal(toView: self)
+            line.centerY(toView: addButton)
+            
+            addButton.top(toView: self)
+            addButton.centerX(toView: self)
+            addButton.size(CGSize(width: screenWidth / 1.8, height: 60))
+            
+            listOptionButton.right(toView: self, space: -24)
+            listOptionButton.verticalSpacing(toView: addButton)
+            
+            accountOptionButton.left(toView: self, space: 24)
+            accountOptionButton.verticalSpacing(toView: addButton)
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;When you work in a project, I’m sure you don’t do like this. I have to try to design UI in the main view. When everything works great, I split them up to smaller view to be easier to reuse.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;implement-homescreen-ui&quot;&gt;Implement homescreen UI&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open file &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; and change base class to &lt;code class=&quot;highlighter-rouge&quot;&gt;knController&lt;/code&gt;. That’s just a UIViewController but I added some other extension for it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Define some views&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let titleLabel = knUIMaker.makeLabel(text: &quot;My Tasks&quot;,
+                                            font: UIFont.systemFont(ofSize: 36),
+                                            color: .black)
+    let stateView = tkStateView()
+    let functionView = tkFunctionView()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Override &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method from base class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        view.addSubviews(views: titleLabel, stateView, functionView)
+        
+        titleLabel.topLeft(toView: view, top: 68, left: 54)
+        
+        stateView.center(toView: view)
+        
+        functionView.horizontal(toView: view)
+        functionView.bottom(toView: view)
+        functionView.height(120)        
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run and see.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F1.result_fresh_start.png?alt=media&amp;amp;token=13a4dbcd-f277-4510-8860-f4f4eb6c34a7&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I don’t like shadow, so I skip drop shadow for the line and the add button in &lt;code class=&quot;highlighter-rouge&quot;&gt;tkFunctionView&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;add-createtaskview&quot;&gt;Add CreateTaskView&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;CreateTaskView.swift&lt;/code&gt; and paste code below&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class tkCreateTaskView: knView {
+        let taskNameTextView = knUIMaker.makeTextView(placeholder: &quot;New task&quot;,
+                                                  font: .systemFont(ofSize: 18),
+                                                  color: .black)
+        let addButton = knUIMaker.makeButton(image: UIImage(named: &quot;add_fill&quot;))
+        let saveButton = knUIMaker.makeButton(title: &quot;Save&quot;,
+                                          titleColor: .color(r: 68, g: 137, b: 242),
+                                          font: .boldSystemFont(ofSize: 18))
+        var officalBounds = CGRect.zero
+        
+        override func setupView() {
+            taskNameTextView.showsVerticalScrollIndicator = false
+            taskNameTextView.returnKeyType = .done
+            taskNameTextView.autocorrectionType = .no
+
+            addSubviews(views: taskNameTextView, addButton, saveButton)
+            
+            taskNameTextView.horizontal(toView: self, space: 24)
+            taskNameTextView.top(toView: self, space: 16)
+            
+            addButton.bottomLeft(toView: self, bottom: -16, left: 24)
+            addButton.square(edge: 44)
+            
+            saveButton.right(toView: self, space: -24)
+            saveButton.centerY(toView: addButton)
+            
+            taskNameTextView.height(44)
+            backgroundColor = .white
+        }
+        
+        override func layoutSubviews() {
+            // (1)
+            guard officalBounds != bounds else { return }
+            officalBounds = bounds
+            makeRoundCorner()
+        }
+
+        func makeRoundCorner() {
+            let maskPath = UIBezierPath(roundedRect: bounds,
+                                        byRoundingCorners: [.topRight, .topLeft],
+                                        cornerRadii: CGSize(width: 20, height: 20))
+            let shape = CAShapeLayer()
+            shape.path = maskPath.cgPath
+            layer.mask = shape
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): method &lt;code class=&quot;highlighter-rouge&quot;&gt;layoutSubviews&lt;/code&gt; is called multi times. We don’t need to do anything if &lt;code class=&quot;highlighter-rouge&quot;&gt;bounds&lt;/code&gt; does not change.&lt;/p&gt;
+
+&lt;h3 id=&quot;animate-to-show-createtaskview&quot;&gt;Animate to show CreateTaskView&lt;/h3&gt;
+
+&lt;p&gt;Official UI&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F2.add_task.jpeg?alt=media&amp;amp;token=7550a6e5-c464-4d68-a4d7-8036fbad53ac&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; class and add some code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    let newTaskView: tkCreateTaskView = {
+        let view = tkCreateTaskView()
+        view.frame.size = CGSize(width: screenWidth, height: 130)
+        // (1)
+        view.alpha = 0
+        return view
+    }()
+    
+    // (2)
+    override var inputAccessoryView: UIView? { return newTaskView }
+    override var canBecomeFirstResponder: Bool { return true }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): We will animate the view opacity in next step&lt;/p&gt;
+
+&lt;p&gt;(2): There are 2 ways to make the UI like this&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;First, add &lt;code class=&quot;highlighter-rouge&quot;&gt;newTaskView&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view&lt;/code&gt; and set auto layout. Observe Keyboard Notification and animate the constraints.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Second, set &lt;code class=&quot;highlighter-rouge&quot;&gt;newTaskView&lt;/code&gt; as &lt;code class=&quot;highlighter-rouge&quot;&gt;inputAccessoryView&lt;/code&gt;. Much easier. This is what I am doing&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add action to show &lt;code class=&quot;highlighter-rouge&quot;&gt;newTaskView&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        ...
+        functionView.addButton.addTarget(self, action: #selector(showCreateTaskView))
+    }
+
+    @objc func showCreateTaskView() {
+        newTaskView.taskNameTextView.becomeFirstResponder()
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.newTaskView.alpha = 1
+        })
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Run and see.&lt;/li&gt;
+  &lt;li&gt;Almost done. Just miss a black view overlay the main view. Get it done.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func showBlackView() {
+        let blackButton = knUIMaker.makeButton()
+        blackButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        blackButton.tag = 1001
+        view.addSubviews(views: blackButton)
+        blackButton.fill(toView: view)
+        blackButton.addTarget(self, action: #selector(hideCreateTaskView))
+    }
+
+    @objc func hideCreateTaskView() {
+        let blackButton = view.viewWithTag(1001)
+        newTaskView.taskNameTextView.resignFirstResponder()
+        UIView.animate(withDuration: 0.35, animations: { [weak self] in
+            self?.newTaskView.alpha = 0
+            blackButton?.alpha = 0
+        })
+
+        run({ blackButton?.removeFromSuperview()
+            }, after: 0.35)
+    }
+
+    @objc func showCreateTaskView() {
+        showBlackView() 
+        ...
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;OK, run again for final result&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Ftodo%2F2.result_add_task.gif?alt=media&amp;amp;token=ac236b54-5f44-4e47-948c-974854a8f929&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;We’ve done the first part. You can download the source &lt;a href=&quot;https://drive.google.com/open?id=1jX8toVMnIAHmmvM_HwCXjvgur6x4dquF&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/30/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-30T00:00:00+07:00</published><updated>2018-04-30T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/30/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/30/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -1927,215 +2668,4 @@
 
 &lt;p&gt;That’s all I do with multi languages in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  &lt;code class=&quot;highlighter-rouge&quot;&gt;User has multi devices, and in every device, he selects a different language.&lt;/code&gt; Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.&lt;/p&gt;
 
-&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.</summary></entry><entry><title type="html">Short note - Configure the development environments</title><link href="http://localhost:4001/2018/04/11/config-development-environment.html" rel="alternate" type="text/html" title="Short note - Configure the development environments" /><published>2018-04-11T00:00:00+07:00</published><updated>2018-04-11T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/11/config-development-environment</id><content type="html" xml:base="http://localhost:4001/2018/04/11/config-development-environment.html">&lt;p&gt;My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is &lt;a href=&quot;https://kynguyen.space/2018/04/07/user-define-setting-ios.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;But in development, I usually connect devices to Macbook, build and run directly from Xcode, no need to switch scheme. We have 3 different environments in development: &lt;code class=&quot;highlighter-rouge&quot;&gt;production&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;staging&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;development&lt;/code&gt;. It means there are 3 endpoints. While coding, I have to switch to 3 of them very often, for coding or debugging for production.&lt;/p&gt;
-
-&lt;p&gt;So I write some code to make it easier.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-`&quot;&gt;
-    enum EndPoints: String {
-        case dev = &quot;http://dev.kynguyen.space&quot;
-        case pro = &quot;https://kynguyen.space&quot;
-        case staging = &quot;http://staging.kynguyen.space&quot;
-    }
-
-    var baseUrl: String = {
-        return EndPoints.pro.rawValue 
-    }()
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So everytime I need to change, I switch &lt;code class=&quot;highlighter-rouge&quot;&gt;baseUrl&lt;/code&gt; to EndPoints I need, very easy.&lt;/p&gt;
-
-&lt;p&gt;But I usually forget to switch to production endpoint when release, even one time I pushed to TestFlight. So do one more step.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    var baseUrl: String = {
-        #if DEBUG
-            return EndPoints.dev.rawValue
-        #else
-            return EndPoints.pro.rawValue
-        #endif
-    }()
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;#if DEBUG ... #else&lt;/code&gt; is very useful for hard-coded values. Can be use widely in coding and testing.&lt;/p&gt;
-
-&lt;p&gt;When switch environment, we need to logout the current account and sign in to another account to prevent unknown error, avoid wasting time for debug. It’s a damn experience with error like this.&lt;/p&gt;
-
-&lt;p&gt;So I need to remember current enviroment to UserDefault.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    var currentUrl: EndPoint {
-        get {
-            if let url = UserDefaults.standard.value(forKeyPath: &quot;currentUrl&quot;) as? String,
-                let environment = EndPoint(rawValue: url) {
-                return environment
-            }
-            return EndPoint.dev
-        }
-        set {
-            UserDefaults.standard.setValue(&quot;\(newValue)&quot;, forKeyPath: &quot;currentUrl&quot;)
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And check every time app runs. Show login if EndPoint is changed.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    var isNeedToLogout: Bool {
-        if let baseUrl = EndPoint(rawValue: Setting.baseUrl),
-            baseUrl == currentUrl { return false }
-        return true
-    }
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Just some basic tips but they save me much time in development.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">My previous note is about configuration to release multi apps in the same project. I can use these configurations to build different enviroments for internal testing via Fabric, HockeyApp or TestFlight. For instance, production, staging and development have different icons, endpoint. Detail is here.</summary></entry><entry><title type="html">Configuration and User-Defined setting in iOS</title><link href="http://localhost:4001/2018/04/07/user-define-setting-ios.html" rel="alternate" type="text/html" title="Configuration and User-Defined setting in iOS" /><published>2018-04-07T00:00:00+07:00</published><updated>2018-04-07T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/07/user-define-setting-ios</id><content type="html" xml:base="http://localhost:4001/2018/04/07/user-define-setting-ios.html">&lt;p&gt;I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fuser-defined-setting.gif?alt=media&amp;amp;token=9767c004-c1d6-4788-8ebc-0d9d0fc8c255&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Cloning to different projects is not my solution. Did some research and finally, I did this solution. Use different Build Settings and Schemes for markets. This is how I did&lt;/p&gt;
-
-&lt;h3 id=&quot;add-configurations&quot;&gt;Add configurations&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Access to Project Setting/Info. Rename configuration &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Red&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Red&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_configuration.png?alt=media&amp;amp;token=abe69701-38e7-4824-9f70-53e28d98627f&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Duplicate these 2 configurations and change name to &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Green&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Green&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fduplicate_configuration.png?alt=media&amp;amp;token=38bcfbc7-1db0-441b-bb54-ecee23cee2f2&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;add-schemes&quot;&gt;Add Schemes&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Select current scheme and &lt;code class=&quot;highlighter-rouge&quot;&gt;Edit Scheme...&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fedit_scheme.png?alt=media&amp;amp;token=293dc583-d59a-4a8b-b1cb-8ddd627b6e72&quot; width=&quot;65%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Duplicate Scheme&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Manage Schemes...&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Select a scheme and press Return key to rename.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Frename_scheme.png?alt=media&amp;amp;token=e436ccc7-1416-4d22-aee4-7ee384d11388&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Double click to Scheme Red and check left hand side setting&lt;/li&gt;
-  &lt;li&gt;Make sure &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Test&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Analyze&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug_Red&lt;/code&gt; configuration and &lt;code class=&quot;highlighter-rouge&quot;&gt;Profile&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Release&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;Release_Red&lt;/code&gt;. To change configuration, select &lt;code class=&quot;highlighter-rouge&quot;&gt;Info&lt;/code&gt; and change in &lt;code class=&quot;highlighter-rouge&quot;&gt;Build Configuration&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fchange_scheme_setting.png?alt=media&amp;amp;token=4ba4f76f-1328-4c7e-899e-86e0f85daa76&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Same to Scheme Green&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;add-user-defined-setting&quot;&gt;Add User-Defined Setting&lt;/h3&gt;
-&lt;p&gt;Red and Green have different name, bundle ID, version, build number. I have to add some User-Defined Setting&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Select Project setting/Editor/Add Build Setting/Add User-Defined&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fadd_setting_menu.png?alt=media&amp;amp;token=349c2c95-0e7b-44fa-8c35-0c40fe3bf923&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add some settings: &lt;code class=&quot;highlighter-rouge&quot;&gt;app_name&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle_id&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;version&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;build_number&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Add value to new settings
-&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fnew_setting.png?alt=media&amp;amp;token=eae822e1-389e-4de3-ac55-f531a1d11c22&quot; width=&quot;75%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;bind-user-defined-setting&quot;&gt;Bind User-Defined Setting&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;In Tab &lt;code class=&quot;highlighter-rouge&quot;&gt;Build Setting&lt;/code&gt;, search &lt;code class=&quot;highlighter-rouge&quot;&gt;Product Bundle Identifier&lt;/code&gt; and enter value &lt;code class=&quot;highlighter-rouge&quot;&gt;$(bundle_id)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fapply_setting.png?alt=media&amp;amp;token=37fd8c6b-d86d-4728-818e-b68a66d40d14&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Select Tab &lt;code class=&quot;highlighter-rouge&quot;&gt;General&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;$(app_name)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Display Name&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;$(version)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Version&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;$(build_number)&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Build&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Ffinish_apply_setting.png?alt=media&amp;amp;token=35d459c5-979c-42e7-a1df-21ba261fd80e&quot; width=&quot;75%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Add some UILabel to Storyboard Main and connect outlets&lt;/li&gt;
-  &lt;li&gt;Add some code to show setting of the running app.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    appNameLabel.text = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String
-    versionLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleShortVersionString&quot;] as? String
-    buildLabel.text = Bundle.main.infoDictionary?[&quot;CFBundleVersion&quot;] as? String
-    bundleIdLabel.text = Bundle.main.bundleIdentifier
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It works&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_first.png?alt=media&amp;amp;token=3fa4e33e-3c19-49cf-8cdf-cfe920f98265&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_first.png?alt=media&amp;amp;token=5293183b-716b-4a33-b4e4-147e90b51d4b&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;other-setting&quot;&gt;Other setting&lt;/h3&gt;
-&lt;p&gt;We can apply this solution to Launchscreen, App Icon by adding 2 Launchscreens, 2 App Icons with same name, just different suffix.&lt;/p&gt;
-
-&lt;p&gt;We can set &lt;code class=&quot;highlighter-rouge&quot;&gt;Launchscreen&lt;/code&gt; same to &lt;code class=&quot;highlighter-rouge&quot;&gt;Display Name&lt;/code&gt; but App Icon needs to be configured same to &lt;code class=&quot;highlighter-rouge&quot;&gt;Product Bundle Identifier&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Besides that, we need to change font family, theme color, text color depend on App. Here how to do.&lt;/p&gt;
-
-&lt;h3 id=&quot;configure-in-code&quot;&gt;Configure in code&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    protocol Configuration {
-        var themeColor: UIColor { get set }
-        var textColor: UIColor { get set }
-    }
-
-    struct RedConfiguration: Configuration {
-        var themeColor = UIColor.red
-        var textColor = UIColor.white
-    }
-
-    struct GreenConfiguration: Configuration {
-        var themeColor: UIColor = UIColor.green
-        var textColor = UIColor.blue
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In my main setting class&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let config: Configuration = {
-        if let app = Bundle.main.object(forInfoDictionaryKey: &quot;CFBundleDisplayName&quot;) as? String {
-            if app == &quot;Red&quot; {
-                return RedConfiguration()
-            }
-            else {
-                return GreenConfiguration()
-            }
-        }
-        
-        return RedConfiguration()
-    }()
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;final&quot;&gt;Final&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fred_final.png?alt=media&amp;amp;token=5429f000-f157-419d-aad4-acc7bc3723a1&quot; width=&quot;240px&quot; /&gt; &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fuser-setting%2Fgreen_final.png?alt=media&amp;amp;token=616338fa-4bd4-4c2a-afaa-fb1aa41dd15a&quot; width=&quot;240px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;My demo source is available on &lt;a href=&quot;https://github.com/nguyentruongky/User-Defined-Setting-iOS&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I ran into a challenge: support different countries with different app’s name, icon but same code. “Green” app is the original app, there is a need to convert the original “Green” app to another app with different properties, which in the demo is known as the “Red” app.</summary></entry></feed>
+&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.</summary></entry></feed>
