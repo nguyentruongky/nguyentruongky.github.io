@@ -9,6 +9,99 @@ background: 'https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com
 <hr/>
 <br/> 
 
+# 09/07/2018
+
+### Auto remove apt in Ubuntu
+
+
+```
+
+    sudo apt autoremove
+
+```
+
+<hr/>
+
+
+
+# 15/06/2018
+
+### Hot keys for Visual Code 
+
+Format document 
+
+```
+
+    Windows / Linux: Altr + Shift + F
+    
+    Mac: Option + Shift + F
+
+```
+
+Detail is [here](https://www.ngdevelop.tech/visual-studio-code-tips-tricks/)
+
+<hr/>
+
+
+# 08/06/2018
+
+### Reindex spotlight High Sierra 
+
+
+```
+
+    sudo mdutil -E /
+
+```
+<hr/>
+
+### Say this instead of "very"
+
+- very rude         -   vulgar 
+- very short        -   brief
+- very boring       -   dull 
+- very good         -   superb
+- very hot          -   scalding / scorching 
+- very cold         -   freezing 
+- very hungry       -   ravenous
+- very slow         -   fluggish 
+- very fast         -   rapid 
+- very tired        -   exhausted
+- very poor         -   destitute 
+- very ric          -   wealthy
+- very happy        -   jubilant 
+- very worried      -   anxious
+- very thirsty      -   parched 
+- very dirty        -   squalid 
+- very clean        -   spotless 
+
+<br/> 
+<hr/>
+<br/> 
+
+
+# 07/06/2018
+
+### Serve static file in Nginx
+
+Without alias, can't serve the static file.
+
+```
+
+    root /var/www/html/ogenii;
+
+    location /tos {
+    	default_type "text/html";
+	    alias /var/www/html/ogenii/tos.html;
+    }
+
+```
+
+<br/> 
+<hr/>
+<br/> 
+
+
 # 18/05/2018
 
 ### Create breakpoint to catch error 

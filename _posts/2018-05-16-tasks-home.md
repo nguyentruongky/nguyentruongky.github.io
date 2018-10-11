@@ -123,7 +123,7 @@ Hope code is easy to understand. This view can automatically calculate the size.
 
 ### Implement homescreen UI
 
-- Open file `ViewController.swift` and change base class to `knController`. That's just a UIViewController but I added some other extension for it. 
+- Open file `ViewController.swift` and change base class to `knController`. That's just a UIViewController and I added some extensions for it. 
 
 - Define some views
 

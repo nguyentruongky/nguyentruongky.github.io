@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    UI Implementation - Popup - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It di...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/10/05/UI-popup.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118652981-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-118652981-1');
+  </script>
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/til">Today I learn</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/cdn.dribbble.com/users/71189/screenshots/2391749/_resized.jpg')"> -->
+<header class="masthead" style="background-image: url('https://cdn.dribbble.com/users/71189/screenshots/2391749/_resized.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>UI Implementation - Popup</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Make a popup and customize what you want</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on October 05, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.</p>
+
+<p>Today, I will implement a popup, inspired by the design of <a href="https://dribbble.com/shots/2391749-Referral-Window">Joseph Liu</a>. Change something to make it simpler for the first post. :D</p>
+
+<h2 id="prepare-project">Prepare project</h2>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup-1.png?alt=media&amp;token=17e3fb44-5ff7-4d2d-89c0-af4c06062ee2" width="40%" /></p>
+
+<ul>
+  <li>Create new <code class="highlighter-rouge">Single View App</code> project</li>
+  <li>Add new file <code class="highlighter-rouge">ReferralPopup.swift</code></li>
+</ul>
+
+<h2 id="define-components">Define components</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class ReferralPopup: knView {
+        let blackView: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            return button
+        }()
+        let container: UIView = {
+            let v = UIView()
+            v.translatesAutoresizingMaskIntoConstraints = false
+            v.backgroundColor = .white
+            v.createRoundCorner(7)
+            return v
+        }()
+        let okButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            let color = UIColor.color(r: 241, g: 66, b: 70)
+            button.backgroundColor = color
+            button.setTitle("COPY &amp; CONTINUE", for: .normal)
+            button.backgroundColor = UIColor.color(r: 71, g: 204, b: 54)
+            button.height(54)
+            button.createRoundCorner(27)
+            return button
+        }()
+    }
+
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">blackView</code> is the transparent background cover the whole screen. We will dismiss the popup when it clicked. You can use UIView and add UIGestureRecognizer also.</p>
+
+<p><code class="highlighter-rouge">container</code> is the white background container. It’s the main view for popup.</p>
+
+<h2 id="layout-the-container">Layout the container</h2>
+
+<p>The most important part is how to layout the container</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func setupView() {
+        let color = UIColor.color(r: 241, g: 66, b: 70)
+        
+        let instruction = "GET YOUR FREE $10 CREDITS"
+        let label = UIMaker.makeLabel(text: instruction,
+                                      font: UIFont.boldSystemFont(ofSize: 15),
+                                      color: .white,
+                                      alignment: .center)
+        
+        let circle = UIMaker.makeView(background: color)
+        let logo = UIMaker.makeImageView(image: UIImage(named: "swift"), contentMode: .scaleAspectFit)
+        logo.backgroundColor = .white
+        
+        let codeTitle = UIMaker.makeLabel(text: "REFERRAL CODE",
+                                          font: UIFont.boldSystemFont(ofSize: 12),
+                                          color: UIColor.color(r: 155, g: 165, b: 172),
+                                          alignment: .center)
+        let codeLabel = UIMaker.makeLabel(text: "KYNGUYEN",
+                                          font: UIFont.boldSystemFont(ofSize: 40),
+                                          color: UIColor.color(r: 242, g: 64, b: 65),
+                                          alignment: .center)
+        
+        
+        container.addSubviews(views: circle, label, okButton, logo, codeTitle, codeLabel)
+        
+        // (1)
+        label.top(toView: container, space: 24)
+        label.horizontal(toView: container, space: 24)
+        
+        // (2)
+        let edge: CGFloat = UIScreen.main.bounds.width * 2
+        circle.square(edge: edge)
+        circle.createRoundCorner(edge / 2)
+        circle.centerX(toView: container)
+        circle.bottom(toAnchor: logo.centerYAnchor)
+        
+        // (3)
+        let logoEdge: CGFloat = 66
+        logo.square(edge: logoEdge)
+        logo.centerX(toView: circle)
+        logo.verticalSpacing(toView: label, space: 40)
+        logo.createRoundCorner(logoEdge / 2)
+        logo.createBorder(1, color: color)
+        
+        // (4)
+        codeTitle.centerX(toView: container)
+        codeTitle.verticalSpacing(toView: logo, space: 24)
+        
+        // (5)
+        codeLabel.centerX(toView: container)
+        codeLabel.verticalSpacing(toView: codeTitle, space: 8)
+        
+        // (6)
+        okButton.verticalSpacing(toView: codeLabel, space: 24)
+        okButton.bottom(toView: container, space: -24)
+        okButton.horizontal(toView: container, space: 36)
+        okButton.createRoundCorner(28)
+        
+        okButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        blackView.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+    }
+
+</code></pre></div></div>
+
+<p>The sketch is like this</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F09-popup-frame_explaination.png?alt=media&amp;token=e03f6b90-c6de-4dc0-a78b-2faf586ade15" width="40%" /></p>
+
+<p>(1): <code class="highlighter-rouge">label</code> is the instruction label, created by my helper <code class="highlighter-rouge">UIMaker</code>. It is sticked to the <code class="highlighter-rouge">container's topAnchor</code> with 24px spacing. It should be sticked to <code class="highlighter-rouge">left</code> and <code class="highlighter-rouge">right</code>, and <code class="highlighter-rouge">textAlignment</code> is center to prevent long text can break the UI.</p>
+
+<p><strong>Notes</strong></p>
+
+<hr />
+
+<p><code class="highlighter-rouge">top</code>: layout the <code class="highlighter-rouge">view1's topAnchor</code> to the <code class="highlighter-rouge">view2's topAnchor</code>.</p>
+
+<p><code class="highlighter-rouge">horizontal</code>: layout the <code class="highlighter-rouge">view1's leftAnchor</code> to <code class="highlighter-rouge">view2's leftAnchor</code> and <code class="highlighter-rouge">view1's rightAnchor</code> to <code class="highlighter-rouge">view2's rightAnchor</code>.</p>
+
+<hr />
+
+<p>(2): <code class="highlighter-rouge">circle</code> is the top curve. You can use an image instead. The circle has <code class="highlighter-rouge">width</code> and <code class="highlighter-rouge">height</code> equal to <code class="highlighter-rouge">UIScreen.main.bounds.width * 2</code>. It is bigger than the view so we can put its lower edge overlay on the <code class="highlighter-rouge">container</code>.</p>
+
+<p>Layout <code class="highlighter-rouge">circle</code> horizonal center to the view, so the circle looks balance. You can try align to left or right to see differences.</p>
+
+<p>The <code class="highlighter-rouge">circle</code>’s bottom edge will align to the <code class="highlighter-rouge">logo</code> center. A little bit difficult to understand. The <code class="highlighter-rouge">logo</code> is sticked to the top, and <code class="highlighter-rouge">circle</code> is sticked to the <code class="highlighter-rouge">logo</code>. I set the <code class="highlighter-rouge">circle</code> sticked to the <code class="highlighter-rouge">container</code>’s top, but the view can’t auto layout. This way, <code class="highlighter-rouge">container</code> can easy auto layout, we don’t need to care the <code class="highlighter-rouge">container</code>’s height.</p>
+
+<p><strong>Notes</strong></p>
+
+<hr />
+
+<p><code class="highlighter-rouge">square(value: CGFloat)</code>: set the <code class="highlighter-rouge">view's width</code> equals to <code class="highlighter-rouge">view's height</code> and equal to <code class="highlighter-rouge">value</code></p>
+
+<p><code class="highlighter-rouge">centerX</code>: stick <code class="highlighter-rouge">view1's centerXAnchor</code> to <code class="highlighter-rouge">view2's centerXAnchor</code></p>
+
+<p><code class="highlighter-rouge">bottom</code>: layout <code class="highlighter-rouge">view1's bottomAnchor</code> to <code class="highlighter-rouge">view2's bottomAnchor</code>.</p>
+
+<hr />
+
+<p>(3): <code class="highlighter-rouge">logo</code> has <code class="highlighter-rouge">verticalSpacing</code> to <code class="highlighter-rouge">label</code> and has 40px spacing. It means the <code class="highlighter-rouge">logo</code>’s top and the <code class="highlighter-rouge">label</code>’s bottom has 40px spacing.</p>
+
+<p><strong>Notes</strong></p>
+
+<hr />
+
+<p><code class="highlighter-rouge">verticalSpacing</code>: layout <code class="highlighter-rouge">view1's topAnchor</code> to <code class="highlighter-rouge">view2's bottomAnchor</code></p>
+
+<hr />
+
+<p>(4), (5): same to <code class="highlighter-rouge">codeTitle</code> and <code class="highlighter-rouge">codeLabel</code>, <code class="highlighter-rouge">verticalSpacing</code> will make a space between them.</p>
+
+<p>(6): <code class="highlighter-rouge">okButton</code> has <code class="highlighter-rouge">verticalSpacing</code> and <code class="highlighter-rouge">bottom</code>. So keep in mind, the view can automatically calculate the height of the view.</p>
+
+<h2 id="display-the-popup">Display the popup</h2>
+
+<p>The popup is ready to display. Let’s display it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    func show(in view: UIView) {
+        addSubviews(views: blackView, container)
+        blackView.fill(toView: self)
+        container.centerY(toView: self)
+        container.horizontal(toView: self, space: 24)
+        
+        blackView.alpha = 0
+        UIView.animate(withDuration: 0.1, animations:
+            { [weak self] in self?.blackView.alpha = 1 })
+        container.zoomIn(true)
+        
+        view.addSubviews(views: self)
+        fill(toView: view)
+    }
+
+</code></pre></div></div>
+
+<p>We will display the popup inside the controller’s view. Rememeber 3 views: <code class="highlighter-rouge">blackView</code>, <code class="highlighter-rouge">container</code>, <code class="highlighter-rouge">self</code>. We will add <code class="highlighter-rouge">blackView</code> and <code class="highlighter-rouge">container</code> to <code class="highlighter-rouge">self</code>. And we add <code class="highlighter-rouge">self</code> to <code class="highlighter-rouge">containerView</code>.</p>
+
+<p><code class="highlighter-rouge">view.zoomIn(true)</code> will show the popup with a slight zoom animation.</p>
+
+<h2 id="dismiss-the-popup">Dismiss the popup</h2>
+
+<p>Quite hard here for dismiss animation. The popup zooms in a little bit and zooms out to disappear.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func dismiss() {
+        let initialValue: CGFloat = 1
+        let middleValue: CGFloat = 1.025
+        let endValue: CGFloat = 0.001
+        func fadeOutContainer() {
+            UIView.animate(withDuration: 0.2, animations:
+                { [weak self] in self?.container.alpha = 0 })
+        }
+        func zoomInContainer() {
+            UIView.animate(withDuration: 0.05,
+                           animations: { [weak self] in self?.container.scale(value: middleValue) })
+        }
+        func zoomOutContainer() {
+            UIView.animate(withDuration: 0.3, delay: 0.05, options: .curveEaseIn,
+                           animations:
+                { [weak self] in
+                    self?.container.scale(value: endValue)
+                    self?.blackView.alpha = 0
+                }, completion: { [weak self] _ in self?.removeFromSuperview() })
+        }
+        
+        container.transform = container.transform.scaledBy(x: initialValue , y: initialValue)
+        fadeOutContainer()
+        zoomInContainer()
+        zoomOutContainer()
+    }
+
+</code></pre></div></div>
+
+<h2 id="time-to-run">Time to run</h2>
+
+<ul>
+  <li>Add a button to <code class="highlighter-rouge">ViewController</code> and show the popup in the button event</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    @objc func showReferralPopup() {
+        ReferralPopup().show(in: view)
+    }
+
+</code></pre></div></div>
+
+<p>This is how it looks after coding.</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup.gif?alt=media&amp;token=53559318-3d67-47f0-a794-1f0bdc13b37d" width="40%" /></p>
+
+<h2 id="do-it-better">Do it better</h2>
+
+<p>You can add new class <code class="highlighter-rouge">Popup</code> and move components, full <code class="highlighter-rouge">show</code> function, full <code class="highlighter-rouge">dismiss</code> function and empty <code class="highlighter-rouge">setupView</code> to <code class="highlighter-rouge">Popup</code>.</p>
+
+<p>The <code class="highlighter-rouge">ReferralPopup</code> is inherited from <code class="highlighter-rouge">Popup</code>. You can add new popup easily just set inherit from <code class="highlighter-rouge">Popup</code> and layout your new view in its <code class="highlighter-rouge">setupView</code>.</p>
+
+<p>Full code can pull from <a href="https://github.com/nguyentruongky/knPopup">my Github</a></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/10/05/UI-implementation-series.html" data-toggle="tooltip" data-placement="top" title="Series UI Implementation">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

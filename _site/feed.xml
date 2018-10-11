@@ -1,4 +1,269 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-06-07T03:15:40+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Tasks iOs - Create task</title><link href="http://localhost:4001/2018/05/17/tasks-create-task.html" rel="alternate" type="text/html" title="Tasks iOs - Create task" /><published>2018-05-17T00:00:00+07:00</published><updated>2018-05-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/17/tasks-create-task</id><content type="html" xml:base="http://localhost:4001/2018/05/17/tasks-create-task.html">&lt;p&gt;Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-10-11T11:28:31+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">UI Implementation - Popup</title><link href="http://localhost:4001/2018/10/05/UI-popup.html" rel="alternate" type="text/html" title="UI Implementation - Popup" /><published>2018-10-05T00:00:00+07:00</published><updated>2018-10-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/05/UI-popup</id><content type="html" xml:base="http://localhost:4001/2018/10/05/UI-popup.html">&lt;p&gt;Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.&lt;/p&gt;
+
+&lt;p&gt;Today, I will implement a popup, inspired by the design of &lt;a href=&quot;https://dribbble.com/shots/2391749-Referral-Window&quot;&gt;Joseph Liu&lt;/a&gt;. Change something to make it simpler for the first post. :D&lt;/p&gt;
+
+&lt;h2 id=&quot;prepare-project&quot;&gt;Prepare project&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup-1.png?alt=media&amp;amp;token=17e3fb44-5ff7-4d2d-89c0-af4c06062ee2&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create new &lt;code class=&quot;highlighter-rouge&quot;&gt;Single View App&lt;/code&gt; project&lt;/li&gt;
+  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;ReferralPopup.swift&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;define-components&quot;&gt;Define components&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class ReferralPopup: knView {
+        let blackView: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+            return button
+        }()
+        let container: UIView = {
+            let v = UIView()
+            v.translatesAutoresizingMaskIntoConstraints = false
+            v.backgroundColor = .white
+            v.createRoundCorner(7)
+            return v
+        }()
+        let okButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            let color = UIColor.color(r: 241, g: 66, b: 70)
+            button.backgroundColor = color
+            button.setTitle(&quot;COPY &amp;amp; CONTINUE&quot;, for: .normal)
+            button.backgroundColor = UIColor.color(r: 71, g: 204, b: 54)
+            button.height(54)
+            button.createRoundCorner(27)
+            return button
+        }()
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;blackView&lt;/code&gt; is the transparent background cover the whole screen. We will dismiss the popup when it clicked. You can use UIView and add UIGestureRecognizer also.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt; is the white background container. It’s the main view for popup.&lt;/p&gt;
+
+&lt;h2 id=&quot;layout-the-container&quot;&gt;Layout the container&lt;/h2&gt;
+
+&lt;p&gt;The most important part is how to layout the container&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        let color = UIColor.color(r: 241, g: 66, b: 70)
+        
+        let instruction = &quot;GET YOUR FREE $10 CREDITS&quot;
+        let label = UIMaker.makeLabel(text: instruction,
+                                      font: UIFont.boldSystemFont(ofSize: 15),
+                                      color: .white,
+                                      alignment: .center)
+        
+        let circle = UIMaker.makeView(background: color)
+        let logo = UIMaker.makeImageView(image: UIImage(named: &quot;swift&quot;), contentMode: .scaleAspectFit)
+        logo.backgroundColor = .white
+        
+        let codeTitle = UIMaker.makeLabel(text: &quot;REFERRAL CODE&quot;,
+                                          font: UIFont.boldSystemFont(ofSize: 12),
+                                          color: UIColor.color(r: 155, g: 165, b: 172),
+                                          alignment: .center)
+        let codeLabel = UIMaker.makeLabel(text: &quot;KYNGUYEN&quot;,
+                                          font: UIFont.boldSystemFont(ofSize: 40),
+                                          color: UIColor.color(r: 242, g: 64, b: 65),
+                                          alignment: .center)
+        
+        
+        container.addSubviews(views: circle, label, okButton, logo, codeTitle, codeLabel)
+        
+        // (1)
+        label.top(toView: container, space: 24)
+        label.horizontal(toView: container, space: 24)
+        
+        // (2)
+        let edge: CGFloat = UIScreen.main.bounds.width * 2
+        circle.square(edge: edge)
+        circle.createRoundCorner(edge / 2)
+        circle.centerX(toView: container)
+        circle.bottom(toAnchor: logo.centerYAnchor)
+        
+        // (3)
+        let logoEdge: CGFloat = 66
+        logo.square(edge: logoEdge)
+        logo.centerX(toView: circle)
+        logo.verticalSpacing(toView: label, space: 40)
+        logo.createRoundCorner(logoEdge / 2)
+        logo.createBorder(1, color: color)
+        
+        // (4)
+        codeTitle.centerX(toView: container)
+        codeTitle.verticalSpacing(toView: logo, space: 24)
+        
+        // (5)
+        codeLabel.centerX(toView: container)
+        codeLabel.verticalSpacing(toView: codeTitle, space: 8)
+        
+        // (6)
+        okButton.verticalSpacing(toView: codeLabel, space: 24)
+        okButton.bottom(toView: container, space: -24)
+        okButton.horizontal(toView: container, space: 36)
+        okButton.createRoundCorner(28)
+        
+        okButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        blackView.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The sketch is like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F09-popup-frame_explaination.png?alt=media&amp;amp;token=e03f6b90-c6de-4dc0-a78b-2faf586ade15&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;label&lt;/code&gt; is the instruction label, created by my helper &lt;code class=&quot;highlighter-rouge&quot;&gt;UIMaker&lt;/code&gt;. It is sticked to the &lt;code class=&quot;highlighter-rouge&quot;&gt;container's topAnchor&lt;/code&gt; with 24px spacing. It should be sticked to &lt;code class=&quot;highlighter-rouge&quot;&gt;left&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;right&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;textAlignment&lt;/code&gt; is center to prevent long text can break the UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt;: layout the &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's topAnchor&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's topAnchor&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;horizontal&lt;/code&gt;: layout the &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's leftAnchor&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's leftAnchor&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's rightAnchor&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's rightAnchor&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;(2): &lt;code class=&quot;highlighter-rouge&quot;&gt;circle&lt;/code&gt; is the top curve. You can use an image instead. The circle has &lt;code class=&quot;highlighter-rouge&quot;&gt;width&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;height&lt;/code&gt; equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;UIScreen.main.bounds.width * 2&lt;/code&gt;. It is bigger than the view so we can put its lower edge overlay on the &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Layout &lt;code class=&quot;highlighter-rouge&quot;&gt;circle&lt;/code&gt; horizonal center to the view, so the circle looks balance. You can try align to left or right to see differences.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;circle&lt;/code&gt;’s bottom edge will align to the &lt;code class=&quot;highlighter-rouge&quot;&gt;logo&lt;/code&gt; center. A little bit difficult to understand. The &lt;code class=&quot;highlighter-rouge&quot;&gt;logo&lt;/code&gt; is sticked to the top, and &lt;code class=&quot;highlighter-rouge&quot;&gt;circle&lt;/code&gt; is sticked to the &lt;code class=&quot;highlighter-rouge&quot;&gt;logo&lt;/code&gt;. I set the &lt;code class=&quot;highlighter-rouge&quot;&gt;circle&lt;/code&gt; sticked to the &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt;’s top, but the view can’t auto layout. This way, &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt; can easy auto layout, we don’t need to care the &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt;’s height.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;square(value: CGFloat)&lt;/code&gt;: set the &lt;code class=&quot;highlighter-rouge&quot;&gt;view's width&lt;/code&gt; equals to &lt;code class=&quot;highlighter-rouge&quot;&gt;view's height&lt;/code&gt; and equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;centerX&lt;/code&gt;: stick &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's centerXAnchor&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's centerXAnchor&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt;: layout &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's bottomAnchor&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's bottomAnchor&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;(3): &lt;code class=&quot;highlighter-rouge&quot;&gt;logo&lt;/code&gt; has &lt;code class=&quot;highlighter-rouge&quot;&gt;verticalSpacing&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;label&lt;/code&gt; and has 40px spacing. It means the &lt;code class=&quot;highlighter-rouge&quot;&gt;logo&lt;/code&gt;’s top and the &lt;code class=&quot;highlighter-rouge&quot;&gt;label&lt;/code&gt;’s bottom has 40px spacing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;verticalSpacing&lt;/code&gt;: layout &lt;code class=&quot;highlighter-rouge&quot;&gt;view1's topAnchor&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;view2's bottomAnchor&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;(4), (5): same to &lt;code class=&quot;highlighter-rouge&quot;&gt;codeTitle&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;codeLabel&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;verticalSpacing&lt;/code&gt; will make a space between them.&lt;/p&gt;
+
+&lt;p&gt;(6): &lt;code class=&quot;highlighter-rouge&quot;&gt;okButton&lt;/code&gt; has &lt;code class=&quot;highlighter-rouge&quot;&gt;verticalSpacing&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt;. So keep in mind, the view can automatically calculate the height of the view.&lt;/p&gt;
+
+&lt;h2 id=&quot;display-the-popup&quot;&gt;Display the popup&lt;/h2&gt;
+
+&lt;p&gt;The popup is ready to display. Let’s display it.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    func show(in view: UIView) {
+        addSubviews(views: blackView, container)
+        blackView.fill(toView: self)
+        container.centerY(toView: self)
+        container.horizontal(toView: self, space: 24)
+        
+        blackView.alpha = 0
+        UIView.animate(withDuration: 0.1, animations:
+            { [weak self] in self?.blackView.alpha = 1 })
+        container.zoomIn(true)
+        
+        view.addSubviews(views: self)
+        fill(toView: view)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We will display the popup inside the controller’s view. Rememeber 3 views: &lt;code class=&quot;highlighter-rouge&quot;&gt;blackView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;. We will add &lt;code class=&quot;highlighter-rouge&quot;&gt;blackView&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;. And we add &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;containerView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;view.zoomIn(true)&lt;/code&gt; will show the popup with a slight zoom animation.&lt;/p&gt;
+
+&lt;h2 id=&quot;dismiss-the-popup&quot;&gt;Dismiss the popup&lt;/h2&gt;
+
+&lt;p&gt;Quite hard here for dismiss animation. The popup zooms in a little bit and zooms out to disappear.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func dismiss() {
+        let initialValue: CGFloat = 1
+        let middleValue: CGFloat = 1.025
+        let endValue: CGFloat = 0.001
+        func fadeOutContainer() {
+            UIView.animate(withDuration: 0.2, animations:
+                { [weak self] in self?.container.alpha = 0 })
+        }
+        func zoomInContainer() {
+            UIView.animate(withDuration: 0.05,
+                           animations: { [weak self] in self?.container.scale(value: middleValue) })
+        }
+        func zoomOutContainer() {
+            UIView.animate(withDuration: 0.3, delay: 0.05, options: .curveEaseIn,
+                           animations:
+                { [weak self] in
+                    self?.container.scale(value: endValue)
+                    self?.blackView.alpha = 0
+                }, completion: { [weak self] _ in self?.removeFromSuperview() })
+        }
+        
+        container.transform = container.transform.scaledBy(x: initialValue , y: initialValue)
+        fadeOutContainer()
+        zoomInContainer()
+        zoomOutContainer()
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;time-to-run&quot;&gt;Time to run&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Add a button to &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; and show the popup in the button event&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    @objc func showReferralPopup() {
+        ReferralPopup().show(in: view)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is how it looks after coding.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup.gif?alt=media&amp;amp;token=53559318-3d67-47f0-a794-1f0bdc13b37d&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;do-it-better&quot;&gt;Do it better&lt;/h2&gt;
+
+&lt;p&gt;You can add new class &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt; and move components, full &lt;code class=&quot;highlighter-rouge&quot;&gt;show&lt;/code&gt; function, full &lt;code class=&quot;highlighter-rouge&quot;&gt;dismiss&lt;/code&gt; function and empty &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ReferralPopup&lt;/code&gt; is inherited from &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt;. You can add new popup easily just set inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt; and layout your new view in its &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Full code can pull from &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;my Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.</summary></entry><entry><title type="html">Series UI Implementation</title><link href="http://localhost:4001/2018/10/05/UI-implementation-series.html" rel="alternate" type="text/html" title="Series UI Implementation" /><published>2018-10-05T00:00:00+07:00</published><updated>2018-10-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/05/UI-implementation-series</id><content type="html" xml:base="http://localhost:4001/2018/10/05/UI-implementation-series.html">&lt;p&gt;Hey, I am back with a series: &lt;strong&gt;UI Implementation&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;I didn’t write any blogs for long time because of my startup. It is launched and dead in silence. But learnt lot of new things for my career path.&lt;/p&gt;
+
+&lt;p&gt;Any iOS apps need very good UI/UX to attract users. Users will remove bad UI/UX app immediately they try it on the first time or second times (very patient users). UI design is very beautiful with Sketch/Photoshop/Illustrator. But with Xcode, not exactly beautiful like this. We have some different screen sizes, with notch and without notch.&lt;/p&gt;
+
+&lt;p&gt;In this series, hopefully I can write good posts to show you how we can do the best UI for our apps. To do this, I abandoned Storyboard and use Swift programmatically. Use my code base to make development easier. Will share you on every projects.&lt;/p&gt;
+
+&lt;p&gt;I will right back with first post.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/2018/10/05/UI-popup.html&quot; target=&quot;_blank&quot;&gt;Popup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Cover photo: Awesome design by &lt;a href=&quot;https://dribbble.com/shots/4222725-iOS-App-Concept&quot;&gt;Surja Sen Das Raj &lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Hey, I am back with a series: UI Implementation.</summary></entry><entry><title type="html">Tasks iOs - Create task</title><link href="http://localhost:4001/2018/05/17/tasks-create-task.html" rel="alternate" type="text/html" title="Tasks iOs - Create task" /><published>2018-05-17T00:00:00+07:00</published><updated>2018-05-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/17/tasks-create-task</id><content type="html" xml:base="http://localhost:4001/2018/05/17/tasks-create-task.html">&lt;p&gt;Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Display a list of task&lt;/li&gt;
@@ -539,7 +804,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;Open file &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; and change base class to &lt;code class=&quot;highlighter-rouge&quot;&gt;knController&lt;/code&gt;. That’s just a UIViewController but I added some other extension for it.&lt;/p&gt;
+    &lt;p&gt;Open file &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; and change base class to &lt;code class=&quot;highlighter-rouge&quot;&gt;knController&lt;/code&gt;. That’s just a UIViewController and I added some extensions for it.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Define some views&lt;/p&gt;
@@ -2289,383 +2554,4 @@
 &lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
 &lt;p&gt;The main part is ready. Minors methods, properties are in the lib in github. Link is &lt;a href=&quot;https://github.com/nguyentruongky/knOtpView&quot;&gt;https://github.com/nguyentruongky/knOtpView&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_final.gif?alt=media&amp;amp;token=a60f523c-40ac-429d-9546-804344e27d1f&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Two years ago, I did a view for this purpose. Detail is on my github: https://github.com/nguyentruongky/ActiveCode.</summary></entry><entry><title type="html">Customize your UITabBarController</title><link href="http://localhost:4001/2018/04/15/TabController-TabBar.html" rel="alternate" type="text/html" title="Customize your UITabBarController" /><published>2018-04-15T00:00:00+07:00</published><updated>2018-04-15T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/15/TabController-TabBar</id><content type="html" xml:base="http://localhost:4001/2018/04/15/TabController-TabBar.html">&lt;p&gt;From 2017, design trending has changed to tab bar, instead of slide menu. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fogenii.png?alt=media&amp;amp;token=033df77c-7adb-40a7-aca9-ad921efb4629&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;or like this&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.png?alt=media&amp;amp;token=e5a38fff-eddf-4863-b2bb-b4e15fdef4d2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I had to implement a tab bar like above in 2015. My implementation at that time was bad. I used a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt; as a main controller, and added a custom view like a tab bar. And everytime a tab selected, embed the other &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt; into the main controller. That’s not good option.&lt;/p&gt;
-
-&lt;p&gt;Today I make a &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; with a custom view like a tab bar. With this solution, we can use the max strength of &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt; with the same behavior and code. Much easier and better than my implementation before. Hope anyone can easily customize to their design if they want after this note.&lt;/p&gt;
-
-&lt;h2 id=&quot;kntabbaritem&quot;&gt;knTabBarItem&lt;/h2&gt;
-&lt;p&gt;First thing need to be customized is the &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarItem&lt;/code&gt; is not flexible enough to be customized to anything I want. I need to use &lt;code class=&quot;highlighter-rouge&quot;&gt;UIButton&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    class knTabBarItem: UIButton {
-        // (1)
-        var itemHeight: CGFloat = 0
-        // (2)
-        var lock = false
-        // (3)
-        var color: UIColor = UIColor.lightGray {
-            didSet {
-                guard lock == false else { return }
-                iconImageView.change(color: color)
-                textLabel.textColor = color
-            }}
-        
-        // (4)
-        private let iconImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFit)
-        private let textLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 11),
-                                            color: .black, alignment: .center)
-        
-        convenience init(icon: UIImage, title: String,
-                        font: UIFont = UIFont.systemFont(ofSize: 11)) {
-            self.init()
-            translatesAutoresizingMaskIntoConstraints = false
-            iconImageView.image = icon
-            textLabel.text = title
-            textLabel.font = UIFont(name: font.fontName, size: 11)
-            setupView()
-        }
-        
-        // (5)
-        private func setupView() {
-            addSubviews(views: iconImageView, textLabel)
-            iconImageView.top(toView: self, space: 4)
-            iconImageView.centerX(toView: self)
-            iconImageView.square()
-            
-            let iconBottomConstant: CGFloat = textLabel.text == &quot;&quot; ? -2 : -20
-            iconImageView.bottom(toView: self, space: iconBottomConstant)
-            
-            textLabel.bottom(toView: self, space: -2)
-            textLabel.centerX(toView: self)
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): Some tab items can be bigger than others. I can easily set the height for them to make difference with others.&lt;/p&gt;
-
-&lt;p&gt;(2) (3): Same to (1), some tab items are very unacceptional with different color and don’t change color when selected.&lt;/p&gt;
-
-&lt;p&gt;(4): knUIMaker is my collection to make controls. Just easier to make UIButton, UIImageView, UILabel by code.&lt;/p&gt;
-
-&lt;p&gt;(5): &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubviews&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;top&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;centerX&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bottom&lt;/code&gt; are from my &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;knConstraints&lt;/a&gt; to make auto layout. I’m a fan of auto layout programmatically, so make controls and set layouts by code is what to do hundreds of times everyday.&lt;/p&gt;
-
-&lt;h2 id=&quot;kntabbar&quot;&gt;knTabBar&lt;/h2&gt;
-&lt;p&gt;Next thing I have to focus on is &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class knTabBar: UITabBar {
-        // (1)
-        var kn_items = [knTabBarItem]()
-        convenience init(items: [knTabBarItem]) {
-            self.init()
-            kn_items = items
-            translatesAutoresizingMaskIntoConstraints = false
-            setupView()
-        }
-        
-        override var tintColor: UIColor! {
-            didSet {
-                for item in kn_items {
-                    item.color = tintColor
-                }}}
-        
-        func setupView() {
-            backgroundColor = .white
-            if kn_items.count == 0 { return }
-            
-            // (2)
-            let line = knUIMaker.makeLine(color: .gray, height: 0.5)
-            addSubviews(views: line)
-            line.horizontal(toView: self)
-            line.top(toView: self)
-            
-            // (3)
-            var horizontalConstraints = &quot;H:|&quot;
-            let itemWidth: CGFloat = screenWidth / CGFloat(kn_items.count)
-            for i in 0 ..&amp;lt; kn_items.count {
-                let item = kn_items[i]
-                addSubviews(views: item)
-                if item.itemHeight == 0 {
-                    item.vertical(toView: self)
-                }
-                else {
-                    item.bottom(toView: self)
-                    item.height(item.itemHeight)
-                }
-                item.width(itemWidth)
-                horizontalConstraints += String(format: &quot;[v%d]&quot;, i)
-                if item.lock == false {
-                    item.color = tintColor
-                }
-            }
-            
-            horizontalConstraints += &quot;|&quot;
-            addConstraints(withFormat: horizontalConstraints, arrayOf: kn_items)
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): I can’t override &lt;code class=&quot;highlighter-rouge&quot;&gt;items&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBar&lt;/code&gt;, so I name it a little bit similar to easier to remember&lt;/p&gt;
-
-&lt;p&gt;(2): Add a line to separate the tab bar to the controller. Some designs need indicator at the selected item, I will add indicator here.&lt;/p&gt;
-
-&lt;p&gt;(3): Flexible to add items by programmatically. Thanks Apple for Auto Layout Programmatically.&lt;/p&gt;
-
-&lt;h2 id=&quot;kntabcontroller&quot;&gt;knTabController&lt;/h2&gt;
-&lt;p&gt;The easiest thing is here. Just inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;, add some code, and it works.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class knTabController: UITabBarController {
-        var kn_tabBar: knTabBar!
-        var selectedColor = UIColor.darkGray
-        var normalColor = UIColor.lightGray {
-            didSet {
-                kn_tabBar.tintColor = normalColor
-            }}
-        
-        private var kn_tabBarHeight: CGFloat = 49
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            tabBar.isHidden = true
-            setupView()
-        }
-
-        func setupView() {}
-        
-        private func setTabBar(items: [knTabBarItem], height: CGFloat = 49) {
-            guard items.count &amp;gt; 0 else { return }
-            
-            kn_tabBar = knTabBar(items: items)
-            guard let bar = kn_tabBar else { return }
-            kn_tabBar.tintColor = normalColor
-            bar.kn_items.first?.color = selectedColor
-            
-            view.addSubviews(views: bar)
-            bar.horizontal(toView: view)
-            bar.bottom(toView: view)
-            kn_tabBarHeight = height
-            bar.height(kn_tabBarHeight)
-            for i in 0 ..&amp;lt; items.count {
-                items[i].tag = i
-                items[i].addTarget(self, action: #selector(switchTab))
-            }
-        }
-        
-        @objc func switchTab(button: UIButton) {
-            selectedIndex = button.tag
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That’s ready for new tab bar. Just use it in a controller.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-to-use&quot;&gt;How to use?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Inherit class &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt; to your controller.&lt;/li&gt;
-  &lt;li&gt;Override &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class DoctorController: knTabController {
-        override func setupView() {
-            let home = knTabBarItem(icon: #imageLiteral(resourceName: &quot;home&quot;), title: &quot;Home&quot;)
-            let appointment = knTabBarItem(icon: #imageLiteral(resourceName: &quot;appointment&quot;), title: &quot;Appointment&quot;)
-            let add = knTabBarItem(icon: #imageLiteral(resourceName: &quot;add&quot;), title: &quot;&quot;)
-            add.lock = true
-            add.itemHeight = 66
-            let doctors = knTabBarItem(icon: #imageLiteral(resourceName: &quot;doctors&quot;), title: &quot;Doctors&quot;)
-            let porfolio = knTabBarItem(icon: #imageLiteral(resourceName: &quot;user&quot;), title: &quot;Porfolio&quot;)
-
-            let red = UIViewController()
-            red.view.backgroundColor = .red
-            let green = UIViewController()
-            green.view.backgroundColor = .green
-            let blue = UIViewController()
-            blue.view.backgroundColor = .white
-            let yellow = UIViewController()
-            yellow.view.backgroundColor = .yellow
-            let gray = UIViewController()
-            gray.view.backgroundColor = .gray
-
-            setTabBar(items: [home, appointment, add, doctors, porfolio])
-            viewControllers = [red, green, blue, yellow, gray]
-            normalColor = .red
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run and see. The main button (Hexagon Add) is locked, don’t change the color when selected.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor.gif?alt=media&amp;amp;token=27df3f84-5d39-499a-9205-43eaeea87515&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;But it’s better if we have animation, looks much better.&lt;/p&gt;
-
-&lt;h2 id=&quot;add-animation&quot;&gt;Add animation&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;knTabController&lt;/code&gt;, change method &lt;code class=&quot;highlighter-rouge&quot;&gt;switchTab&lt;/code&gt; content to&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let newIndex = button.tag
-    changeTab(from: selectedIndex, to: newIndex)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;ul&gt;
-  &lt;li&gt;Add method &lt;code class=&quot;highlighter-rouge&quot;&gt;changeTab&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    private func changeTab(from fromIndex: Int, to toIndex: Int) {
-        kn_tabBar.kn_items[fromIndex].color = normalColor
-        kn_tabBar.kn_items[toIndex].color = selectedColor
-        animateSliding(from: fromIndex, to: toIndex)
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;And result:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2FtabController%2Fdoctor_slide.gif?alt=media&amp;amp;token=2b1a56d8-aacf-4d51-924e-a44d6827a99d&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Hope this can help anyone want to customize a tab bar can do it effortless. Code is &lt;a href=&quot;https://github.com/nguyentruongky/knTabController&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I will add some more animations and some properties to make it more convenience in very near future. Suggestions and feedbacks are welcome.&lt;/p&gt;
-
-&lt;h3 id=&quot;notes&quot;&gt;Notes&lt;/h3&gt;
-&lt;p&gt;I am a fan of Auto Layout Programmatically, so usually use my library, &lt;strong&gt;knConstraints&lt;/strong&gt; for setting constraints. &lt;strong&gt;knConstraints&lt;/strong&gt; is a very simple way to setup Auto Layout with very easy to read syntax. You can try it yourself &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">From 2017, design trending has changed to tab bar, instead of slide menu. UITabBarController has become one of the most popular controller. It’s very simple to use. But sometime, it’s too simple to customize and make attractive. Designers are artists, and they usually want tab bar like this</summary></entry><entry><title type="html">i18n from Server</title><link href="http://localhost:4001/2018/04/13/i18n-from-server.html" rel="alternate" type="text/html" title="i18n from Server" /><published>2018-04-13T00:00:00+07:00</published><updated>2018-04-13T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/13/i18n-from-server</id><content type="html" xml:base="http://localhost:4001/2018/04/13/i18n-from-server.html">&lt;p&gt;I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt; is fully supported i18n from client to server. It’s not an easy task for me, because I’m just a newbie in backend. I believe this is not the best way to do but it’s a good way I can find and do at this time. Main idea is separation all texts to languages objects and get the values by the keys.&lt;/p&gt;
-
-&lt;h3 id=&quot;move-all-texts-to-language-files&quot;&gt;Move all texts to language files&lt;/h3&gt;
-&lt;p&gt;I support English and Vietnamese in &lt;a href=&quot;https://ogenii.com&quot;&gt;Ogenii&lt;/a&gt;, so I add 2 new files &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt; and move texts to object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    module.exports.texts = {
-        err_401: &quot;Your login is expired. Login again and keep learning.&quot;,
-        verification_sent: 'Your verification will be processed in 2-4 hours',
-        clazz_created: &quot;Your class is created and under review. It'll be live soon.&quot;
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    module.exports.texts = {
-        err_401: &quot;Phiên đăng nhập đã hết hạn. Đăng nhập lại và tiếp tục học thôi&quot;,
-        verification_sent: 'Thông tin xác thực của bạn sẽ được xử lý xong trong 2 - 4 giờ tới',
-        clazz_created: &quot;Lớp của bạn đã được tạo thành công và đang được xem xét. Lớp sẽ sớm online thôi&quot;
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-a-language-center-file&quot;&gt;Add a language center file&lt;/h3&gt;
-&lt;p&gt;Don’t connect language files directly to others, I make a file as a center to connect all supported languages to other files and name it &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Import all supported languages to &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let En = require('./en')
-    let Vi = require('./vi')
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Add all language to an object like this. So don’t care how many languages will support.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    let supported_langs = {
-        &quot;en&quot;: En, 
-        &quot;vi&quot;: Vi
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add an object to contain all keys. The values of this object must be exactly &lt;strong&gt;same&lt;/strong&gt; to keys of object &lt;code class=&quot;highlighter-rouge&quot;&gt;texts&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;en.js&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;vi.js&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    module.exports.keys = {
-        err_401: &quot;err_401&quot;,
-        verification_sent: &quot;verification_sent&quot;,
-        clazz_created: &quot;clazz_created&quot;
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add function to get a translated text from a key and requested language from client. By adding languages to object &lt;code class=&quot;highlighter-rouge&quot;&gt;supported_lang&lt;/code&gt;, we don’t need condition to get the requested language texts here, much easier.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    /**
-    * @desc Get string by language
-    * @param key of the text 
-    * @param lang If param `lang` is a String, it's a language name. If it's an object, it is a request from client. param `lang` is in the request header. 
-    * @return String in selected language
-    */
-    function getText(key, lang) {
-        if (typeof lang !== 'string') {
-            lang = lang.headers['lang']
-        }
-        let dict = supported_langs[lang].texts
-        return dict[key]
-    }
-    module.exports.getText = getText
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Okay, it’s done for all messages from server. Any messages we need to send to client, just add to language files and &lt;code class=&quot;highlighter-rouge&quot;&gt;keys&lt;/code&gt; objects in &lt;code class=&quot;highlighter-rouge&quot;&gt;LangCenter.js&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;This is not fully supported yet. Notification still is 1 language only. I saved the notification content to database, and it can’t be dynamic for multi languages. I had to change. Just save elements to generate notification content only. Depend on elements, I can get text by language.&lt;/p&gt;
-
-&lt;h3 id=&quot;generate-notification-content-by-language&quot;&gt;Generate Notification content by language&lt;/h3&gt;
-
-&lt;p&gt;One example to generate message.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    /**
-    * @desc Generate text to tell Master when Genius book his class
-    * @desc Text structure: Genius `&amp;lt;genius_name&amp;gt;` has just booked your class `&amp;lt;clazz_title&amp;gt;`
-    * @param data: `genius_name`, `clazz_title`
-    * @param lang
-    * @return Meaningful String
-    */
-    function getClazzBookedToMasterText(data, lang) {
-        let booked = Lang.getText(LangCenter.keys.clazz_booked_to_master, lang)
-        return `Genius ${data.genius_name} ${booked} ${data.clazz_title}`
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I make functions to generate messages, because I need these functions several times.&lt;/p&gt;
-
-&lt;p&gt;NodeJS is not as strict as Swift, so that, I put lot of comments in my code, especially for params. It helps me easier to get back or fix bugs.&lt;/p&gt;
-
-&lt;p&gt;Now, the code is 95% flexible for multi languages. Server now returns notification content by client requested language.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-language-in-push-notification&quot;&gt;Multi language in push notification&lt;/h3&gt;
-
-&lt;p&gt;Final step is push notification in multi language. Push notification is dynamic from server, when data meets some conditions. Genius books a class and server pushes notification to Master, for instance. No request from Master, so I don’t know the Master’s current language. I have to save user language to database and get it when push notification is needed. Then generate content by functions above and push to users.&lt;/p&gt;
-
-&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
-
-&lt;p&gt;That’s all I do with multi languages in Ogenii backend. It’s 98% flexible. There is one more edge case I have no solution at this time.  &lt;code class=&quot;highlighter-rouge&quot;&gt;User has multi devices, and in every device, he selects a different language.&lt;/code&gt; Hope I find solution to solve this edge case soon. Any suggestion to solve it, please drop me a message on Skype.&lt;/p&gt;
-
-&lt;p&gt;Hope this can help.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I took a note about multi languages in iOs few days before. Multi languages can’t be finished from iOS/Android or Web only, but need help from server. Without support from server, users can face to messages in English while using Vietnamese, or notifications in Vietnamese, but app language is in English.</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_final.gif?alt=media&amp;amp;token=a60f523c-40ac-429d-9546-804344e27d1f&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Two years ago, I did a view for this purpose. Detail is on my github: https://github.com/nguyentruongky/ActiveCode.</summary></entry></feed>

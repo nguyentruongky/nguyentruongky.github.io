@@ -96,6 +96,92 @@
 
 <p><br /></p>
 
+<h1 id="09072018">09/07/2018</h1>
+
+<h3 id="auto-remove-apt-in-ubuntu">Auto remove apt in Ubuntu</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    sudo apt autoremove
+
+</code></pre></div></div>
+
+<hr />
+
+<h1 id="15062018">15/06/2018</h1>
+
+<h3 id="hot-keys-for-visual-code">Hot keys for Visual Code</h3>
+
+<p>Format document</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    Windows / Linux: Altr + Shift + F
+    
+    Mac: Option + Shift + F
+
+</code></pre></div></div>
+
+<p>Detail is <a href="https://www.ngdevelop.tech/visual-studio-code-tips-tricks/">here</a></p>
+
+<hr />
+
+<h1 id="08062018">08/06/2018</h1>
+
+<h3 id="reindex-spotlight-high-sierra">Reindex spotlight High Sierra</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    sudo mdutil -E /
+
+</code></pre></div></div>
+<hr />
+
+<h3 id="say-this-instead-of-very">Say this instead of “very”</h3>
+
+<ul>
+  <li>very rude         -   vulgar</li>
+  <li>very short        -   brief</li>
+  <li>very boring       -   dull</li>
+  <li>very good         -   superb</li>
+  <li>very hot          -   scalding / scorching</li>
+  <li>very cold         -   freezing</li>
+  <li>very hungry       -   ravenous</li>
+  <li>very slow         -   fluggish</li>
+  <li>very fast         -   rapid</li>
+  <li>very tired        -   exhausted</li>
+  <li>very poor         -   destitute</li>
+  <li>very ric          -   wealthy</li>
+  <li>very happy        -   jubilant</li>
+  <li>very worried      -   anxious</li>
+  <li>very thirsty      -   parched</li>
+  <li>very dirty        -   squalid</li>
+  <li>very clean        -   spotless</li>
+</ul>
+
+<p><br /></p>
+<hr />
+
+<p><br /></p>
+
+<h1 id="07062018">07/06/2018</h1>
+
+<h3 id="serve-static-file-in-nginx">Serve static file in Nginx</h3>
+
+<p>Without alias, can’t serve the static file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    root /var/www/html/ogenii;
+
+    location /tos {
+    	default_type "text/html";
+	    alias /var/www/html/ogenii/tos.html;
+    }
+
+</code></pre></div></div>
+
+<p><br /></p>
+<hr />
+
+<p><br /></p>
+
 <h1 id="18052018">18/05/2018</h1>
 
 <h3 id="create-breakpoint-to-catch-error">Create breakpoint to catch error</h3>
