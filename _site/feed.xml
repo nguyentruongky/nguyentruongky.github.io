@@ -1,4 +1,147 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-10-11T11:28:31+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">UI Implementation - Popup</title><link href="http://localhost:4001/2018/10/05/UI-popup.html" rel="alternate" type="text/html" title="UI Implementation - Popup" /><published>2018-10-05T00:00:00+07:00</published><updated>2018-10-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/05/UI-popup</id><content type="html" xml:base="http://localhost:4001/2018/10/05/UI-popup.html">&lt;p&gt;Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2018-10-17T11:50:14+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">UI Implementation - Confirmation popup</title><link href="http://localhost:4001/2018/10/17/UI-Popup-extend.html" rel="alternate" type="text/html" title="UI Implementation - Confirmation popup" /><published>2018-10-17T00:00:00+07:00</published><updated>2018-10-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/17/UI-Popup-extend</id><content type="html" xml:base="http://localhost:4001/2018/10/17/UI-Popup-extend.html">&lt;p&gt;In &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.&lt;/p&gt;
+
+&lt;h2 id=&quot;confirmation-popup&quot;&gt;Confirmation popup&lt;/h2&gt;
+
+&lt;p&gt;An information popup is used to alert user about some important information, like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-1.PNG?alt=media&amp;amp;token=82348803-b152-4106-b781-7deb9abcb5d2&quot; width=&quot;40%&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup-1.png?alt=media&amp;amp;token=17e3fb44-5ff7-4d2d-89c0-af4c06062ee2&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A confirmation alert is very useful to warn user about next action, for instance, confirm to remove a photo, confirm a withdrawal request… In this post, I will extend the &lt;code class=&quot;highlighter-rouge&quot;&gt;knPopup&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;knConfirmation&lt;/code&gt; to display a confirmation popup.&lt;/p&gt;
+
+&lt;p&gt;The idea is same to the &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, you can customize any UI you want in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;define-new-controls&quot;&gt;Define new controls&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    class knConfirmation: knPopup {
+        private let iconImgView = UIMaker.makeImageView()
+        let titleLabel = UIMaker.makeLabel(font: UIFont.boldSystemFont(ofSize: 18),
+                                        color: UIColor.darkGray, numberOfLines: 2,
+                                        alignment: .center)
+        let contentLabel = UIMaker.makeLabel(font: UIFont.systemFont(ofSize: 15),
+                                        color: UIColor.lightGray, numberOfLines: 0,
+                                        alignment: .center)
+        private let stack = UIMaker.makeStackView()
+        private let cancelButton = UIMaker.makeButton(titleColor: .darkGray,
+                                            font: UIFont.systemFont(ofSize: 15),
+                                            cornerRadius: 27,
+                                            borderWidth: 1,
+                                            borderColor: .darkGray)
+        private let buttonStack = UIMaker.makeStackView(axis: .horizontal, distributon: UIStackView.Distribution.fill, alignment: UIStackView.Alignment.fill, space: 16)
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            setupView()
+        }
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;A confirmation popup needs:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1 icon (optional)&lt;/li&gt;
+  &lt;li&gt;2 labels: title (optional), content&lt;/li&gt;
+  &lt;li&gt;2 buttons: 1 for accept action, 1 for reject action (optional). We have &lt;code class=&quot;highlighter-rouge&quot;&gt;okButton&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;knPopup&lt;/code&gt;, just need one more for reject action&lt;/li&gt;
+  &lt;li&gt;2 stack views: 1 to contain 2 buttons, 1 to contain all controls&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;layout-the-view&quot;&gt;Layout the view&lt;/h3&gt;
+
+&lt;p&gt;Same to &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, we will setup auto layout for all controls by code in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; function&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    override func setupView() {
+        // (1)
+        buttonStack.addViews(cancelButton, okButton)
+        cancelButton.size(toView: okButton)
+        okButton.vertical(toView: buttonStack)
+        cancelButton.centerY(toView: okButton)
+        
+        // (2)
+        let spaceView = UIMaker.makeView()
+        spaceView.height(12)
+
+        stack.addViews(iconImgView, titleLabel, contentLabel, spaceView, buttonStack)
+        iconImgView.square(edge: 56)
+        iconImgView.centerX(toView: stack)
+        titleLabel.horizontal(toView: stack, space: 16)
+        contentLabel.horizontal(toView: stack, space: 16)
+        buttonStack.horizontal(toView: stack, space: 16)
+        
+        // (3)
+        container.addSubview(stack)
+        stack.fill(toView: container, space: UIEdgeInsets(top: 16, bottom: 16))
+        
+        okButton.addTarget(self, action: #selector(didSelectOK), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+    }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;buttonStack&lt;/code&gt; is a &lt;code class=&quot;highlighter-rouge&quot;&gt;UIStackView&lt;/code&gt;, so we can’t &lt;code class=&quot;highlighter-rouge&quot;&gt;addSubviews&lt;/code&gt; as usual, but have to &lt;code class=&quot;highlighter-rouge&quot;&gt;addArrangedSubview&lt;/code&gt;. I extend to new function &lt;code class=&quot;highlighter-rouge&quot;&gt;addViews&lt;/code&gt; to shorten the name. :) 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;buttonStack&lt;/code&gt; contains the button, so when you don’t need cancel button, you can remove it from &lt;code class=&quot;highlighter-rouge&quot;&gt;buttonStack&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;okButton&lt;/code&gt; automatically fill the &lt;code class=&quot;highlighter-rouge&quot;&gt;superView&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;That’s why I choose UIStackView for this UI.&lt;/p&gt;
+
+&lt;p&gt;(2): In stackView, you can’t change specific space between 2 views, so I did this trick. Insert a space view with a height I want.&lt;/p&gt;
+
+&lt;p&gt;(3): We need to add &lt;code class=&quot;highlighter-rouge&quot;&gt;stack&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt;. The &lt;code class=&quot;highlighter-rouge&quot;&gt;container&lt;/code&gt; is setup to animate when appear/disappear. So we don’t need to care about animation anymore.&lt;/p&gt;
+
+&lt;h3 id=&quot;dynamically-display-what-you-want&quot;&gt;Dynamically display what you want&lt;/h3&gt;
+
+&lt;p&gt;Some popups, you need to show an icon to make it be colorful. Others don’t need title and cancel button. We will dynamicall init what we want.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+    init(icon: UIImage? = nil, title: String? = nil, content: String, okTitle: String? = nil, cancelTitle: String? = nil) {
+        super.init(frame: .zero)
+        set(icon: icon, title: title, content: content, okTitle: okTitle, cancelTitle: cancelTitle)
+    }
+    
+    private func set(icon: UIImage? = nil, title: String? = nil, content: String, okTitle: String? = nil, cancelTitle: String? = nil) {
+        if icon == nil {
+            iconImgView.removeFromSuperview()
+        } else {
+            iconImgView.image = icon
+        }
+        
+        if title == nil {
+            titleLabel.removeFromSuperview()
+        } else {
+            titleLabel.text = title
+        }
+        
+        contentLabel.text = content
+        if okTitle != nil {
+            okButton.setTitle(okTitle, for: .normal)
+        }
+        
+        if cancelTitle == nil {
+            cancelButton.removeFromSuperview()
+        } else {
+            cancelButton.setTitle(cancelTitle, for: .normal)
+        }
+    }
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Just pass &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt; or remove that param from the &lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; function. What param is nil, the related control will be removed from UI.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-the-app&quot;&gt;Run the app&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-3.png?alt=media&amp;amp;token=30d703b0-8215-4604-b400-785e96fcce92&quot; width=&quot;40%&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-4.png?alt=media&amp;amp;token=6a08ca01-b74f-4356-995d-9c535bb0450b&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;live-sample&quot;&gt;Live sample&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-2.png?alt=media&amp;amp;token=8ef6dbcf-cc14-407e-afee-d71a9cd68240&quot; width=&quot;40%&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-5.jpeg?alt=media&amp;amp;token=7efaec5f-406c-4c08-a74c-b2380ef55aaf&quot; width=&quot;40%&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-6.jpeg?alt=media&amp;amp;token=d7741048-4ffb-4912-a2fd-59273828bb6e&quot; width=&quot;40%&quot; /&gt;
+&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-1.PNG?alt=media&amp;amp;token=82348803-b152-4106-b781-7deb9abcb5d2&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;Hope this popup can help you save your time and efforts to display a popup. Customize what you want and share it to me via this &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">In previous post, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.</summary></entry><entry><title type="html">UI Implementation - Popup</title><link href="http://localhost:4001/2018/10/10/UI-popup.html" rel="alternate" type="text/html" title="UI Implementation - Popup" /><published>2018-10-10T00:00:00+07:00</published><updated>2018-10-10T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/10/UI-popup</id><content type="html" xml:base="http://localhost:4001/2018/10/10/UI-popup.html">&lt;p&gt;Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.&lt;/p&gt;
 
 &lt;p&gt;Today, I will implement a popup, inspired by the design of &lt;a href=&quot;https://dribbble.com/shots/2391749-Referral-Window&quot;&gt;Joseph Liu&lt;/a&gt;. Change something to make it simpler for the first post. :D&lt;/p&gt;
 
@@ -2393,165 +2536,4 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s it. Next part is coming.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry><entry><title type="html">OTP Code View</title><link href="http://localhost:4001/2018/04/17/otp-code-view.html" rel="alternate" type="text/html" title="OTP Code View" /><published>2018-04-17T00:00:00+07:00</published><updated>2018-04-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/17/otp-code-view</id><content type="html" xml:base="http://localhost:4001/2018/04/17/otp-code-view.html">&lt;p&gt;Two years ago, I did a view for this purpose. Detail is on my github: &lt;a href=&quot;https://github.com/nguyentruongky/ActiveCode&quot;&gt;https://github.com/nguyentruongky/ActiveCode&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/nguyentruongky/ActiveCode/master/E7AVZubaOT.gif&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It’s 100% code, without auto layout. Today, I make another view, with same purpose, but use auto layout, better UI and much easier to maintain.&lt;/p&gt;
-
-&lt;p&gt;UI will be like this.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_design.png?alt=media&amp;amp;token=2355a603-7056-45c1-94fa-dfb18e6e0318&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;initilize-view&quot;&gt;Initilize view&lt;/h3&gt;
-
-&lt;p&gt;Init view with number of digits you need and an action to validate your OTP from your controller. The number of digits should be less than 6 for good UI.&lt;/p&gt;
-
-&lt;p&gt;Anyone can customize UI themselves for more digits. Digit indicator is • or _ can save more space.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    private var digitCount = 0
-    private var validate: ((String) -&amp;gt; Void)?
-    convenience init(digitCount: Int, validate: @escaping ((String) -&amp;gt; Void)) {
-        self.init(frame: CGRect.zero)
-        self.digitCount = digitCount
-        self.validate = validate
-        setupView()
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;setup-the-ui&quot;&gt;Setup the UI&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    override func setupView() {
-        // (1)
-        guard digitCount &amp;gt; 0 else { return }
-
-        // (2)
-        var constraints = &quot;H:|-8-&quot;
-        for i in 0 ..&amp;lt; digitCount {
-            let label = makeLabel()
-            if i &amp;gt; 0 {
-                label.width(toView: labels[0])
-            }
-            constraints += &quot;[v\(i)]-8-&quot;
-        }
-        constraints += &quot;|&quot;
-        addConstraints(withFormat: constraints, arrayOf: labels)
-        height(60)
-        
-        // (3)
-        setCode(at: 0, active: true)
-        hiddenTextField.becomeFirstResponder()
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(becomeFirstResponder)))
-    }
-
-    private func makeLabel() -&amp;gt; UILabel {
-        let label = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 45),
-                                    color: color_69_125_245,
-                                    alignment: .center)
-        // (4)
-        label.createRoundCorner(5)
-        label.createBorder(0.5, color: color_102)
-
-        // (5)
-        addSubview(label)
-        label.vertical(toView: self)
-        labels.append(label)
-        return label
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(1): Prevent code running while no digit. Only support init view by code with &lt;code class=&quot;highlighter-rouge&quot;&gt;init(digitCount:validate)&lt;/code&gt;, so should prevent other init way to make wrong behaviour.&lt;/p&gt;
-
-&lt;p&gt;(2): Set Auto layout code. Create a Visual Format Language string (like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;H:|-8-[v0]-[v1]-8-|&quot;&lt;/code&gt;). Detail is &lt;a href=&quot;https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To make sure all digit indicators have same width, I set widthConstraint equal to the first indicator.&lt;/p&gt;
-
-&lt;p&gt;(3): Minor stuffs, make first indicator active, set focus to the hiddenTextField to show keyboard.&lt;/p&gt;
-
-&lt;p&gt;(4): This is how the indicator look. Want to change UI, just do it here. Please keep the (5) stay here. it is for auto layout setting.&lt;/p&gt;
-
-&lt;h3 id=&quot;set-hidden-uitextfield&quot;&gt;Set hidden UITextField&lt;/h3&gt;
-&lt;p&gt;Just add a UITextField, which is overlapped to use its keyboard and delegate. Every key input, I will update the digit indicator by catch the character in UITextFieldDelegate&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    lazy var hiddenTextField = self.addHiddenTextField()
-    private func addHiddenTextField() -&amp;gt; UITextField {
-        let tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        tf.keyboardType = .numberPad
-        tf.isHidden = true
-        tf.delegate = self
-        
-        addSubviews(views: tf)
-        tf.fill(toView: self)
-        
-        return tf
-    }
-    override func becomeFirstResponder() -&amp;gt; Bool {
-        hiddenTextField.becomeFirstResponder()
-        return true
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Conform &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt; and update method &lt;code class=&quot;highlighter-rouge&quot;&gt;textfield(shouldChangeCharactersIn:replacementString)&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -&amp;gt; Bool {
-        var newText = string
-        // (1)
-        if isInvalid {
-            isInvalid = false
-        }
-        else {
-            newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-        }
-
-        // (2)
-        let codeLength = newText.length
-        guard codeLength &amp;lt;= digitCount else { return false }
-        textField.text = newText
-        
-        // (3)
-        func setTextToActiveBox() {
-            for i in 0 ..&amp;lt; codeLength {
-                let char = textField.text!.substring(from: i, to: i)
-                labels[i].text = char
-                setCode(at: i, active: true)
-            }
-        }
-        
-        // (4)
-        func setTextToInactiveBox() {
-            for i in codeLength ..&amp;lt; digitCount {
-                labels[i].text = &quot;&quot;
-                setCode(at: i, active: false)
-            }
-            
-            if codeLength &amp;lt;= digitCount - 1 {
-                setCode(at: codeLength, active: true)
-            }
-        }
-        
-        setTextToActiveBox()
-        setTextToInactiveBox()
-        
-        if codeLength == digitCount {
-            validateCode(code: textField.text!)
-        }
-        return false
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): Reset all boxes when the code is invalid and type new character.&lt;/p&gt;
-
-&lt;p&gt;(2)(3)(4): Update every character from &lt;code class=&quot;highlighter-rouge&quot;&gt;hiddenTextField&lt;/code&gt; to every indicator box. Rest of boxes will be set to empty.&lt;/p&gt;
-
-&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
-&lt;p&gt;The main part is ready. Minors methods, properties are in the lib in github. Link is &lt;a href=&quot;https://github.com/nguyentruongky/knOtpView&quot;&gt;https://github.com/nguyentruongky/knOtpView&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fotp%2Fotp_final.gif?alt=media&amp;amp;token=a60f523c-40ac-429d-9546-804344e27d1f&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Two years ago, I did a view for this purpose. Detail is on my github: https://github.com/nguyentruongky/ActiveCode.</summary></entry></feed>
+&lt;p&gt;That’s it. Next part is coming.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry></feed>

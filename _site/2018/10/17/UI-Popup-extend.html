@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    UI Implementation - Confirmation popup - &lt; Code for life /&gt;
+    
+  </title>
+
+  <meta name="description" content="In previous post, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my proj...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4001/2018/10/17/UI-Popup-extend.html">
+  <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118652981-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-118652981-1');
+  </script>
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/"></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/til">Today I learn</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<!-- <header class="masthead" style="background-image: url('/https:/cdn.dribbble.com/users/71189/screenshots/2391749/_resized.jpg')"> -->
+<header class="masthead" style="background-image: url('https://cdn.dribbble.com/users/71189/screenshots/2391749/_resized.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>UI Implementation - Confirmation popup</h1>
+          
+          <h2 class="subheading" style="line-height:1.4">Make a confirmation popup and customize what you want</h2>
+          
+          <span class="meta">Posted by
+            <a href="/about">Ky Nguyen</a>
+            on October 17, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>In <a href="/2018/10/10/UI-popup.html">previous post</a>, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.</p>
+
+<h2 id="confirmation-popup">Confirmation popup</h2>
+
+<p>An information popup is used to alert user about some important information, like this</p>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-1.PNG?alt=media&amp;token=82348803-b152-4106-b781-7deb9abcb5d2" width="40%" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-09-popup-1.png?alt=media&amp;token=17e3fb44-5ff7-4d2d-89c0-af4c06062ee2" width="40%" /></p>
+
+<p>A confirmation alert is very useful to warn user about next action, for instance, confirm to remove a photo, confirm a withdrawal request… In this post, I will extend the <code class="highlighter-rouge">knPopup</code> to <code class="highlighter-rouge">knConfirmation</code> to display a confirmation popup.</p>
+
+<p>The idea is same to the <a href="/2018/10/10/UI-popup.html">previous post</a>, you can customize any UI you want in <code class="highlighter-rouge">setupView</code>.</p>
+
+<h3 id="define-new-controls">Define new controls</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    class knConfirmation: knPopup {
+        private let iconImgView = UIMaker.makeImageView()
+        let titleLabel = UIMaker.makeLabel(font: UIFont.boldSystemFont(ofSize: 18),
+                                        color: UIColor.darkGray, numberOfLines: 2,
+                                        alignment: .center)
+        let contentLabel = UIMaker.makeLabel(font: UIFont.systemFont(ofSize: 15),
+                                        color: UIColor.lightGray, numberOfLines: 0,
+                                        alignment: .center)
+        private let stack = UIMaker.makeStackView()
+        private let cancelButton = UIMaker.makeButton(titleColor: .darkGray,
+                                            font: UIFont.systemFont(ofSize: 15),
+                                            cornerRadius: 27,
+                                            borderWidth: 1,
+                                            borderColor: .darkGray)
+        private let buttonStack = UIMaker.makeStackView(axis: .horizontal, distributon: UIStackView.Distribution.fill, alignment: UIStackView.Alignment.fill, space: 16)
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            setupView()
+        }
+    }
+
+</code></pre></div></div>
+
+<p>A confirmation popup needs:</p>
+
+<ul>
+  <li>1 icon (optional)</li>
+  <li>2 labels: title (optional), content</li>
+  <li>2 buttons: 1 for accept action, 1 for reject action (optional). We have <code class="highlighter-rouge">okButton</code> in <code class="highlighter-rouge">knPopup</code>, just need one more for reject action</li>
+  <li>2 stack views: 1 to contain 2 buttons, 1 to contain all controls</li>
+</ul>
+
+<h3 id="layout-the-view">Layout the view</h3>
+
+<p>Same to <a href="/2018/10/10/UI-popup.html">previous post</a>, we will setup auto layout for all controls by code in <code class="highlighter-rouge">setupView</code> function</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    override func setupView() {
+        // (1)
+        buttonStack.addViews(cancelButton, okButton)
+        cancelButton.size(toView: okButton)
+        okButton.vertical(toView: buttonStack)
+        cancelButton.centerY(toView: okButton)
+        
+        // (2)
+        let spaceView = UIMaker.makeView()
+        spaceView.height(12)
+
+        stack.addViews(iconImgView, titleLabel, contentLabel, spaceView, buttonStack)
+        iconImgView.square(edge: 56)
+        iconImgView.centerX(toView: stack)
+        titleLabel.horizontal(toView: stack, space: 16)
+        contentLabel.horizontal(toView: stack, space: 16)
+        buttonStack.horizontal(toView: stack, space: 16)
+        
+        // (3)
+        container.addSubview(stack)
+        stack.fill(toView: container, space: UIEdgeInsets(top: 16, bottom: 16))
+        
+        okButton.addTarget(self, action: #selector(didSelectOK), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+    }
+
+</code></pre></div></div>
+
+<p>(1): <code class="highlighter-rouge">buttonStack</code> is a <code class="highlighter-rouge">UIStackView</code>, so we can’t <code class="highlighter-rouge">addSubviews</code> as usual, but have to <code class="highlighter-rouge">addArrangedSubview</code>. I extend to new function <code class="highlighter-rouge">addViews</code> to shorten the name. :) 
+<code class="highlighter-rouge">buttonStack</code> contains the button, so when you don’t need cancel button, you can remove it from <code class="highlighter-rouge">buttonStack</code>, and <code class="highlighter-rouge">okButton</code> automatically fill the <code class="highlighter-rouge">superView</code>.</p>
+
+<p>That’s why I choose UIStackView for this UI.</p>
+
+<p>(2): In stackView, you can’t change specific space between 2 views, so I did this trick. Insert a space view with a height I want.</p>
+
+<p>(3): We need to add <code class="highlighter-rouge">stack</code> to <code class="highlighter-rouge">container</code>. The <code class="highlighter-rouge">container</code> is setup to animate when appear/disappear. So we don’t need to care about animation anymore.</p>
+
+<h3 id="dynamically-display-what-you-want">Dynamically display what you want</h3>
+
+<p>Some popups, you need to show an icon to make it be colorful. Others don’t need title and cancel button. We will dynamicall init what we want.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+    init(icon: UIImage? = nil, title: String? = nil, content: String, okTitle: String? = nil, cancelTitle: String? = nil) {
+        super.init(frame: .zero)
+        set(icon: icon, title: title, content: content, okTitle: okTitle, cancelTitle: cancelTitle)
+    }
+    
+    private func set(icon: UIImage? = nil, title: String? = nil, content: String, okTitle: String? = nil, cancelTitle: String? = nil) {
+        if icon == nil {
+            iconImgView.removeFromSuperview()
+        } else {
+            iconImgView.image = icon
+        }
+        
+        if title == nil {
+            titleLabel.removeFromSuperview()
+        } else {
+            titleLabel.text = title
+        }
+        
+        contentLabel.text = content
+        if okTitle != nil {
+            okButton.setTitle(okTitle, for: .normal)
+        }
+        
+        if cancelTitle == nil {
+            cancelButton.removeFromSuperview()
+        } else {
+            cancelButton.setTitle(cancelTitle, for: .normal)
+        }
+    }
+    
+</code></pre></div></div>
+
+<p>Just pass <code class="highlighter-rouge">nil</code> or remove that param from the <code class="highlighter-rouge">init</code> function. What param is nil, the related control will be removed from UI.</p>
+
+<h3 id="run-the-app">Run the app</h3>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-3.png?alt=media&amp;token=30d703b0-8215-4604-b400-785e96fcce92" width="40%" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-4.png?alt=media&amp;token=6a08ca01-b74f-4356-995d-9c535bb0450b" width="40%" /></p>
+
+<h2 id="live-sample">Live sample</h2>
+
+<p><img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-2.png?alt=media&amp;token=8ef6dbcf-cc14-407e-afee-d71a9cd68240" width="40%" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-5.jpeg?alt=media&amp;token=7efaec5f-406c-4c08-a74c-b2380ef55aaf" width="40%" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-6.jpeg?alt=media&amp;token=d7741048-4ffb-4912-a2fd-59273828bb6e" width="40%" />
+<img src="https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-1.PNG?alt=media&amp;token=82348803-b152-4106-b781-7deb9abcb5d2" width="40%" /></p>
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Hope this popup can help you save your time and efforts to display a popup. Customize what you want and share it to me via this <a href="https://github.com/nguyentruongky/knPopup">repository</a>.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2018/10/10/UI-popup.html" data-toggle="tooltip" data-placement="top" title="UI Implementation - Popup">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+
+        <!-- Twitter -->
+          
+
+          <!-- Skype -->
+          
+          <li class="list-inline-item">
+            <a href="skype:nguyentruongky3390?chat">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-skype fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Mail -->
+          
+          <li class="list-inline-item">
+            <a href="mailto:nguyentruongky33@gmail.com?subject=Hello">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Facebook -->
+          
+
+          <!-- Github -->
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/nguyentruongky">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          <!-- Linkedin -->
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/nguyentruongky3390">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Ky Nguyen 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
