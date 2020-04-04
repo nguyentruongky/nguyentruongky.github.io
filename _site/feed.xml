@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4001/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4001/" rel="alternate" type="text/html" /><updated>2019-01-02T03:55:53+07:00</updated><id>http://localhost:4001/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">UI Implementation - Confirmation popup</title><link href="http://localhost:4001/2018/10/17/UI-Popup-extend.html" rel="alternate" type="text/html" title="UI Implementation - Confirmation popup" /><published>2018-10-17T00:00:00+07:00</published><updated>2018-10-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/17/UI-Popup-extend</id><content type="html" xml:base="http://localhost:4001/2018/10/17/UI-Popup-extend.html">&lt;p&gt;In &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-05T01:40:30+07:00</updated><id>http://localhost:4000/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Speed up compile time with script dependency</title><link href="http://localhost:4000/2020/04/02/graphql-script.html" rel="alternate" type="text/html" title="Speed up compile time with script dependency" /><published>2020-04-02T00:00:00+07:00</published><updated>2020-04-02T00:00:00+07:00</updated><id>http://localhost:4000/2020/04/02/graphql-script</id><content type="html" xml:base="http://localhost:4000/2020/04/02/graphql-script.html">&lt;p&gt;Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.&lt;/p&gt;
+
+&lt;h1 id=&quot;online-instructions&quot;&gt;Online Instructions&lt;/h1&gt;
+&lt;p&gt;I followed some instructions to speed it up. You can find it with ease.&lt;/p&gt;
+
+&lt;h1 id=&quot;reduce-not-important-scripts&quot;&gt;Reduce not important scripts&lt;/h1&gt;
+&lt;p&gt;Open your &lt;code class=&quot;highlighter-rouge&quot;&gt;Build Phrase&lt;/code&gt; and check your scripts. I had 4 running scripts, generating GraphQL API, 2 Pods related scripts, Sentry scripts (upload .dSYM).&lt;/p&gt;
+
+&lt;p&gt;I notice generating GraphQL API and Sentry scripts here. Why do you need it run everytime we compile?&lt;/p&gt;
+
+&lt;h3 id=&quot;get-rid-of-graphql-script&quot;&gt;Get rid of GraphQL script&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;How often do we change GraphQL schemas?&lt;/strong&gt;
+Only when implement new features.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is where I started. 
+Remove GraphQL script and add it into a bash script file. Run script when you need to recompile schema. Here is my script:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# (1)
+apollo schema:download --endpoint=server_endpoint path_to_schema_file/schema.json
+# (2)
+SCHEMA_PATH=$PWD&quot;/project_name&quot;
+# (3)
+$PWD/Pods/Apollo/scripts/run-bundled-codegen.sh codegen:generate --target=swift --includes='./**/*.graphql' --localSchemaFile=&quot;$SCHEMA_PATH/Services/GraphQL/schema.json&quot; $SCHEMA_PATH/Services/GraphQL/API.swift
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;(1): Download latest schema from your server. &lt;code class=&quot;highlighter-rouge&quot;&gt;server_endpoint&lt;/code&gt; is your server path. Usually it’s like this &lt;code class=&quot;highlighter-rouge&quot;&gt;https://api.company_name.com/graphql&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;(2): $PWD: get your current directory and point it to your project&lt;/p&gt;
+
+&lt;p&gt;(3): Now generate file. Please make sure you change &lt;code class=&quot;highlighter-rouge&quot;&gt;$SCHEMA_PATH/Services/GraphQL/schema.json&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;$SCHEMA_PATH/Services/GraphQL/API.swift&lt;/code&gt; to yours.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;
+You have to run &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod u+r+x downloadSchema.sh&lt;/code&gt; at the first time run the bash file.
+Then run, &lt;code class=&quot;highlighter-rouge&quot;&gt;./downloadSchema.sh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Later, just run download script. 
+That’s it. I save minutes with this.&lt;/p&gt;
+
+&lt;h3 id=&quot;remove-uploading-script&quot;&gt;Remove uploading script&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;How often do we need to upload .dSYM?&lt;/strong&gt;
+Only when release new version&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Ask yourself, do you really want to do this? Some extra work is needed when release to upload .dSYM to Sentry (crashed report service I used). But for me, it’s worth to do.&lt;/p&gt;
+
+&lt;p&gt;Some extra work:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Release&lt;/li&gt;
+  &lt;li&gt;Download dSYM from AppstoreConnect when finish processing&lt;/li&gt;
+  &lt;li&gt;Upload manually&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If it doesn’t matter with you, please try this script. 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sentry-cli upload-dif --org company_name --project project_name --log-level=debug appDsyms.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I added it into my &lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt;as an alias, so after download, just run alias and done.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;This is my experience, maybe it doesn’t work in your project. Please feel free to discuss &lt;a href=&quot;https://github.com/nguyentruongky/nguyentruongky.github.io/issues/2&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Enjoy coding.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.</summary></entry><entry><title type="html">UI Implementation - Confirmation popup</title><link href="http://localhost:4000/2018/10/17/UI-Popup-extend.html" rel="alternate" type="text/html" title="UI Implementation - Confirmation popup" /><published>2018-10-17T00:00:00+07:00</published><updated>2018-10-17T00:00:00+07:00</updated><id>http://localhost:4000/2018/10/17/UI-Popup-extend</id><content type="html" xml:base="http://localhost:4000/2018/10/17/UI-Popup-extend.html">&lt;p&gt;In &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.&lt;/p&gt;
 
 &lt;h2 id=&quot;confirmation-popup&quot;&gt;Confirmation popup&lt;/h2&gt;
 
@@ -141,7 +205,7 @@
 &lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2F2018-10%2F2018-10-17-popup-1.PNG?alt=media&amp;amp;token=82348803-b152-4106-b781-7deb9abcb5d2&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;Hope this popup can help you save your time and efforts to display a popup. Customize what you want and share it to me via this &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">In previous post, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.</summary></entry><entry><title type="html">UI Implementation - Popup</title><link href="http://localhost:4001/2018/10/10/UI-popup.html" rel="alternate" type="text/html" title="UI Implementation - Popup" /><published>2018-10-10T00:00:00+07:00</published><updated>2018-10-10T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/10/UI-popup</id><content type="html" xml:base="http://localhost:4001/2018/10/10/UI-popup.html">&lt;p&gt;Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.&lt;/p&gt;
+&lt;p&gt;Hope this popup can help you save your time and efforts to display a popup. Customize what you want and share it to me via this &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;repository&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">In previous post, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.</summary></entry><entry><title type="html">UI Implementation - Popup</title><link href="http://localhost:4000/2018/10/10/UI-popup.html" rel="alternate" type="text/html" title="UI Implementation - Popup" /><published>2018-10-10T00:00:00+07:00</published><updated>2018-10-10T00:00:00+07:00</updated><id>http://localhost:4000/2018/10/10/UI-popup</id><content type="html" xml:base="http://localhost:4000/2018/10/10/UI-popup.html">&lt;p&gt;Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.&lt;/p&gt;
 
 &lt;p&gt;Today, I will implement a popup, inspired by the design of &lt;a href=&quot;https://dribbble.com/shots/2391749-Referral-Window&quot;&gt;Joseph Liu&lt;/a&gt;. Change something to make it simpler for the first post. :D&lt;/p&gt;
 
@@ -390,7 +454,7 @@
 
 &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;ReferralPopup&lt;/code&gt; is inherited from &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt;. You can add new popup easily just set inherit from &lt;code class=&quot;highlighter-rouge&quot;&gt;Popup&lt;/code&gt; and layout your new view in its &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Full code can pull from &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;my Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.</summary></entry><entry><title type="html">Series UI Implementation</title><link href="http://localhost:4001/2018/10/05/UI-implementation-series.html" rel="alternate" type="text/html" title="Series UI Implementation" /><published>2018-10-05T00:00:00+07:00</published><updated>2018-10-05T00:00:00+07:00</updated><id>http://localhost:4001/2018/10/05/UI-implementation-series</id><content type="html" xml:base="http://localhost:4001/2018/10/05/UI-implementation-series.html">&lt;p&gt;Hey, I am back with a series: &lt;strong&gt;UI Implementation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Full code can pull from &lt;a href=&quot;https://github.com/nguyentruongky/knPopup&quot;&gt;my Github&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Popup is not the best choice to notify users. It takes the users’ attention, and need action to remove popup. But sometimes, popup is a good selection. It displays on the same view, not change eyesight.</summary></entry><entry><title type="html">Series UI Implementation</title><link href="http://localhost:4000/2018/10/05/UI-implementation-series.html" rel="alternate" type="text/html" title="Series UI Implementation" /><published>2018-10-05T00:00:00+07:00</published><updated>2018-10-05T00:00:00+07:00</updated><id>http://localhost:4000/2018/10/05/UI-implementation-series</id><content type="html" xml:base="http://localhost:4000/2018/10/05/UI-implementation-series.html">&lt;p&gt;Hey, I am back with a series: &lt;strong&gt;UI Implementation&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;I didn’t write any blogs for long time because of my startup. It is launched and dead in silence. But learnt lot of new things for my career path.&lt;/p&gt;
 
@@ -406,7 +470,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;Cover photo: Awesome design by &lt;a href=&quot;https://dribbble.com/shots/4222725-iOS-App-Concept&quot;&gt;Surja Sen Das Raj &lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Hey, I am back with a series: UI Implementation.</summary></entry><entry><title type="html">Tasks iOs - Create task</title><link href="http://localhost:4001/2018/05/17/tasks-create-task.html" rel="alternate" type="text/html" title="Tasks iOs - Create task" /><published>2018-05-17T00:00:00+07:00</published><updated>2018-05-17T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/17/tasks-create-task</id><content type="html" xml:base="http://localhost:4001/2018/05/17/tasks-create-task.html">&lt;p&gt;Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to&lt;/p&gt;
+&lt;p&gt;Cover photo: Awesome design by &lt;a href=&quot;https://dribbble.com/shots/4222725-iOS-App-Concept&quot;&gt;Surja Sen Das Raj &lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Hey, I am back with a series: UI Implementation.</summary></entry><entry><title type="html">Tasks iOs - Create task</title><link href="http://localhost:4000/2018/05/17/tasks-create-task.html" rel="alternate" type="text/html" title="Tasks iOs - Create task" /><published>2018-05-17T00:00:00+07:00</published><updated>2018-05-17T00:00:00+07:00</updated><id>http://localhost:4000/2018/05/17/tasks-create-task</id><content type="html" xml:base="http://localhost:4000/2018/05/17/tasks-create-task.html">&lt;p&gt;Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Display a list of task&lt;/li&gt;
@@ -817,7 +881,7 @@
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;That’s enough for today. Keep reading, I’ll come back soon.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to</summary></entry><entry><title type="html">Tasks iOs - Homescreen</title><link href="http://localhost:4001/2018/05/16/tasks-home.html" rel="alternate" type="text/html" title="Tasks iOs - Homescreen" /><published>2018-05-16T00:00:00+07:00</published><updated>2018-05-16T00:00:00+07:00</updated><id>http://localhost:4001/2018/05/16/tasks-home</id><content type="html" xml:base="http://localhost:4001/2018/05/16/tasks-home.html">&lt;p&gt;Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.&lt;/p&gt;
+&lt;p&gt;That’s enough for today. Keep reading, I’ll come back soon.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Keep moving in Google Tasks series today with Create Task. In this note, I will show you how to</summary></entry><entry><title type="html">Tasks iOs - Homescreen</title><link href="http://localhost:4000/2018/05/16/tasks-home.html" rel="alternate" type="text/html" title="Tasks iOs - Homescreen" /><published>2018-05-16T00:00:00+07:00</published><updated>2018-05-16T00:00:00+07:00</updated><id>http://localhost:4000/2018/05/16/tasks-home</id><content type="html" xml:base="http://localhost:4000/2018/05/16/tasks-home.html">&lt;p&gt;Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.&lt;/p&gt;
 
 &lt;p&gt;I admire this app and want to make a good app like this. In this series, I will try to copy Google Tasks in iOS. Hope you keep reading.&lt;/p&gt;
 
@@ -1147,7 +1211,7 @@
 
 &lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
 
-&lt;p&gt;We’ve done the first part. You can download the source &lt;a href=&quot;https://drive.google.com/open?id=1jX8toVMnIAHmmvM_HwCXjvgur6x4dquF&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4001/2018/04/30/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-30T00:00:00+07:00</published><updated>2018-04-30T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/30/transition-to-detail</id><content type="html" xml:base="http://localhost:4001/2018/04/30/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;We’ve done the first part. You can download the source &lt;a href=&quot;https://drive.google.com/open?id=1jX8toVMnIAHmmvM_HwCXjvgur6x4dquF&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Do you want to find a todo list? Google Tasks is a good choice for you. Very easy to use, very cool to keep using.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Transition to view photo fullscreen</title><link href="http://localhost:4000/2018/04/30/transition-to-detail.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Transition to view photo fullscreen" /><published>2018-04-30T00:00:00+07:00</published><updated>2018-04-30T00:00:00+07:00</updated><id>http://localhost:4000/2018/04/30/transition-to-detail</id><content type="html" xml:base="http://localhost:4000/2018/04/30/transition-to-detail.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -1391,7 +1455,7 @@
 
 &lt;p&gt;I do not cover all the app. This is the end of this series. Learn a lot from Unsplash app. Unsplash team is very precise. App is simple but very cool. Love what the team doing. Thanks Unplash team.&lt;/p&gt;
 
-&lt;p&gt;You can find final source at &lt;a href=&quot;https://github.com/nguyentruongky/Unsplash&quot;&gt;my Github Unsplash&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4001/2018/04/28/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-28T00:00:00+07:00</published><updated>2018-04-28T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/28/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/28/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;You can find final source at &lt;a href=&quot;https://github.com/nguyentruongky/Unsplash&quot;&gt;my Github Unsplash&lt;/a&gt;&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Drag and Drop in UITableView</title><link href="http://localhost:4000/2018/04/28/drap-drop-tableview-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Drag and Drop in UITableView" /><published>2018-04-28T00:00:00+07:00</published><updated>2018-04-28T00:00:00+07:00</updated><id>http://localhost:4000/2018/04/28/drap-drop-tableview-animation</id><content type="html" xml:base="http://localhost:4000/2018/04/28/drap-drop-tableview-animation.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 3 in the series.&lt;/p&gt;
 
@@ -1721,7 +1785,7 @@
 
 &lt;p&gt;There are many things we can improve in this code. I will do that at the end of the project. You can do it yourself and drop me text in github or skype. We can discuss more about this. Love to hear from you.&lt;/p&gt;
 
-&lt;p&gt;PS: After this note, I found the Unsplash app only support for iOs 11, so maybe the team is using Drag and Drop in iOs 11 only. You can try it yourself.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4001/2018/04/26/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-26T00:00:00+07:00</published><updated>2018-04-26T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/26/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4001/2018/04/26/unsplash-home-animation.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;PS: After this note, I found the Unsplash app only support for iOs 11, so maybe the team is using Drag and Drop in iOs 11 only. You can try it yourself.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Animation</title><link href="http://localhost:4000/2018/04/26/unsplash-home-animation.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Animation" /><published>2018-04-26T00:00:00+07:00</published><updated>2018-04-26T00:00:00+07:00</updated><id>http://localhost:4000/2018/04/26/unsplash-home-animation</id><content type="html" xml:base="http://localhost:4000/2018/04/26/unsplash-home-animation.html">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.&lt;/p&gt;
 
 &lt;p&gt;Unsplash does a great job here. A cool animation when scrolling makes app more interesting.&lt;/p&gt;
@@ -1996,7 +2060,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4001/2018/04/23/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-23T00:00:00+07:00</published><updated>2018-04-23T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/23/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4001/2018/04/23/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
+&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4000/2018/04/23/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-23T00:00:00+07:00</published><updated>2018-04-23T00:00:00+07:00</updated><id>http://localhost:4000/2018/04/23/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4000/2018/04/23/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
 
 &lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.&lt;/p&gt;
 
@@ -2331,209 +2395,4 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - List</title><link href="http://localhost:4001/2018/04/20/unsplash-homescreen.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - List" /><published>2018-04-20T00:00:00+07:00</published><updated>2018-04-20T00:00:00+07:00</updated><id>http://localhost:4001/2018/04/20/unsplash-homescreen</id><content type="html" xml:base="http://localhost:4001/2018/04/20/unsplash-homescreen.html">&lt;p&gt;I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.&lt;/p&gt;
-
-&lt;p&gt;This note is about homescreen. I will make a basic homescreen with photos like Unsplash. Animation, category, load more photos are in other notes.&lt;/p&gt;
-
-&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 1&lt;/strong&gt;: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 2: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;preparation&quot;&gt;Preparation&lt;/h2&gt;
-&lt;p&gt;I use some code collection from my personal codebase. You can download it at &lt;a href=&quot;https://github.com/nguyentruongky/codebase&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Init an empty project and added my &lt;code class=&quot;highlighter-rouge&quot;&gt;mustHave&lt;/code&gt; folder&lt;/p&gt;
-
-&lt;h2 id=&quot;add-tableview-to-homecontroller&quot;&gt;Add TableView to HomeController&lt;/h2&gt;
-&lt;p&gt;Change something&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;File name: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController.swift&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.swift&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Class name: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Main Storyboard custome class: &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt; content is below.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    // (1)
-    class HomeController: knCustomTableController {
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            setupView()
-        }
-        override func setupView() {
-            view.addSubview(tableView)
-            tableView.fill(toView: view)
-        }
-        override func registerCells() {
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: &quot;UITableViewCell&quot;)
-        }
-    }
-
-    // (2)
-    extension HomeController {
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
-            return 5
-        }
-        
-        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: &quot;UITableViewCell&quot;, for: indexPath) as! UITableViewCell
-            cell.backgroundColor = UIColor.color(value: CGFloat(UInt32.random(lower: 0, upper: 255)))
-            return cell
-        }
-        
-        override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat {
-            return 35
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;knCustomTableController&lt;/code&gt; is my favourite controller in my codebase. It’s a view controller, contain &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableView&lt;/code&gt;, conform &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDataSource&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDelegate&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Why don’t I use &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewController&lt;/code&gt;? I have a note about this &lt;a href=&quot;https://kynguyen.space/2017/10/12/UITableViewController-vs-UIViewController.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;knCustomTableController&lt;/code&gt; is setup everything to be ready to display. You need override &lt;code class=&quot;highlighter-rouge&quot;&gt;registerCells&lt;/code&gt;, some needed methods for table datasource like (2).&lt;/p&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method contains something weird. It’s my constraints setting. I am a fan of Auto Layout Programmatically, so usually use my library, &lt;a href=&quot;https://github.com/nguyentruongky/knConstraints&quot;&gt;&lt;strong&gt;knConstraints&lt;/strong&gt;&lt;/a&gt; for setting constraints.&lt;/p&gt;
-
-&lt;p&gt;Run and see a tableView with 5 rows, different colors.&lt;/p&gt;
-
-&lt;h2 id=&quot;add-model-and-fake-data&quot;&gt;Add Model and fake data&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoModel.swift&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Add some code&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class Photo {
-        var author: String
-        var url: String
-        var ratio: CGFloat = 1
-        var displayHeight: CGFloat {
-            return CGFloat(floor(Double(ratio * screenWidth)))
-        }
-        
-        init(author: String, url: String, ratio: CGFloat) {
-            self.author = author
-            self.url = url
-            self.ratio = ratio
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Update code in file &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController.swift&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var datasource = [Photo]()
-
-    override func registerCells() {
-        tableView.register(PhotoCell.self, forCellReuseIdentifier: &quot;PhotoCell&quot;)
-    }
-
-    override func fetchData() {
-        for _ in 0 ..&amp;lt; 5 {
-            datasource.append(Photo(author: &quot;Kyle&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, ratio: 0.667954600338083))
-            datasource.append(Photo(author: &quot;Mark&quot;, url: &quot;https://unsplash.com/photos/Y6N_w94x8ik/download&quot;, ratio: 1.5))
-        }
-        tableView.reloadData()
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
-        return datasource.count }
-        
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;PhotoCell&quot;, for: indexPath) as! PhotoCell
-        cell.data = datasource[indexPath.row]
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -&amp;gt; CGFloat { 
-        return UITableViewAutomaticDimension }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData()&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Can’t run because of missing PhotoCell. Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell.swift&lt;/code&gt;. Add content below to &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoCell.swift&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    import UIKit
-    class PhotoCell: knTableCell {
-        var heightConstraint: NSLayoutConstraint?
-        var data: Photo? {
-            didSet {
-                guard let data = data else { return }
-                authorLabel.text = data.author
-                photoImageView.downloadImage(from: data.url)
-                // (1)
-                heightConstraint?.constant = data.displayHeight
-            }
-        }
-
-        private let authorLabel = knUIMaker.makeLabel(color: .white)
-        private let photoImageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
-        
-        override func setupView() {
-            let line = knUIMaker.makeLine(color: .white, height: 1)
-            
-            addSubviews(views: photoImageView, authorLabel, line)
-            photoImageView.fill(toView: self)
-            
-            authorLabel.bottomLeft(toView: self, bottom: -8, left: 8)
-            
-            line.horizontal(toView: self)
-            line.bottom(toView: self)
-            
-            // (2)
-            heightConstraint = height(100, isActive: false)
-            heightConstraint?.priority = UILayoutPriority(999)
-            heightConstraint?.isActive = true
-        }
-    }
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I always setup Auto Layout in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method. So, want to change any layout, UI, just find &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;(1): Every photo has different ratio, and we need to keep the photoImageView the same ratio. So every photo, update the height constraint (calculated when ratio set).&lt;/p&gt;
-
-&lt;p&gt;(2): Need to descrease the priority to avoid conflict with &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView-Encapsulated-Layout-Height&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView-Encapsulated-Layout-Height&lt;/code&gt; is a constraints automatically added by iOs.&lt;/p&gt;
-
-&lt;h2 id=&quot;install-pod&quot;&gt;Install pod&lt;/h2&gt;
-
-&lt;p&gt;Still have error at &lt;code class=&quot;highlighter-rouge&quot;&gt;photoImageView.downloadImage(from: data.url)&lt;/code&gt;. You comment it before because missing &lt;code class=&quot;highlighter-rouge&quot;&gt;Kingfisher&lt;/code&gt; library. We need to install &lt;code class=&quot;highlighter-rouge&quot;&gt;Kingfisher&lt;/code&gt; to help us download image. It’s very cool lib. More detail about Kingfisher is &lt;a href=&quot;https://github.com/onevcat/Kingfisher&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Use Terminal to access to your project, and &lt;code class=&quot;highlighter-rouge&quot;&gt;pod init&lt;/code&gt; then follow &lt;a href=&quot;https://github.com/onevcat/Kingfisher/wiki/Installation-Guide&quot;&gt;this instruction&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Uncomment code in &lt;code class=&quot;highlighter-rouge&quot;&gt;knUIImage.swift&lt;/code&gt; and run again&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Funsplash_photo_list_1.gif?alt=media&amp;amp;token=5e2786f0-e428-4771-8aee-879d6c3f2404&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;That’s it. Next part is coming.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">I found an excellent app, Unsplash. It’s simple and good at UX. Some techniques are very interesting. I will implement a demo for this app. Just for practise my skills and hope this can help junior developers can enjoy new techniques.</summary></entry></feed>
+&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry></feed>

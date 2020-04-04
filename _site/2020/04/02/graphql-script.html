@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>
-    Series UI Implementation - &lt; Code for life /&gt;
+    Speed up compile time with script dependency - &lt; Code for life /&gt;
     
   </title>
 
-  <meta name="description" content="Hey, I am back with a series: UI Implementation.">
+  <meta name="description" content="Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really incon...">
 
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/2018/10/05/UI-implementation-series.html">
+  <link rel="canonical" href="http://localhost:4000/2020/04/02/graphql-script.html">
   <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -70,21 +70,21 @@
 
     <!-- Page Header -->
 
-<!-- <header class="masthead" style="background-image: url('/https:/cdn.dribbble.com/users/758684/screenshots/4222725/attachments/965392/preview.png')"> -->
-<header class="masthead" style="background-image: url('https://cdn.dribbble.com/users/758684/screenshots/4222725/attachments/965392/preview.png')">
+<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fbash-script.jpg?alt=media&token=04b47378-e3d5-4343-885d-7c46e9cb32a7')"> -->
+<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fbash-script.jpg?alt=media&token=04b47378-e3d5-4343-885d-7c46e9cb32a7')">
 
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-10 mx-auto">
         <div class="post-heading">
-          <h1>Series UI Implementation</h1>
+          <h1>Speed up compile time with script dependency</h1>
           
-          <h2 class="subheading" style="line-height:1.4">Make cool UI programmatically by Swift</h2>
+          <h2 class="subheading" style="line-height:1.4">Large projects have lots of scripts and take few minutes or even dozen of minutes to build.</h2>
           
           <span class="meta">Posted by
             <a href="/about">Ky Nguyen</a>
-            on October 05, 2018</span>
+            on April 02, 2020</span>
         </div>
       </div>
     </div>
@@ -95,23 +95,72 @@
   <div class="row">
     <div class="col-lg-10 col-md-10 mx-auto">
 
-      <p>Hey, I am back with a series: <strong>UI Implementation</strong>.</p>
+      <p>Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.</p>
 
-<p>I didn’t write any blogs for long time because of my startup. It is launched and dead in silence. But learnt lot of new things for my career path.</p>
+<h1 id="online-instructions">Online Instructions</h1>
+<p>I followed some instructions to speed it up. You can find it with ease.</p>
 
-<p>Any iOS apps need very good UI/UX to attract users. Users will remove bad UI/UX app immediately they try it on the first time or second times (very patient users). UI design is very beautiful with Sketch/Photoshop/Illustrator. But with Xcode, not exactly beautiful like this. We have some different screen sizes, with notch and without notch.</p>
+<h1 id="reduce-not-important-scripts">Reduce not important scripts</h1>
+<p>Open your <code class="highlighter-rouge">Build Phrase</code> and check your scripts. I had 4 running scripts, generating GraphQL API, 2 Pods related scripts, Sentry scripts (upload .dSYM).</p>
 
-<p>In this series, hopefully I can write good posts to show you how we can do the best UI for our apps. To do this, I abandoned Storyboard and use Swift programmatically. Use my code base to make development easier. Will share you on every projects.</p>
+<p>I notice generating GraphQL API and Sentry scripts here. Why do you need it run everytime we compile?</p>
 
-<p>I will right back with first post.</p>
+<h3 id="get-rid-of-graphql-script">Get rid of GraphQL script</h3>
 
+<blockquote>
+  <p><strong>How often do we change GraphQL schemas?</strong>
+Only when implement new features.</p>
+</blockquote>
+
+<p>This is where I started. 
+Remove GraphQL script and add it into a bash script file. Run script when you need to recompile schema. Here is my script:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># (1)
+apollo schema:download --endpoint=server_endpoint path_to_schema_file/schema.json
+# (2)
+SCHEMA_PATH=$PWD"/project_name"
+# (3)
+$PWD/Pods/Apollo/scripts/run-bundled-codegen.sh codegen:generate --target=swift --includes='./**/*.graphql' --localSchemaFile="$SCHEMA_PATH/Services/GraphQL/schema.json" $SCHEMA_PATH/Services/GraphQL/API.swift
+</code></pre></div></div>
+<p>(1): Download latest schema from your server. <code class="highlighter-rouge">server_endpoint</code> is your server path. Usually it’s like this <code class="highlighter-rouge">https://api.company_name.com/graphql</code></p>
+
+<p>(2): $PWD: get your current directory and point it to your project</p>
+
+<p>(3): Now generate file. Please make sure you change <code class="highlighter-rouge">$SCHEMA_PATH/Services/GraphQL/schema.json</code> and <code class="highlighter-rouge">$SCHEMA_PATH/Services/GraphQL/API.swift</code> to yours.</p>
+
+<p><strong>Notes:</strong>
+You have to run <code class="highlighter-rouge">chmod u+r+x downloadSchema.sh</code> at the first time run the bash file.
+Then run, <code class="highlighter-rouge">./downloadSchema.sh</code>.</p>
+
+<p>Later, just run download script. 
+That’s it. I save minutes with this.</p>
+
+<h3 id="remove-uploading-script">Remove uploading script</h3>
+<blockquote>
+  <p><strong>How often do we need to upload .dSYM?</strong>
+Only when release new version</p>
+</blockquote>
+
+<p>Ask yourself, do you really want to do this? Some extra work is needed when release to upload .dSYM to Sentry (crashed report service I used). But for me, it’s worth to do.</p>
+
+<p>Some extra work:</p>
 <ul>
-  <li><a href="/2018/10/05/UI-popup.html" target="_blank">Popup</a></li>
+  <li>Release</li>
+  <li>Download dSYM from AppstoreConnect when finish processing</li>
+  <li>Upload manually</li>
 </ul>
 
-<hr />
+<p>If it doesn’t matter with you, please try this script. 
+<code class="highlighter-rouge">sentry-cli upload-dif --org company_name --project project_name --log-level=debug appDsyms.zip</code></p>
 
-<p>Cover photo: Awesome design by <a href="https://dribbble.com/shots/4222725-iOS-App-Concept">Surja Sen Das Raj </a></p>
+<p>I added it into my <code class="highlighter-rouge">.zshrc</code>as an alias, so after download, just run alias and done.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>This is my experience, maybe it doesn’t work in your project. Please feel free to discuss <a href="https://github.com/nguyentruongky/nguyentruongky.github.io/issues/2">here</a>.</p>
+
+<blockquote>
+  <p>Enjoy coding.</p>
+</blockquote>
+
 
 
       <hr>
@@ -119,10 +168,8 @@
       <div class="clearfix">
 
         
-        <a class="btn btn-primary float-left" href="/2018/05/17/tasks-create-task.html" data-toggle="tooltip" data-placement="top" title="Tasks iOs - Create task">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        <a class="btn btn-primary float-left" href="/2018/10/17/UI-Popup-extend.html" data-toggle="tooltip" data-placement="top" title="UI Implementation - Confirmation popup">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
         
-        
-        <a class="btn btn-primary float-right" href="/2018/10/10/UI-popup.html" data-toggle="tooltip" data-placement="top" title="UI Implementation - Popup">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
         
 
       </div>
