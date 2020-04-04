@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>
-    Speed up compile time with script dependency - &lt; Code for life /&gt;
+    Should I use Segue to navigate controllers? - &lt; Code for life /&gt;
     
   </title>
 
-  <meta name="description" content="Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really incon...">
+  <meta name="description" content="Many tutorials, iOS books for beginners teach us use Segue. That’s good start. But is it good for you and your projects? From my experience, it’s totally not...">
 
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/2020/04/02/graphql-script.html">
+  <link rel="canonical" href="http://localhost:4000/2020/03/31/segue.html">
   <link rel="alternate" type="application/rss+xml" title="&lt; Code for life /&gt;" href="/feed.xml">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -70,21 +70,21 @@
 
     <!-- Page Header -->
 
-<!-- <header class="masthead" style="background-image: url('/https:/firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fbash-script.jpg?alt=media&token=04b47378-e3d5-4343-885d-7c46e9cb32a7')"> -->
-<header class="masthead" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Fbash-script.jpg?alt=media&token=04b47378-e3d5-4343-885d-7c46e9cb32a7')">
+<!-- <header class="masthead" style="background-image: url('/https:/i.stack.imgur.com/v2IKA.png')"> -->
+<header class="masthead" style="background-image: url('https://i.stack.imgur.com/v2IKA.png')">
 
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 col-md-10 mx-auto">
         <div class="post-heading">
-          <h1>Speed up compile time with script dependency</h1>
+          <h1>Should I use Segue to navigate controllers?</h1>
           
-          <h2 class="subheading" style="line-height:1.4">Large projects have lots of scripts and take few minutes or even dozen of minutes to build.</h2>
+          <h2 class="subheading" style="line-height:1.4">Is segue good for you and your projects?</h2>
           
           <span class="meta">Posted by
             <a href="/about">Ky Nguyen</a>
-            on April 02, 2020</span>
+            on March 31, 2020</span>
         </div>
       </div>
     </div>
@@ -95,71 +95,59 @@
   <div class="row">
     <div class="col-lg-10 col-md-10 mx-auto">
 
-      <p>Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.</p>
+      <p>Many tutorials, iOS books for beginners teach us use Segue. That’s good start. But is it good for you and your projects? From my experience, it’s totally not good. Here the reasons.</p>
+<h1 id="1-its-slow">1. It’s slow</h1>
+<p>Storyboard is slow, especially you add many controllers in a Storyboard, that’s a disaster. I wrote something about Storyboard <a href="https://www.codementor.io/@nguyentruongky/auto-layout-with-storyboard-and-programmatically-r1zuvtzbk">here</a>.</p>
+<h1 id="2-its-messy">2. It’s messy</h1>
+<p>When you have 4 or 5 controllers, yes, not too bad. When you have 10 controllers, and screen A can show screen B, C, D, screen B can show D and E, screen E can show A and C. It’s a big pain in the ass.</p>
 
-<h1 id="online-instructions">Online Instructions</h1>
-<p>I followed some instructions to speed it up. You can find it with ease.</p>
+<h1 id="3-you-cant-reuse-your-code">3. You can’t reuse your code</h1>
+<p>You have to open the storyboards, drag and drop segues many times. When you setup other segues, you have to set <code class="highlighter-rouge">modalPresentationStyle</code> again.</p>
 
-<h1 id="reduce-not-important-scripts">Reduce not important scripts</h1>
-<p>Open your <code class="highlighter-rouge">Build Phrase</code> and check your scripts. I had 4 running scripts, generating GraphQL API, 2 Pods related scripts, Sentry scripts (upload .dSYM).</p>
+<p>In other way, you can easily copy and paste the code.</p>
 
-<p>I notice generating GraphQL API and Sentry scripts here. Why do you need it run everytime we compile?</p>
-
-<h3 id="get-rid-of-graphql-script">Get rid of GraphQL script</h3>
-
-<blockquote>
-  <p><strong>How often do we change GraphQL schemas?</strong>
-Only when implement new features.</p>
-</blockquote>
-
-<p>This is where I started. 
-Remove GraphQL script and add it into a bash script file. Run script when you need to recompile schema. Here is my script:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># (1)
-apollo schema:download --endpoint=server_endpoint path_to_schema_file/schema.json
-# (2)
-SCHEMA_PATH=$PWD"/project_name"
-# (3)
-$PWD/Pods/Apollo/scripts/run-bundled-codegen.sh codegen:generate --target=swift --includes='./**/*.graphql' --localSchemaFile="$SCHEMA_PATH/Services/GraphQL/schema.json" $SCHEMA_PATH/Services/GraphQL/API.swift
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>let vc = DailyBonusController()
+vc.modalPresentationStyle = .fullScreen
+present(vc, animated: true)
 </code></pre></div></div>
-<p>(1): Download latest schema from your server. <code class="highlighter-rouge">server_endpoint</code> is your server path. Usually it’s like this <code class="highlighter-rouge">https://api.company_name.com/graphql</code></p>
+<p>Simple? You can change to any controllers you want, instead of drag and drop to a controller, which located 3 or 4 screens from your current controller.</p>
 
-<p>(2): $PWD: get your current directory and point it to your project</p>
-
-<p>(3): Now generate file. Please make sure you change <code class="highlighter-rouge">$SCHEMA_PATH/Services/GraphQL/schema.json</code> and <code class="highlighter-rouge">$SCHEMA_PATH/Services/GraphQL/API.swift</code> to yours.</p>
+<h1 id="4-typo-mistakes">4. Typo mistakes</h1>
+<p>Segue identifier is a String, and you can easily have typo mistakes there. If your screens have many destinations, you have to if … else to select what destination to process correct flow.</p>
 
 <p><strong>Notes:</strong>
-You have to run <code class="highlighter-rouge">chmod u+r+x downloadSchema.sh</code> at the first time run the bash file.
-Then run, <code class="highlighter-rouge">./downloadSchema.sh</code>.</p>
+If you have to use Segue, try to name identifier like “Show” + your_controller_name. By this way, you don’t have to remember too many things anymore and prevent typo mistakes.</p>
 
-<p>Later, just run download script. 
-That’s it. I save minutes with this.</p>
+<h1 id="5-sending-data">5. Sending data</h1>
+<p>When you use Segue, you send data to next screen in <code class="highlighter-rouge">prepareForSegue</code>. 
+Think this case, you have a UITableView or UICollectionView, selecting row/item shows detail screen. Here is how it works.</p>
 
-<h3 id="remove-uploading-script">Remove uploading script</h3>
-<blockquote>
-  <p><strong>How often do we need to upload .dSYM?</strong>
-Only when release new version</p>
-</blockquote>
-
-<p>Ask yourself, do you really want to do this? Some extra work is needed when release to upload .dSYM to Sentry (crashed report service I used). But for me, it’s worth to do.</p>
-
-<p>Some extra work:</p>
+<p><strong>Use segue</strong>:</p>
 <ul>
-  <li>Release</li>
-  <li>Download dSYM from AppstoreConnect when finish processing</li>
-  <li>Upload manually</li>
+  <li>Save the selected IndexPath to a local variable.</li>
+  <li>Go to <code class="highlighter-rouge">prepareForSegue</code> and go to correct if case.</li>
+  <li>Unwrap selected indexpath.</li>
+  <li>Send data to your destination.</li>
 </ul>
 
-<p>If it doesn’t matter with you, please try this script. 
-<code class="highlighter-rouge">sentry-cli upload-dif --org company_name --project project_name --log-level=debug appDsyms.zip</code></p>
+<p><strong>Don’t use segue</strong> 
+In <code class="highlighter-rouge">didSelectRow</code> or somewhere you want to show.</p>
+<ul>
+  <li>Init the destination</li>
+  <li>Send data</li>
+  <li>Navigate.</li>
+</ul>
 
-<p>I added it into my <code class="highlighter-rouge">.zshrc</code>as an alias, so after download, just run alias and done.</p>
+<p>And you can reuse this way in other places, just copy.</p>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>This is my experience, maybe it doesn’t work in your project. Please feel free to discuss <a href="https://github.com/nguyentruongky/nguyentruongky.github.io/issues/2">here</a>.</p>
+<p>Just some reasons you shouldn’t use segue. Hope this can help you find a better way in your code. Please feel free to share your idea <a href="https://github.com/nguyentruongky/nguyentruongky.github.io/issues/3">here</a>.</p>
 
 <blockquote>
   <p>Enjoy coding.</p>
 </blockquote>
+
+<p>Cover image is from: <a href="https://stackoverflow.com/questions/16085735/using-storyboards-to-navigate-a-complex-set-of-views-unwind-segue-is-not-enough">stackoverflow.com</a>.</p>
 
 
 
@@ -168,8 +156,10 @@ Only when release new version</p>
       <div class="clearfix">
 
         
-        <a class="btn btn-primary float-left" href="/2020/03/31/segue.html" data-toggle="tooltip" data-placement="top" title="Should I use Segue to navigate controllers?">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        <a class="btn btn-primary float-left" href="/2018/10/17/UI-Popup-extend.html" data-toggle="tooltip" data-placement="top" title="UI Implementation - Confirmation popup">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
         
+        
+        <a class="btn btn-primary float-right" href="/2020/04/02/graphql-script.html" data-toggle="tooltip" data-placement="top" title="Speed up compile time with script dependency">Next<span class="d-none d-md-inline"> Post</span> &rarr;</a>
         
 
       </div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-05T01:40:30+07:00</updated><id>http://localhost:4000/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Speed up compile time with script dependency</title><link href="http://localhost:4000/2020/04/02/graphql-script.html" rel="alternate" type="text/html" title="Speed up compile time with script dependency" /><published>2020-04-02T00:00:00+07:00</published><updated>2020-04-02T00:00:00+07:00</updated><id>http://localhost:4000/2020/04/02/graphql-script</id><content type="html" xml:base="http://localhost:4000/2020/04/02/graphql-script.html">&lt;p&gt;Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-05T02:39:15+07:00</updated><id>http://localhost:4000/</id><title type="html">&amp;lt; Code for life /&amp;gt;</title><subtitle>If you don't build your dream someone will hire you to help build theirs. - Tony A. Gaskins Jr.</subtitle><author><name>Ky Nguyen</name></author><entry><title type="html">Speed up compile time with script dependency</title><link href="http://localhost:4000/2020/04/02/graphql-script.html" rel="alternate" type="text/html" title="Speed up compile time with script dependency" /><published>2020-04-02T00:00:00+07:00</published><updated>2020-04-02T00:00:00+07:00</updated><id>http://localhost:4000/2020/04/02/graphql-script</id><content type="html" xml:base="http://localhost:4000/2020/04/02/graphql-script.html">&lt;p&gt;Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.&lt;/p&gt;
 
 &lt;h1 id=&quot;online-instructions&quot;&gt;Online Instructions&lt;/h1&gt;
 &lt;p&gt;I followed some instructions to speed it up. You can find it with ease.&lt;/p&gt;
@@ -62,7 +62,59 @@ Only when release new version&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Enjoy coding.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.</summary></entry><entry><title type="html">UI Implementation - Confirmation popup</title><link href="http://localhost:4000/2018/10/17/UI-Popup-extend.html" rel="alternate" type="text/html" title="UI Implementation - Confirmation popup" /><published>2018-10-17T00:00:00+07:00</published><updated>2018-10-17T00:00:00+07:00</updated><id>http://localhost:4000/2018/10/17/UI-Popup-extend</id><content type="html" xml:base="http://localhost:4000/2018/10/17/UI-Popup-extend.html">&lt;p&gt;In &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Large projects have lots of scripts and take few minutes or even dozens of minutes to build. Mine takes 4-5 minutes for every compile time. It’s really inconvenience when implement UI, change spacing or colors. I have to change that.</summary></entry><entry><title type="html">Should I use Segue to navigate controllers?</title><link href="http://localhost:4000/2020/03/31/segue.html" rel="alternate" type="text/html" title="Should I use Segue to navigate controllers?" /><published>2020-03-31T00:00:00+07:00</published><updated>2020-03-31T00:00:00+07:00</updated><id>http://localhost:4000/2020/03/31/segue</id><content type="html" xml:base="http://localhost:4000/2020/03/31/segue.html">&lt;p&gt;Many tutorials, iOS books for beginners teach us use Segue. That’s good start. But is it good for you and your projects? From my experience, it’s totally not good. Here the reasons.&lt;/p&gt;
+&lt;h1 id=&quot;1-its-slow&quot;&gt;1. It’s slow&lt;/h1&gt;
+&lt;p&gt;Storyboard is slow, especially you add many controllers in a Storyboard, that’s a disaster. I wrote something about Storyboard &lt;a href=&quot;https://www.codementor.io/@nguyentruongky/auto-layout-with-storyboard-and-programmatically-r1zuvtzbk&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&quot;2-its-messy&quot;&gt;2. It’s messy&lt;/h1&gt;
+&lt;p&gt;When you have 4 or 5 controllers, yes, not too bad. When you have 10 controllers, and screen A can show screen B, C, D, screen B can show D and E, screen E can show A and C. It’s a big pain in the ass.&lt;/p&gt;
+
+&lt;h1 id=&quot;3-you-cant-reuse-your-code&quot;&gt;3. You can’t reuse your code&lt;/h1&gt;
+&lt;p&gt;You have to open the storyboards, drag and drop segues many times. When you setup other segues, you have to set &lt;code class=&quot;highlighter-rouge&quot;&gt;modalPresentationStyle&lt;/code&gt; again.&lt;/p&gt;
+
+&lt;p&gt;In other way, you can easily copy and paste the code.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let vc = DailyBonusController()
+vc.modalPresentationStyle = .fullScreen
+present(vc, animated: true)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Simple? You can change to any controllers you want, instead of drag and drop to a controller, which located 3 or 4 screens from your current controller.&lt;/p&gt;
+
+&lt;h1 id=&quot;4-typo-mistakes&quot;&gt;4. Typo mistakes&lt;/h1&gt;
+&lt;p&gt;Segue identifier is a String, and you can easily have typo mistakes there. If your screens have many destinations, you have to if … else to select what destination to process correct flow.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notes:&lt;/strong&gt;
+If you have to use Segue, try to name identifier like “Show” + your_controller_name. By this way, you don’t have to remember too many things anymore and prevent typo mistakes.&lt;/p&gt;
+
+&lt;h1 id=&quot;5-sending-data&quot;&gt;5. Sending data&lt;/h1&gt;
+&lt;p&gt;When you use Segue, you send data to next screen in &lt;code class=&quot;highlighter-rouge&quot;&gt;prepareForSegue&lt;/code&gt;. 
+Think this case, you have a UITableView or UICollectionView, selecting row/item shows detail screen. Here is how it works.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Use segue&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Save the selected IndexPath to a local variable.&lt;/li&gt;
+  &lt;li&gt;Go to &lt;code class=&quot;highlighter-rouge&quot;&gt;prepareForSegue&lt;/code&gt; and go to correct if case.&lt;/li&gt;
+  &lt;li&gt;Unwrap selected indexpath.&lt;/li&gt;
+  &lt;li&gt;Send data to your destination.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Don’t use segue&lt;/strong&gt; 
+In &lt;code class=&quot;highlighter-rouge&quot;&gt;didSelectRow&lt;/code&gt; or somewhere you want to show.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Init the destination&lt;/li&gt;
+  &lt;li&gt;Send data&lt;/li&gt;
+  &lt;li&gt;Navigate.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And you can reuse this way in other places, just copy.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Just some reasons you shouldn’t use segue. Hope this can help you find a better way in your code. Please feel free to share your idea &lt;a href=&quot;https://github.com/nguyentruongky/nguyentruongky.github.io/issues/3&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Enjoy coding.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Cover image is from: &lt;a href=&quot;https://stackoverflow.com/questions/16085735/using-storyboards-to-navigate-a-complex-set-of-views-unwind-segue-is-not-enough&quot;&gt;stackoverflow.com&lt;/a&gt;.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Many tutorials, iOS books for beginners teach us use Segue. That’s good start. But is it good for you and your projects? From my experience, it’s totally not good. Here the reasons. 1. It’s slow Storyboard is slow, especially you add many controllers in a Storyboard, that’s a disaster. I wrote something about Storyboard here. 2. It’s messy When you have 4 or 5 controllers, yes, not too bad. When you have 10 controllers, and screen A can show screen B, C, D, screen B can show D and E, screen E can show A and C. It’s a big pain in the ass.</summary></entry><entry><title type="html">UI Implementation - Confirmation popup</title><link href="http://localhost:4000/2018/10/17/UI-Popup-extend.html" rel="alternate" type="text/html" title="UI Implementation - Confirmation popup" /><published>2018-10-17T00:00:00+07:00</published><updated>2018-10-17T00:00:00+07:00</updated><id>http://localhost:4000/2018/10/17/UI-Popup-extend</id><content type="html" xml:base="http://localhost:4000/2018/10/17/UI-Popup-extend.html">&lt;p&gt;In &lt;a href=&quot;/2018/10/10/UI-popup.html&quot;&gt;previous post&lt;/a&gt;, I shared you how to show an animated popup, and explained how to customize your popup. In this post, I share how I use the popup in my projects with confirmation and information alert.&lt;/p&gt;
 
 &lt;h2 id=&quot;confirmation-popup&quot;&gt;Confirmation popup&lt;/h2&gt;
 
@@ -2060,339 +2112,4 @@ Only when release new version&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry><entry><title type="html">Unsplash iOs - Homescreen - Header and Collection Scroll</title><link href="http://localhost:4000/2018/04/23/unsplash-header-collection.html" rel="alternate" type="text/html" title="Unsplash iOs - Homescreen - Header and Collection Scroll" /><published>2018-04-23T00:00:00+07:00</published><updated>2018-04-23T00:00:00+07:00</updated><id>http://localhost:4000/2018/04/23/unsplash-header-collection</id><content type="html" xml:base="http://localhost:4000/2018/04/23/unsplash-header-collection.html">&lt;h2 id=&quot;whole-series&quot;&gt;Whole series&lt;/h2&gt;
-
-&lt;p&gt;I am making an app like Unsplash iOs to practise skills. This is the part 2 in the series.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 1: &lt;a href=&quot;/2018/04/20/unsplash-homescreen.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1eJWCPYe0mrLj30yUhHixL3kKe1vXNipX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Part 2&lt;/strong&gt;: &lt;a href=&quot;/2018/04/23/unsplash-header-collection.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=17nrIA8hjXWOiofVlAmR-G1aL-xx65vvY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 3: &lt;a href=&quot;/2018/04/26/unsplash-home-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1BWS51BVmJ0HwpDxTv3AXhGoINOPEvyOY&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 4 &lt;a href=&quot;/2018/04/28/drap-drop-tableview-animation.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1sPk9e72ToR0VFbaK1IFFPpHHrQb4zOpX&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Part 5: &lt;a href=&quot;/2018/04/30/transition-to-detail.html&quot; target=&quot;_blank&quot;&gt;Note&lt;/a&gt; &lt;a href=&quot;https://drive.google.com/open?id=1pTvT1MDiIhdQbvu2PshwEgyrNPnmc0fL&quot; target=&quot;_blank&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;photogroupview&quot;&gt;PhotoGroupView&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupView.swift&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class PhotoGroupView: knView {
-        var datasource = [PhotoGroup]() { didSet { collectionView.reloadData() }}
-        lazy var collectionView: UICollectionView = { [weak self] in
-
-            // (1)
-            let layout = FAPaginationLayout()
-            layout.scrollDirection = .horizontal
-            let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            cv.translatesAutoresizingMaskIntoConstraints = false
-            cv.backgroundColor = .white
-            // (2)
-            cv.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-            cv.register(PhotoGroupCell.self, forCellWithReuseIdentifier: &quot;PhotoGroupCell&quot;)
-            cv.showsHorizontalScrollIndicator = false
-            cv.showsVerticalScrollIndicator = false
-            cv.delegate = self
-            cv.dataSource = self
-            return cv
-        }()
-        
-        override func setupView() {
-            addSubviews(views: collectionView)
-            collectionView.fill(toView: self)
-        }
-    }
-
-    extension PhotoGroupView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&amp;gt; Int { return datasource.count }
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&amp;gt; UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: &quot;PhotoGroupCell&quot;, for: indexPath) as! PhotoGroupCell
-            cell.data = datasource[indexPath.row]
-            return cell
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -&amp;gt; CGFloat { return 8 }
-        
-        // (3)
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -&amp;gt; CGSize {
-            var cellSize: CGSize = collectionView.bounds.size
-            cellSize.width -= collectionView.contentInset.left
-            cellSize.width -= collectionView.contentInset.right
-            return cellSize
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;(1): &lt;code class=&quot;highlighter-rouge&quot;&gt;FAPaginationLayout&lt;/code&gt; is a layout to center the item. It’s good library I used in some recently projects. You can see it on &lt;a href=&quot;https://github.com/fahidattique55/FAPaginationLayout&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;(2): ContentInset left and right are 16 to make a space 16px when scroll to the first and last items.&lt;/p&gt;
-
-&lt;p&gt;(3): calculate the item size, item stretches all the horizontal without the left and right inset like (2)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupCell.swift&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class PhotoGroupCell: knCollectionCell {
-        var data: PhotoGroup? {
-            didSet {
-                titleLabel.text = data?.name
-                imageView.downloadImage(from: data?.url)
-            }}
-        
-        let imageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
-        let titleLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 16), color: .white, numberOfLines: 3, alignment: .center)
-        
-        override func setupView() {
-            addSubviews(views: imageView, titleLabel)
-            
-            imageView.fill(toView: self)
-            titleLabel.horizontal(toView: self, space: 8)
-            titleLabel.centerY(toView: self)
-            
-            createRoundCorner(7)
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;An error about missing &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroup&lt;/code&gt;. Add new file name &lt;code class=&quot;highlighter-rouge&quot;&gt;PhotoGroupModel.swift&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    struct PhotoGroup {
-        var name: String
-        var url: String
-        var id: String        
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;One more step. Add some code to class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    // (1)
-    let categoryView = PhotoGroupView()
-
-    // (2)
-    lazy var photoGroupCell = self.makePhotoGroupCell()
-    func makePhotoGroupCell() -&amp;gt; knTableCell {
-        let font = UIFont.boldSystemFont(ofSize: 16)
-        let explore = knUIMaker.makeLabel(text: &quot;Explore&quot;, font: font, color: .black)
-        let new = knUIMaker.makeLabel(text: &quot;New&quot;, font: font, color: .black)
-        
-        let cell = knTableCell()
-        cell.addSubviews(views: categoryView, explore, new)
-        cell.addConstraints(withFormat: &quot;V:|-12-[v0]-8-[v1]-12-[v2]-8-|&quot;, views: explore, categoryView, new)
-        
-        categoryView.horizontal(toView: cell)
-        explore.left(toView: cell, space: 16)
-        new.left(toView: explore)
-        
-        categoryView.height(150)
-        return cell
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): You can add &lt;code class=&quot;highlighter-rouge&quot;&gt;UICollectionView&lt;/code&gt; inside &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewCell&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt; as what I am doing. It is shorter way, but can’t reuse in other project. This kind of design is very popular, maybe we need in other projects, so I make a custom view, instead of a custom cell.&lt;/p&gt;
-
-&lt;p&gt;(2): Define &lt;code class=&quot;highlighter-rouge&quot;&gt;photoGroupCell&lt;/code&gt; is a &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy var&lt;/code&gt; property.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Lazy properties are useful when the initial value for a property is dependent on outside factors whose values are not known until after an instance’s initialization is complete. Lazy properties are also useful when the initial value for a property requires complex or computationally expensive setup that should not be performed unless or until it is needed. (from &lt;a href=&quot;https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Properties.html&quot;&gt;Apple Developer Document&lt;/a&gt;)&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I usually use this way to define properties need to complex actions to initialize. This way can help to manage to code easier, you are able to fold/unfold codes, move initialization method to extension or somewhere.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Update &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewDatasource&lt;/code&gt;: Datasource for homescreen is a Photo array, so we can’t put an extra Photo into that array. Need a trick here.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -&amp;gt; Int { 
-        return datasource.count + 1 }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -&amp;gt; UITableViewCell {
-        
-        if indexPath.row == 0 { return photoGroupCell }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: &quot;PhotoCell&quot;, for: indexPath) as! PhotoCell
-        cell.data = datasource[indexPath.row - 1] // (*)
-        return cell
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We will return one more row in the table, and cell for this row is &lt;code class=&quot;highlighter-rouge&quot;&gt;photoGroupCell&lt;/code&gt; created before.&lt;/p&gt;
-
-&lt;p&gt;(*) is very important. Without minus 1, app crashes when scroll to the final item. Example will be easier to understand.&lt;/p&gt;
-
-&lt;p&gt;You have 10 Photo instances in array &lt;code class=&quot;highlighter-rouge&quot;&gt;datasource&lt;/code&gt;, but have 11 rows to display. So the final row will get item at index 10 in &lt;code class=&quot;highlighter-rouge&quot;&gt;datasource&lt;/code&gt;. That’s &lt;code class=&quot;highlighter-rouge&quot;&gt;Fatal error: Index out of range&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run and see.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fempty_collection.png?alt=media&amp;amp;token=76cf0e38-5a1e-44c0-a7f6-b21464849af4&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Empty space in top. It’s work. But no data setup, so it’s empty. Add test data into &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData&lt;/code&gt; method&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    var categories = [PhotoGroup]()
-    for _ in 0 ..&amp;lt; 5 {
-        categories.append(PhotoGroup(name: &quot;Sport&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, id: &quot;12bawr&quot;))
-        categories.append(PhotoGroup(name: &quot;Computer&quot;, url: &quot;https://unsplash.com/photos/Y6N_w94x8ik/download&quot;, id: &quot;nvljx91&quot;))
-    }
-    categoryView.datasource = categories
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Run again and see&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fdata_collection.png?alt=media&amp;amp;token=32ba9c94-e280-4569-a2ab-0540f77ae774&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;headerview&quot;&gt;HeaderView&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add new file &lt;code class=&quot;highlighter-rouge&quot;&gt;HeaderView.swift&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    class HeaderView: knView {
-    
-        var data: Photo? {didSet {
-            guard let data = data else { return }
-            authorLabel.text = &quot;photo by &quot; + data.author
-            imageView.downloadImage(from: data.url)
-            }}
-        
-        let imageView = knUIMaker.makeImageView(contentMode: .scaleAspectFill)
-        let authorLabel = knUIMaker.makeLabel(font: UIFont.systemFont(ofSize: 16), color: .white, alignment: .center)
-        let titleLabel = knUIMaker.makeLabel(text: &quot;Photos for everyone&quot;, font: UIFont.boldSystemFont(ofSize: 32), color: .white, alignment: .center)
-        let searchTextField = knUIMaker.makeTextField(placeholder: &quot;Search photos&quot;)
-        
-        override func setupView() {
-            // (1)
-            translatesAutoresizingMaskIntoConstraints = true
-            
-            searchTextField.createRoundCorner(8)
-            searchTextField.setLeftViewWithImage(#imageLiteral(resourceName: &quot;search&quot;))
-            searchTextField.height(44)
-            searchTextField.changePlaceholderTextColor(.white)
-            addBlur(to: searchTextField, size: CGSize(width: screenWidth - 16 * 2, height: 44))
-            
-            addSubviews(views: imageView, titleLabel, searchTextField, authorLabel)
-            
-            imageView.fill(toView: self)
-            
-            titleLabel.centerY(toView: self, space: -48)
-            titleLabel.centerX(toView: self)
-            
-            searchTextField.horizontal(toView: self, space: 16)
-            searchTextField.verticalSpacing(toView: titleLabel, space: 16)
-            
-            authorLabel.centerX(toView: self)
-            authorLabel.bottom(toView: self, space: -16)
-        }
-        
-        func addBlur(to view: UIView, size: CGSize) {
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.addSubview(blurEffectView)
-        }
-    }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): Need to set &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; to true because in knView, it’s set to false by default. &lt;code class=&quot;highlighter-rouge&quot;&gt;translatesAutoresizingMaskIntoConstraints&lt;/code&gt; is used for auto layout by code. But here, we will set frame for headerView.&lt;/p&gt;
-
-&lt;p&gt;The search textfield in Unsplash is very nice. It has a blur background. That’s why I add blur to it by &lt;code class=&quot;highlighter-rouge&quot;&gt;addBlur(to:size)&lt;/code&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Back to class &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt; and add new view &lt;code class=&quot;highlighter-rouge&quot;&gt;let headerView = HeaderView()&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Open &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method, add these codes at before method close bracket&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    // (1)
-    let headerHeight: CGFloat = 350
-    headerView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: headerHeight)
-    tableView.tableHeaderView = headerView
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(1): We don’t need headerView automatically adjust height, so set a fixed height for it. Without a height, table view can’t render properly.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Add data to header in &lt;code class=&quot;highlighter-rouge&quot;&gt;fetchData&lt;/code&gt; method&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    headerView.data = Photo(author: &quot;Kyle&quot;, url: &quot;https://unsplash.com/photos/zydhjnjppEc/download&quot;, ratio: 0.667954600338083)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Fstatus_bar.png?alt=media&amp;amp;token=967b3402-7b86-4e81-b23e-5b535445bbf3&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It’s better when the photo fill the status bar. Just one line in &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Wait, the status bar is black and the header is black, too. It’s bad. Change the status bar to light content&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Right click on &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Open As\Source Code&lt;/code&gt;, paste this the before &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/dict&amp;gt;&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    &amp;lt;key&amp;gt;UIViewControllerBasedStatusBarAppearance&amp;lt;/key&amp;gt;
-    &amp;lt;false/&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Back to &lt;code class=&quot;highlighter-rouge&quot;&gt;HomeController&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;setupView&lt;/code&gt; method, add one more line&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-    statusBarStyle = .lightContent
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;statusBarStyle&lt;/code&gt; is my custom property, you can see it more detail by press &lt;code class=&quot;highlighter-rouge&quot;&gt;control + command&lt;/code&gt; and click on it.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Run again and see&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://firebasestorage.googleapis.com/v0/b/blogs-1de93.appspot.com/o/assets%2Funsplash%2Ffinal_part_2.png?alt=media&amp;amp;token=93cbf937-735a-4705-b64d-ac14be383f72&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;That’s all for today. I will make animation next note.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Whole series</summary></entry></feed>
+&lt;p&gt;That’s some simple thing about animation in Unsplash. Simple and good. Love Unsplash team.&lt;/p&gt;</content><author><name>Ky Nguyen</name></author><summary type="html">Introduction Animation is a must-have thing in iOs app. Animation makes app look cool and live. Everyone likes something animate than a sudden change.</summary></entry></feed>
